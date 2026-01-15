@@ -6,15 +6,20 @@ notion = Client(auth=os.environ["NOTION_TOKEN"])
 DATABASE_ID = os.environ["DATABASE_ID"]
 genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 
-# 使用最精确的模型路径名称
-model = genai.GenerativeModel('models/gemini-1.5-flash-latest') 
+# 自动寻找可用模型 (解决 404 的终极方案)
+try:
+    available_models = [m.name for m in genai.list_models() if 'generateContent' in m.supported_generation_methods]
+    # 优先选择 1.5-flash，没有就选第一个可用的
+    model_name = 'models/gemini-1.5-flash' if 'models/gemini-1.5-flash' in available_models else available_models[0]
+    model = genai.GenerativeModel(model_name)
+except Exception:
+    model = genai.GenerativeModel('gemini-pro')
 
 # 2. RSS 源
 RSS_FEEDS = {
     "Economist": "https://www.economist.com/briefing/rss.xml",
     "The Atlantic": "https://www.theatlantic.com/feed/all/",
-    "NYT": "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml",
-    "HBR": "https://hbr.org/rss/topic/leadership"
+    "NYT": "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml"
 }
 
 def analyze_and_push():
@@ -23,14 +28,14 @@ def analyze_and_push():
         if not feed.entries: continue
         entry = feed.entries[0]
         
-        # 优化 Prompt 确保输出中文
-        prompt = f"你是一位专业策展人。请用中文总结这篇文章的核心观点（150字以内），并标注英语难度等级(A1-C2)。标题: {entry.title}"
+        # 优化提示词
+        prompt = f"你是Read & Rise的策展人。请用中文总结这篇文章核心观点（100字），并标注英语难度(A1-C2)。标题: {entry.title}"
         
         try:
             response = model.generate_content(prompt)
             summary_text = response.text
         except Exception as e:
-            summary_text = f"AI Summary pending. (Error: {str(e)})"
+            summary_text = f"AI暂时离线，请检查API状态。错误详情: {str(e)}"
         
         # 3. 写入 Notion
         notion.pages.create(
@@ -43,7 +48,7 @@ def analyze_and_push():
                 "Status": {"rich_text": [{"text": {"content": "To Read"}}]}
             }
         )
-        print(f"✅ 已同步: {entry.title}")
+        print(f"✅ 同步成功: {entry.title}")
 
 if __name__ == "__main__":
     analyze_and_push()
