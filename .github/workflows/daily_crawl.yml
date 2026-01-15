@@ -2,8 +2,8 @@ name: ReadAndRise_Bot
 on:
   schedule:
     # 每天北京时间凌晨1点执行 (UTC 17:00)
-    - cron: '0 17 * * *' 
-  workflow_dispatch: # 允许你手动点击运行按钮
+    - cron: '0 17 * * *'
+  workflow_dispatch: # 允许你手动点击按钮执行
 
 jobs:
   build:
@@ -22,3 +22,12 @@ jobs:
           DATABASE_ID: ${{ secrets.DATABASE_ID }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python crawler.py
+      
+      # --- 关键：将生成的 library.json 存回仓库 ---
+      - name: Commit and Push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/library.json || echo "No data file to add"
+          git commit -m "Auto-update library data" || echo "No changes to commit"
+          git push
