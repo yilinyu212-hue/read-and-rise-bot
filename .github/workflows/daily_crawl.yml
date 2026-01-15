@@ -1,21 +1,26 @@
 name: ReadAndRise_Bot
 on:
   schedule:
-    # 每天北京时间凌晨1点执行 (UTC 17:00)
-    - cron: '0 17 * * *'
-  workflow_dispatch: # 允许你手动点击按钮执行
+    - cron: '0 17 * * *' # 每天北京时间凌晨1点
+  workflow_dispatch: # 允许手动点击运行
+
+permissions:
+  contents: write # 明确授予写入权限
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
+          
       - name: Install dependencies
         run: pip install feedparser google-generativeai notion-client
+        
       - name: Run Script
         env:
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
@@ -23,11 +28,11 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python crawler.py
       
-      # --- 关键：将生成的 library.json 存回仓库 ---
+      # --- 关键步骤：把生成的 JSON 文件存回你的 GitHub 仓库 ---
       - name: Commit and Push changes
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/library.json || echo "No data file to add"
+          git add data/library.json
           git commit -m "Auto-update library data" || echo "No changes to commit"
           git push
