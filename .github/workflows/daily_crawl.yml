@@ -33,8 +33,8 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          # 先拉取最新代码，避免冲突
+          # 核心修复：先拉取最新版本，合并后再提交
           git pull --rebase origin main
           git add data/library.json
           git commit -m "Auto-update library data" || echo "No changes to commit"
-          git push
+          git push origin main
