@@ -8,7 +8,7 @@ genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 
 # 关键修复：改用最基础的 'gemini-1.5-flash-latest' 或 'gemini-1.5-pro'
 # 这样可以兼容大部分旧版和新版的 API 库
-model = genai.GenerativeModel('gemini-1.5-flash') 
+model = genai.GenerativeModel('models/gemini-1.5-flash-latest') 
 
 # 2. RSS 源
 RSS_FEEDS = {
