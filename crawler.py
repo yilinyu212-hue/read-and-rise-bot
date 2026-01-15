@@ -1,13 +1,15 @@
 import os, feedparser, google.generativeai as genai
 from notion_client import Client
 
-# 初始化 (Init)
+# 1. 初始化
 notion = Client(auth=os.environ["NOTION_TOKEN"])
 DATABASE_ID = os.environ["DATABASE_ID"]
 genai.configure(api_key=os.environ["GEMINI_API_KEY"])
-model = genai.GenerativeModel('gemini-1.5-flash')
 
-# 订阅源 (Sources)
+# 修复报错：改用最稳定的模型名称
+model = genai.GenerativeModel('gemini-pro') 
+
+# 2. RSS 源
 RSS_FEEDS = {
     "Economist": "https://www.economist.com/briefing/rss.xml",
     "The Atlantic": "https://www.theatlantic.com/feed/all/",
@@ -21,11 +23,11 @@ def analyze_and_push():
         if not feed.entries: continue
         entry = feed.entries[0]
         
-        # AI 简述
         prompt = f"Summarize this in Chinese (150 words) and set English level. Title: {entry.title}"
         response = model.generate_content(prompt)
         
-        # 写入 Notion (全文字兼容模式)
+        # 3. 写入 Notion (采用最万能的 Rich Text 格式，解决 Status/Source 报错)
+        # 无论你的 Notion 列设为 Text 还是 Select，这段代码都能绕过类型检查
         notion.pages.create(
             parent={"database_id": DATABASE_ID},
             properties={
