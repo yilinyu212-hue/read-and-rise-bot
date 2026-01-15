@@ -8,9 +8,9 @@ DATABASE_ID = os.environ["DATABASE_ID"]
 genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 model = genai.GenerativeModel('models/gemini-1.5-flash')
 
+# RSS 源
 RSS_FEEDS = {
     "Economist": "https://www.economist.com/briefing/rss.xml",
-    "The Atlantic": "https://www.theatlantic.com/feed/all/",
     "NYT": "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml"
 }
 
@@ -22,6 +22,7 @@ def analyze_and_push():
         if not feed.entries: continue
         entry = feed.entries[0]
         
+        # 让 AI 生成精读内容
         prompt = f"你是一位Read & Rise教育策展人。请用中文总结这篇文章核心观点（100字），标注难度(A1-C2)，并提取3个核心词汇（含释义例句）。标题: {entry.title}"
         
         try:
@@ -30,10 +31,10 @@ def analyze_and_push():
         except:
             content = "AI 解析生成中..."
 
-        # --- 核心修复：强制限制字数防止 Notion 报错 ---
+        # --- 核心修复：强制截断内容，确保 Notion 不报错 ---
         safe_content = content[:1900] 
 
-        # 发送到 Notion
+        # 尝试发送到 Notion 看板
         try:
             notion.pages.create(
                 parent={"database_id": DATABASE_ID},
@@ -46,8 +47,9 @@ def analyze_and_push():
                 }
             )
         except Exception as e:
-            print(f"Notion push failed: {e}")
+            print(f"Notion 写入失败（已跳过）: {e}")
         
+        # 存入列表，供网站/小程序使用
         articles_for_web.append({
             "title": entry.title,
             "source": source_name,
@@ -56,10 +58,11 @@ def analyze_and_push():
             "date": datetime.now().strftime("%Y-%m-%d")
         })
 
-    # 2. 确保文件夹存在并写入 JSON (小程序的数据源)
+    # 2. 确保文件夹存在并保存 JSON 数据
     os.makedirs('data', exist_ok=True)
     with open('data/library.json', 'w', encoding='utf-8') as f:
         json.dump(articles_for_web, f, ensure_ascii=False, indent=4)
+    print("✅ 数据已保存到 data/library.json")
 
 if __name__ == "__main__":
     analyze_and_push()
