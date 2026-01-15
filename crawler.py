@@ -17,9 +17,13 @@ except Exception:
 
 # 2. RSS 源
 RSS_FEEDS = {
-    "Economist": "https://www.economist.com/briefing/rss.xml",
+    "NYT": "https://rss.nytimes.com/services/xml/rss/nyt/World.xml",
     "The Atlantic": "https://www.theatlantic.com/feed/all/",
-    "NYT": "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml"
+    "Economist": "https://www.economist.com/the-world-this-week/rss.xml",
+    # 你可以继续往下面添加：
+    "Scientific American": "https://www.scientificamerican.com/section/generic/rss-feeds/",
+    "Wired": "https://www.wired.com/feed/rss",
+    "BBC News": "http://feeds.bbci.co.uk/news/world/rss.xml"
 }
 
 def analyze_and_push():
