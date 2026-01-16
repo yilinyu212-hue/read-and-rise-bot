@@ -2,49 +2,52 @@ import os, feedparser, requests, json
 from datetime import datetime
 from notion_client import Client
 
-# 读取配置
+# 配置读取
 DEEPSEEK_KEY = os.environ.get("DEEPSEEK_API_KEY")
 NOTION_TOKEN = os.environ.get("NOTION_TOKEN")
 DATABASE_ID = os.environ.get("DATABASE_ID")
 
 notion = Client(auth=NOTION_TOKEN)
 
-def get_ai_lesson_plan(title):
-    if not DEEPSEEK_KEY: return "未配置 AI 秘钥"
+def get_coach_notes(title):
+    if not DEEPSEEK_KEY: return "AI 密钥未配置"
     headers = {"Content-Type": "application/json", "Authorization": f"Bearer {DEEPSEEK_KEY}"}
     
-    # 针对英文老师设计的专业教研 Prompt
+    # 针对“英语培训师 + 管理教练”身份深度定制的 Prompt
     prompt = f"""
-    作为外刊精读专家，请针对文章《{title}》制作一份【英语学习精读讲义】：
+    你是一位拥有MBA背景的顶级职场英语教练。请针对文章《{title}》制作一份【管理精英精读讲义】。
     
-    1. 🇬🇧 【Original Golden Sentence / 原文金句】
-       - 摘录一段最值得学习的长难句。
-       - [Syntax Analysis]: 深度拆解语法结构（如倒装、虚拟语气、伴随状语等）。
+    内容必须严格按以下四个模块输出：
     
-    2. 📝 【Vocabulary Building / 词汇积累】
-       - 提取3个高阶词汇，格式：单词 [音标] (词性) 含义 + 语境搭配。
+    ### 🧠 [Logic & Insight / 商业逻辑洞察]
+    - **Context**: 用两句话说明这篇文章探讨的行业背景或管理挑战。
+    - **Logic Analysis**: 拆解文章的论证逻辑（如：现状-痛点-对策）。
     
-    3. 💡 【Critical Thinking / 核心观点】
-       - 中文深度解析文章的背景、逻辑与争议点。
+    ### 🗣️ [Executive Language / 领袖语言工坊]
+    - **Power Words**: 提取3个高阶职场词汇，给出 [音标]、[文中含义] 及 [董事会级别例句]。
+    - **Golden Structure**: 摘录原文中1个体现商业逻辑的句式，并进行语法解析。
     
-    4. ✍️ 【Writing & Speaking / 句型仿写】
-       - 提炼1个文中的高阶逻辑连接词或句式，并给出一个教育场景的仿写。
+    ### 🤝 [Coaching Corner / 教练锦囊]
+    - **Actionable Advice**: 作为一个管理教练，你会建议学员如何将文中的观点应用到团队管理或个人职业规划中？
     
-    请使用 Markdown 格式，注重英语学习的专业性。
+    ### ✍️ [Scenario Simulation / 场景仿写]
+    - 提供一个基于文中高阶句式的“职场汇报”或“商务邮件”场景的仿写。
+    
+    要求：专业、干练，英语术语与中文解析交替，排版使用清晰的 Markdown 格式。
     """
     
     data = {
         "model": "deepseek-chat",
         "messages": [
-            {"role": "system", "content": "你是一位拥有10年经验的顶级外刊精读教练，擅长深度语法解析与教研。"},
+            {"role": "system", "content": "你是一位专注于企业领袖培训的资深英语教练。"},
             {"role": "user", "content": prompt}
         ]
     }
     try:
         res = requests.post("https://api.deepseek.com/chat/completions", headers=headers, json=data, timeout=60)
         return res.json()['choices'][0]['message']['content']
-    except:
-        return "AI 解析生成中..."
+    except Exception as e:
+        return f"笔记生成中，暂遇故障: {e}"
 
 def run():
     SOURCES = [
@@ -53,17 +56,17 @@ def run():
     ]
     
     all_articles = []
-    print("🚀 Read & Rise 教研笔记生成中...")
+    print("🚀 Read & Rise 教案库更新中...")
 
     for src in SOURCES:
         feed = feedparser.parse(src['url'])
         for entry in feed.entries[:2]:
-            print(f"正在研读: {entry.title}")
-            lesson_plan = get_ai_lesson_plan(entry.title)
+            print(f"📘 研读中: {entry.title}")
+            coach_notes = get_coach_notes(entry.title)
             
-            # 1. 在 Notion 创建页面，并把笔记写入页面正文
+            # 同步到 Notion (包含正文写入)
             try:
-                new_page = notion.pages.create(
+                notion.pages.create(
                     parent={"database_id": DATABASE_ID},
                     properties={
                         "Name": {"title": [{"text": {"content": entry.title}}]},
@@ -72,33 +75,32 @@ def run():
                         "Date": {"date": {"start": datetime.now().strftime("%Y-%m-%d")}},
                         "Status": {"status": {"name": "To Read"}}
                     },
-                    # 这是关键：把解析内容写入页面正文 (Blocks)
                     children=[
                         {
                             "object": "block",
                             "type": "paragraph",
                             "paragraph": {
-                                "rich_text": [{"type": "text", "text": {"content": lesson_plan[:2000]}}] # 每一块限2000字
+                                "rich_text": [{"type": "text", "text": {"content": coach_notes[:2000]}}]
                             }
                         }
                     ]
                 )
-                print(f"✅ Notion 详情页已生成")
             except Exception as e:
-                print(f"❌ Notion 失败: {e}")
+                print(f"❌ Notion 写入失败: {e}")
 
             all_articles.append({
                 "source": src['name'],
                 "title": entry.title,
-                "content": lesson_plan,
+                "content": coach_notes,
                 "link": entry.link,
                 "date": datetime.now().strftime("%Y-%m-%d")
             })
 
-    # 保存网站数据
+    # 保存至 GitHub 供网页调用
     os.makedirs('data', exist_ok=True)
     with open('data/library.json', 'w', encoding='utf-8') as f:
         json.dump(all_articles, f, ensure_ascii=False, indent=4)
+    print("🎯 教研同步完成！")
 
 if __name__ == "__main__":
     run()
