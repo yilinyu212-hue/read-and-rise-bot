@@ -1,188 +1,226 @@
 [
     {
-        "level": "Advanced (C1)",
-        "tags": [
-            "Leadership",
-            "Strategy"
-        ],
-        "en_excerpt": "The era of globalisation is over. Companies can no longer assume that they can operate seamlessly across borders, sourcing inputs and selling outputs wherever it is most efficient. Instead, they must navigate a world of geopolitical tensions, where commercial decisions are increasingly shaped by national security concerns, trade barriers and the need to build resilience against supply-chain shocks. This new reality requires a fundamental rethink of corporate strategy.",
-        "cn_translation": "全球化时代已经终结。企业不能再想当然地认为可以无缝跨越国界运营，在最有效率的地方采购投入品和销售产出品。相反，它们必须在一个地缘政治紧张的世界中航行，在这个世界里，商业决策日益受到国家安全关切、贸易壁垒以及建立供应链冲击抵御能力的需要所塑造。这一新现实要求对企业战略进行根本性的重新思考。",
+        "level": "C1",
+        "en_excerpt": "Geopolitics is warping multinationals' commercial decisions. As tensions rise between major powers, companies are increasingly forced to navigate complex regulatory landscapes, reassess supply chains, and reconsider market entry strategies. This shift reflects a broader trend where business considerations are no longer purely economic but are deeply intertwined with national security and diplomatic relations.",
+        "cn_translation": "地缘政治正在扭曲跨国公司的商业决策。随着大国间紧张局势加剧，企业被迫越来越多地应对复杂的监管环境、重新评估供应链并重新考虑市场进入策略。这一转变反映了一个更广泛的趋势：商业考量不再纯粹是经济性的，而是与国家安全和外交关系深度交织。",
         "vocabulary_pro": {
-            "seamlessly": "adv. 无缝地，流畅地 - The new software integrates seamlessly with existing systems. (这款新软件与现有系统实现了无缝集成。)",
-            "resilience": "n. 韧性，恢复力 - Building supply chain resilience has become a top priority for multinationals. (构建供应链韧性已成为跨国公司的首要任务。)",
-            "fundamental": "adj. 根本的，基础的 - This crisis requires a fundamental shift in our business model. (这场危机要求我们的商业模式进行根本性转变。)"
+            "geopolitics": "地缘政治学（研究地理因素对国际政治的影响）",
+            "warping": "扭曲，使变形（这里指非正常影响）",
+            "multinationals": "跨国公司（缩写：MNCs）",
+            "commercial decisions": "商业决策",
+            "navigate": "驾驭，应对（复杂情况）",
+            "regulatory landscapes": "监管环境（比喻性表达）",
+            "reassess": "重新评估",
+            "supply chains": "供应链",
+            "market entry strategies": "市场进入策略",
+            "intertwined": "交织的，紧密相连的"
         },
-        "syntax_analysis": "主句: 'Companies can no longer assume that they can operate seamlessly across borders' | 宾语从句: 'that they can operate...' | 现在分词短语作状语: 'sourcing inputs and selling outputs...' | 关系副词引导定语从句: 'where commercial decisions are increasingly shaped...' | 并列宾语: 'by national security concerns, trade barriers and the need...' | 不定式作定语: 'to build resilience against supply-chain shocks'",
+        "syntax_analysis": "1. 主句使用现在进行时（is warping）强调持续影响；2. 'As tensions rise...' 状语从句表原因；3. 'where business considerations...' 定语从句修饰'trend'；4. 被动语态（are forced）突出企业被动处境；5. 平行结构（navigate..., reassess..., reconsider...）增强论述力度。",
         "output_playbook": {
-            "speaking": "In today's geopolitical landscape, we can no longer operate under the assumption that [previous globalized model]. Instead, we must recognize that [new reality], which requires us to [strategic adjustment].",
-            "writing": "The paradigm shift from globalization to geopolitical fragmentation necessitates a fundamental recalibration of corporate strategy, wherein commercial decisions are increasingly contingent upon factors beyond mere economic efficiency, such as supply-chain resilience and regulatory alignment."
+            "speaking": "1. 辩论练习：'Should multinationals prioritize geopolitical risks over profitability?' 2. 案例讨论：分析华为/特斯拉的地缘政治应对策略 3. 角色扮演：模拟董事会讨论供应链重组议题",
+            "writing": "1. 商业报告：'Geopolitical Risk Assessment for Market Expansion' 2. 议论文：'The New Normal: When Business Meets Geopolitics' 3. 邮件写作：向管理层汇报监管变化影响"
         },
-        "insight": {
-            "1": "战略思维需从'效率优先'转向'韧性优先'，将地缘政治风险纳入核心决策框架，建立多区域、多层次的供应链体系。",
-            "2": "领导者必须具备'地缘政治商数'(GQ)，能够解读国际关系变动对商业的潜在影响，并在投资、市场进入等决策中平衡商业逻辑与政治风险。",
-            "3": "组织需要建立跨职能的地缘政治情报分析机制，整合市场、供应链、政府关系等数据，实现从被动应对到主动塑造商业环境的转变。"
-        },
+        "insight": "本文揭示了全球化退潮背景下企业决策范式的根本转变：从'效率优先'的全球化模型转向'安全优先'的区域化思维。这要求商业领袖具备政治敏锐度，并能将地缘政治变量纳入战略决策框架，标志着纯粹商业逻辑时代的终结。",
         "source": "Economist",
         "title": "Geopolitics is warping multinationals’ commercial decisions",
         "date": "2026-01-16"
     },
     {
-        "level": "Advanced (C1)",
-        "tags": [
-            "Leadership",
-            "Strategy"
-        ],
-        "en_excerpt": "Despite a $45 million net worth, Big Bang Theory star Kunal Nayyar still works tough, 16-hour days. He repeats this mantra when he's overwhelmed: 'This is the work. This is what I signed up for. This is what I love.' Nayyar explains that his relentless work ethic stems not from financial necessity but from a deep commitment to his craft and the understanding that sustained success requires continuous effort, even after achieving external markers of accomplishment.",
-        "cn_translation": "尽管坐拥4500万美元净资产，《生活大爆炸》明星库纳尔·奈耶尔仍坚持每天艰苦工作16小时。当感到不堪重负时，他会重复这句箴言：'这就是工作。这是我当初的选择。这是我所热爱的。'奈耶尔解释道，他这种不懈的职业精神并非出于经济需求，而是源于对技艺的深刻承诺，以及他明白持续成功需要不断努力——即便在取得外在成就标志之后亦然。",
-        "vocabulary_pro": [
-            {
-                "word": "relentless",
-                "definition": "persistent, never stopping or weakening",
-                "application": "Her relentless pursuit of excellence inspired the entire team to push beyond their limits."
-            },
-            {
-                "word": "sustained",
-                "definition": "maintained at length without interruption or weakening",
-                "application": "The company's sustained growth over five quarters demonstrated effective long-term strategy."
-            },
-            {
-                "word": "craft",
-                "definition": "an activity involving skill in making things by hand, or one's profession requiring specialized skill",
-                "application": "He approaches management as a craft, constantly refining his techniques through deliberate practice."
-            }
-        ],
-        "syntax_analysis": "复合句分析：'Nayyar explains that his relentless work ethic stems not from financial necessity but from a deep commitment to his craft and the understanding that sustained success requires continuous effort, even after achieving external markers of accomplishment.'\n1. 主句：Nayyar explains [that引导宾语从句]\n2. 宾语从句主干：his work ethic stems not from A but from B and C\n3. 并列结构：from a deep commitment... and the understanding...\n4. 嵌套从句：understanding [that引导同位语从句说明understanding的内容]\n5. 同位语从句主干：sustained success requires continuous effort\n6. 状语：even after achieving external markers of accomplishment",
-        "output_playbook": {
-            "speaking": "When discussing work ethic, you might say: 'Like Kunal Nayyar reminds himself during challenging periods: This is the work. This is what I signed up for. This is what I love. This mindset transforms obligation into purpose.'",
-            "writing": "高级句型：'The paradigm that [external achievement] necessitates reduced effort is fundamentally flawed; rather, as evidenced by [example], sustained excellence demands [continuous action], even when [apparent milestones] have been attained.'"
+        "level": "C1",
+        "en_excerpt": "Artificial intelligence is increasingly being integrated into health care systems worldwide. Now, chief executive officers are shifting their focus from technological implementation to measurable improvements in patient outcomes and practitioner effectiveness. This strategic pivot reflects a maturation in how AI is perceived within the medical field—not merely as a novel tool but as a catalyst for tangible healthcare advancements.",
+        "cn_translation": "人工智能正日益融入全球医疗保健系统。如今，首席执行官们正将关注点从技术实施转向患者治疗效果和医疗从业者效率的可衡量改善。这一战略转变反映了医学领域对AI认知的成熟化——不再仅仅视其为新颖工具，而是将其视为切实医疗进步的催化剂。",
+        "vocabulary_pro": {
+            "integrated into": "融入/整合到（高级动词短语，描述技术融合）",
+            "shifting focus": "转移关注点（战略决策常用表达）",
+            "measurable improvements": "可衡量的改善（强调结果导向）",
+            "practitioner effectiveness": "从业者效率（专业医疗管理术语）",
+            "strategic pivot": "战略转变（商业战略高级词汇）",
+            "maturation in perception": "认知成熟化（抽象概念表达）",
+            "catalyst for advancements": "进步的催化剂（比喻性商业术语）",
+            "tangible healthcare advancements": "切实的医疗进步（强调具体成果）"
         },
-        "insight": [
-            "内在驱动超越外在激励：真正的卓越领导者由内在使命感驱动而非外部回报，当工作与核心价值对齐时，高强度投入成为自然选择而非负担。",
-            "成功后的持续投入悖论：传统认为成功后可减少努力，但顶尖执行者理解平台期正是需要加倍投入的时刻，防止成就变成停滞的温床。",
-            "压力叙事重构：通过将挑战性工作重新定义为'这是我选择且热爱的事业'，领导者能将压力转化为意义感，这种认知重构是维持长期韧性的关键心理机制。"
-        ],
+        "syntax_analysis": "1. 主从复合句结构：'Now, chief executive officers are shifting...'为主句，后接'This strategic pivot reflects...'构成因果逻辑链\n2. 破折号补充说明：'—not merely as...but as...'形成对比强调结构\n3. 现在进行时被动语态：'is increasingly being integrated'体现持续进行的技术融合过程\n4. 名词化表达：'technological implementation', 'measurable improvements'提升文本正式度",
+        "output_playbook": {
+            "speaking": "1. 角色扮演：模拟CEO在董事会上阐述AI战略转型（使用'shifting focus','strategic pivot'等短语）\n2. 辩论练习：'技术实施vs.实际疗效'的利弊分析（运用对比连接词while/whereas）\n3. 即兴演讲：用3分钟说明'catalyst for advancements'在医疗领域的体现",
+            "writing": "1. 执行摘要：撰写300字医疗AI项目报告（模仿原文的正式语体）\n2. 对比论证：'Traditional vs. AI-enhanced healthcare delivery'（应用measurable improvements等指标词汇）\n3. 提案写作：设计'AI Implementation Roadmap'框架（整合integrated into, practitioner effectiveness等术语）"
+        },
+        "insight": "本文本揭示了医疗AI发展的关键范式转移：从'技术中心论'转向'价值实现论'。语言特点上：1) 使用'pivot','maturation'等商业隐喻将技术话题战略化 2) 通过'tangible','measurable'等限定词体现结果导向思维 3) 'not merely...but...'的修辞结构典型反映C1级复杂观点表达。教学启示：应引导学员掌握将技术术语（如AI integration）与商业价值主张（patient outcomes）进行逻辑嫁接的高级表达模式。",
         "source": "Fortune",
-        "title": "Despite a $45 million net worth, Big Bang Theory star Kunal Nayyar still works tough, 16-hour days—he repeats this mantra when he’s overwhelmed",
+        "title": "AI is becoming baked into health care. Now CEOs are focusing on patient and practitioner outcomes",
         "date": "2026-01-16"
     },
     {
-        "level": "Advanced (C1)",
-        "tags": [
-            "Leadership",
-            "Strategy"
-        ],
-        "en_excerpt": "The EU is considering a 'membership-lite' option for Ukraine that would grant Kyiv many of the benefits of membership without full voting rights. This proposal, designed to circumvent Hungary's veto threat, has unsettled several European capitals who fear it could undermine the bloc's cohesion and set a precedent for other aspiring members. The plan reflects the EU's struggle to balance geopolitical imperatives with institutional integrity amid Ukraine's protracted conflict.",
-        "cn_translation": "欧盟正考虑为乌克兰提供'精简版成员国'方案，该方案将赋予基辅诸多成员国权益但不包含完整投票权。此项旨在规避匈牙利否决威胁的提议，已引发多个欧洲国家首都的不安——他们担忧这可能削弱欧盟凝聚力，并为其他候选国设立先例。该计划折射出欧盟在乌克兰持久战背景下，试图在地缘政治必要性与制度完整性之间寻求平衡的困境。",
+        "level": "C1",
+        "en_excerpt": "The European Union is considering a 'membership-lite' plan for Ukraine that would offer Kyiv closer ties without full membership, a proposal that has unsettled several European capitals wary of the long-term implications. This intermediate status, discussed behind closed doors, aims to provide Ukraine with security guarantees and economic benefits while avoiding the contentious issue of immediate accession. However, critics argue it could create a two-tier Europe and undermine the EU's enlargement policy.",
+        "cn_translation": "欧盟正在考虑为乌克兰制定一项“简化版成员国”计划，该计划将为基辅提供更紧密的联系而非完全成员国身份，这一提议已令多个欧洲国家首都感到不安，它们对长期影响持谨慎态度。这一在闭门会议中讨论的中间地位，旨在为乌克兰提供安全保障和经济利益，同时避免立即加入欧盟这一争议性问题。然而，批评者认为这可能造成欧洲的两级分化，并削弱欧盟的扩大政策。",
         "vocabulary_pro": {
-            "circumvent": "动词，意为'规避/绕过'。例句：The agreement was structured to circumvent existing trade barriers.",
-            "cohesion": "名词，指'凝聚力/团结性'。例句：Lack of social cohesion can undermine organizational effectiveness.",
-            "imperatives": "名词复数，表示'必要事项/紧迫需求'。例句：Strategic imperatives often require balancing short-term gains with long-term stability."
+            "membership-lite": "简化版成员国身份（比喻性复合词，lite表示'简化/低配版'）",
+            "spooks": "使...不安/惊吓（动词，口语化表达，比alarms更生动）",
+            "wary of": "对...谨慎/警惕（固定搭配，wary为形容词）",
+            "intermediate status": "中间地位（政治外交术语）",
+            "behind closed doors": "秘密地/闭门地（习语）",
+            "contentious issue": "争议性问题（contentious含'易引起争论的'之意）",
+            "two-tier": "两级分化的（复合形容词，tier指'层级'）",
+            "undermine": "逐渐削弱/暗中破坏（动词，含负面渐进意）"
         },
-        "syntax_analysis": {
-            "original_sentence": "This proposal, designed to circumvent Hungary's veto threat, has unsettled several European capitals who fear it could undermine the bloc's cohesion and set a precedent for other aspiring members.",
-            "analysis": "主干结构为'This proposal has unsettled capitals'。插入语'designed to...threat'作后置定语修饰proposal；关系从句'who fear...members'修饰capitals，其中嵌套宾语从句'it could...precedent'，并由并列连词'and'连接两个动词短语'undermine cohesion'与'set precedent'。"
-        },
+        "syntax_analysis": [
+            {
+                "sentence": "The European Union is considering a 'membership-lite' plan for Ukraine that would offer Kyiv closer ties without full membership, a proposal that has unsettled several European capitals wary of the long-term implications.",
+                "analysis": "复合句结构：主句（EU is considering...）+ 定语从句1（that would offer...修饰plan）+ 同位语（a proposal...）+ 定语从句2（that has unsettled...修饰proposal）+ 后置定语（wary of...修饰capitals）。注意：'membership-lite'为创新复合词，Kyiv（基辅）借代乌克兰政府。"
+            },
+            {
+                "sentence": "This intermediate status, discussed behind closed doors, aims to provide Ukraine with security guarantees and economic benefits while avoiding the contentious issue of immediate accession.",
+                "analysis": "主句（This status aims to...）+ 过去分词短语作后置定语（discussed...修饰status）+ while引导的现在分词短语表伴随。专业表达：security guarantees（安全保障）、immediate accession（立即加入）。"
+            },
+            {
+                "sentence": "However, critics argue it could create a two-tier Europe and undermine the EU's enlargement policy.",
+                "analysis": "转折连词+主句（critics argue）+ 宾语从句（it could create...and undermine...）。动词搭配：create与undermine形成递进逻辑；two-tier Europe为政治隐喻。"
+            }
+        ],
         "output_playbook": {
-            "speaking": "In addressing institutional challenges, we might consider a phased approach—similar to how 'the EU is weighing a membership-lite model to navigate veto constraints while advancing strategic objectives.'",
-            "writing": "The proposal exemplifies the structural dilemma wherein geopolitical imperatives necessitate innovative frameworks, yet such adaptations risk eroding institutional cohesion—a tension manifest in how the mechanism 'grants benefits without full integration, unsettling stakeholders who perceive precedent-setting implications.'"
+            "speaking": {
+                "role_play": "模拟欧盟外交官辩论：一方支持'membership-lite'作为务实方案，另一方主张坚持传统扩大政策。使用词汇如intermediate status, contentious issue, long-term implications。",
+                "discussion_points": [
+                    "How might a 'two-tier Europe' affect EU cohesion?",
+                    "What are the diplomatic nuances between 'spooking capitals' and 'causing concern'?",
+                    "Debate: Is 'membership-lite' a pragmatic compromise or a dangerous precedent?"
+                ]
+            },
+            "writing": {
+                "task_1": "撰写政策简报摘要（150词），分析该计划的三个潜在风险，使用undermine, wary of, contentious等词汇。",
+                "task_2": "以欧盟官员身份起草内部备忘录，使用behind closed doors, intermediate status等表达，建议如何向公众解释该提案。"
+            }
         },
-        "insight": {
-            "1": "制度创新需预判连锁反应：'精简方案'虽解决短期否决困境，但可能触发成员国对规则稀释的长期忧虑，管理者在突破框架时应建立影响评估机制。",
-            "2": "地缘政治与组织原则的平衡艺术：当外部危机（如战争）迫使组织调整准入标准时，需明确'临时措施'与'永久规则'的边界，避免使命漂移。",
-            "3": "利益相关者焦虑管理：部分成员国'不安'源于对先例效应的敏感，高层决策需通过情景推演提前识别潜在联盟裂痕，并设计补偿性信任措施。"
-        },
+        "insight": "本文体现了高级政治语篇的三大特征：1) 创新术语创造（membership-lite）反映政策灵活性；2) 隐喻使用（spooks, two-tier）增强论述生动性；3) 复杂句结构承载多重逻辑关系（因果、让步、目的）。学习重点：如何在正式语境中平衡精准性与修辞力，例如用wary of替代简单表达concerned about，以传达更细微的政治立场。",
         "source": "FT",
         "title": "EU ‘membership-lite’ plan for Ukraine spooks European capitals",
         "date": "2026-01-16"
     },
     {
-        "level": "Advanced (C1)",
-        "tags": [
-            "Leadership",
-            "Strategy"
-        ],
-        "en_excerpt": "The FBI and CISA have issued a joint advisory urging iPhone and Android users to delete sensitive messages immediately, citing sophisticated cyberattacks targeting mobile devices. These attacks often exploit zero-day vulnerabilities in messaging apps to install spyware that can access contacts, location data, and private communications. The agencies emphasize that even encrypted messages stored locally can be compromised if devices are infected, recommending regular deletion of sensitive conversations and enabling automatic message deletion features where available.",
-        "cn_translation": "美国联邦调查局（FBI）和网络安全与基础设施安全局（CISA）联合发布警告，敦促iPhone和安卓用户立即删除敏感信息，原因在于针对移动设备的复杂网络攻击日益猖獗。此类攻击常利用即时通讯应用中的零日漏洞植入间谍软件，从而窃取联系人、位置数据和私人通讯内容。当局强调，即使本地存储的加密信息，在设备感染后也可能遭泄露，建议定期删除敏感对话，并尽可能启用自动删除功能。",
+        "level": "C1",
+        "en_excerpt": "Federal cybersecurity agencies are urging iPhone and Android users to delete sensitive messages immediately after reading them, citing growing threats from sophisticated spyware and data interception techniques. The advisory highlights how malicious actors can exploit vulnerabilities in mobile operating systems to access private communications, even on encrypted platforms. Experts recommend implementing 'zero-trust' messaging habits and using ephemeral messaging features where available.",
+        "cn_translation": "联邦网络安全机构正敦促iPhone和安卓用户在阅读敏感信息后立即删除，理由是来自复杂间谍软件和数据拦截技术的威胁日益增长。该建议强调了恶意行为者如何利用移动操作系统中的漏洞访问私人通信，即使在加密平台上也是如此。专家建议实施'零信任'消息习惯，并在可用时使用短暂消息功能。",
         "vocabulary_pro": {
-            "sophisticated": "（adj.）复杂的、精密的；指技术先进且难以防范的攻击手段。例句：Sophisticated phishing campaigns often mimic legitimate corporate communications to deceive employees.",
-            "zero-day vulnerabilities": "（n.）零日漏洞；指软件中尚未被开发者发现或修补的安全缺陷，攻击者可趁其未修复前进行利用。例句：Organizations must establish protocols to respond swiftly when zero-day vulnerabilities are disclosed.",
-            "compromised": "（v.）遭泄露、被破坏；指安全防护失效导致数据或系统完整性受损。例句：The CEO's email account was compromised through a brute-force attack on the corporate server."
+            "cybersecurity": "网络安全（复合名词，cyber-前缀表示'网络'，security表示'安全'）",
+            "sophisticated": "复杂的，精密的（形容词，常形容技术或手段的高级程度）",
+            "spyware": "间谍软件（复合名词，spy+ware，属于恶意软件malware的一种）",
+            "interception": "拦截（名词，动词形式为intercept，常见于通信安全语境）",
+            "vulnerabilities": "漏洞（名词复数，单数vulnerability，来自形容词vulnerable'易受攻击的'）",
+            "encrypted": "加密的（形容词，动词encrypt的过去分词形式作定语）",
+            "ephemeral": "短暂的（形容词，源自希腊语，在技术语境中特指'阅后即焚'类功能）",
+            "zero-trust": "零信任（信息技术术语，指'从不信任，始终验证'的安全模型）"
         },
-        "syntax_analysis": "主句：'The agencies emphasize that even encrypted messages stored locally can be compromised if devices are infected'。结构拆解：1) 主句主语（The agencies）+ 谓语（emphasize）；2) that引导宾语从句，其中嵌套条件状语从句（if devices are infected）；3) 过去分词短语（stored locally）作后置定语修饰messages；4) 情态动词被动语态（can be compromised）表达可能性。全句逻辑：强调条件（设备感染）与结果（加密信息泄露）的因果关系。",
+        "syntax_analysis": [
+            {
+                "sentence": "Federal cybersecurity agencies are urging iPhone and Android users to delete sensitive messages immediately after reading them, citing growing threats from sophisticated spyware and data interception techniques.",
+                "analysis": "主句使用现在进行时表示当前持续的建议动作；现在分词短语'citing...'作状语说明原因，其中包含介词短语'from...'修饰threats；不定式短语'to delete...'作宾语补足语，内含时间状语从句'after reading them'（省略主语和be动词的状语从句）"
+            },
+            {
+                "sentence": "The advisory highlights how malicious actors can exploit vulnerabilities in mobile operating systems to access private communications, even on encrypted platforms.",
+                "analysis": "主句为简单陈述句；宾语从句由how引导，包含情态动词can表示可能性；不定式短语'to access...'作目的状语；插入语'even on encrypted platforms'通过even加强语气，强调漏洞的严重性"
+            },
+            {
+                "sentence": "Experts recommend implementing 'zero-trust' messaging habits and using ephemeral messaging features where available.",
+                "analysis": "主句动词recommend后接动名词短语作宾语（implementing...and using...）；关系副词where引导省略的状语从句'where they are available'，修饰using动作的条件"
+            }
+        ],
         "output_playbook": {
-            "speaking": "口语引用模板：'As highlighted in the recent federal advisory, [论点]. For instance, [具体案例/数据]. This underscores why leaders must [建议行动].' 示例：'As highlighted in the recent federal advisory, locally stored encrypted messages remain vulnerable. For instance, spyware exploiting zero-day vulnerabilities can bypass encryption. This underscores why leaders must mandate regular message purging protocols.'",
-            "writing": "写作高阶句型：'Notwithstanding [普遍认知], [转折论点]—a reality evidenced by [权威来源]'s finding that [具体证据].' 示例：'Notwithstanding the common perception that encryption ensures absolute security, locally stored messages remain susceptible to compromise—a reality evidenced by the FBI-CISA advisory's finding that infected devices can expose even encrypted conversations.'"
+            "speaking": [
+                "角色扮演：模拟网络安全专家向企业管理层汇报移动设备安全威胁，使用专业术语如'attack vectors'、'endpoint protection'",
+                "辩论练习：'企业是否应强制员工使用自毁消息功能？' 正反方需引用文中概念如zero-trust原则、隐私权平衡",
+                "即兴演讲：以'Digital Hygiene in the Age of Surveillance'为题，结合文中案例阐述3条具体防护措施"
+            ],
+            "writing": [
+                "邮件撰写：以IT部门名义起草全员安全通告，要求使用被动语态和正式措辞（例：'All sensitive communications must be...'）",
+                "报告摘要：用150词概括文章核心发现，需包含threat landscape、countermeasures、implementation challenges三要素",
+                "政策草案：为企业设计'移动消息安全指南'，包含：1) Risk assessment framework 2) Protocol for handling classified information 3) Incident reporting procedures"
+            ]
         },
         "insight": {
-            "1": "技术风险治理需超越传统边界：管理者应认识到，员工个人设备的安全漏洞（如未删除的敏感信息）可能成为企业数据泄露的跳板，须将移动设备安全纳入整体风险管理框架。",
-            "2": "主动防御优于被动响应：等待漏洞修补（如零日漏洞修复）存在时间差，领导者需推行‘默认删除’文化，通过流程设计（如自动删除机制）降低人为疏忽带来的风险。",
-            "3": "权威警示的杠杆价值：政府机构的联合警告具备天然公信力，管理者可借此推动内部安全政策升级，将外部警示转化为内部合规动力，减少变革阻力。"
+            "linguistic": "科技类文本的典型特征：1) 高频使用名词化结构（如data interception而非intercept data）提升信息密度 2) 被动语态与主动建议交替出现，体现客观性与行动号召的结合 3) 专业术语与日常词汇的有机嵌套（如ephemeral messaging与delete messages）",
+            "professional": "网络安全沟通的行业惯例：1) 威胁描述采用'主体-手段-目标'三段式（actors exploit vulnerabilities to access...）2) 建议遵循'现状-风险-对策'逻辑链条 3) 谨慎使用绝对化表述，常配合情态动词（can/may）和程度副词（growing/increasingly）",
+            "cultural": "数字隐私观念的跨文化差异：1) 西方企业强调'合规驱动'的安全实践（如GDPR框架下的数据最小化原则）2) 中文语境常侧重'技术防护'与'用户教育'双轨并进 3) 国际商务中需注意不同法域对'sensitive information'的法律界定差异"
         },
         "source": "Forbes",
         "title": "‘Delete Sensitive Messages’—Feds Warn iPhone And Android Users",
         "date": "2026-01-16"
     },
     {
-        "level": "Advanced (C1)",
-        "tags": [
-            "Leadership",
-            "Strategy"
-        ],
-        "en_excerpt": "By 2026, three converging technologies will fundamentally reshape biotechnology: AI-driven drug discovery platforms that slash development timelines, CRISPR-based gene editing tools with unprecedented precision, and organ-on-a-chip systems that revolutionize preclinical testing. These innovations will not only accelerate therapeutic breakthroughs but also force biotech leaders to navigate complex ethical landscapes and regulatory frameworks. Companies that strategically integrate these technologies while fostering cross-disciplinary collaboration will gain decisive competitive advantages in the rapidly evolving market.",
-        "cn_translation": "到2026年，三项融合技术将从根本上重塑生物技术领域：大幅缩短研发周期的人工智能药物发现平台、具有空前精准度的CRISPR基因编辑工具，以及彻底改变临床前测试的器官芯片系统。这些创新不仅将加速治疗突破，还将迫使生物技术领导者应对复杂的伦理环境和监管框架。那些在促进跨学科合作的同时，战略性地整合这些技术的企业，将在快速演变的市场中获得决定性竞争优势。",
-        "vocabulary_pro": [
-            {
-                "word": "converging",
-                "definition": "coming together from different directions to meet at a common point",
-                "application": "The converging trends of digitalization and sustainability are creating new business models across industries."
-            },
-            {
-                "word": "unprecedented",
-                "definition": "never done or known before; without precedent",
-                "application": "The pandemic triggered an unprecedented shift toward remote work arrangements globally."
-            },
-            {
-                "word": "decisive",
-                "definition": "settling an issue; producing a definite result",
-                "application": "Her decisive leadership during the crisis prevented further financial losses for the organization."
-            }
-        ],
-        "syntax_analysis": "主句：'These innovations will not only accelerate therapeutic breakthroughs but also force biotech leaders to navigate complex ethical landscapes and regulatory frameworks.'\n结构拆解：\n1. 主语：These innovations\n2. 并列谓语：will accelerate... + but also force...\n3. 宾语1：therapeutic breakthroughs\n4. 宾语2：biotech leaders\n5. 宾语补足语：to navigate complex ethical landscapes and regulatory frameworks\n6. 修饰成分：complex (形容词修饰ethical landscapes), ethical landscapes and regulatory frameworks (并列名词短语)",
-        "output_playbook": {
-            "speaking": "In strategic discussions, you might say: 'As the article highlights, the convergence of AI, CRISPR, and organ-on-a-chip technologies presents both unprecedented opportunities and complex challenges. Forward-thinking leaders must therefore...'",
-            "writing": "For executive reports: 'The synergistic integration of [Technology A], [Technology B], and [Technology C] necessitates a paradigm shift in [business function], compelling organizations to reconfigure their [operational aspect] while addressing concomitant [ethical/regulatory considerations].'"
+        "level": "C1",
+        "en_excerpt": "As we approach 2026, three transformative technologies are poised to redefine the biotechnology landscape: AI-driven drug discovery, CRISPR-based gene therapies, and organ-on-a-chip systems. These innovations promise to accelerate therapeutic development, enhance precision medicine, and reduce reliance on animal testing, fundamentally altering how we approach human health.",
+        "cn_translation": "随着2026年的临近，三项变革性技术即将重新定义生物技术格局：人工智能驱动的药物发现、基于CRISPR的基因疗法以及器官芯片系统。这些创新有望加速治疗开发、提升精准医疗水平，并减少对动物实验的依赖，从根本上改变我们应对人类健康问题的方式。",
+        "vocabulary_pro": {
+            "transformative": "变革性的（形容词），指能带来根本性改变的技术或事物",
+            "poised to": "准备就绪的（短语），表示处于即将发生的状态",
+            "AI-driven": "人工智能驱动的（复合形容词），强调技术核心驱动力",
+            "CRISPR-based": "基于CRISPR的（复合形容词），特指基因编辑技术应用",
+            "organ-on-a-chip": "器官芯片（专业术语），微流控细胞培养装置",
+            "therapeutic development": "治疗开发（专业短语），指药物或疗法研发过程",
+            "precision medicine": "精准医疗（专业术语），个性化医疗的高级形态",
+            "reliance on": "对...的依赖（固定搭配），常接抽象名词"
         },
-        "insight": [
-            "技术融合战略：管理者必须超越单一技术采用，制定跨技术整合路线图，建立AI、基因编辑和生物工程之间的协同机制，而非孤立地投资各项技术。",
-            "伦理领导力：在技术快速演进中，管理者需在创新加速与伦理监管之间建立动态平衡机制，主动构建伦理评估框架，而非被动应对监管变化。",
-            "组织适应性：成功将取决于创建跨学科协作文化，打破研发、伦理、商业部门之间的壁垒，培养既能深入专业技术又能理解商业生态的T型人才团队。"
-        ],
+        "syntax_analysis": "1. 主句采用'As we approach...'时间状语从句引导，建立时间框架\n2. 'poised to redefine'使用被动结构+不定式，强调技术蓄势待发的状态\n3. 冒号后列举三项技术，构成平行结构(parallel structure)\n4. 'promise to'连用三个动词短语(accelerate, enhance, reduce)，形成排比修辞\n5. 现在分词'altering'作结果状语，展示技术影响的持续性",
+        "output_playbook": {
+            "speaking": "1. 技术趋势论述：练习用'As we approach [时间点], ... are poised to...'结构预测行业趋势\n2. 创新影响分析：使用'These innovations promise to...'句式讨论技术多重影响\n3. 专业术语应用：在模拟行业会议场景中嵌入organ-on-a-chip等术语\n4. 对比表达训练：用'fundamentally altering...'对比传统与新兴技术范式",
+            "writing": "1. 行业报告开篇：仿写时间框架+技术枚举的引言结构\n2. 技术说明文：学习用复合形容词(AI-driven)精确描述技术特征\n3. 影响论证段落：模仿'promise to'接排比动词的论证逻辑\n4. 摘要写作：练习将专业概念(precision medicine)融入限字数摘要"
+        },
+        "insight": "本段展现生物技术论述的典型范式：1) 以明确时间节点建立论述紧迫性 2) 使用'poised to'等商务预测专用语态 3) 通过技术枚举呈现系统化思维 4) 用'fundamentally altering'强调范式变革性质。高级学习者需掌握这种融合技术细节与战略视野的表述方式，特别是在需要向非技术背景决策者阐述技术价值时，平衡专业性与可及性。",
         "source": "MIT Tech",
         "title": "Three technologies that will shape biotech in 2026",
         "date": "2026-01-16"
     },
     {
-        "level": "Advanced (C1)",
-        "tags": [
-            "Leadership",
-            "Strategy"
-        ],
-        "en_excerpt": "Cryptocurrencies have emerged as a potent tool for political corruption due to their pseudonymous nature and cross-border fluidity. Unlike traditional banking systems, crypto transactions can obscure the identities of senders and recipients while bypassing regulatory oversight. This opacity enables illicit actors to funnel bribes, launder political funds, and evade sanctions with relative impunity. The decentralized architecture of blockchain networks further complicates detection, creating a shadow economy that undermines democratic institutions and governance.",
-        "cn_translation": "加密货币因其匿名特性和跨境流动性，已成为政治腐败的有力工具。与传统银行系统不同，加密交易可以模糊发送方和接收方的身份，同时规避监管审查。这种不透明性使得不法行为者能够相对不受惩罚地输送贿赂、洗白政治资金并逃避制裁。区块链网络的去中心化架构进一步增加了侦查难度，形成了一个侵蚀民主制度和治理的阴影经济。",
+        "level": "C1",
+        "en_excerpt": "Cryptocurrencies have emerged as a potent tool for political corruption, enabling illicit financial flows with unprecedented anonymity and borderless efficiency. Unlike traditional banking systems, blockchain transactions can obscure the identities of both senders and recipients through complex networks of digital wallets and mixing services. This opacity facilitates bribery, campaign finance violations, and money laundering on a global scale, often bypassing regulatory oversight. Politicians and lobbyists exploit these technologies to conceal payments, fund illicit activities, or evade sanctions, undermining democratic institutions and economic stability. The decentralized nature of cryptocurrencies complicates enforcement, as authorities struggle to trace transactions across jurisdictions without centralized intermediaries.",
+        "cn_translation": "加密货币已成为政治腐败的有力工具，以前所未有的匿名性和无国界效率促成非法资金流动。与传统银行系统不同，区块链交易可通过复杂的数字钱包和混币服务网络模糊发送方和接收方的身份。这种不透明性助长了全球范围内的贿赂、竞选资金违规和洗钱活动，常常规避监管审查。政客和游说者利用这些技术隐藏支付、资助非法活动或逃避制裁，损害民主制度和经济稳定。加密货币的去中心化特性使执法复杂化，因为当局在没有中心化中介的情况下难以跨司法管辖区追踪交易。",
         "vocabulary_pro": {
-            "pseudonymous": "伪匿名的 (adj.) - 指身份被假名掩盖但理论上可追溯，如：'The pseudonymous nature of crypto wallets allows donors to conceal political affiliations.'",
-            "impunity": "不受惩罚 (n.) - 指免于后果的状态，如：'Corrupt officials exploit regulatory gaps to act with impunity.'",
-            "opacity": "不透明性 (n.) - 指缺乏清晰度或可追溯性，如：'Financial opacity in campaigns breeds public distrust.'"
+            "potent tool": "强有力的工具（形容词+名词搭配）",
+            "illicit financial flows": "非法资金流动（金融犯罪术语）",
+            "unprecedented anonymity": "前所未有的匿名性（强调程度）",
+            "borderless efficiency": "无国界效率（全球化语境）",
+            "obscure identities": "模糊身份（动词+宾语搭配）",
+            "mixing services": "混币服务（加密货币特定术语）",
+            "opacity": "不透明性（抽象名词，对比transparency）",
+            "campaign finance violations": "竞选资金违规（政治法律术语）",
+            "bypass regulatory oversight": "规避监管审查（动词短语）",
+            "decentralized nature": "去中心化特性（技术特征描述）",
+            "trace transactions": "追踪交易（执法行动动词）",
+            "centralized intermediaries": "中心化中介（金融体系对比）"
         },
-        "syntax_analysis": "主句：'This opacity enables illicit actors to funnel bribes, launder political funds, and evade sanctions with relative impunity.' 结构分析：主语(This opacity) + 谓语(enables) + 宾语(illicit actors) + 不定式复合宾语(to funnel..., launder..., evade...) + 方式状语(with relative impunity)。三个并列不定式动词精准描述腐败行为链条，'with relative impunity'作评注状语，强调系统性漏洞。",
+        "syntax_analysis": [
+            {
+                "sentence": "Unlike traditional banking systems, blockchain transactions can obscure the identities of both senders and recipients through complex networks of digital wallets and mixing services.",
+                "analysis": "主句采用'can obscure'表达可能性，'Unlike...'引导对比状语，'through...'介词短语说明方式，体现C1级复杂修饰结构"
+            },
+            {
+                "sentence": "The decentralized nature of cryptocurrencies complicates enforcement, as authorities struggle to trace transactions across jurisdictions without centralized intermediaries.",
+                "analysis": "'as'引导原因状语从句，'without'介词短语表示条件限制，主句使用'complicates'使役动词体现因果关系"
+            },
+            {
+                "sentence": "Politicians and lobbyists exploit these technologies to conceal payments, fund illicit activities, or evade sanctions, undermining democratic institutions and economic stability.",
+                "analysis": "不定式'to conceal...'表目的，并列动词短语展现行为多样性，现在分词'undermining'作结果状语"
+            }
+        ],
         "output_playbook": {
-            "speaking": "在论述监管挑战时可引用：'As the IMF report highlights, the pseudonymous nature of crypto creates a perfect storm for political corruption—where opacity meets impunity.'",
-            "writing": "批判性写作模板：'While blockchain technology promises transparency in theory, its practical application in political finance has paradoxically fostered an ecosystem of deliberate opacity, enabling actors to [具体行为] while institutions struggle to [监管难点].'"
+            "speaking": {
+                "debate_framework": "组织小组辩论：'Cryptocurrency regulation should prioritize anti-corruption over innovation.' 提供正反方论点框架：正方强调democratic integrity, financial transparency, global cooperation；反方侧重technological progress, privacy rights, regulatory overreach",
+                "presentation_structure": "设计10分钟演讲结构：1. Hook-近期政治丑闻案例 2. Problem-加密货币如何助长腐败 3. Mechanism-匿名交易技术分析 4. Impact-对民主制度的具体损害 5. Solution-监管与技术平衡建议",
+                "discussion_questions": [
+                    "How might blockchain transparency features be leveraged against political corruption?",
+                    "What ethical dilemmas arise when balancing financial privacy with anti-corruption efforts?",
+                    "Compare the effectiveness of traditional and crypto-based corruption in different political systems."
+                ]
+            },
+            "writing": {
+                "policy_memo": "撰写政策备忘录：'Recommendations for G20 Crypto Corruption Mitigation' 要求包含：Executive Summary, Current Threat Assessment, Proposed Multilateral Measures, Implementation Timeline, Risk Evaluation",
+                "analytical_essay": "写作任务：'Analyze how cryptocurrency corruption differs from traditional methods in three aspects: detection difficulty, cross-border impact, and institutional vulnerability.' 提供thesis statement范例和段落发展技巧",
+                "email_negotiation": "模拟场景：作为国际组织代表，起草给不合作司法管辖区的正式邮件，要求交易数据共享。重点练习diplomatic language, persuasive reasoning, 和call to action的平衡"
+            }
         },
         "insight": {
-            "1": "领导者必须超越技术表象，识别系统性风险：加密货币的'去中心化'特性常被误读为'去责任化'，需建立跨部门监管沙盒模拟腐败场景。",
-            "2": "战略上应平衡创新与监管：完全禁止将驱动腐败地下化，而智能合约审计和链上分析工具可转化为'监管科技(RegTech)'竞争优势。",
-            "3": "组织治理启示：企业政治献金政策需升级至'区块链可追溯性标准'，将钱包地址披露纳入ESG报告体系，防范供应链腐败蔓延。"
+            "conceptual_framework": "政治腐败的数字化演进呈现三重悖论：1) 促进金融包容的技术同时成为逃避监管的工具 2) 增强透明度的区块链可能被用于制造不透明 3) 去中心化理想与集中化监管需求的冲突。这反映了技术中性论与社会建构论的持续张力",
+            "critical_thinking": "引导学员质疑：加密货币真的是腐败'原因'，还是仅仅放大现有制度缺陷的'催化剂'？分析时应区分：技术能力、使用者意图、监管滞后三个维度，避免technological determinism",
+            "professional_application": "在商业语境中，此话题涉及：合规部门需发展的新型风险评估模型、跨国企业反腐败协议的数字条款更新、ESG报告中加密货币风险的披露标准。建议学员联系FCPA、UK Bribery Act等法律框架分析"
         },
         "source": "Atlantic",
         "title": "How Crypto Is Used for Political Corruption",
