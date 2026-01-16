@@ -1,11 +1,42 @@
 [
     {
         "title": "The Pyramid Principle",
-        "intro": "The gold standard for logical thinking.",
+        "intro": "A structured communication methodology by Barbara Minto that teaches professionals to organize ideas logically from top-down, starting with the main conclusion followed by supporting arguments, ensuring clarity and persuasive impact in business writing and presentations.",
         "takeaways": [
-            "Start with conclusion",
-            "Group ideas"
+            "Start with the answer or main conclusion first, then provide supporting arguments",
+            "Group and summarize ideas into logical pyramids to enhance clarity and coherence",
+            "Use the SCQA framework (Situation, Complication, Question, Answer) to structure problem-solving and storytelling"
         ],
-        "coach_tips": "Focus on the governing thought."
+        "coach_tips": "As CEO, apply the Pyramid Principle to streamline executive communications, board reports, and strategic plans. Begin every presentation with your key recommendation, use it to critique team proposals for logical rigor, and train your leadership team in this method to improve organizational decision-making efficiency."
+    },
+    {
+        "title": "Atomic Habits",
+        "intro": "A practical guide to building good habits and breaking bad ones by focusing on small, incremental changes. James Clear demonstrates how tiny improvements compound into remarkable results over time through his four laws of behavior change.",
+        "takeaways": [
+            "Habits are formed through a four-step loop: cue, craving, response, reward",
+            "Focus on systems rather than goals to achieve lasting change",
+            "Make good habits obvious, attractive, easy, and satisfying while making bad habits invisible, unattractive, difficult, and unsatisfying"
+        ],
+        "coach_tips": "As CEO, implement the '1% improvement' philosophy across your organization by redesigning systems and environments to make productive behaviors automatic. Audit your company's habit loops, create identity-based habits aligned with your core values, and use habit stacking to build momentum in critical areas like innovation and customer service."
+    },
+    {
+        "title": "Thinking, Fast and Slow",
+        "intro": "Nobel laureate Daniel Kahneman explores the two systems that drive human thought: System 1 (fast, intuitive) and System 2 (slow, deliberate). This groundbreaking work reveals cognitive biases and heuristics that shape decisions, offering profound insights for business, psychology, and everyday life.",
+        "takeaways": [
+            "Human thinking operates through two systems: intuitive (System 1) and analytical (System 2)",
+            "Cognitive biases like anchoring, availability, and overconfidence systematically distort judgment",
+            "Understanding these mental shortcuts can improve decision-making in business and personal contexts"
+        ],
+        "coach_tips": "As CEO, consciously engage System 2 for strategic decisions by creating decision-making protocols that counteract biases. Implement pre-mortems for major initiatives, seek diverse perspectives to challenge assumptions, and establish checklists to ensure deliberate thinking in high-stakes situations."
+    },
+    {
+        "title": "Blue Ocean Strategy",
+        "intro": "A business strategy framework by W. Chan Kim and Renée Mauborgne that advocates creating uncontested market space ('blue oceans') rather than competing in crowded industries ('red oceans'). It emphasizes value innovation to make competition irrelevant by simultaneously pursuing differentiation and low cost.",
+        "takeaways": [
+            "Focus on creating new market space rather than competing in existing ones",
+            "Use the 'Four Actions Framework' to eliminate, reduce, raise, and create value factors",
+            "Pursue differentiation and low cost simultaneously through value innovation"
+        ],
+        "coach_tips": "As CEO, map your current strategic landscape using the Strategy Canvas tool. Identify non-customers and their pain points. Challenge industry assumptions by asking what factors you can eliminate or reduce below industry standards while raising or creating new value. Test your blue ocean ideas with rapid, low-cost market experiments before full commitment."
     }
 ]

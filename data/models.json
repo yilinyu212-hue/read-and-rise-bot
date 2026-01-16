@@ -2,12 +2,6 @@
     {
         "name": "SCQA Framework",
         "scenario": "High-stakes presentation",
-        "coach_tips": "Avoid burying the lead.",
-        "logic_flow": [
-            "Situation",
-            "Complication",
-            "Question",
-            "Answer"
-        ]
+        "coach_tips": "Focus on the 'Complication' to build tension."
     }
 ]
