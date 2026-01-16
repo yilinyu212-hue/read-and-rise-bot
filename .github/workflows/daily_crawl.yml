@@ -12,31 +12,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0 
-
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
-
       - name: Install dependencies
-        run: pip install feedparser google-generativeai notion-client
-
+        run: pip install feedparser requests  # 确保有 requests
       - name: Run Script
         env:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
         run: python crawler.py
-
-      - name: Force Sync and Push
+      - name: Commit and Push
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          # 核心修复：强行重置本地状态，确保提交成功
           git fetch origin main
-          git checkout main
           git reset --hard origin/main
           mkdir -p data
           git add data/library.json
-          git commit -m "Auto-update library data" || exit 0
+          git commit -m "Auto-update data" || exit 0
           git push -f origin main
