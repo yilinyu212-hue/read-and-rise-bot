@@ -26,9 +26,14 @@ def run():
         {"name": "Wired (科技)", "url": "https://www.wired.com/feed/rss"},
         {"name": "McKinsey (麦肯锡)", "url": "https://www.mckinsey.com/insights/rss"}
     ]
+    
+    # --- 书籍和模型库（可在此处增加更多） ---
+    BOOK_POOL = ["Atomic Habits", "The Pyramid Principle", "Deep Work", "Grit", "Zero to One", "Thinking, Fast and Slow"]
+    MODEL_POOL = ["MECE", "SCQA", "SWOT Analysis", "OKR", "Pareto Principle", "First Principles", "Eisenhower Matrix"]
 
     all_articles = []
     
+    # --- 1. 抓取文章 ---
     for src in SOURCES:
         try:
             print(f"正在抓取: {src['name']}")
@@ -36,9 +41,8 @@ def run():
             feed = feedparser.parse(resp.content)
             
             if feed.entries:
-                # 选取每个源最新的一篇
                 e = feed.entries[0]
-                prompt = f"针对文章《{e.title}》输出讲义JSON: {{'level':'C1','en_excerpt':'原文核心段','cn_translation':'翻译','vocabulary_pro':'关键词(英文:中文)','syntax_analysis':'句法结构','output_playbook':{{'speaking':'口语地道表达','writing':'写作高级表达'}},'insight':'教练视角的深度洞察','logic_flow':'逻辑链(A -> B -> C)'}}"
+                prompt = f"针对文章《{e.title}》输出讲义JSON: {{'level':'C1','en_excerpt':'原文核心段','cn_translation':'翻译','vocabulary_pro':'关键词(英文:中文)','syntax_analysis':'句法结构','output_playbook':{{'speaking':'口语地道表达','writing':'写作高级表达'}},'insight':'教练视角的深度洞察','logic_flow':'逻辑链(核心概念 -> 分支1 -> 细节1, 核心概念 -> 分支2)'}}"
                 ai = get_ai_data(prompt)
                 
                 if ai:
@@ -52,17 +56,49 @@ def run():
             print(f"源 {src['name']} 抓取跳过: {ex}")
             continue
 
-    # 强制保存，确保即使只有部分源成功也能显示
     os.makedirs('data', exist_ok=True)
     with open('data/library.json', 'w', encoding='utf-8') as f:
         json.dump(all_articles, f, ensure_ascii=False, indent=4)
 
-    # --- 兜底逻辑：确保书籍和模型不为空 ---
-    if not os.path.exists('data/books.json') or os.path.getsize('data/books.json') < 10:
-        book_init = get_ai_data("解析《Atomic Habits》: {'intro':'简介','takeaways':['1','2','3'],'why_read':'理由','logic_flow':'逻辑'}")
-        if book_init:
-            with open('data/books.json', 'w', encoding='utf-8') as f:
-                json.dump([{"title": "Atomic Habits", "author": "James Clear", "img": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800", **book_init}], f, ensure_ascii=False)
+    # --- 2. 累加书籍 (增量更新) ---
+    existing_books = []
+    if os.path.exists('data/books.json') and os.path.getsize('data/books.json') > 0:
+        with open('data/books.json', 'r', encoding='utf-8') as f:
+            try: existing_books = json.load(f)
+            except json.JSONDecodeError: existing_books = []
+    
+    current_book_titles = [b.get('title') for b in existing_books]
+    new_book_candidates = [b for b in BOOK_POOL if b not in current_book_titles]
+    
+    if new_book_candidates:
+        target_book = new_book_candidates[0]
+        prompt_book = f"深度解析书籍《{target_book}》。JSON格式: {{'intro':'详细双语简介','takeaways':['核心重点1','核心重点2','核心重点3'],'why_read':'推荐理由','logic_flow':'思维导图核心逻辑(主要概念 -> 细节1, 主要概念 -> 细节2)'}}"
+        ai_book = get_ai_data(prompt_book)
+        if ai_book:
+            existing_books.append({"title": target_book, "author": "AI Curated", "tag": "Growth", "img": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800", **ai_book})
+    
+    with open('data/books.json', 'w', encoding='utf-8') as f:
+        json.dump(existing_books, f, ensure_ascii=False, indent=4)
+
+    # --- 3. 累加思维模型 (增量更新) ---
+    existing_models = []
+    if os.path.exists('data/models.json') and os.path.getsize('data/models.json') > 0:
+        with open('data/models.json', 'r', encoding='utf-8') as f:
+            try: existing_models = json.load(f)
+            except json.JSONDecodeError: existing_models = []
+
+    current_model_names = [m.get('name','').split('(')[0].strip() for m in existing_models]
+    new_model_candidates = [m for m in MODEL_POOL if m not in current_model_names]
+
+    if new_model_candidates:
+        target_model = new_model_candidates[0]
+        prompt_model = f"深度解析思维模型《{target_model}》。英文在前。JSON格式: {{'name':'English Name (中文名)','definition':'English Def (中文)','how_to_use':'Scenario (场景)','english_template':['Sentence 1','Sentence 2','Sentence 3'],'logic_flow':'模型结构图(步骤1 -> 步骤2 -> 步骤3)'}}"
+        ai_model = get_ai_data(prompt_model)
+        if ai_model:
+            existing_models.append(ai_model)
+
+    with open('data/models.json', 'w', encoding='utf-8') as f:
+        json.dump(existing_models, f, ensure_ascii=False, indent=4)
 
 if __name__ == "__main__":
     run()
