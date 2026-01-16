@@ -1,22 +1,24 @@
 [
     {
-        "name": "MECE (Mutually Exclusive, Collectively Exhaustive) (相互独立，完全穷尽)",
-        "definition": "A principle for organizing information into distinct, non-overlapping categories that together cover all possibilities without gaps or overlaps. (一种将信息组织成互不重叠、完全覆盖所有可能性的分类原则，确保无遗漏无重复)",
-        "how_to_use": "Apply when structuring problems, brainstorming solutions, or analyzing data to ensure comprehensive and clear categorization. (适用于构建问题框架、头脑风暴解决方案或数据分析时，确保分类全面且清晰)",
+        "name": "MECE（相互独立，完全穷尽）",
+        "definition": "MECE (Mutually Exclusive, Collectively Exhaustive) is a principle for organizing information into distinct, non-overlapping categories that together cover all possibilities. It ensures logical clarity and comprehensiveness in analysis.（MECE（相互独立，完全穷尽）是一种将信息组织成互不重叠、共同涵盖所有可能性的分类原则，确保分析的逻辑清晰性和全面性。）",
+        "how_to_use": "1. Identify the problem or topic to be analyzed. 2. Break it down into categories that do not overlap (mutually exclusive). 3. Ensure all relevant aspects are covered (collectively exhaustive). 4. Use the categories to structure analysis, brainstorming, or decision-making.（1. 确定要分析的问题或主题。2. 将其分解为互不重叠的类别（相互独立）。3. 确保涵盖所有相关方面（完全穷尽）。4. 使用这些类别来构建分析、头脑风暴或决策框架。）",
         "english_template": [
-            "To analyze this issue using MECE, we'll break it down into mutually exclusive categories.",
-            "Our framework needs to be collectively exhaustive to cover all possible scenarios.",
-            "Let's ensure our categories are MECE to avoid overlap and gaps in our analysis."
-        ]
+            "S1: To apply MECE, start by defining the scope of your analysis clearly.",
+            "S2: Next, brainstorm all possible categories and refine them to avoid overlaps.",
+            "S3: Finally, validate that your categories cover every relevant aspect without gaps."
+        ],
+        "mindmap": "graph TD\n    A[MECE Principle] --> B[Mutually Exclusive]\n    A --> C[Collectively Exhaustive]\n    B --> D[No Overlap Between Categories]\n    B --> E[Clear Distinctions]\n    C --> F[Covers All Possibilities]\n    C --> G[No Gaps in Analysis]\n    A --> H[Applications]\n    H --> I[Problem-Solving]\n    H --> J[Decision-Making]\n    H --> K[Data Structuring]\n    A --> L[Benefits]\n    L --> M[Enhanced Clarity]\n    L --> N[Improved Comprehensiveness]\n    L --> O[Reduced Bias]"
     },
     {
-        "name": "SCQA Model (情境-冲突-问题-答案模型)",
-        "definition": "A structured communication framework that organizes information into four sequential components: Situation (establishes context), Complication (introduces conflict or challenge), Question (poses the core problem), and Answer (provides the solution). (一种结构化的沟通框架，将信息组织为四个连续部分：情境-建立背景，冲突-引入矛盾或挑战，问题-提出核心问题，答案-提供解决方案)",
-        "how_to_use": "Apply in business presentations, reports, or proposals to create logical narratives that guide audiences from context to resolution. Start with Situation to set the scene, then introduce Complication to highlight urgency, formulate Question to focus attention, and conclude with Answer to deliver value. (用于商业演示、报告或提案中，创建引导受众从背景到解决方案的逻辑叙述。从情境开始设定场景，引入冲突强调紧迫性，提出问题聚焦注意力，最后以答案提供价值)",
+        "name": "第一性原理",
+        "definition": "First Principles thinking is a problem-solving approach that involves breaking down complex problems into their most fundamental truths or basic elements, then reasoning up from there to create new solutions. It requires questioning assumptions and rebuilding understanding from the ground up rather than relying on analogies or existing frameworks.\n\n第一性原理是一种解决问题的方法，涉及将复杂问题分解为最基本的真理或基本元素，然后从这些基础出发进行推理以创造新的解决方案。它要求质疑假设并从零开始重建理解，而不是依赖类比或现有框架。",
+        "how_to_use": "1. Identify and define the problem clearly\n2. Break down the problem into its fundamental components or basic truths\n3. Question all assumptions and conventional wisdom about these components\n4. Reconstruct the solution from these verified fundamentals\n5. Test the new solution against reality\n\n1. 清晰识别并定义问题\n2. 将问题分解为其基本组成部分或基本真理\n3. 质疑关于这些组成部分的所有假设和传统智慧\n4. 从这些经过验证的基础出发重建解决方案\n5. 根据现实测试新解决方案",
         "english_template": [
-            "Given the current market expansion (Situation), we're facing increased competition from new entrants (Complication). How can we maintain our market leadership? (Question) Our proposed strategy involves three key initiatives... (Answer)",
-            "While our sales have grown steadily (Situation), customer retention rates have declined by 15% this quarter (Complication). What's causing this disconnect? (Question) Our analysis reveals two primary factors requiring immediate attention... (Answer)",
-            "The team successfully launched the product (Situation), but user adoption remains below projections (Complication). How do we accelerate market penetration? (Question) We recommend implementing a revised marketing campaign focused on... (Answer)"
-        ]
+            "To apply First Principles thinking to [problem/issue], we need to identify its fundamental components by asking: What are the basic truths about [specific aspect] that we know for certain?",
+            "Instead of accepting conventional approaches to [challenge], let's break it down to its core elements. What are the essential building blocks of [system/process] that cannot be reduced further?",
+            "By questioning our assumptions about [topic] and rebuilding our understanding from verified fundamentals, we can develop innovative solutions that traditional analogical thinking might miss."
+        ],
+        "mindmap": "graph TD\n    A[First Principles Thinking] --> B1[Core Concept]\n    A --> B2[Application Process]\n    A --> B3[Key Benefits]\n    A --> B4[Common Examples]\n    \n    B1 --> C1[Break down to fundamentals]\n    B1 --> C2[Question assumptions]\n    B1 --> C3[Rebuild from basics]\n    \n    B2 --> D1[Identify problem]\n    B2 --> D2[Deconstruct elements]\n    B2 --> D3[Verify fundamentals]\n    B2 --> D4[Reconstruct solution]\n    B2 --> D5[Test implementation]\n    \n    B3 --> E1[Innovative solutions]\n    B3 --> E2[Overcome biases]\n    B3 --> E3[Clearer understanding]\n    B3 --> E4[Reduced complexity]\n    \n    B4 --> F1[Elon Musk: SpaceX rockets]\n    B4 --> F2[Aristotle: Deductive reasoning]\n    B4 --> F3[Scientific method]\n    B4 --> F4[Product design]"
     }
 ]
