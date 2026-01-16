@@ -9,6 +9,14 @@ DATABASE_ID = os.environ.get("DATABASE_ID")
 
 notion = Client(auth=NOTION_TOKEN)
 
+# --- 外刊来源配置列表 ---
+# 你可以在这里增加更多 RSS 链接，机器人会自动循环抓取
+SOURCES = [
+    {"name": "Economist", "url": "https://www.economist.com/briefing/rss.xml"},
+    {"name": "NYT", "url": "https://rss.nytimes.com/services/xml/rss/nyt/World.xml"},
+    {"name": "The Atlantic", "url": "https://www.theatlantic.com/feed/all/"}
+]
+
 def get_ai_analysis(title):
     headers = {
         "Content-Type": "application/json",
@@ -28,45 +36,49 @@ def get_ai_analysis(title):
         return f"AI解析生成中... (错误: {e})"
 
 def run():
-    print("🚀 正在抓取并同步...")
-    feed = feedparser.parse("https://www.economist.com/briefing/rss.xml")
-    articles = []
+    print("🚀 Read & Rise 多源抓取开始...")
+    all_articles = []
     
-    # 每次同步最新的 3 篇
-    for entry in feed.entries[:3]:
-        print(f"处理中: {entry.title}")
-        analysis = get_ai_analysis(entry.title)
+    for source in SOURCES:
+        print(f"📡 正在抓取: {source['name']}...")
+        feed = feedparser.parse(source['url'])
         
-        # 1. 推送到 Notion
-        try:
-            notion.pages.create(
-                parent={"database_id": DATABASE_ID},
-                properties={
-                    "Name": {"title": [{"text": {"content": entry.title}}]},
-                    "Source": {"select": {"name": "Economist"}},
-                    "Link": {"url": entry.link},
-                    "AI Summary": {"rich_text": [{"text": {"content": analysis[:1900]}}]},
-                    "Date": {"date": {"start": datetime.now().strftime("%Y-%m-%d")}},
-                    "Status": {"status": {"name": "To Read"}}
-                }
-            )
-            print(f"✅ Notion 已更新: {entry.title[:15]}")
-        except Exception as e:
-            print(f"❌ Notion 推送失败: {e}")
+        # 每个来源只抓取最新的 2 篇，避免瞬间产生太多任务
+        for entry in feed.entries[:2]:
+            print(f"处理中: [{source['name']}] {entry.title}")
+            analysis = get_ai_analysis(entry.title)
+            
+            # 1. 推送到 Notion
+            try:
+                notion.pages.create(
+                    parent={"database_id": DATABASE_ID},
+                    properties={
+                        "Name": {"title": [{"text": {"content": entry.title}}]},
+                        "Source": {"select": {"name": source['name']}}, # 动态匹配来源名
+                        "Link": {"url": entry.link},
+                        "AI Summary": {"rich_text": [{"text": {"content": analysis[:1900]}}]},
+                        "Date": {"date": {"start": datetime.now().strftime("%Y-%m-%d")}},
+                        "Status": {"status": {"name": "To Read"}}
+                    }
+                )
+                print(f"✅ Notion 同步成功")
+            except Exception as e:
+                print(f"❌ Notion 同步失败: {e}")
 
-        # 2. 收集数据用于网站显示
-        articles.append({
-            "title": entry.title,
-            "link": entry.link,
-            "content": analysis,
-            "date": datetime.now().strftime("%Y-%m-%d")
-        })
+            # 2. 收集数据用于网站显示
+            all_articles.append({
+                "source": source['name'],
+                "title": entry.title,
+                "link": entry.link,
+                "content": analysis,
+                "date": datetime.now().strftime("%Y-%m-%d")
+            })
 
-    # 3. 保存 library.json 供精读网站读取
+    # 3. 更新本地 library.json
     os.makedirs('data', exist_ok=True)
     with open('data/library.json', 'w', encoding='utf-8') as f:
-        json.dump(articles, f, ensure_ascii=False, indent=4)
-    print("📂 library.json 已更新，精读网站数据就绪。")
+        json.dump(all_articles, f, ensure_ascii=False, indent=4)
+    print(f"📂 本地数据已更新，共抓取 {len(all_articles)} 篇文章。")
 
 if __name__ == "__main__":
     run()
