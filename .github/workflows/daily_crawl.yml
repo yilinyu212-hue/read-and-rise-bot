@@ -25,6 +25,9 @@ jobs:
 
       - name: Run Script
         env:
+          # 这三行是将 GitHub Secrets 映射给 Python 程序的“桥梁”
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          DATABASE_ID: ${{ secrets.DATABASE_ID }}
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
         run: python crawler.py
 
