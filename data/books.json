@@ -79,13 +79,13 @@
         "author": "AI Curated",
         "tag": "Growth",
         "img": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800",
-        "intro": "《Thinking, Fast and Slow》是诺贝尔经济学奖得主丹尼尔·卡尼曼（Daniel Kahneman）的经典著作，系统性地阐述了人类思维的两种模式：快速、直觉的“系统1”和缓慢、理性的“系统2”。本书基于作者数十年的心理学和行为经济学研究，揭示了人类决策过程中的认知偏见和启发式思维，挑战了传统经济学中“理性人”的假设。\n\n'Thinking, Fast and Slow' is a seminal work by Nobel laureate Daniel Kahneman, systematically exploring two modes of human thinking: the fast, intuitive 'System 1' and the slow, deliberate 'System 2'. Drawing on decades of psychological and behavioral economics research, the book reveals cognitive biases and heuristic thinking in human decision-making, challenging the traditional economic assumption of 'rational actors'.",
+        "intro": "《思考，快与慢》是诺贝尔经济学奖得主丹尼尔·卡尼曼的经典著作，系统性地揭示了人类思维的两套系统及其对决策的影响。本书基于作者数十年的行为经济学研究，挑战了传统理性经济人假设，展示了直觉与理性思维的互动如何塑造我们的判断、选择和行动。\n\n\"Thinking, Fast and Slow\" is a seminal work by Nobel laureate Daniel Kahneman, systematically revealing the two systems of human thinking and their impact on decision-making. Based on decades of behavioral economics research, the book challenges the traditional assumption of rational economic agents, demonstrating how the interaction between intuition and rational thinking shapes our judgments, choices, and actions.",
         "takeaways": [
-            "系统1与系统2的双重思维模型：系统1是自动、快速的直觉思维，负责日常简单决策；系统2是缓慢、费力的理性思维，处理复杂问题。两者相互作用但常导致认知错误。",
-            "认知偏见与启发式思维：详细阐述了锚定效应、可得性启发、代表性启发等常见偏见，说明人类如何依赖心理捷径做出非理性判断。",
-            "前景理论与损失厌恶：提出人们面对收益和损失时的不对称心理反应——损失带来的痛苦远大于等量收益带来的快乐，这颠覆了传统效用理论。"
+            "人类思维由系统1（快速、直觉、自动）和系统2（缓慢、理性、需努力）组成，两者共同作用但常导致认知偏差",
+            "常见的认知偏差包括锚定效应、可得性启发、过度自信等，这些偏差在商业、投资和个人决策中普遍存在",
+            "通过认识思维系统的运作机制，我们可以改善决策质量，减少错误判断，在复杂环境中做出更理性的选择"
         ],
-        "why_read": "本书融合心理学、经济学和神经科学，提供理解人类决策缺陷的完整框架；其实证研究方法严谨，案例丰富生动；对个人决策优化、商业策略制定和公共政策设计都有重要启示；能帮助读者识别自身思维盲点，提升批判性思考能力。",
-        "logic_flow": "双重思维系统 -> 系统1（直觉/自动/情绪化）与系统2（理性/控制/计算）的区分与互动 -> 认知负荷与懒惰的系统2 -> 启发式与偏见 -> 可得性启发（基于记忆易得性判断频率） -> 锚定效应（初始值影响后续判断） -> 框架效应（表达方式改变决策） -> 前景理论 -> 损失厌恶（损失比收益更敏感） -> 确定效应（偏爱确定性收益） -> 反射效应（风险偏好逆转） -> 过度自信与后见之明 -> 规划谬误（低估完成时间） -> 专家直觉的局限性"
+        "why_read": "本书提供了理解人类决策本质的科学框架，对商业决策、投资策略、政策制定和个人生活都具有重要指导意义。卡尼曼将复杂的心理学研究转化为通俗易懂的洞察，帮助读者识别自身思维盲点，提升批判性思维能力。",
+        "logic_flow": "主要概念：双系统思维模型 -> 细节1：系统1特征（快速、直觉、情感驱动、易受偏见影响），细节2：系统2特征（缓慢、理性、逻辑分析、需认知努力）\n主要概念：认知偏差与启发法 -> 细节1：常见偏差类型（锚定效应、可得性启发、代表性启发），细节2：偏差在现实决策中的表现（投资错误、管理失误、日常判断）\n主要概念：决策心理学应用 -> 细节1：改善决策的方法（放慢思考、外部视角、事前验尸），细节2：在商业和个人生活中的实践价值"
     }
 ]

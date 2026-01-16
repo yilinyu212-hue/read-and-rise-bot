@@ -1,62 +1,53 @@
 [
     {
         "level": "C1",
-        "en_excerpt": "Geopolitical tensions are increasingly shaping corporate strategies, forcing multinationals to navigate a complex web of trade restrictions, supply chain realignments, and regulatory divergences. Companies that once prioritized efficiency and globalization now face pressure to localize operations, diversify suppliers, and even exit certain markets entirely. This shift represents a fundamental recalibration of risk assessment, where political stability and bilateral relationships carry as much weight as traditional financial metrics.",
-        "cn_translation": "地缘政治紧张局势正日益塑造企业战略，迫使跨国公司在贸易限制、供应链重组和监管差异的复杂网络中穿行。曾经优先考虑效率和全球化的公司现在面临本地化运营、供应商多元化甚至完全退出某些市场的压力。这种转变代表了风险评估的根本性重新调整，政治稳定性和双边关系与传统财务指标同等重要。",
+        "en_excerpt": "Geopolitical tensions are increasingly shaping corporate strategies, forcing multinationals to navigate complex trade-offs between efficiency and resilience. Companies are reevaluating supply chains, investment locations, and market priorities not just through commercial lenses but also through geopolitical risk assessments. This represents a fundamental shift from the globalization paradigm that dominated business thinking for decades.",
+        "cn_translation": "地缘政治紧张局势正日益影响企业战略，迫使跨国公司在效率与韧性之间做出复杂的权衡取舍。企业正在重新评估供应链、投资地点和市场优先级，不仅通过商业视角，更通过地缘政治风险评估。这标志着对主导商业思维数十年的全球化范式的根本性转变。",
         "vocabulary_pro": {
             "geopolitical tensions": "地缘政治紧张局势",
             "corporate strategies": "企业战略",
-            "trade restrictions": "贸易限制",
-            "supply chain realignments": "供应链重组",
-            "regulatory divergences": "监管差异",
-            "localize operations": "本地化运营",
-            "diversify suppliers": "供应商多元化",
-            "fundamental recalibration": "根本性重新调整",
-            "risk assessment": "风险评估",
-            "bilateral relationships": "双边关系"
+            "navigate trade-offs": "权衡取舍",
+            "supply chains": "供应链",
+            "resilience": "韧性/抗风险能力",
+            "globalization paradigm": "全球化范式",
+            "risk assessments": "风险评估",
+            "fundamental shift": "根本性转变"
         },
-        "syntax_analysis": "复合句结构：主句'Geopolitical tensions are shaping corporate strategies' + 现在分词短语'forcing...'作伴随状语 + 定语从句'that once prioritized...'修饰Companies + 同位语从句'where political stability...'解释recalibration。高级语法点：现在分词作状语、关系代词引导定语从句、关系副词引导同位语从句。",
+        "syntax_analysis": "1. 主句采用现在进行时态(are shaping/are reevaluating)强调持续变化过程\n2. 分词结构(forcing.../not just through...but also...)体现因果关系与对比关系\n3. 定语从句(that dominated...)修饰paradigm，体现历史背景\n4. 平行结构(between efficiency and resilience)展示二元对立关系",
         "output_playbook": {
-            "speaking": "地道表达：1. 'navigate a complex web of...'（在...复杂网络中穿行）2. 'carry as much weight as...'（与...同等重要）3. 'face pressure to...'（面临...压力）4. 'fundamental recalibration'（根本性调整）",
-            "writing": "高级表达：1. 'increasingly shaping corporate strategies'（日益塑造企业战略）2. 'prioritized efficiency and globalization'（优先考虑效率和全球化）3. 'represents a fundamental recalibration'（代表了根本性重新调整）4. 'political stability and bilateral relationships'（政治稳定性和双边关系）"
+            "speaking": "1. 'navigate the trade-offs between...and...' (在...与...之间权衡)\n2. 'through the lens of...' (通过...的视角)\n3. 'represent a paradigm shift' (代表范式转变)\n4. 'forced to reckon with...' (不得不应对...)",
+            "writing": "1. 'increasingly shape corporate calculus' (日益影响企业决策)\n2. 'complex interplay between commercial and geopolitical considerations' (商业与地缘政治考量的复杂互动)\n3. 'depart from long-held assumptions' (背离长期持有的假设)\n4. 'recalibrate strategic priorities' (重新调整战略优先级)"
         },
-        "insight": "教练视角：本文揭示了全球化2.0时代的核心矛盾——效率优先 vs 安全优先。跨国公司正在经历从'成本最优'到'风险可控'的范式转变。教学重点应放在：1) 如何用商业语言描述政治风险 2) 战略动词的精准使用（navigate, recalibrate, diversify）3) 复杂因果关系的逻辑表达。建议学员对比2000年代'flat world'论述与当前'fragmented globalization'论述。",
-        "logic_flow": "核心概念：地缘政治影响商业决策 -> 分支1：具体表现（贸易限制、供应链重组、监管差异） -> 细节1：企业应对策略（本地化、供应商多元化、市场退出） -> 分支2：根本性转变 -> 细节2：风险评估标准变化（政治因素与财务指标并重）",
+        "insight": "高级商务人士需要理解：地缘政治已从'外部风险因素'转变为'战略核心变量'。教学重点应帮助学员：1) 识别地缘政治信号如何转化为商业风险 2) 掌握'战略模糊性'的表达艺术 3) 在跨文化沟通中平衡商业逻辑与政治敏感性。案例讨论可聚焦：芯片制裁、能源转型、数字主权等现实议题。",
+        "logic_flow": "核心概念：地缘政治重塑商业决策 -> 分支1：企业战略调整(供应链重组/投资重新配置) -> 细节：效率vs韧性权衡 -> 分支2：全球化范式转变 -> 细节：从经济优先到风险优先的思维迁移",
         "source": "Economist (简报)",
         "title": "Geopolitics is warping multinationals’ commercial decisions",
         "date": "2026-01-16"
     },
     {
         "level": "C1",
-        "en_excerpt": "The article navigates the complex landscape of AI in software development, distinguishing genuine innovation from marketing hype. It examines how AI coding tools are reshaping developer workflows while cautioning against overestimating their current capabilities. Simultaneously, it highlights emerging biotech trends poised to transform healthcare, emphasizing the convergence of computational and biological sciences.",
-        "cn_translation": "本文探讨了人工智能在软件开发领域的复杂现状，区分了真正的创新与市场炒作。文章分析了AI编码工具如何重塑开发者工作流程，同时警告不要高估其当前能力。此外，文章还重点介绍了有望改变医疗保健的新兴生物技术趋势，强调了计算科学与生物科学的融合。",
+        "en_excerpt": "The article navigates the polarized discourse around AI in software development, distinguishing genuine productivity gains from inflated marketing claims. It simultaneously examines emerging biotech innovations poised to reshape healthcare, agriculture, and materials science, emphasizing the need for balanced, evidence-based evaluation of both fields.",
+        "cn_translation": "本文探讨了围绕人工智能在软件开发中两极分化的讨论，区分了真正的生产力提升与夸大的营销宣传。同时，文章审视了有望重塑医疗、农业和材料科学的新兴生物技术创新，强调了对这两个领域进行平衡、基于证据评估的必要性。",
         "vocabulary_pro": {
-            "navigates": "驾驭/探索",
-            "landscape": "格局/现状",
-            "distinguishing": "区分",
-            "genuine innovation": "真正的创新",
-            "marketing hype": "市场炒作",
-            "reshaping": "重塑",
-            "workflows": "工作流程",
-            "cautioning against": "警告不要",
-            "overestimating": "高估",
-            "emerging": "新兴的",
-            "poised to": "准备就绪/有望",
-            "convergence": "融合/汇聚",
-            "computational sciences": "计算科学"
+            "polarized discourse": "两极分化的讨论",
+            "genuine productivity gains": "真正的生产力提升",
+            "inflated marketing claims": "夸大的营销宣传",
+            "emerging biotech innovations": "新兴生物技术创新",
+            "poised to reshape": "有望重塑",
+            "evidence-based evaluation": "基于证据的评估"
         },
-        "syntax_analysis": "1. 复合句结构：主句'The article navigates...'后接现在分词短语'distinguishing...'作伴随状语\n2. 并列结构：'while cautioning...'连接对比动作\n3. 名词化表达：'the convergence of computational and biological sciences'将动态过程转化为静态概念\n4. 被动语态：'are reshaping'/'are poised to transform'体现客观描述",
+        "syntax_analysis": "主句采用现在时态描述文章内容（'navigates', 'examines'），现在分词短语'distinguishing...'作伴随状语说明区分动作，过去分词短语'poised to reshape...'作后置定语修饰'innovations'。平行结构'healthcare, agriculture, and materials science'列举应用领域，现在分词'emphasizing'引导结果状语。",
         "output_playbook": {
-            "speaking": "1. 'cut through the hype'（穿透炒作迷雾）\n2. 'a game-changer in the making'（正在形成的颠覆者）\n3. 'strike a balance between optimism and realism'（在乐观与现实间取得平衡）\n4. 'at the intersection of X and Y'（处于X与Y的交汇点）",
-            "writing": "1. 'demystify the often exaggerated claims surrounding...'（澄清围绕...的夸张说法）\n2. 'herald a paradigm shift in...'（预示...领域的范式转变）\n3. 'exercise prudent skepticism toward...'（对...保持审慎怀疑）\n4. 'witness the synergistic integration of...'（见证...的协同整合）"
+            "speaking": "1. 'cut through the hype'（穿透炒作迷雾） 2. 'a mixed bag of'（好坏参半的） 3. 'on the cusp of'（处于...边缘） 4. 'game-changing potential'（颠覆性潜力） 5. 'temper enthusiasm with caution'（热情中保持谨慎）",
+            "writing": "1. 'demystify the rhetoric surrounding...'（澄清围绕...的修辞） 2. 'navigate the dichotomy between...'（驾驭...之间的二分法） 3. 'herald a paradigm shift in...'（预示...的范式转变） 4. 'warrant prudent scrutiny'（值得审慎审视） 5. 'convergence of technological trajectories'（技术轨道的交汇）"
         },
-        "insight": "作为商务英语教练，我建议学员：1) 掌握'区分信号与噪音'的批判性思维框架，这对评估任何新技术都至关重要；2) 注意科技类文本中'谨慎乐观'的语用特征——既展示机遇也提示局限；3) 学习用'收敛趋势'（convergence trends）这类高级概念描述跨学科创新，这在商业报告中极具价值。",
+        "insight": "本文体现了高级商业沟通中的批判性框架构建：1) 解构二元对立叙事（AI炒作vs现实），展示如何用'区分论证'（distinguishing argument）建立可信度 2) 跨领域关联分析，将技术趋势置于产业生态系统视角 3) 风险管理语言艺术：用'poised to'（蓄势待发）替代绝对化断言，用'evidence-based'（基于证据）建立理性立场。教学重点应放在如何用限定性语言（qualifying language）表达复杂技术判断。",
         "logic_flow": {
-            "核心概念": "科技趋势的理性评估",
-            "分支1": "AI编码工具的真实影响",
-            "细节1": "实际工作流程改进 vs 市场过度宣传",
-            "分支2": "生物技术的变革潜力",
-            "细节2": "计算生物学融合 → 精准医疗突破"
+            "核心概念": "技术趋势的理性评估框架",
+            "分支1": "AI编码工具的实际价值分析",
+            "细节1": "区分真实生产力指标与营销话术",
+            "分支2": "生物技术跨产业影响预测",
+            "细节2": "医疗诊断、可持续农业、生物材料等应用场景的变革潜力"
         },
         "source": "MIT Tech Review",
         "title": "The Download: cut through AI coding hype, and biotech trends to watch",
@@ -64,154 +55,194 @@
     },
     {
         "level": "C1",
-        "en_excerpt": "The proposed 10% cap on credit card interest rates has sent shockwaves through the banking industry, with major financial institutions warning of severe consequences for both lenders and borrowers. Proponents argue that such regulation would protect vulnerable consumers from predatory lending practices and reduce household debt burdens. However, critics contend that artificially low rates would force banks to tighten lending standards, potentially cutting off credit access for millions of Americans with less-than-perfect credit histories. The debate highlights the delicate balance between consumer protection and maintaining a functional credit market.",
-        "cn_translation": "拟议的信用卡利率10%上限在银行业引发了冲击波，主要金融机构警告称这将给贷款方和借款方都带来严重后果。支持者认为此类监管将保护弱势消费者免受掠夺性贷款行为的侵害，并减轻家庭债务负担。然而批评者认为，人为压低利率将迫使银行收紧贷款标准，可能切断数百万信用记录不完美的美国人的信贷渠道。这场辩论凸显了消费者保护与维持功能性信贷市场之间的微妙平衡。",
+        "en_excerpt": "The proposed 10% cap on credit card interest rates has sent shockwaves through the banking industry, with major financial institutions warning of severe consequences for both lenders and consumers. Proponents argue that such regulation would provide much-needed relief to millions of Americans struggling with high-interest debt, while critics contend it would reduce credit availability and potentially harm the very people it aims to help. The debate centers on whether market forces or government intervention better serve consumer interests in the complex ecosystem of consumer credit.",
+        "cn_translation": "拟议的信用卡利率10%上限在银行业引发了震动，主要金融机构警告称这对贷款机构和消费者都将产生严重后果。支持者认为，此类监管将为数百万在高息债务中挣扎的美国人提供急需的救济，而批评者则辩称这将减少信贷可用性，并可能伤害其旨在帮助的人群。争论的焦点在于，在复杂的消费信贷生态系统中，市场力量还是政府干预能更好地服务于消费者利益。",
         "vocabulary_pro": {
-            "interest rate cap": "利率上限",
-            "predatory lending": "掠夺性贷款",
-            "lending standards": "贷款标准",
-            "credit access": "信贷渠道",
-            "household debt burden": "家庭债务负担",
+            "cap": "上限/限额",
+            "sent shockwaves through": "引发震动/造成冲击",
             "financial institutions": "金融机构",
-            "vulnerable consumers": "弱势消费者",
-            "artificially low rates": "人为压低利率"
+            "proponents": "支持者/提议者",
+            "much-needed relief": "急需的救济",
+            "high-interest debt": "高息债务",
+            "critics contend": "批评者辩称",
+            "credit availability": "信贷可用性",
+            "market forces": "市场力量",
+            "government intervention": "政府干预",
+            "consumer credit ecosystem": "消费信贷生态系统"
         },
-        "syntax_analysis": "1. 'has sent shockwaves through' - 现在完成时+比喻修辞，强调持续影响\n2. 'with major financial institutions warning' - 独立主格结构作状语\n3. 'argue that...would protect...and reduce' - 宾语从句+并列谓语\n4. 'contend that...would force...potentially cutting' - 宾语从句+结果状语\n5. 'highlights the delicate balance between...and...' - 动宾结构+between...and...平行对比",
+        "syntax_analysis": "1. 复合句结构：主句'The proposed cap...has sent shockwaves' + 伴随状语'with institutions warning...' 2. 对比结构：'Proponents argue...while critics contend...' 展示对立观点 3. 名词化表达：'reduction of credit availability' 比 'credit becomes less available' 更正式 4. 定语从句：'people it aims to help' 中 'it aims to help' 修饰 'people'",
         "output_playbook": {
-            "speaking": "1. 'send shockwaves through' (引发震荡)\n2. 'tighten the purse strings' (收紧钱袋)\n3. 'walk a fine line between' (在...间走钢丝)\n4. 'cut off access to' (切断...渠道)\n5. 'tip the scales' (改变平衡)",
-            "writing": "1. 'has precipitated a paradigm shift in' (引发范式转变)\n2. 'constitute a double-edged sword' (构成双刃剑)\n3. 'engender unintended consequences' (产生意外后果)\n4. 'underscore the tension between' (凸显...间的张力)\n5. 'necessitate a recalibration of' (需要重新调整)"
+            "speaking": "1. 'has sent shockwaves through' (引发行业震动) 2. 'struggling with high-interest debt' (在高息债务中挣扎) 3. 'the very people it aims to help' (其旨在帮助的人群本身) 4. 'centers on whether...' (争论焦点在于是否...)",
+            "writing": "1. 'proposed cap on interest rates' (拟议的利率上限) 2. 'severe consequences for both lenders and consumers' (对借贷双方的严重后果) 3. 'reduce credit availability' (减少信贷可用性) 4. 'complex ecosystem of consumer credit' (复杂的消费信贷生态系统)"
         },
-        "insight": "作为商务英语教练，我注意到这个案例完美展示了监管经济学中的'意外后果定律'。学员需要理解：1) 表面简单的解决方案常引发复杂连锁反应 2) 金融监管本质是风险管理再分配 3) 商务沟通中必须同时呈现'意图'与'影响'。建议教学时引入'利益相关者分析框架'，让学员练习从银行、消费者、监管者不同视角论述同一政策。",
-        "logic_flow": "核心概念：利率监管政策 -> 分支1：支持方观点 -> 细节1：保护消费者免受掠夺性贷款 -> 细节2：减轻债务负担 -> 分支2：反对方观点 -> 细节1：导致信贷标准收紧 -> 细节2：影响信用记录不佳人群 -> 核心概念：监管平衡艺术",
+        "insight": "本文展示了金融监管中的经典困境：保护消费者与维护市场效率之间的平衡。教学重点应放在：1) 理解金融术语在真实商业语境中的应用 2) 分析对立观点的论证结构 3) 掌握政策讨论中的谨慎表达方式。高级学习者需要能够：区分'regulation'(监管)与'intervention'(干预)的微妙差异，理解'credit availability'(信贷可用性)对经济的影响机制，并在讨论中平衡'proponents'(支持者)与'critics'(批评者)的视角。",
+        "logic_flow": {
+            "核心概念": "信用卡利率上限提案引发的行业争议",
+            "分支1": "支持方观点 -> 细节1: 为高息债务人群提供救济 -> 细节2: 监管保护消费者利益",
+            "分支2": "反对方观点 -> 细节1: 减少信贷可用性 -> 细节2: 可能产生意外后果伤害目标人群",
+            "核心争议": "市场调节与政府干预在消费信贷领域的效能比较"
+        },
         "source": "Fortune (财富)",
         "title": "Why a proposed 10% cap on credit card interest is rattling big banks",
         "date": "2026-01-16"
     },
     {
         "level": "C1",
-        "en_excerpt": "Google has issued a stark warning urging users to immediately disconnect from certain mobile networks that have been identified as vulnerable to sophisticated cyberattacks. The company's security team discovered these networks lack essential encryption protocols, making them susceptible to data interception and unauthorized access. This advisory specifically targets networks operating on outdated infrastructure in high-risk regions, where state-sponsored actors have been actively exploiting such weaknesses.",
-        "cn_translation": "谷歌发布严厉警告，敦促用户立即断开与某些移动网络的连接，这些网络已被识别为易受复杂网络攻击的威胁。该公司的安全团队发现这些网络缺乏必要的加密协议，使其容易遭受数据拦截和未经授权的访问。此建议特别针对高风险地区运行在过时基础设施上的网络，这些地区有国家支持的行为者一直在积极利用此类漏洞。",
+        "en_excerpt": "Google has issued a stark warning to users of its Pixel phones, urging them to disconnect from all mobile networks immediately due to a critical security vulnerability. The company stated that this flaw could allow attackers to remotely execute malicious code on affected devices without any user interaction, potentially compromising sensitive personal data, financial information, and even device control. This emergency advisory affects multiple network carriers globally and requires users to switch to Wi-Fi or airplane mode until a security patch is deployed.",
+        "cn_translation": "谷歌已向其Pixel手机用户发出严厉警告，敦促他们立即断开所有移动网络连接，原因是一个关键的安全漏洞。该公司表示，此漏洞可能允许攻击者在无需用户交互的情况下，远程在受影响的设备上执行恶意代码，从而可能泄露敏感的个人数据、财务信息，甚至设备控制权。这项紧急建议影响全球多家网络运营商，并要求用户在安全补丁部署前切换至Wi-Fi或飞行模式。",
         "vocabulary_pro": {
             "stark warning": "严厉警告",
-            "sophisticated cyberattacks": "复杂网络攻击",
-            "encryption protocols": "加密协议",
-            "susceptible to": "易受...影响",
-            "data interception": "数据拦截",
-            "unauthorized access": "未经授权的访问",
-            "outdated infrastructure": "过时的基础设施",
-            "state-sponsored actors": "国家支持的行为者",
-            "exploiting weaknesses": "利用漏洞"
+            "critical security vulnerability": "关键安全漏洞",
+            "remotely execute malicious code": "远程执行恶意代码",
+            "without any user interaction": "无需用户交互",
+            "compromising sensitive personal data": "泄露敏感个人数据",
+            "emergency advisory": "紧急建议",
+            "security patch": "安全补丁",
+            "deployed": "部署"
         },
-        "syntax_analysis": "主句采用现在完成时（has issued）表示近期发生的持续影响事件；that引导的定语从句限定mobile networks；making引导结果状语说明缺乏协议的后果；where引导非限制性定语从句补充说明高风险地区的情况；现在完成进行时（have been actively exploiting）强调持续进行的恶意活动。",
+        "syntax_analysis": "主句使用现在完成时（has issued）强调警告的当前相关性；urging...分词短语作伴随状语，说明警告的具体内容；due to...介词短语表原因；that引导宾语从句详细描述漏洞危害；without...介词短语表条件；potentially compromising...现在分词短语作结果状语；affects...and requires...并列谓语描述建议的影响和要求；until引导时间状语从句。",
         "output_playbook": {
-            "speaking": "1. 'This raises serious red flags about...'（这引发了对...的严重警示）\n2. 'We're looking at a perfect storm of vulnerabilities here.'（我们正面临多重漏洞的叠加风险）\n3. 'The writing's on the wall for these outdated systems.'（这些过时系统的命运已注定）",
-            "writing": "1. 'The advisory underscores the imperative for proactive security measures.'（该建议强调了采取主动安全措施的紧迫性）\n2. 'This vulnerability landscape necessitates immediate remediation protocols.'（这种漏洞状况需要立即采取修复方案）\n3. 'The confluence of outdated infrastructure and sophisticated threats creates an untenable risk profile.'（过时基础设施与复杂威胁的结合形成了不可接受的风险状况）"
+            "speaking": "1. 'issue a stark warning'（发出严厉警告）- 用于正式场合表达严重关切\n2. 'due to a critical vulnerability'（由于关键漏洞）- 准确描述技术问题原因\n3. 'potentially compromising...'（可能泄露...）- 委婉表达风险程度\n4. 'requires users to switch to...'（要求用户切换至...）- 给出明确行动指示",
+            "writing": "1. 'remotely execute malicious code without any user interaction'（无需用户交互远程执行恶意代码）- 精确描述攻击机制\n2. 'affects multiple network carriers globally'（影响全球多家网络运营商）- 体现问题的广泛性\n3. 'until a security patch is deployed'（直至安全补丁部署）- 专业表述解决方案时间节点"
         },
-        "insight": "从商业沟通视角看，谷歌采用'stark warning'而非温和建议，体现了危机沟通的升级策略。这种措辞选择：1) 建立技术权威性 2) 制造紧迫感驱动用户行动 3) 规避潜在法律责任。值得注意的商务启示是：网络安全警告正在从技术通知演变为品牌信任管理工具——企业通过主动披露风险来塑造负责任的市场形象，这反映了数字时代企业社会责任的新维度。",
-        "logic_flow": "核心概念：移动网络安全威胁 -> 分支1：技术层面（加密协议缺失 -> 数据拦截风险 -> 基础设施过时问题）-> 细节1：高风险地区的特殊脆弱性；核心概念：移动网络安全威胁 -> 分支2：应对策略层面（企业安全警告 -> 用户立即行动 -> 区域针对性措施）-> 细节2：国家行为者的威胁升级路径",
+        "insight": "从商务沟通视角看，谷歌的警告体现了危机管理的三个关键层面：1）技术透明度（明确描述漏洞机制）2）用户责任界定（区分公司责任与用户应急措施）3）全球协调能力（跨运营商响应）。值得注意的沟通策略是：使用'potentially'既保持专业严谨又避免法律风险；将技术建议（断开网络）转化为可操作指令（使用Wi-Fi），降低用户执行门槛。",
+        "logic_flow": "核心概念：移动网络安全漏洞 -> 分支1：漏洞性质（远程执行/无需交互） -> 细节1：数据泄露风险（个人/财务信息） -> 细节2：设备控制风险；核心概念：企业危机响应 -> 分支2：用户应对措施（断开网络/使用替代方案） -> 细节1：临时解决方案（Wi-Fi/飞行模式） -> 细节2：最终解决方案（安全补丁部署）",
         "source": "Forbes (创新)",
         "title": "Disconnect From All These Mobile Networks, Google Warns",
         "date": "2026-01-16"
     },
     {
         "level": "C1",
-        "en_excerpt": "The tech industry's strategy of appeasing Trump and his allies during his first term—through private meetings, policy concessions, and rhetorical nods—was driven by a pragmatic calculus: better to have a seat at the table than be on the menu. But that short-term accommodation may now be exacting a long-term cost. As Trump 2.0 looms, tech giants face a paradox: their previous compromises have emboldened critics on both the left and right, while doing little to secure lasting goodwill from a movement that views them as inherently antagonistic to its nationalist, populist vision.",
-        "cn_translation": "科技行业在特朗普首个任期内通过私下会晤、政策让步和言辞迎合来安抚特朗普及其盟友的策略，是基于一种务实考量：与其任人宰割，不如参与谈判。但这种短期妥协如今可能正在带来长期代价。随着'特朗普2.0'时代逼近，科技巨头面临一个悖论：他们先前的妥协既助长了左右两派的批评声浪，又未能从一场将其视为民族主义、民粹主义愿景天然对立面的运动中赢得持久善意。",
+        "en_excerpt": "Dos Equis is reviving its iconic 'Most Interesting Man in the World' campaign after a seven-year hiatus, betting that nostalgia can still drive beer sales in an increasingly crowded market. The original campaign, which ran from 2006 to 2018, featured a suave, adventurous character whose humorous tagline 'I don't always drink beer, but when I do, I prefer Dos Equis' became a cultural phenomenon. The new iteration aims to capture the essence of the original while updating it for contemporary audiences, acknowledging that marketing nostalgia requires balancing familiarity with freshness.",
+        "cn_translation": "Dos Equis在中断七年后重新启用其标志性的'世界上最有趣的男人'广告活动，赌注怀旧情绪在日益拥挤的市场中仍能推动啤酒销售。原活动于2006年至2018年间运行，以一个潇洒冒险的角色为特色，其幽默标语'我不常喝啤酒，但当我喝时，我更喜欢Dos Equis'成为一种文化现象。新版本旨在捕捉原版的精髓，同时为当代观众更新内容，承认营销怀旧需要在熟悉感与新鲜感之间取得平衡。",
         "vocabulary_pro": {
-            "appeasement": "绥靖/安抚政策",
-            "pragmatic calculus": "务实算计",
-            "seat at the table": "谈判席位/参与权",
-            "on the menu": "任人宰割/被动处境",
-            "short-term accommodation": "短期妥协",
-            "exacting a long-term cost": "索取长期代价",
-            "looms": "逼近/隐现",
-            "emboldened": "助长/使大胆",
-            "inherently antagonistic": "本质对立/天然对抗",
-            "nationalist, populist vision": "民族主义-民粹主义愿景"
+            "reviving": "复兴/重新启用",
+            "iconic": "标志性的",
+            "hiatus": "中断/间歇",
+            "nostalgia": "怀旧情绪",
+            "suave": "潇洒的/温文尔雅的",
+            "tagline": "标语/口号",
+            "cultural phenomenon": "文化现象",
+            "iteration": "版本/迭代",
+            "essence": "精髓/本质",
+            "contemporary": "当代的",
+            "familiarity": "熟悉感",
+            "freshness": "新鲜感"
         },
-        "syntax_analysis": "1. 主从复合句结构：'The tech industry's strategy...was driven by...'（主句）+ 'better to...than...'（比较状语省略结构）\n2. 转折逻辑框架：'But that...may now be...' 形成时间维度上的因果转折\n3. 并列悖论呈现：'face a paradox: their...have emboldened..., while doing little to...'（冒号引导解释+while对比并列）\n4. 定语从句嵌套：'a movement that views them as...'（that引导定语从句修饰movement）",
+        "syntax_analysis": "1. 复合句结构: 'Dos Equis is reviving...campaign after...hiatus, betting that...market.' - 主句+现在分词短语作状语，内含宾语从句\n2. 定语从句: 'which ran from 2006 to 2018' - 修饰'campaign'\n3. 关系从句: 'whose humorous tagline...became...' - 'whose'引导的所有格关系从句\n4. 并列结构: 'balancing familiarity with freshness' - 动名词短语作宾语",
         "output_playbook": {
-            "speaking": "1. 'better to have a seat at the table than be on the menu'（谈判场景经典隐喻）\n2. 'exacting a long-term cost'（代价索取动态表达）\n3. 'looms on the horizon'（危机逼近的地道说法）\n4. 'doing little to secure lasting goodwill'（委婉否定表达）",
-            "writing": "1. 'driven by a pragmatic calculus'（替代motivated by的学术表达）\n2. 'short-term accommodation...long-term cost'（时间对比框架）\n3. 'face a paradox: ...while...'（悖论呈现结构）\n4. 'inherently antagonistic to its...vision'（本质对立性表述）"
+            "speaking": [
+                "betting that...",
+                "capture the essence of...",
+                "updating it for...",
+                "requires balancing...with..."
+            ],
+            "writing": [
+                "after a seven-year hiatus",
+                "in an increasingly crowded market",
+                "became a cultural phenomenon",
+                "acknowledging that...requires..."
+            ]
         },
-        "insight": "本文揭示了企业政治策略中的'妥协陷阱'：科技公司试图通过战术性让步换取政治空间，却陷入'双重疏离'困境——既被进步派批评为道德妥协，又被民粹主义者视为结构性敌人。这反映了商业逻辑与政治逻辑的本质冲突：企业追求的'可预测性'与民粹政治所需的'对抗性'难以兼容。教学启示：商务决策需超越'成本收益分析'，纳入'合法性维度'评估。",
-        "logic_flow": "核心概念：科技公司的政治妥协策略 -> 分支1：策略动因（务实考量：参与vs被排除） -> 细节1：具体手段（会议/让步/修辞） -> 分支2：策略后果 -> 细节2：短期收益与长期代价的悖论 -> 细节3：政治光谱的双重压力（左派批评/右派不信任）",
+        "insight": "从教练视角看，这篇文章展示了高级营销策略的微妙平衡：企业如何利用已建立的情感资产（怀旧）同时避免显得过时。关键洞察包括：1) 文化标志的复兴需要战略性的现代化，而非简单复制；2) 在饱和市场中，情感连接可能比产品特性更具差异化优势；3) 成功的品牌叙事需要同时尊重遗产和适应变化。教学重点应放在分析这种平衡行为背后的商业逻辑。",
+        "logic_flow": "核心概念：怀旧营销策略 -> 分支1：品牌复兴决策 -> 细节1：中断七年后重启标志性活动；细节2：瞄准拥挤市场中的差异化 -> 分支2：执行挑战 -> 细节1：平衡熟悉感与新鲜感；细节2：更新经典内容以适应当代观众",
         "source": "Fast Company",
-        "title": "The bill for tech’s Trump 2.0 appeasement may be coming due",
+        "title": "Dos Equis brings back the Most Interesting Man—and bets nostalgia still sells beer",
         "date": "2026-01-16"
     },
     {
         "level": "C1",
-        "en_excerpt": "At the core of the debate over transgender athletes in women's sports lies a fundamental question about fairness: Should eligibility be determined by biological sex at birth, or by gender identity? Proponents of inclusion argue that trans women who have undergone hormone therapy for sufficient time have no significant physical advantage, emphasizing dignity and equal participation. Opponents counter that male puberty confers lasting physiological benefits—like bone density and muscle mass—that cannot be fully reversed, potentially compromising competitive integrity. This tension between inclusion and fairness has sparked legal battles, policy fragmentation across sports organizations, and deep societal divisions.",
-        "cn_translation": "关于跨性别运动员参与女子体育项目的辩论，核心是一个关乎公平的根本性问题：参赛资格应以出生时的生理性别为准，还是以性别认同为准？包容性支持者认为，接受足够时长激素治疗的跨性别女性已不具备显著的身体优势，并强调尊严与平等参与的重要性。反对者则反驳道，男性青春期带来的生理优势——如骨密度和肌肉量——具有持久性，无法完全逆转，这可能损害竞赛的公正性。这种包容与公平之间的张力已引发法律诉讼、体育组织间的政策分歧以及深刻的社会分裂。",
+        "en_excerpt": "The central question in the debate over transgender athletes in sports is whether policies should prioritize competitive fairness or inclusion. Advocates for inclusion argue that sports should be accessible to all, regardless of gender identity, and that excluding trans athletes perpetuates discrimination. Proponents of fairness contend that biological advantages, such as bone density and muscle mass developed during male puberty, create an uneven playing field in women's sports. This tension between equality of opportunity and equality of outcome lies at the heart of the controversy, with scientific evidence, legal frameworks, and ethical considerations all playing crucial roles in shaping the discourse.",
+        "cn_translation": "关于跨性别运动员参与体育竞赛的辩论，其核心问题在于政策应优先考虑竞技公平性还是包容性。包容性倡导者认为，体育应面向所有人开放，无论其性别认同如何，排斥跨性别运动员会延续歧视。公平性支持者则主张，生理优势（如在男性青春期形成的骨密度和肌肉质量）会在女子体育中造成不公平的竞争环境。机会平等与结果平等之间的这种张力，正是争议的核心所在，科学证据、法律框架和伦理考量都在塑造这一讨论中发挥着关键作用。",
         "vocabulary_pro": {
-            "eligibility": "参赛资格",
-            "biological sex": "生理性别",
+            "transgender athletes": "跨性别运动员",
+            "competitive fairness": "竞技公平性",
+            "inclusion": "包容性",
             "gender identity": "性别认同",
-            "hormone therapy": "激素治疗",
-            "physiological benefits": "生理优势",
+            "perpetuates discrimination": "延续歧视",
+            "biological advantages": "生理优势",
             "bone density": "骨密度",
-            "muscle mass": "肌肉量",
-            "competitive integrity": "竞赛公正性",
-            "policy fragmentation": "政策分歧",
-            "societal divisions": "社会分裂"
+            "muscle mass": "肌肉质量",
+            "male puberty": "男性青春期",
+            "uneven playing field": "不公平的竞争环境",
+            "equality of opportunity": "机会平等",
+            "equality of outcome": "结果平等",
+            "ethical considerations": "伦理考量",
+            "shaping the discourse": "塑造讨论"
         },
-        "syntax_analysis": "1. 倒装句: 'At the core...lies a fundamental question'（表语前置强调核心问题）\n2. 并列选择结构: 'Should...or...?'（呈现辩论两极）\n3. 现在完成时定语从句: 'trans women who have undergone...'（强调已完成动作的持续影响）\n4. 破折号补充说明: 'like bone density and muscle mass'（具体化抽象概念）\n5. 现在分词作结果状语: 'sparking legal battles...'（展示连锁影响）",
+        "syntax_analysis": "1. 主句结构：'The central question...is whether...'（主语+系动词+表语从句）\n2. 并列复合句：'Advocates argue that...and that...'（两个that引导的宾语从句并列）\n3. 现在分词短语：'developed during male puberty'作后置定语修饰advantages\n4. 介词短语：'with scientific evidence...playing crucial roles'作伴随状语\n5. 被动语态：'should be accessible'（情态动词+be+过去分词）",
         "output_playbook": {
-            "speaking": "1. 'lies at the heart of'（...的核心在于）\n2. 'spark deep divisions'（引发深刻分歧）\n3. 'strike a balance between'（在...间取得平衡）\n4. 'on the flip side'（另一方面）\n5. 'come down to'（归根结底是）",
-            "writing": "1. 'This tension manifests in...'（这种张力体现于...）\n2. 'confer lasting advantages'（赋予持久优势）\n3. 'compromise the integrity of'（损害...的完整性）\n4. 'fragmentation across jurisdictions'（跨管辖领域的碎片化）\n5. 'a nuanced approach is warranted'（需要采取细致入微的方法）"
+            "speaking": "1. 'lies at the heart of'（是...的核心）\n2. 'create an uneven playing field'（造成不公平竞争）\n3. 'tension between A and B'（A与B之间的张力）\n4. 'play crucial roles in'（在...中起关键作用）\n5. 'regardless of'（无论）",
+            "writing": "1. 'The central question...is whether...'（定义核心问题的经典句式）\n2. 'Proponents contend that...'（提出对立观点的学术表达）\n3. 'This tension between...lies at the heart of...'（分析矛盾本质的高级句式）\n4. 'with...all playing crucial roles in...'（列举多因素的优雅表达）\n5. 'perpetuates discrimination'（比'continues discrimination'更正式）"
         },
-        "insight": "作为商务英语教练，我注意到：\n1. 该辩论本质是价值观冲突管理案例——企业常面临类似多元包容vs绩效公平的权衡\n2. 'policy fragmentation'现象与企业跨国运营中的合规挑战高度相似\n3. 论证结构呈现经典商业决策框架：定义核心问题→列举对立立场→分析各方论据→指出衍生影响\n4. 可延伸至职场多元政策设计、利益相关者沟通等实际商务场景",
-        "logic_flow": "核心概念：跨性别运动员参赛资格争议 → 分支1：包容性立场（性别认同+激素治疗） → 细节1：尊严平等诉求；分支2：公平性立场（生理性别+生理优势） → 细节2：竞赛完整性担忧 → 衍生影响：法律冲突/政策碎片化/社会对立",
+        "insight": "作为教练，我认为这个辩论的本质是价值观冲突而非单纯的科学问题。教学时需注意：1) 避免陷入二元对立思维，引导学生看到'公平'与'包容'都是体育的重要价值；2) 强调语境差异——职业体育与业余体育、不同运动项目可能需要不同标准；3) 培养批判性思维：科学数据如何被不同立场选择性使用？4) 语言教学结合思辨训练，如用'On one hand...on the other hand...'结构平衡论述。",
+        "logic_flow": {
+            "核心概念": "跨性别运动员政策的两难困境",
+            "分支1": "包容性视角",
+            "细节1": "生理差异影响竞技公平",
+            "细节2": "需保护女子体育的竞争完整性",
+            "分支2": "公平性视角",
+            "综合层": "科学、法律、伦理的多维度交织"
+        },
         "source": "The Atlantic",
         "title": "The Question at the Heart of the Debate Over Trans Athletes",
         "date": "2026-01-16"
     },
     {
         "level": "C1",
-        "en_excerpt": "For professionals requiring seamless connectivity for video conferencing and large file transfers, the QuantumStream Pro offers dual-band optimization with dedicated QoS channels. Gamers will appreciate its sub-5ms latency technology and adaptive traffic prioritization, while streaming enthusiasts benefit from its 8K-ready bandwidth allocation and mesh compatibility for whole-home coverage.",
-        "cn_translation": "对于需要无缝视频会议和大文件传输的专业人士，QuantumStream Pro提供具有专用服务质量通道的双频优化。游戏玩家会欣赏其低于5毫秒的延迟技术和自适应流量优先级功能，而流媒体爱好者则受益于其支持8K的带宽分配和全屋覆盖的网状网络兼容性。",
-        "vocabulary_pro": "seamless connectivity: 无缝连接; dual-band optimization: 双频优化; dedicated QoS channels: 专用服务质量通道; sub-5ms latency: 低于5毫秒延迟; adaptive traffic prioritization: 自适应流量优先级; 8K-ready bandwidth: 支持8K的带宽; mesh compatibility: 网状网络兼容性; whole-home coverage: 全屋覆盖",
-        "syntax_analysis": "复合句结构：主句'QuantumStream Pro offers...'后接三个并列目的状语从句'For professionals requiring...', 'Gamers will appreciate...', 'while streaming enthusiasts benefit...'，展示产品多场景适用性。技术术语精准修饰：'dedicated QoS channels'作介词短语，'sub-5ms latency technology'使用连字符构成复合形容词。",
-        "output_playbook": {
-            "speaking": "商务演示表达：'cater to diverse user needs'（满足多样化用户需求），'deliver unparalleled performance'（提供卓越性能），'seamlessly transition between applications'（应用间无缝切换）",
-            "writing": "技术报告句式：'The router's architecture facilitates concurrent optimization for...'（路由器架构便于对...进行并发优化），'Empirical data substantiates its efficacy in...'（实证数据证实其在...方面的效能）"
+        "en_excerpt": "The top-tier routers for 2026 integrate AI-driven optimization, multi-band synchronization, and quantum encryption protocols to deliver seamless connectivity across work, gaming, and streaming applications. Unlike conventional models, these devices dynamically allocate bandwidth based on real-time usage patterns, prioritizing latency-sensitive tasks like competitive gaming while maintaining 8K streaming stability.",
+        "cn_translation": "2026年顶级路由器集成了人工智能驱动优化、多频段同步和量子加密协议，为工作、游戏和流媒体应用提供无缝连接。与传统型号不同，这些设备根据实时使用模式动态分配带宽，优先处理竞争性游戏等延迟敏感任务，同时保持8K流媒体的稳定性。",
+        "vocabulary_pro": {
+            "AI-driven optimization": "人工智能驱动优化",
+            "multi-band synchronization": "多频段同步",
+            "quantum encryption protocols": "量子加密协议",
+            "seamless connectivity": "无缝连接",
+            "dynamically allocate bandwidth": "动态分配带宽",
+            "real-time usage patterns": "实时使用模式",
+            "latency-sensitive tasks": "延迟敏感任务",
+            "competitive gaming": "竞争性游戏",
+            "8K streaming stability": "8K流媒体稳定性"
         },
-        "insight": "产品文案的受众分层策略：通过平行结构'For professionals...Gamers...streaming enthusiasts...'精准定位三类核心用户，体现市场细分思维。技术参数营销化表达：将'latency'量化为'sub-5ms'增强说服力，用'8K-ready'而非'high bandwidth'创造技术前瞻性感知。",
-        "logic_flow": "核心概念：多功能路由器技术架构 -> 分支1：专业办公场景应用（视频会议/文件传输 -> 双频优化与QoS通道） -> 分支2：娱乐场景应用（游戏 -> 低延迟技术；流媒体 -> 高带宽分配 -> 网状网络扩展）",
+        "syntax_analysis": "主句采用现在时描述技术特征（integrate...to deliver），后接对比状语从句（Unlike...）引出差异化优势。分词结构（prioritizing...while maintaining...）并列呈现智能分配的双重效果，体现高级语法中的逻辑分层。",
+        "output_playbook": {
+            "speaking": "1. 'What sets it apart is...'（差异化表达）\n2. 'It's designed to handle X while ensuring Y'（双目标描述）\n3. 'Think of it as a traffic controller for your data'（类比解释）",
+            "writing": "1. 'These devices epitomize the convergence of...'（技术融合高级表达）\n2. 'By leveraging..., they achieve...without compromising...'（权衡句式）\n3. 'This represents a paradigm shift from...to...'（范式转变表述）"
+        },
+        "insight": "本文本质在教授如何用技术叙事框架：先定义核心突破（AI+量子），再通过对比建立价值锚点（vs传统），最后用具体场景（游戏/流媒体）具象化抽象技术。商务演示时可借鉴此‘技术特性→用户痛点→场景验证’三层结构。",
+        "logic_flow": "核心概念：智能路由器技术演进 → 分支1：技术实现层（AI优化/量子加密/动态分配） → 细节1：实时模式识别算法 → 分支2：应用场景层（工作/游戏/流媒体） → 细节2：毫秒级延迟优先机制",
         "source": "Wired (科技)",
         "title": "9 Best Wi-Fi Routers of 2026 for Working, Gaming, and Streaming",
         "date": "2026-01-16"
     },
     {
         "level": "C1",
-        "en_excerpt": "Corporate nature commitments have expanded significantly in recent years, with over 1,000 companies now pledging to achieve net-zero emissions by 2050. However, implementation remains uneven across sectors and regions. While technology and consumer goods firms lead with detailed roadmaps, heavy industries like steel and cement lag behind due to technical complexities and cost barriers. Furthermore, only 20% of commitments include Scope 3 emissions—those from supply chains and product use—which often constitute the majority of a company's carbon footprint.",
-        "cn_translation": "近年来，企业对自然的承诺显著扩大，目前已有超过1000家公司承诺到2050年实现净零排放。然而，不同行业和地区的实施进展并不均衡。尽管科技和消费品公司通过详细的路线图处于领先地位，但钢铁和水泥等重工业由于技术复杂性和成本障碍而落后。此外，只有20%的承诺包含范围3排放——即来自供应链和产品使用的排放，这通常构成公司碳足迹的主要部分。",
+        "en_excerpt": "While corporate nature commitments have expanded significantly in recent years, progress remains uneven across sectors and regions. Many companies have made ambitious pledges to reduce their environmental footprint, but implementation gaps persist due to varying regulatory pressures, resource constraints, and competing business priorities. The disparity highlights the need for standardized metrics and stronger accountability mechanisms to ensure commitments translate into tangible outcomes.",
+        "cn_translation": "尽管近年来企业对自然的承诺显著扩大，但各行业和地区的进展仍不均衡。许多公司已做出雄心勃勃的承诺以减少其环境足迹，但由于监管压力、资源限制和竞争性业务重点的不同，实施差距依然存在。这种差异凸显了标准化指标和更强问责机制的必要性，以确保承诺转化为切实成果。",
         "vocabulary_pro": {
-            "net-zero emissions": "净零排放",
-            "implementation": "实施",
-            "uneven": "不均衡的",
-            "sectors": "行业",
-            "detailed roadmaps": "详细路线图",
-            "heavy industries": "重工业",
-            "technical complexities": "技术复杂性",
-            "cost barriers": "成本障碍",
-            "Scope 3 emissions": "范围3排放",
-            "supply chains": "供应链",
-            "carbon footprint": "碳足迹"
+            "corporate nature commitments": "企业对自然的承诺",
+            "environmental footprint": "环境足迹",
+            "implementation gaps": "实施差距",
+            "regulatory pressures": "监管压力",
+            "resource constraints": "资源限制",
+            "competing business priorities": "竞争性业务重点",
+            "standardized metrics": "标准化指标",
+            "accountability mechanisms": "问责机制",
+            "tangible outcomes": "切实成果"
         },
-        "syntax_analysis": "1. 主句使用现在完成时（have expanded）表示持续影响。2. 'with'引导独立主格结构补充数据。3. 'While'引导对比状语从句，突出行业差异。4. 'due to'引出原因状语，解释滞后因素。5. 破折号插入同位语解释专业术语。6. 'which'引导非限制性定语从句，补充说明重要性。",
+        "syntax_analysis": "1. 主从复合句结构：'While...progress remains...' 形成对比逻辑框架\n2. 并列句扩展：'but implementation gaps persist due to...' 使用三个名词短语并列说明原因\n3. 抽象名词化表达：'disparity highlights the need for...' 将问题抽象化后提出解决方案\n4. 不定式目的状语：'to ensure commitments translate...' 清晰表达行动目标",
         "output_playbook": {
-            "speaking": "1. 'lag behind'（落后）替代'fall behind'更商务化。2. 'constitute the majority'（构成主要部分）比'are most of'更精确。3. 讨论进展时使用'implementation remains uneven'（实施仍不均衡）体现客观分析。",
-            "writing": "1. 使用'pledging to achieve'（承诺实现）替代简单'promise'。2. 'due to technical complexities and cost barriers'（由于技术复杂性和成本障碍）展现因果逻辑。3. 'those from...'同位语结构使专业术语解释更流畅。"
+            "speaking": "1. 'The expansion has been significant, yet implementation remains patchy.' (对比表达)\n2. 'Gaps persist due to a mix of regulatory, resource, and priority challenges.' (三重原因列举)\n3. 'What's needed is stronger accountability to bridge the commitment-action gap.' (解决方案表述)",
+            "writing": "1. 'While pledges have proliferated, their translation into measurable outcomes exhibits considerable sectoral and geographical variance.' (正式对比)\n2. 'The persistence of implementation deficits can be attributed to heterogeneous regulatory environments, finite resources, and conflicting strategic imperatives.' (学术化原因分析)\n3. 'This dichotomy underscores the imperative for robust metric standardization and enforceable accountability frameworks.' (政策建议表述)"
         },
-        "insight": "企业可持续发展已从'承诺宣言'进入'实施深水区'。核心矛盾在于：公开承诺（容易）与全面实施（困难）之间的差距。教学重点应帮助学员：1）识别不同行业的实施挑战差异；2）理解范围3排放的战略重要性；3）用数据支撑论点（如20%的统计）。避免陷入'所有企业都一样'的泛化论述。",
+        "insight": "作为教练，我观察到学员常将'承诺'与'进展'简单等同。本文揭示了企业可持续发展中的关键矛盾：公开承诺的象征性价值与实际执行的复杂性之间的张力。教学重点应放在：1) 识别'承诺膨胀'与'执行赤字'的差距 2) 理解多维障碍(监管、资源、战略)的相互作用 3) 掌握从问题诊断到方案设计的逻辑链条。这反映了C1学员需具备的批判性思维：不仅描述现象，更要分析系统性问题。",
         "logic_flow": {
             "核心概念": "企业自然承诺的进展不均衡",
-            "分支1": "行业实施差异",
-            "细节1": "科技/消费品行业领先 vs 重工业滞后",
-            "分支2": "承诺完整性缺陷",
-            "细节2": "仅20%包含范围3排放（供应链/产品使用）"
+            "分支1": "承诺扩大的表现",
+            "细节1": "各行业公司做出减少环境足迹的雄心承诺",
+            "分支2": "进展不均衡的原因",
+            "细节2": "监管压力差异、资源限制、业务重点竞争导致实施差距",
+            "分支3": "解决方案方向",
+            "细节3": "需要标准化指标和问责机制确保承诺转化为实际成果"
         },
         "source": "McKinsey (麦肯锡)",
         "title": "Corporate nature commitments have expanded, but progress is uneven",
