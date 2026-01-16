@@ -5,8 +5,26 @@ DEEPSEEK_KEY = os.environ.get("DEEPSEEK_API_KEY")
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
 
 def get_ai_data(prompt):
-    if not DEEPSEEK_KEY:
-        print("Error: API Key is missing!")
+    headers = {"Content-Type": "application/json", "Authorization": f"Bearer {DEEPSEEK_KEY}"}
+    data = {
+        "model": "deepseek-chat", # 确认模型名称正确
+        "messages": [
+            {"role": "system", "content": "You are a professional Executive Coach. Output strictly in JSON."},
+            {"role": "user", "content": prompt}
+        ],
+        "response_format": {"type": "json_object"} # 强制 JSON 输出
+    }
+    try:
+        res = requests.post("https://api.deepseek.com/chat/completions", headers=headers, json=data, timeout=60)
+        res_json = res.json()
+        if "choices" in res_json:
+            return json.loads(res_json['choices'][0]['message']['content'])
+        else:
+            # 这行会在 GitHub Action 日志里打印具体错在哪里
+            print(f"API Error Details: {res_json}")
+            return None
+    except Exception as e:
+        print(f"Request Error: {e}")
         return None
     
     headers = {"Content-Type": "application/json", "Authorization": f"Bearer {DEEPSEEK_KEY}"}
