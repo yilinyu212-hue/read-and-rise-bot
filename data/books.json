@@ -1,6 +1,10 @@
 [
     {
-        "title": "The Pyramid Principle: Structuring Your Thinking",
-        "brief": "This book teaches a top-down communication method: start with your main conclusion, then support it with key arguments, and finally provide detailed evidence. It helps professionals present ideas clearly and persuasively in business writing and presentations."
+        "title": "The Pyramid Principle",
+        "intro": "Logical thinking for executives.",
+        "logic_flow": [
+            "Build Top",
+            "Support Groups"
+        ]
     }
 ]

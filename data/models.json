@@ -1,25 +1,20 @@
 [
     {
         "name": "MECE Principle",
-        "scenario": "A leader is structuring a complex problem, such as reorganizing a department, launching a new product, or analyzing market segments. They need to ensure all aspects are covered without overlap or gaps to make clear, actionable decisions.",
-        "coach_tips": "Avoid forcing categories to be MECE if they naturally overlap; prioritize clarity over strict adherence. Ensure categories are collectively exhaustive by validating with stakeholders or data, not just intuition. Don't oversimplify; some problems may require iterative refinement to achieve MECE. Beware of analysis paralysis—use MECE as a tool for structure, not an end in itself."
+        "scenario": "Usage",
+        "coach_tips": "Tips",
+        "logic_flow": [
+            "A",
+            "B"
+        ]
     },
     {
         "name": "SCQA Framework",
-        "scenario": "The SCQA Framework is a structured communication and problem-solving mental model used by leaders to clarify complex situations, align teams, and drive effective decision-making. It stands for Situation, Complication, Question, and Answer. Leaders apply it to analyze challenges, frame strategic discussions, and present solutions in a logical, compelling manner. For example, a leader might use it to address declining market share by first describing the current situation (e.g., stable industry), then identifying complications (e.g., new competitors), posing a key question (e.g., 'How can we innovate to regain advantage?'), and proposing an answer (e.g., invest in R&D).",
-        "coach_tips": {
-            "避坑指南": [
-                "Avoid oversimplifying the Situation: Ensure the initial description is accurate and comprehensive, not biased or incomplete, to prevent flawed analysis.",
-                "Don't confuse Complication with symptoms: Focus on root causes or core challenges, not just surface-level issues, to address the real problem.",
-                "Ensure the Question is actionable: Frame it to guide toward solutions, not vague or rhetorical, to maintain team focus and momentum.",
-                "Align Answer with the framework: The proposed solution should directly respond to the Question and address the Complication, avoiding tangents or mismatched actions.",
-                "Adapt to audience context: Tailor the SCQA structure to the team's familiarity and the situation's urgency, avoiding rigid application that may hinder engagement."
-            ]
-        }
-    },
-    {
-        "name": "First Principles",
-        "scenario": "A leader faces a complex business challenge, such as declining market share, inefficient processes, or disruptive competition, where conventional solutions have failed or are insufficient. They need to break down the problem to its fundamental truths and rebuild innovative solutions from the ground up, rather than relying on analogies or past assumptions.",
-        "coach_tips": "1. Avoid assuming existing frameworks or industry norms are immutable; question every premise. 2. Don't rush to solutions based on surface-level analogies—dig deeper into root causes. 3. Beware of cognitive biases like anchoring or confirmation bias that can skew first-principles analysis. 4. Ensure team alignment on core truths to prevent miscommunication during solution-building. 5. Balance first-principles thinking with practical constraints (e.g., resources, time) to avoid over-idealization."
+        "scenario": "Usage",
+        "coach_tips": "Tips",
+        "logic_flow": [
+            "A",
+            "B"
+        ]
     }
 ]
