@@ -31,5 +31,17 @@
             "The emerging market trend toward sustainable products presents a significant opportunity for expansion into eco-friendly lines."
         ],
         "mindmap": "SWOT Analysis\n├── Internal Factors\n│   ├── Strengths (Positive attributes within control)\n│   │   ├── Resources\n│   │   ├── Capabilities\n│   │   └── Competitive advantages\n│   └── Weaknesses (Negative attributes within control)\n│       ├── Limitations\n│       ├── Gaps\n│       └── Disadvantages\n└── External Factors\n    ├── Opportunities (Positive external conditions)\n    │   ├── Market trends\n    │   ├── Technological advances\n    │   └── Regulatory changes\n    └── Threats (Negative external conditions)\n        ├── Competition\n        ├── Economic factors\n        └── Barriers to entry"
+    },
+    {
+        "name": "SWOT分析模型",
+        "definition": "SWOT分析是一种战略规划工具，用于评估组织、项目或个人在特定情境下的优势、劣势、机会和威胁。它通过内部因素（优势和劣势）与外部因素（机会和威胁）的交叉分析，帮助制定有效的战略决策。",
+        "how_to_use": "1. 明确分析对象（如企业、产品、个人职业发展）。2. 分别列出内部优势（S）和劣势（W），以及外部机会（O）和威胁（T）。3. 将内部与外部因素进行匹配，形成SO（利用优势抓住机会）、ST（利用优势规避威胁）、WO（克服劣势把握机会）、WT（减少劣势应对威胁）四种战略组合。4. 基于分析结果制定具体行动计划。",
+        "english_template": [
+            "Strengths: Internal positive attributes/resources",
+            "Weaknesses: Internal limitations or areas for improvement",
+            "Opportunities: External favorable conditions or trends",
+            "Threats: External challenges or risks"
+        ],
+        "logic_flow": "内部环境分析（S/W） -> 外部环境分析（O/T） -> 交叉匹配（SO/ST/WO/WT） -> 战略制定"
     }
 ]
