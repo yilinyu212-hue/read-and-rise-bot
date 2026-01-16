@@ -1,22 +1,11 @@
 [
     {
         "title": "The Pyramid Principle",
-        "intro": "The Pyramid Principle is a communication framework developed by Barbara Minto at McKinsey & Company, which emphasizes structuring ideas in a top-down, hierarchical manner to enhance clarity and persuasiveness in business writing and presentations.",
+        "intro": "The gold standard for logical thinking.",
         "takeaways": [
-            "Structure ideas from the top down, starting with the main conclusion or recommendation, followed by supporting arguments and evidence.",
-            "Use logical grouping and sequencing to organize information into a pyramid shape, ensuring each level supports the one above it for effective communication."
+            "Start with conclusion",
+            "Group ideas"
         ],
-        "coach_tips": "As an executive, apply the Pyramid Principle to streamline decision-making and reporting by focusing on key messages first; practice summarizing complex issues into concise, actionable insights to improve team alignment and stakeholder engagement."
-    },
-    {
-        "title": "Atomic Habits",
-        "intro": "《原子习惯》由詹姆斯·克利尔（James Clear）所著，探讨如何通过微小、持续的日常改进来建立好习惯、打破坏习惯，强调系统而非目标的重要性，以及习惯形成的四步模型：提示、渴望、反应、奖励。",
-        "takeaways": [
-            "习惯是复利的自我提升：每天微小的1%改进，长期积累会产生巨大影响。",
-            "关注系统而非目标：成功不是达成单一目标，而是持续运行有效的系统。",
-            "利用习惯四定律：让好习惯显而易见、有吸引力、容易执行、令人满足；让坏习惯反之。",
-            "身份转变是关键：从“我想做什么”转变为“我是谁”，通过习惯塑造身份认同。"
-        ],
-        "coach_tips": "作为高管，可将书中的‘原子习惯’原则应用于领导力与团队管理：1. 设计工作环境提示（如固定会议流程）来培养高效习惯；2. 将大目标拆解为微小、可执行的行动（如每日15分钟战略思考）；3. 通过团队习惯系统（如定期反馈循环）提升组织效能，而非仅设定业绩目标；4. 以身作则，用身份语言（如‘我们是创新者’）强化文化变革。"
+        "coach_tips": "Focus on the governing thought."
     }
 ]
