@@ -1,51 +1,32 @@
 [
     {
-        "name": "相互独立，完全穷尽",
-        "definition": {
-            "chinese": "MECE是一种结构化思考原则，要求将问题分解为相互独立（Mutually Exclusive）且完全穷尽（Collectively Exhaustive）的部分，确保分类不重叠且无遗漏。",
-            "english": "MECE is a structured thinking principle that requires breaking down a problem into Mutually Exclusive and Collectively Exhaustive components, ensuring classifications do not overlap and leave no gaps."
-        },
-        "how_to_use": {
-            "chinese": "1. 项目规划：将项目任务分解为不重叠的子任务，确保覆盖所有关键环节。\n2. 市场分析：对客户群体进行无遗漏分类（如按年龄、地域、消费行为），避免重复统计。\n3. 问题诊断：将复杂问题拆解为独立因素（如技术、流程、人员），系统化排查根源。\n4. 报告撰写：用MECE结构组织内容（如SWOT分析中的优势、劣势、机会、威胁），提升逻辑严谨性。",
-            "english": "1. Project Planning: Decompose project tasks into non-overlapping subtasks to ensure all critical aspects are covered.\n2. Market Analysis: Categorize customer segments exhaustively (e.g., by age, region, consumption behavior) to avoid duplicate counting.\n3. Problem Diagnosis: Break down complex issues into independent factors (e.g., technology, process, personnel) for systematic root cause analysis.\n4. Report Writing: Organize content with MECE structure (e.g., SWOT analysis: strengths, weaknesses, opportunities, threats) to enhance logical rigor."
-        },
+        "name": "MECE (Mutually Exclusive, Collectively Exhaustive)",
+        "definition": "A principle for structuring information where categories are mutually exclusive (no overlap) and collectively exhaustive (cover all possibilities). (一种信息结构化原则，要求分类相互独立不重叠，且完全穷尽所有可能性。)",
+        "how_to_use": "Used in problem-solving frameworks like issue trees, decision matrices, and brainstorming to ensure comprehensive analysis without redundancy. (应用于问题树、决策矩阵、头脑风暴等分析框架，确保分析全面且无重复。)",
         "english_template": [
-            "By applying the MECE principle, we can categorize these challenges into three distinct, non-overlapping dimensions: operational efficiency, market penetration, and talent retention.",
-            "This framework ensures our analysis is both mutually exclusive—avoiding redundancy in the data—and collectively exhaustive, leaving no critical factor unexamined.",
-            "To structure our discussion, I propose a MECE approach that divides the strategy into four exhaustive components: product innovation, customer engagement, supply chain optimization, and financial sustainability."
+            "To address this challenge, we'll apply the MECE principle by breaking it down into three distinct categories: market factors, operational constraints, and financial considerations.",
+            "Our analysis follows a MECE structure—each recommendation targets a separate root cause while collectively covering all critical improvement areas.",
+            "By organizing the data into mutually exclusive customer segments, we ensure clear insights without overlap, and our segmentation is collectively exhaustive to represent the entire market."
         ]
     },
     {
-        "name": "第一性原理",
-        "definition": {
-            "chinese": "第一性原理是一种通过将复杂问题分解为最基本的、不可再分的元素，并基于这些基础元素重新构建解决方案的思维方式。它强调回归事物本质，摆脱既有假设和惯例的束缚，从零开始进行逻辑推理。",
-            "english": "First Principles thinking is a problem-solving approach that involves breaking down complex issues into their most fundamental, irreducible elements, and then reconstructing solutions from these basic building blocks. It emphasizes returning to the essence of things, freeing oneself from existing assumptions and conventions, and reasoning from the ground up."
-        },
-        "how_to_use": {
-            "chinese": "1. 战略规划：当公司面临行业颠覆时，使用第一性原理重新定义核心业务价值，而非简单模仿竞争对手。\n2. 产品创新：在开发新产品时，从用户最基本需求出发，而非受限于现有技术或市场惯例。\n3. 流程优化：分析业务流程时，质疑“我们一直这样做”的假设，识别并重构低效环节。\n4. 决策制定：在复杂决策中，区分事实与假设，基于基础数据而非经验直觉做判断。\n5. 问题解决：遇到棘手问题时，将其分解为基本组成部分，寻找根本原因而非表面症状。",
-            "english": "1. Strategic Planning: When a company faces industry disruption, use First Principles to redefine core business value rather than simply imitating competitors.\n2. Product Innovation: When developing new products, start from users' most fundamental needs rather than being constrained by existing technologies or market conventions.\n3. Process Optimization: When analyzing business processes, question assumptions like 'we've always done it this way,' identify inefficient links, and reconstruct them.\n4. Decision Making: In complex decisions, distinguish facts from assumptions, and make judgments based on fundamental data rather than experience or intuition.\n5. Problem Solving: When encountering difficult problems, break them down into basic components to find root causes rather than surface symptoms."
-        },
+        "name": "First Principles Thinking (第一性原理思维)",
+        "definition": "A problem-solving approach that breaks down complex problems into their most fundamental, self-evident truths or basic elements, then builds up solutions from scratch rather than relying on analogies or existing assumptions. (一种解决问题的方法，将复杂问题分解为最基本、不言自明的真理或基本要素，然后从零开始构建解决方案，而不是依赖类比或现有假设。)",
+        "how_to_use": "When facing a complex challenge or innovation opportunity, identify and question all existing assumptions, deconstruct the problem to its core components, then reconstruct a solution based only on verified fundamental truths. This is particularly valuable in technology development, business model innovation, and scientific research. (当面临复杂挑战或创新机会时，识别并质疑所有现有假设，将问题解构到其核心组成部分，然后仅基于已验证的基本真理重建解决方案。这在技术开发、商业模式创新和科学研究中特别有价值。)",
         "english_template": [
-            "By applying First Principles thinking, we can deconstruct this challenge into its fundamental components and rebuild our strategy from the ground up, rather than relying on incremental improvements to existing approaches.",
-            "If we strip away all the assumptions and conventions surrounding this market, what remains are the basic human needs we must address - that's where true innovation begins.",
-            "Let's not ask how we can improve our current process by 10%; instead, let's question why this process exists at all and rebuild it based on first principles of efficiency and value creation."
+            "Instead of asking 'How can we improve our current product?', we should ask 'What fundamental human need are we addressing, and what's the most direct way to fulfill it?' This first principles approach led us to completely reimagine our service architecture.",
+            "By breaking down the cost structure to its basic components - raw materials, manufacturing, and distribution - we discovered that 60% of our expenses came from legacy assumptions about supply chains that were no longer valid.",
+            "The breakthrough came when we stopped comparing ourselves to competitors and instead asked: 'If we were starting this industry today with current technology, what would the optimal solution look like?' This first principles thinking revealed entirely new market opportunities."
         ]
     },
     {
-        "name": "结构化沟通模型",
-        "definition": {
-            "中文": "SCQA是一种结构化思维与沟通框架，通过情境（Situation）、冲突（Complication）、问题（Question）、答案（Answer）四个逻辑环节，帮助职场人士清晰表达观点、分析问题并提出解决方案。",
-            "英文": "SCQA is a structured thinking and communication framework that guides professionals through four logical components: Situation, Complication, Question, and Answer, enabling clear articulation of ideas, problem analysis, and solution proposals."
-        },
-        "how_to_use": {
-            "场景1": "项目汇报：先描述项目背景（S），再说明遇到的挑战或变化（C），提出核心待解决问题（Q），最后展示解决方案或成果（A）。",
-            "场景2": "提案说服：陈述当前市场/业务现状（S），指出客户痛点或未满足需求（C），聚焦关键决策问题（Q），系统呈现方案价值（A）。",
-            "场景3": "问题分析报告：客观呈现事实背景（S），识别矛盾点或异常数据（C），定义分析要解决的核心疑问（Q），用数据推导结论与建议（A）。"
-        },
+        "name": "SCQA (Situation-Complication-Question-Answer)",
+        "definition": "A structured communication framework that guides audiences through a logical narrative by presenting the Situation (current context), Complication (problem or challenge), Question (key inquiry), and Answer (solution or recommendation). (一种结构化的沟通框架，通过呈现情境（当前背景）、冲突（问题或挑战）、问题（关键疑问）和答案（解决方案或建议）来引导听众完成逻辑叙述。)",
+        "how_to_use": "Effective for business presentations, proposals, reports, and persuasive communications where clarity and logical flow are essential. Commonly applied in consulting, management, and strategic planning contexts. (适用于需要清晰逻辑流程的商业演示、提案、报告和说服性沟通。常用于咨询、管理和战略规划场景。)",
         "english_template": [
-            "Building on the current situation where [Situation], we are facing a complication that [Complication], which raises the critical question: [Question]. Our analysis leads to an answer where [Answer].",
-            "The context of [Situation] has been disrupted by [Complication], prompting us to address [Question]. Through rigorous evaluation, we propose [Answer] as the most viable path forward.",
-            "While [Situation] represents our baseline, the emergence of [Complication] necessitates a reevaluation of how we approach [Question]. Our findings indicate that [Answer] provides a strategic resolution."
+            "Situation: Our market share has remained stable at 15% for three consecutive quarters. Complication: However, recent competitor innovations threaten to disrupt our core product line. Question: How can we proactively defend our position while exploring new growth avenues? Answer: We recommend a dual-strategy approach combining defensive R&D investments with exploratory market testing.",
+            "Situation: The department consistently meets quarterly targets with 95% accuracy. Complication: Yet employee surveys reveal declining engagement scores across all teams. Question: What systemic changes could address this morale challenge without compromising performance? Answer: Implementing flexible work arrangements paired with targeted recognition programs has proven effective in similar organizations.",
+            "Situation: Global supply chains have operated efficiently under current protocols. Complication: Emerging geopolitical tensions create unprecedented volatility in raw material availability. Question: How might we reconfigure our sourcing strategy to ensure business continuity? Answer: A diversified supplier portfolio with regional redundancy offers the most resilient path forward."
         ]
     }
 ]
