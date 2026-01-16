@@ -1,53 +1,6 @@
 [
     {
-        "title": "The Pyramid Principle",
-        "intro": "The Pyramid Principle, authored by Barbara Minto, is a foundational communication framework that emphasizes structuring ideas in a top-down, hierarchical manner to enhance clarity and persuasiveness. It is widely used in business consulting, report writing, and presentations to ensure logical flow and effective argumentation.",
-        "takeaways": [
-            "Start with the answer or conclusion first to immediately engage the audience and provide context.",
-            "Group and summarize supporting ideas into logical clusters that collectively justify the main point.",
-            "Ensure each level of the pyramid logically supports the one above it, maintaining a coherent structure throughout."
-        ],
-        "logic_flow": [
-            "State the main idea or conclusion at the top of the pyramid.",
-            "Organize supporting arguments into mutually exclusive and collectively exhaustive (MECE) groups below.",
-            "Arrange ideas in a logical order (e.g., chronological, structural, or comparative) within each group to build a compelling narrative."
-        ],
-        "img": "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400"
-    },
-    {
-        "title": "Atomic Habits",
-        "intro": "Bilingual summary: 'Atomic Habits' by James Clear is a practical guide to building good habits and breaking bad ones through small, incremental changes. The book emphasizes that success comes from the compound effect of daily habits rather than dramatic transformations. 原子习惯》是詹姆斯·克利尔所著的一本实用指南，通过微小、渐进的变化来培养好习惯并改掉坏习惯。本书强调成功来自于日常习惯的复合效应，而非戏剧性的转变。",
-        "takeaways": [
-            "Habits are the compound interest of self-improvement - small changes accumulate into remarkable results over time",
-            "The Four Laws of Behavior Change: Make it obvious, attractive, easy, and satisfying (and their inverses for breaking bad habits)"
-        ],
-        "logic_flow": [
-            "Introduction to the power of atomic habits and the 1% improvement principle",
-            "Explanation of the habit loop: cue, craving, response, reward",
-            "Detailed breakdown of the Four Laws of Behavior Change with practical applications",
-            "Advanced tactics for habit formation including habit stacking and environment design",
-            "Strategies for maintaining habits through plateaus and setbacks"
-        ],
-        "img": "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400"
-    },
-    {
-        "title": "Thinking, Fast and Slow",
-        "intro": "Bilingual summary: This groundbreaking book by Nobel laureate Daniel Kahneman explores the two systems that drive human thinking: System 1 (fast, intuitive, emotional) and System 2 (slow, deliberate, logical). Through decades of research, Kahneman reveals how these systems shape our judgments, decisions, and behaviors, often leading to predictable errors and biases.",
-        "takeaways": [
-            "System 1 operates automatically and quickly with little effort, while System 2 requires conscious effort and is slower but more logical.",
-            "Cognitive biases like anchoring, availability heuristic, and overconfidence frequently distort our judgments and decisions.",
-            "Prospect theory explains how people value gains and losses differently, leading to irrational financial decisions.",
-            "The experiencing self and remembering self perceive happiness differently, affecting life evaluations.",
-            "Understanding these systems can improve decision-making in personal, professional, and policy contexts."
-        ],
-        "logic_flow": [
-            "Introduction to System 1 (fast, intuitive) and System 2 (slow, deliberate) thinking",
-            "Exploration of cognitive biases and heuristics that System 1 relies on",
-            "Analysis of overconfidence and flaws in human judgment",
-            "Discussion of prospect theory and loss aversion in decision-making",
-            "Examination of the two selves: experiencing vs. remembering",
-            "Practical applications for improving decisions and reducing biases"
-        ],
-        "img": "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400"
+        "title": "The Pyramid Principle: Structuring Your Thinking",
+        "brief": "This book teaches a top-down communication method: start with your main conclusion, then support it with key arguments, and finally provide detailed evidence. It helps professionals present ideas clearly and persuasively in business writing and presentations."
     }
 ]
