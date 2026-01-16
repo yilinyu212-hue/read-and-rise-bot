@@ -2,51 +2,37 @@
     {
         "title": "Corporate nature commitments have expanded, but progress is uneven",
         "source": "McKinsey Insights",
-        "en_excerpt": "While corporate pledges on biodiversity and natural capital have surged globally, implementation remains fragmented across regions and sectors. Leaders must move beyond aspirational statements to measurable actions, recognizing that uneven progress risks undermining credibility and missing critical ecological tipping points. The gap between commitment and execution is particularly pronounced in supply chain integration and local stakeholder engagement, where short-term economic pressures often override long-term sustainability goals.",
-        "cn_translation": "尽管全球企业在生物多样性和自然资本方面的承诺激增，但执行情况在地区和行业间仍呈现碎片化。领导者必须超越愿景声明，转向可衡量的行动，认识到进展不均会损害信誉并错过关键的生态临界点。承诺与执行之间的差距在供应链整合和地方利益相关方参与方面尤为明显，短期经济压力常压倒长期可持续发展目标。",
-        "vocabulary_pro": [
-            "pledges: 正式承诺（尤指企业公开的环境或社会责任承诺）",
-            "fragmented: 碎片化的（指执行缺乏统一协调）",
-            "aspirational: 愿景性的（描述目标崇高但缺乏具体路径）",
-            "tipping points: 临界点（生态系统中不可逆转的转折阈值）",
-            "override: 压倒（指短期利益凌驾于长期规划）"
-        ],
-        "insight": "AI 无法察觉的高管避坑指南：1）警惕‘承诺通胀’——中国本土需将国际承诺转化为符合‘双碳’政策的具体时间表，避免口号化；2）供应链‘绿色穿透’不足——许多企业仅要求一级供应商合规，忽视二三级的生态影响（如农业溯源、矿山修复）；3）地方政府考核差异——中西部与沿海地区对生态指标的重视程度不同，需定制化沟通策略；4）传统文化冲突——例如退耕还林项目可能与传统农耕生计产生矛盾，需设计过渡性补偿机制。",
+        "en_excerpt": "While corporate commitments to nature and biodiversity have significantly increased in recent years, implementation and measurable progress remain inconsistent across sectors and geographies. Many companies have made ambitious pledges but struggle with practical execution, measurement frameworks, and integrating nature considerations into core business strategies.",
+        "cn_translation": "企业对于自然和生物多样性的承诺近年来显著增加，但实施进展和可衡量的成果在不同行业和地区之间仍然参差不齐。许多公司做出了雄心勃勃的承诺，但在实际执行、衡量框架以及将自然因素融入核心业务战略方面面临挑战。",
+        "insight": "避坑指南：避免只做表面承诺而不落实具体行动；建立清晰的衡量指标和报告机制；将自然保护融入供应链管理和产品生命周期；关注地域差异和本地生态系统特点；加强跨部门协作和利益相关方沟通。",
         "output_playbook": {
-            "speaking": "‘我们的自然承诺正在从愿景转向行动，确保每个环节都落地可衡量。’",
-            "writing": "尊敬的团队：基于近期全球自然承诺进展评估，我们将启动‘本土化执行路线图’项目，重点聚焦供应链穿透式管理（延伸至三级供应商）与区域生态指标对齐。首次汇报定于下季度董事会，请各事业部于两周内提交初步行动方案。"
+            "speaking": "Monday phrase: 'Our nature commitments are expanding, but we need to ensure consistent progress across all operations by establishing clear metrics and integrating biodiversity considerations into our quarterly strategic reviews.'"
         },
-        "logic_flow": [
-            "Step 1: 诊断差距——审计现有承诺与本土执行现状的断层（如国际ESG框架 vs 中国‘绿水青山’指标）",
-            "Step 2: 锚定抓手——选择1-2个高影响、可量化的优先领域（例如供应链水资源足迹或栖息地修复试点）",
-            "Step 3: 构建生态——联合地方政府、科研机构及社区建立长期监测与利益共享机制，避免‘项目制’短期行为"
-        ],
-        "id": "3bc310",
-        "date": "2026-01-16"
+        "id": "3c27d3",
+        "date": "01-16"
+    },
+    {
+        "title": "Leaders at All Levels: 7 Strategies to Give Your Team Real Power",
+        "source": "MIT Sloan",
+        "en_excerpt": "This concept emphasizes that effective leadership involves empowering team members at all levels, not just top executives, by delegating authority, fostering autonomy, and creating a culture of trust to enhance innovation and performance.",
+        "cn_translation": "这一概念强调，有效的领导力涉及赋予所有层级的团队成员权力，而不仅仅是高层管理人员，通过授权、培养自主性和建立信任文化来提升创新和绩效。",
+        "insight": "避坑指南：避免仅将权力集中在少数人手中，这可能导致团队依赖性强、创新受阻和员工士气低落。相反，应通过明确职责、提供资源支持和定期反馈，确保授权不会变成责任推卸，从而真正实现团队赋能。",
+        "output_playbook": {
+            "speaking": "Monday phrase: 'This week, let's focus on empowering each team member to take ownership of their projects, fostering a culture where everyone feels trusted and capable of driving change.'"
+        },
+        "id": "f247b6",
+        "date": "01-16"
     },
     {
         "title": "How AI Is Reshaping Skills, Hiring, and Education",
         "source": "Wharton Knowledge",
-        "en_excerpt": "For leaders, the critical challenge isn't just adopting AI tools but fundamentally rethinking talent ecosystems. AI is automating routine tasks while creating demand for uniquely human skills like ethical judgment, creative problem-solving, and emotional intelligence. This requires a dual strategy: upskilling existing teams in AI literacy while redesigning hiring to prioritize adaptability over static qualifications. The most successful organizations will be those that treat AI not as a replacement for human workers but as a catalyst for human potential, creating hybrid roles where technology amplifies uniquely human capabilities.",
-        "cn_translation": "对领导者而言，关键挑战不仅在于采用AI工具，更在于从根本上重新思考人才生态系统。AI正在自动化常规任务，同时催生对独特人类技能的需求，如伦理判断、创造性解决问题和情商。这需要双重战略：提升现有团队的AI素养，同时重新设计招聘流程，优先考虑适应性而非静态资质。最成功的组织将是那些将AI视为人类潜能的催化剂而非替代品的企业，创造技术放大独特人类能力的混合角色。",
-        "vocabulary_pro": [
-            "talent ecosystems: 人才生态系统 - 指组织内外人才流动、发展和互动的完整体系",
-            "AI literacy: AI素养 - 理解和有效使用AI工具的基本能力",
-            "hybrid roles: 混合角色 - 结合技术技能和人类独特能力的岗位",
-            "catalyst: 催化剂 - 加速变革而不被消耗的推动因素",
-            "ethical judgment: 伦理判断 - 在复杂情境中做出符合道德标准的决策能力"
-        ],
-        "insight": "AI无法察觉的高管避坑指南：1) 避免盲目追求技术指标，关注AI如何增强团队核心能力而非替代；2) 警惕数据偏见，中国本土数据需结合文化语境清洗；3) 建立AI伦理委员会，平衡效率与员工福祉；4) 投资软技能培训，防止团队过度技术依赖；5) 设计渐进式变革，避免组织文化休克。",
+        "en_excerpt": "AI is fundamentally altering the landscape of professional development by automating routine tasks, creating demand for new technical and soft skills, transforming hiring processes through AI-powered screening tools, and necessitating continuous learning in education systems to keep pace with technological change.",
+        "cn_translation": "人工智能正在从根本上改变职业发展格局：自动化常规任务、催生对新技术和软技能的需求、通过AI驱动的筛选工具改变招聘流程，并迫使教育系统持续学习以跟上技术变革的步伐。",
+        "insight": "避免过度依赖AI筛选工具而忽视候选人潜力；平衡技术技能与批判性思维、创造力等人类独特能力；教育体系需从知识传授转向能力培养。",
         "output_playbook": {
-            "speaking": "我们的AI战略核心是：技术赋能人才，而非人才服务技术。",
-            "writing": "主题：关于启动AI时代人才发展计划的通告\n尊敬的团队：\n随着AI技术快速发展，我们正面临重塑人才战略的关键时刻。经研究决定，我们将实施\"AI+人类潜能\"双轨计划，重点投资于团队AI素养提升和适应性能力建设。具体方案将于本周四会议详细说明。让我们共同把握这一转型机遇。"
+            "speaking": "Monday phrase"
         },
-        "logic_flow": [
-            "Step 1: 诊断现状 - 评估组织当前的AI应用水平和人才技能缺口",
-            "Step 2: 制定双轨战略 - 同步推进技术工具部署和人类能力发展",
-            "Step 3: 实施迭代优化 - 建立反馈机制，持续调整AI与人才的协同模式"
-        ],
-        "id": "82feea",
-        "date": "2026-01-16"
+        "id": "ddbc6e",
+        "date": "01-16"
     }
 ]
