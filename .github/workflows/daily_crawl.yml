@@ -19,7 +19,7 @@ jobs:
           python-version: '3.9'
 
       - name: Install dependencies
-        run: pip install requests feedparser
+        run: pip install requests feedparser plotly
 
       - name: Run Crawler
         env:
