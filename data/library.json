@@ -1,1 +1,26 @@
-[]
+[
+    {
+        "level": "C1",
+        "en_excerpt": "Geopolitics is warping multinationals’ commercial decisions. As tensions between major powers intensify, companies are increasingly forced to navigate a fragmented global landscape. This shift is compelling executives to reconsider long-held assumptions about supply chains, market access, and investment strategies. The traditional calculus of globalization—prioritizing efficiency and cost reduction—is being upended by new imperatives: resilience, security, and alignment with national interests. In this environment, multinationals must balance commercial logic with geopolitical risk, often at the expense of profitability.",
+        "cn_translation": "地缘政治正在扭曲跨国公司的商业决策。随着大国间紧张局势加剧，企业被迫在日益割裂的全球格局中艰难前行。这种转变正迫使高管们重新审视关于供应链、市场准入和投资策略的长期假设。传统全球化所推崇的效率优先和成本削减原则，正被新的要务颠覆：韧性、安全以及与本国利益保持一致。在这种环境下，跨国公司必须在商业逻辑与地缘政治风险之间取得平衡，而这往往以牺牲利润为代价。",
+        "vocabulary_pro": {
+            "warping": "扭曲，使变形 (v.) - 指地缘政治因素使商业决策偏离正常轨道",
+            "fragmented": "割裂的，碎片化的 (adj.) - 描述全球化格局的分裂状态",
+            "calculus": "计算，考量 (n.) - 此处指商业决策的权衡体系",
+            "upended": "颠覆，推翻 (v.) - 强调传统模式被彻底改变",
+            "imperatives": "要务，必要事项 (n.) - 指企业必须优先考虑的因素",
+            "resilience": "韧性，复原力 (n.) - 特指供应链抗冲击能力",
+            "alignment": "对齐，一致 (n.) - 指企业战略与国家政策的协调"
+        },
+        "syntax_analysis": "1. 主句结构：'Geopolitics is warping...decisions' 使用现在进行时强调持续影响\n2. 伴随状语：'As tensions...intensify' 以as引导时间状语从句\n3. 被动语态：'are increasingly forced to navigate' 突出企业被动处境\n4. 现在分词：'compelling executives to reconsider' 表示主动施加影响\n5. 破折号使用：'the traditional calculus...—prioritizing...—is being upended' 插入解释性成分\n6. 冒号列举：'new imperatives: resilience, security, and alignment' 具体说明要务内容\n7. 介词短语：'at the expense of profitability' 表达代价关系",
+        "output_playbook": {
+            "speaking": "1. 观点陈述练习：'In my view, geopolitical fragmentation necessitates three strategic shifts...'\n2. 利弊讨论框架：'On one hand...on the other hand...nevertheless...'\n3. 案例分析法：'Take semiconductor industry as an example...'\n4. 预测表达：'This trend is likely to accelerate unless...'\n5. 高阶连接词：'Notwithstanding commercial pressures, geopolitical considerations take precedence...'",
+            "writing": "1. 学术写作结构：引言(现象)-主体(原因/影响)-结论(展望)\n2. 数据支撑技巧：'According to a 2023 McKinsey survey, 68% of CEOs...'\n3. 对比句式：'Whereas previously...nowadays...'\n4. 政策建议格式：'Governments ought to...while corporations should...'\n5. 摘要写作：用150词概括地缘政治对商业决策的三大影响"
+        },
+        "insight": "本文揭示了全球化范式的根本性转变：从'经济效率至上'的单极思维转向'安全与韧性优先'的多维权衡。这种转变的本质是商业逻辑与政治逻辑的碰撞，表现为三个深层矛盾：\n1. 短期利润与长期生存的张力\n2. 全球整合与区域自洽的悖论\nn3. 股东利益与国家利益的冲突\n跨国公司正从纯粹的商业实体演变为'地缘政治参与者'，其决策矩阵中新增了主权风险、技术民族主义等非传统变量。这标志着企业战略学必须与政治经济学深度融合。",
+        "mindmap": "地缘政治影响商业决策 > 全球格局割裂, 地缘政治影响商业决策 > 传统模式颠覆, 全球格局割裂 > 供应链重组, 全球格局割裂 > 市场准入限制, 传统模式颠覆 > 效率优先转向韧性优先, 传统模式颠覆 > 成本考量让位安全考量, 企业应对策略 > 平衡商业与政治风险, 企业应对策略 > 调整投资战略, 平衡商业与政治风险 > 短期利润牺牲, 平衡商业与政治风险 > 国家利益对齐",
+        "source": "Economist",
+        "title": "Geopolitics is warping multinationals’ commercial decisions",
+        "date": "2026-01-16"
+    }
+]

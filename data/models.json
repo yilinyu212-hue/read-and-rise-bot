@@ -1,24 +1,35 @@
 [
     {
-        "name": "MECE（相互独立，完全穷尽）",
-        "definition": "MECE (Mutually Exclusive, Collectively Exhaustive) is a principle for organizing information into distinct, non-overlapping categories that together cover all possibilities. It ensures logical clarity and comprehensiveness in analysis.（MECE（相互独立，完全穷尽）是一种将信息组织成互不重叠、共同涵盖所有可能性的分类原则，确保分析的逻辑清晰性和全面性。）",
-        "how_to_use": "1. Identify the problem or topic to be analyzed. 2. Break it down into categories that do not overlap (mutually exclusive). 3. Ensure all relevant aspects are covered (collectively exhaustive). 4. Use the categories to structure analysis, brainstorming, or decision-making.（1. 确定要分析的问题或主题。2. 将其分解为互不重叠的类别（相互独立）。3. 确保涵盖所有相关方面（完全穷尽）。4. 使用这些类别来构建分析、头脑风暴或决策框架。）",
+        "name": "MECE (Mutually Exclusive, Collectively Exhaustive) (相互独立，完全穷尽)",
+        "definition": "A principle for organizing information into categories that are mutually exclusive (no overlap) and collectively exhaustive (cover all possibilities). (将信息组织成相互独立（无重叠）且完全穷尽（涵盖所有可能性）的类别的原则。)",
+        "how_to_use": "1. Identify the problem or topic. 2. Break it down into distinct categories with no overlap. 3. Ensure all possible aspects are covered. (1. 确定问题或主题。2. 将其分解为互不重叠的类别。3. 确保涵盖所有可能的方面。)",
         "english_template": [
-            "S1: To apply MECE, start by defining the scope of your analysis clearly.",
-            "S2: Next, brainstorm all possible categories and refine them to avoid overlaps.",
-            "S3: Finally, validate that your categories cover every relevant aspect without gaps."
+            "The MECE framework helps structure complex problems by dividing them into non-overlapping categories.",
+            "When applying MECE, ensure each element belongs to only one category and all possibilities are accounted for.",
+            "This approach eliminates redundancy and provides a comprehensive analysis of any situation."
         ],
-        "mindmap": "graph TD\n    A[MECE Principle] --> B[Mutually Exclusive]\n    A --> C[Collectively Exhaustive]\n    B --> D[No Overlap Between Categories]\n    B --> E[Clear Distinctions]\n    C --> F[Covers All Possibilities]\n    C --> G[No Gaps in Analysis]\n    A --> H[Applications]\n    H --> I[Problem-Solving]\n    H --> J[Decision-Making]\n    H --> K[Data Structuring]\n    A --> L[Benefits]\n    L --> M[Enhanced Clarity]\n    L --> N[Improved Comprehensiveness]\n    L --> O[Reduced Bias]"
+        "mindmap": "MECE Principle\n├── Mutually Exclusive\n│   ├── No Overlap\n│   ├── Clear Boundaries\n│   └── Distinct Categories\n└── Collectively Exhaustive\n    ├── Cover All Possibilities\n    ├── No Gaps\n    └── Complete Analysis"
     },
     {
-        "name": "第一性原理",
-        "definition": "First Principles thinking is a problem-solving approach that involves breaking down complex problems into their most fundamental truths or basic elements, then reasoning up from there to create new solutions. It requires questioning assumptions and rebuilding understanding from the ground up rather than relying on analogies or existing frameworks.\n\n第一性原理是一种解决问题的方法，涉及将复杂问题分解为最基本的真理或基本元素，然后从这些基础出发进行推理以创造新的解决方案。它要求质疑假设并从零开始重建理解，而不是依赖类比或现有框架。",
-        "how_to_use": "1. Identify and define the problem clearly\n2. Break down the problem into its fundamental components or basic truths\n3. Question all assumptions and conventional wisdom about these components\n4. Reconstruct the solution from these verified fundamentals\n5. Test the new solution against reality\n\n1. 清晰识别并定义问题\n2. 将问题分解为其基本组成部分或基本真理\n3. 质疑关于这些组成部分的所有假设和传统智慧\n4. 从这些经过验证的基础出发重建解决方案\n5. 根据现实测试新解决方案",
+        "name": "SCQA (Situation-Complication-Question-Answer)",
+        "definition": "SCQA是一种结构化沟通框架，通过情境、冲突、问题、答案四个步骤清晰呈现复杂信息，帮助受众快速理解核心观点。",
+        "how_to_use": "1. 描述背景情境(Situation) 2. 指出关键冲突(Complication) 3. 提出核心问题(Question) 4. 给出解决方案(Answer)",
         "english_template": [
-            "To apply First Principles thinking to [problem/issue], we need to identify its fundamental components by asking: What are the basic truths about [specific aspect] that we know for certain?",
-            "Instead of accepting conventional approaches to [challenge], let's break it down to its core elements. What are the essential building blocks of [system/process] that cannot be reduced further?",
-            "By questioning our assumptions about [topic] and rebuilding our understanding from verified fundamentals, we can develop innovative solutions that traditional analogical thinking might miss."
+            "Given the current market saturation, we need to rethink our product positioning.",
+            "However, our main competitor just launched a similar feature at half our price point.",
+            "So how can we differentiate ourselves while maintaining profitability?"
         ],
-        "mindmap": "graph TD\n    A[First Principles Thinking] --> B1[Core Concept]\n    A --> B2[Application Process]\n    A --> B3[Key Benefits]\n    A --> B4[Common Examples]\n    \n    B1 --> C1[Break down to fundamentals]\n    B1 --> C2[Question assumptions]\n    B1 --> C3[Rebuild from basics]\n    \n    B2 --> D1[Identify problem]\n    B2 --> D2[Deconstruct elements]\n    B2 --> D3[Verify fundamentals]\n    B2 --> D4[Reconstruct solution]\n    B2 --> D5[Test implementation]\n    \n    B3 --> E1[Innovative solutions]\n    B3 --> E2[Overcome biases]\n    B3 --> E3[Clearer understanding]\n    B3 --> E4[Reduced complexity]\n    \n    B4 --> F1[Elon Musk: SpaceX rockets]\n    B4 --> F2[Aristotle: Deductive reasoning]\n    B4 --> F3[Scientific method]\n    B4 --> F4[Product design]"
+        "mindmap": "SCQA\n├── Situation (当前状况)\n│   └── 客观事实描述\n├── Complication (关键冲突)\n│   └── 问题/挑战/变化\n├── Question (核心问题)\n│   └── 需要解决的疑问\n└── Answer (解决方案)\n    └── 具体行动计划"
+    },
+    {
+        "name": "SWOT Analysis (态势分析法)",
+        "definition": "A strategic planning tool used to identify and evaluate the Strengths, Weaknesses, Opportunities, and Threats involved in a project, business, or personal decision. (一种用于识别和评估项目、业务或个人决策中涉及的优势、劣势、机会和威胁的战略规划工具。)",
+        "how_to_use": "1. Create a four-quadrant matrix labeled Strengths, Weaknesses, Opportunities, Threats. 2. Brainstorm and list internal factors (Strengths/Weaknesses) and external factors (Opportunities/Threats). 3. Analyze the relationships between quadrants to develop strategic insights. (1. 创建一个标有优势、劣势、机会、威胁的四象限矩阵。2. 头脑风暴并列出内部因素（优势/劣势）和外部因素（机会/威胁）。3. 分析象限之间的关系以制定战略见解。)",
+        "english_template": [
+            "Our primary strength lies in our established brand reputation, which gives us a competitive edge in customer loyalty.",
+            "A key weakness we must address is our reliance on a single supplier, creating vulnerability in our supply chain.",
+            "The emerging market trend toward sustainable products presents a significant opportunity for expansion into eco-friendly lines."
+        ],
+        "mindmap": "SWOT Analysis\n├── Internal Factors\n│   ├── Strengths (Positive attributes within control)\n│   │   ├── Resources\n│   │   ├── Capabilities\n│   │   └── Competitive advantages\n│   └── Weaknesses (Negative attributes within control)\n│       ├── Limitations\n│       ├── Gaps\n│       └── Disadvantages\n└── External Factors\n    ├── Opportunities (Positive external conditions)\n    │   ├── Market trends\n    │   ├── Technological advances\n    │   └── Regulatory changes\n    └── Threats (Negative external conditions)\n        ├── Competition\n        ├── Economic factors\n        └── Barriers to entry"
     }
 ]
