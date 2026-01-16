@@ -2,7 +2,7 @@ import os, feedparser, json, requests
 from datetime import datetime
 from notion_client import Client
 
-# 1. 配置钥匙
+# 从 GitHub Secrets 中读取配置
 DEEPSEEK_KEY = os.environ.get("DEEPSEEK_API_KEY")
 NOTION_TOKEN = os.environ.get("NOTION_TOKEN")
 DATABASE_ID = os.environ.get("DATABASE_ID")
@@ -24,12 +24,14 @@ def get_ai_analysis(title):
     try:
         res = requests.post("https://api.deepseek.com/chat/completions", headers=headers, json=data, timeout=30)
         return res.json()['choices'][0]['message']['content']
-    except:
-        return "AI解析生成中..."
+    except Exception as e:
+        return f"AI解析生成中... (错误详情: {e})"
 
 def push_to_notion(title, link, content):
     try:
-        # 这里严格对应你看板的 6 个列名
+        # 调试信息：打印 ID 长度确保 Secret 已生效
+        print(f"DEBUG: 尝试推送至 Database ID (长度: {len(DATABASE_ID)})")
+        
         notion.pages.create(
             parent={"database_id": DATABASE_ID},
             properties={
@@ -38,28 +40,34 @@ def push_to_notion(title, link, content):
                 "Link": {"url": link},                       
                 "AI Summary": {"rich_text": [{"text": {"content": content[:1900]}}]}, 
                 "Date": {"date": {"start": datetime.now().strftime("%Y-%m-%d")}},
-                "Status": {"status": {"name": "To Read"}}  # 必须和看板里的状态名一致
+                "Status": {"status": {"name": "To Read"}}  # 匹配你看板中的 'To Read' 状态
             }
         )
-        print(f"✅ 成功：'{title[:15]}...' 已送达 Notion")
+        print(f"🚀 成功同步一篇文章到 Notion: {title[:20]}...")
     except Exception as e:
-        print(f"❌ 失败：无法存入 Notion。错误详情: {e}")
+        print(f"❌ Notion 推送失败。错误原因: {e}")
 
 def run():
+    # 爬取经济学人 Briefing 栏目
     feed = feedparser.parse("https://www.economist.com/briefing/rss.xml")
     articles = []
     
+    # 每次处理前 3 篇
     for entry in feed.entries[:3]:
-        print(f"正在抓取: {entry.title}")
+        print(f"正在处理: {entry.title}")
         analysis = get_ai_analysis(entry.title)
         
-        # 存入本地 JSON (供网站读取)
-        articles.append({"title": entry.title, "link": entry.link, "content": analysis, "date": datetime.now().strftime("%Y-%m-%d")})
+        articles.append({
+            "title": entry.title, 
+            "link": entry.link, 
+            "content": analysis, 
+            "date": datetime.now().strftime("%Y-%m-%d")
+        })
         
-        # 同步到 Notion
         if NOTION_TOKEN and DATABASE_ID:
             push_to_notion(entry.title, entry.link, analysis)
 
+    # 保存本地 library.json
     os.makedirs('data', exist_ok=True)
     with open('data/library.json', 'w', encoding='utf-8') as f:
         json.dump(articles, f, ensure_ascii=False, indent=4)
