@@ -43,5 +43,16 @@
             "Threats: External challenges or risks"
         ],
         "logic_flow": "内部环境分析（S/W） -> 外部环境分析（O/T） -> 交叉匹配（SO/ST/WO/WT） -> 战略制定"
+    },
+    {
+        "name": "艾森豪威尔矩阵",
+        "definition": "艾森豪威尔矩阵是一种时间管理工具，通过将任务按重要性和紧急性分为四个象限，帮助人们优先处理事项并提高效率。",
+        "how_to_use": "1. 列出所有任务 2. 评估每个任务的重要性和紧急性 3. 将任务放入对应象限：重要且紧急（立即执行）、重要不紧急（计划执行）、紧急不重要（委托他人）、不紧急不重要（删除或推迟）",
+        "english_template": [
+            "The Eisenhower Matrix is a time management tool that categorizes tasks based on urgency and importance.",
+            "It divides tasks into four quadrants: Do First (urgent and important), Schedule (important but not urgent), Delegate (urgent but not important), and Eliminate (neither urgent nor important).",
+            "This method helps prioritize work effectively by focusing on what truly matters."
+        ],
+        "logic_flow": "List tasks -> Assess urgency/importance -> Categorize into quadrants -> Execute based on priority"
     }
 ]
