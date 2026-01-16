@@ -3,7 +3,7 @@ from datetime import datetime
 
 API_KEY = os.environ.get("DEEPSEEK_API_KEY", "").strip()
 
-# 10 个全球顶级源
+# 10 个全球顶级商业/领导力源
 SOURCES = [
     ("HBR Leadership", "https://hbr.org/rss/topic/leadership"),
     ("McKinsey Insights", "https://www.mckinsey.com/insights/rss"),
@@ -23,7 +23,7 @@ def ask_ai(prompt):
     headers = {"Content-Type": "application/json", "Authorization": f"Bearer {API_KEY}"}
     payload = {
         "model": "deepseek-chat",
-        "messages": [{"role": "system", "content": "You are an Elite Executive Coach. Output strictly in JSON."}, {"role": "user", "content": prompt}],
+        "messages": [{"role": "system", "content": "You are an Elite Business Educator. Output strictly in valid JSON."}, {"role": "user", "content": prompt}],
         "response_format": {"type": "json_object"}
     }
     try:
@@ -36,23 +36,21 @@ def ask_ai(prompt):
 
 def run():
     os.makedirs("data", exist_ok=True)
-    articles = []
     
+    # 1. 处理 10 个外刊源
+    articles = []
     for name, url in SOURCES:
         try:
             feed = feedparser.parse(url)
             if not feed.entries: continue
             entry = feed.entries[0]
-            # 核心修改：要求 AI 生成维度分数值
-            prompt = f"""Analyze the article: '{entry.title}'. 
+            prompt = f"""Analyze: '{entry.title}'. 
             Output JSON: {{
-                "title": "{entry.title}",
-                "source": "{name}",
-                "en_excerpt": "100-word paragraph",
-                "cn_translation": "中文解析",
-                "insight": "避坑指南",
+                "title": "{entry.title}", "source": "{name}",
+                "en_excerpt": "100-word paragraph", "cn_translation": "中文深度解析",
+                "insight": "教练避坑指南",
                 "dimension_scores": {{ "Strategic": 8, "Team": 7, "Innovation": 6, "Decision": 9, "Execution": 5 }},
-                "output_playbook": {{ "speaking": "10-second phrase" }}
+                "output_playbook": {{ "speaking": "黄金话术金句" }}
             }}"""
             res = ask_ai(prompt)
             if res:
@@ -60,14 +58,20 @@ def run():
                 articles.append(res)
         except: continue
 
-    # 默认书籍和模型数据
-    books = [{"title": "The Pyramid Principle", "intro": "Logical thinking.", "takeaways": ["Group ideas"], "coach_tips": "Focus on clarity."}]
-    models = [{"name": "SCQA Framework", "scenario": "Pitching", "coach_tips": "Build tension.", "logic_flow": ["Situation", "Complication", "Question", "Answer"]}]
+    # 2. 深度书架 (保留书籍板块)
+    books = []
+    for b_name in ["The Pyramid Principle", "Atomic Habits", "Blue Ocean Strategy"]:
+        b_res = ask_ai(f"Summarize book '{b_name}'. JSON: {{'title':'{b_name}','intro':'简介','takeaways':['A','B'],'coach_tips':'阅读建议'}}")
+        if b_res: books.append(b_res)
 
+    # 3. 思维模型 (保留模型板块)
+    models = [{"name": "SCQA Framework", "scenario": "高管汇报", "coach_tips": "先抛出冲突(Complication)，再给方案。", "logic_flow": ["Situation", "Complication", "Question", "Answer"]}]
+
+    # 4. 统一保存
     with open("data/library.json", "w", encoding="utf-8") as f: json.dump(articles, f, ensure_ascii=False, indent=4)
     with open("data/books.json", "w", encoding="utf-8") as f: json.dump(books, f, ensure_ascii=False, indent=4)
     with open("data/models.json", "w", encoding="utf-8") as f: json.dump(models, f, ensure_ascii=False, indent=4)
-    print("Sync complete.")
+    print("All data synced successfully.")
 
 if __name__ == "__main__":
     run()
