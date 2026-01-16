@@ -1,1 +1,72 @@
-[]
+[
+    {
+        "name": "MECE Principle",
+        "definition": "MECE (Mutually Exclusive, Collectively Exhaustive) is a problem-solving framework that ensures categories or elements in an analysis are distinct (no overlap) and comprehensive (cover all possibilities).",
+        "scenario": "Used in consulting, business analysis, and strategic planning to structure problems, organize data, or develop solutions without gaps or redundancies.",
+        "logic_flow": [
+            "Define the problem or scope",
+            "Identify all possible categories or elements",
+            "Ensure categories are mutually exclusive (no overlap)",
+            "Verify categories are collectively exhaustive (cover all aspects)",
+            "Apply to analysis or decision-making"
+        ],
+        "english_template": [
+            "To apply MECE, first break down the issue into distinct, non-overlapping parts.",
+            "Ensure your framework covers all relevant aspects without leaving gaps."
+        ],
+        "coach_tips": "Use MECE to clarify complex issues; avoid forcing categories—if overlaps or gaps appear, refine your structure. It's a tool for rigor, not rigidity."
+    },
+    {
+        "analysis": {
+            "name": {
+                "assessment": "The 'SCQA Framework' name is clear and descriptive, indicating it's likely a structured approach for problem-solving or communication. The acronym suggests components: Situation, Complication, Question, Answer.",
+                "suggestion": "Consider adding a brief expansion of the acronym (e.g., SCQA = Situation, Complication, Question, Answer) in the definition for immediate clarity."
+            },
+            "definition": {
+                "assessment": "The placeholder 'Def' is too vague. A proper definition should explain the framework's purpose, such as 'A structured method for analyzing problems and communicating solutions by breaking them into Situation, Complication, Question, and Answer components.'",
+                "suggestion": "Replace 'Def' with a concise, informative definition that highlights its utility in executive coaching or business contexts."
+            },
+            "scenario": {
+                "assessment": "'Scene' as a placeholder lacks context. A scenario should describe a real-world application, e.g., 'A leader facing declining team morale needs to present a turnaround plan to stakeholders.'",
+                "suggestion": "Specify a concrete scenario where the framework is applied, such as in strategic planning, conflict resolution, or decision-making processes."
+            },
+            "logic_flow": {
+                "assessment": "The flow ['A', 'B'] is incomplete and abstract. For SCQA, a typical logic flow might be: ['Define the Situation', 'Identify the Complication', 'Formulate the Key Question', 'Propose the Answer'].",
+                "suggestion": "Expand the logic flow to include all SCQA steps in sequence, ensuring it guides users through the framework's progression logically."
+            },
+            "english_template": {
+                "assessment": "Templates ['T1', 'T2'] are placeholders. Effective templates could be sentence starters like ['The current situation is...', 'The complication arises because...', 'The key question we must address is...', 'Our proposed answer is...'].",
+                "suggestion": "Provide practical, language-based templates that help users articulate each SCQA component clearly in English, tailored for coaching conversations."
+            },
+            "coach_tips": {
+                "assessment": "'Tip' is too generic. Coach tips should offer actionable advice, e.g., 'Encourage clients to start with facts in the Situation, avoid assumptions in the Complication, and ensure the Answer directly addresses the Question.'",
+                "suggestion": "Include specific coaching strategies, such as how to facilitate SCQA discussions, common pitfalls to avoid, and ways to adapt the framework to different client needs."
+            },
+            "overall_evaluation": "The model structure is well-organized with key components, but all fields contain placeholders that lack detail and practical value. To be effective for executive coaching, each element needs to be fleshed out with concrete, actionable content that aligns with the SCQA methodology.",
+            "recommendations": [
+                "Define SCQA explicitly in the definition to set context.",
+                "Use a realistic business scenario to demonstrate application.",
+                "Detail the logic flow with all four SCQA steps.",
+                "Create usable English templates for each step.",
+                "Provide coach tips that enhance facilitation and client engagement."
+            ]
+        }
+    },
+    {
+        "name": "Pareto Principle",
+        "definition": "The Pareto Principle, also known as the 80/20 rule, states that roughly 80% of effects come from 20% of causes. In business and productivity contexts, this often means 80% of results come from 20% of efforts, 80% of revenue comes from 20% of customers, etc.",
+        "scenario": "A client is overwhelmed with tasks, feeling like they're working constantly but not achieving meaningful progress on key goals. They're spending equal time on all activities without prioritizing what truly drives results.",
+        "logic_flow": [
+            "Identify all current activities/tasks",
+            "Analyze which 20% are producing 80% of desired outcomes",
+            "Reallocate focus and resources to high-impact activities",
+            "Minimize or eliminate low-impact activities"
+        ],
+        "english_template": [
+            "What 20% of your activities are producing 80% of your results?",
+            "If you could only do 3 things this week that would make the biggest difference, what would they be?",
+            "Which tasks on your list could you delegate, automate, or eliminate without significant consequence?"
+        ],
+        "coach_tips": "Help the client distinguish between 'busy work' and high-impact work. Encourage them to track time spent vs. outcomes achieved for 1-2 weeks to identify their personal 80/20 patterns. Remind them that perfectionism on low-impact tasks is a common productivity trap."
+    }
+]
