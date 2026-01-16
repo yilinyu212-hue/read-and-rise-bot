@@ -21,7 +21,7 @@ jobs:
           python-version: '3.9'
 
       - name: Install dependencies
-        run: pip install feedparser requests
+        run: pip install feedparser requests notion-client  # 重点：增加了 notion-client
 
       - name: Run Script
         env:
