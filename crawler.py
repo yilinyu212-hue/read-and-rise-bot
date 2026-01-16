@@ -29,44 +29,37 @@ def get_ai_analysis(title):
 
 def push_to_notion(title, link, content):
     try:
-        # 这里严格对齐你的 Notion 截图列名
+        # 这里严格对应你看板的 6 个列名
         notion.pages.create(
             parent={"database_id": DATABASE_ID},
             properties={
                 "Name": {"title": [{"text": {"content": title}}]},
-                "Source": {"select": {"name": "Economist"}}, # 对应你的彩色 Source 标签
-                "Link": {"url": link},                       # 对应你的 Link 图标列
-                "AI Summary": {"rich_text": [{"text": {"content": content[:1900]}}]}, # 对应摘要
+                "Source": {"select": {"name": "Economist"}}, 
+                "Link": {"url": link},                       
+                "AI Summary": {"rich_text": [{"text": {"content": content[:1900]}}]}, 
                 "Date": {"date": {"start": datetime.now().strftime("%Y-%m-%d")}},
-                "Status": {"status": {"name": "To Read"}}    # 对应你的 Status 状态列
+                "Status": {"status": {"name": "To Read"}}  # 必须和看板里的状态名一致
             }
         )
-        print(f"✅ 成功同步一篇文章到 Notion: {title}")
+        print(f"✅ 成功：'{title[:15]}...' 已送达 Notion")
     except Exception as e:
-        print(f"❌ Notion推送单条失败: {e}")
+        print(f"❌ 失败：无法存入 Notion。错误详情: {e}")
 
 def run():
-    # 爬取经济学人数据
     feed = feedparser.parse("https://www.economist.com/briefing/rss.xml")
     articles = []
     
     for entry in feed.entries[:3]:
-        print(f"正在处理文章: {entry.title}")
+        print(f"正在抓取: {entry.title}")
         analysis = get_ai_analysis(entry.title)
         
-        # 1. 准备本地 JSON 数据
-        articles.append({
-            "title": entry.title, 
-            "link": entry.link, 
-            "content": analysis, 
-            "date": datetime.now().strftime("%Y-%m-%d")
-        })
+        # 存入本地 JSON (供网站读取)
+        articles.append({"title": entry.title, "link": entry.link, "content": analysis, "date": datetime.now().strftime("%Y-%m-%d")})
         
-        # 2. 推送到 Notion
+        # 同步到 Notion
         if NOTION_TOKEN and DATABASE_ID:
             push_to_notion(entry.title, entry.link, analysis)
 
-    # 3. 保存到本地文件供网站读取
     os.makedirs('data', exist_ok=True)
     with open('data/library.json', 'w', encoding='utf-8') as f:
         json.dump(articles, f, ensure_ascii=False, indent=4)
