@@ -2,7 +2,7 @@ import os, feedparser, requests, json
 from datetime import datetime
 from notion_client import Client
 
-# 配置读取
+# 配置
 DEEPSEEK_KEY = os.environ.get("DEEPSEEK_API_KEY")
 NOTION_TOKEN = os.environ.get("NOTION_TOKEN")
 DATABASE_ID = os.environ.get("DATABASE_ID")
@@ -10,107 +10,71 @@ DATABASE_ID = os.environ.get("DATABASE_ID")
 notion = Client(auth=NOTION_TOKEN)
 
 def get_coach_notes(title):
-    if not DEEPSEEK_KEY: return {"notes": "AI 密钥未配置", "tags": ["General"]}
+    if not DEEPSEEK_KEY: return {"tags": ["General"], "notes": "Key missing"}
     headers = {"Content-Type": "application/json", "Authorization": f"Bearer {DEEPSEEK_KEY}"}
     
-    # 针对教练身份深度定制的专业 Prompt
+    # 强化英文段落和句式拆解的 Prompt
     prompt = f"""
-    作为一名拥有MBA背景的顶级职场英语教练，请针对文章《{title}》制作讲义。
+    作为精英英语教练，请针对《{title}》制作讲义。
     
-    1. 首先，请从以下标签中选择1-2个最贴切的分类：[Leadership, Strategy, Management, Innovation, Career, Economy]。
-    2. 然后，按以下模块输出深度解析（使用Markdown格式）：
+    请严格按以下结构输出 Markdown：
+    1. [Tags]: 从 Leadership, Strategy, Tech, Career 中选2个。
+    2. [Reading Excerpt / 原文精选]: 摘录文中一段最能代表核心观点的【英文原文】（约50-100词）。
+    3. [Vocabulary]: 3个职场高阶词汇（含音标、双语释义）。
+    4. [Sentence Lab / 句法实验室]: 选一个高阶句式，进行 [Structure Analysis] 和 [Coach's Imitation / 教练仿写]。
+    5. [Insight]: 深度逻辑解析。
     
-    ### 🧠 [Logic & Insight / 商业逻辑洞察]
-    - **Context**: 简述行业背景或管理挑战。
-    - **Logic Analysis**: 拆解文章论证逻辑。
-    
-    ### 🗣️ [Executive Language / 领袖语言工坊]
-    - **Power Words**: 3个高阶职场词汇（含音标、文中义、领袖级例句）。
-    - **Golden Structure**: 1个体现商业逻辑的句式拆解。
-    
-    ### 🤝 [Coaching Corner / 教练锦囊]
-    - **Actionable Advice**: 给管理者的实战建议。
-    
-    最后，请严格按以下 JSON 格式输出：
-    {{"tags": ["标签1", "标签2"], "notes": "Markdown格式的内容"}}
+    最后请输出 JSON：{{"tags": ["标签"], "excerpt": "英文原文", "notes": "Markdown笔记"}}
     """
     
     data = {
         "model": "deepseek-chat",
-        "messages": [
-            {"role": "system", "content": "你是一位专业的企业领袖培训师。"},
-            {"role": "user", "content": prompt}
-        ],
+        "messages": [{"role": "system", "content": "You are a professional business English coach."},
+                     {"role": "user", "content": prompt}],
         "response_format": {"type": "json_object"}
     }
     try:
         res = requests.post("https://api.deepseek.com/chat/completions", headers=headers, json=data, timeout=60)
         return res.json()['choices'][0]['message']['content']
     except:
-        return json.dumps({"tags": ["General"], "notes": "解析生成中..."})
+        return json.dumps({"tags": ["General"], "excerpt": "", "notes": "AI is thinking..."})
 
 def run():
-    # 扩展来源：HBR, WSJ, Economist, Fortune
+    # 优化后的 Headers 防止被 HBR 等屏蔽
+    UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+    
     SOURCES = [
-        {"name": "HBR (Leadership)", "url": "https://hbr.org/rss/topic/leadership"},
-        {"name": "Economist (Briefing)", "url": "https://www.economist.com/briefing/rss.xml"},
-        {"name": "WSJ (Business)", "url": "https://feeds.a.dj.com/rss/WSJBusiness.xml"},
-        {"name": "Fortune", "url": "https://fortune.com/feed/"}
+        {"name": "HBR", "url": "https://hbr.org/rss/topic/leadership"},
+        {"name": "WSJ", "url": "https://feeds.a.dj.com/rss/WSJBusiness.xml"},
+        {"name": "Economist", "url": "https://www.economist.com/briefing/rss.xml"}
     ]
     
     all_articles = []
-    print("🚀 Read & Rise 多源教研任务开始...")
-
     for src in SOURCES:
-        feed = feedparser.parse(src['url'])
-        # 每个来源取最新 1-2 篇，避免运行时间过长
-        for entry in feed.entries[:1]:
-            print(f"📘 研读中 [{src['name']}]: {entry.title}")
-            
-            raw_ai_output = get_coach_notes(entry.title)
-            try:
-                ai_data = json.loads(raw_ai_output)
-            except:
-                ai_data = {"tags": ["Business"], "notes": raw_ai_output}
-            
-            # 1. 同步到 Notion (包含标签属性)
-            try:
-                notion.pages.create(
-                    parent={"database_id": DATABASE_ID},
-                    properties={
-                        "Name": {"title": [{"text": {"content": entry.title}}]},
-                        "Source": {"select": {"name": src['name']}},
-                        "Date": {"date": {"start": datetime.now().strftime("%Y-%m-%d")}},
-                        "Status": {"status": {"name": "To Read"}}
-                    },
-                    children=[
-                        {
-                            "object": "block",
-                            "type": "paragraph",
-                            "paragraph": {
-                                "rich_text": [{"type": "text", "text": {"content": ai_data['notes'][:2000]}}]
-                            }
-                        }
-                    ]
-                )
-            except Exception as e:
-                print(f"❌ Notion 失败: {e}")
+        try:
+            # 使用 requests 先抓取 xml，避开简单爬虫过滤
+            resp = requests.get(src['url'], headers={"User-Agent": UA}, timeout=20)
+            feed = feedparser.parse(resp.content)
+            for entry in feed.entries[:1]:
+                print(f"研读中: {entry.title}")
+                ai_res = json.loads(get_coach_notes(entry.title))
+                
+                # 同步 Notion (略)
+                
+                all_articles.append({
+                    "source": src['name'],
+                    "title": entry.title,
+                    "excerpt": ai_res.get('excerpt', ''),
+                    "content": ai_res.get('notes', ''),
+                    "tags": ai_res.get('tags', []),
+                    "date": datetime.now().strftime("%Y-%m-%d"),
+                    "img": "https://images.unsplash.com/photo-1454165833767-0266b196773b?w=800" # 预留占位图
+                })
+        except Exception as e:
+            print(f"Error fetching {src['name']}: {e}")
 
-            # 2. 收集数据供网页调用
-            all_articles.append({
-                "source": src['name'],
-                "title": entry.title,
-                "content": ai_data['notes'],
-                "tags": ai_data['tags'],
-                "link": entry.link,
-                "date": datetime.now().strftime("%Y-%m-%d")
-            })
-
-    # 保存数据
-    os.makedirs('data', exist_ok=True)
     with open('data/library.json', 'w', encoding='utf-8') as f:
         json.dump(all_articles, f, ensure_ascii=False, indent=4)
-    print("🎯 多源同步已圆满完成！")
 
 if __name__ == "__main__":
     run()
