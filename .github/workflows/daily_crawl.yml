@@ -1,20 +1,15 @@
-name: Read & Rise Enterprise Sync
-
+name: Read & Rise Auto Sync
 on:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '0 0 * * *' # 每天凌晨同步
   workflow_dispatch:
-
-permissions:
-  contents: write
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0 
+      - name: Checkout code
+        uses: actions/checkout@v3
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -29,11 +24,10 @@ jobs:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
         run: python crawler.py
 
-      - name: Force Push Changes
+      - name: Commit and Push
         run: |
           git config --local user.email "action@github.com"
-          git config --local user.name "Enterprise-Bot"
+          git config --local user.name "GitHub Action"
           git add data/*.json
-          # 强制同步逻辑：不进行合并，直接覆盖提交
-          git commit -m "🤖 [Enterprise] Data Sync: $(date)" || exit 0
-          git push origin main --force
+          git commit -m "Update Daily Energy Hub data" || exit 0
+          git push
