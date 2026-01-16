@@ -1,20 +1,24 @@
 [
     {
         "name": "MECE Principle",
-        "scenario": "Usage",
-        "coach_tips": "Tips",
+        "scenario": "Problem-solving, decision-making, and structuring complex information in business analysis, consulting, and strategic planning.",
+        "coach_tips": "Avoid overlapping categories; ensure all relevant aspects are covered; don't force MECE if it oversimplifies; use it as a tool, not a rigid rule.",
         "logic_flow": [
-            "A",
-            "B"
+            "Step1: Define the problem or topic clearly",
+            "Step2: Break it down into mutually exclusive categories",
+            "Step3: Ensure categories are collectively exhaustive",
+            "Step4: Validate and refine the structure"
         ]
     },
     {
         "name": "SCQA Framework",
-        "scenario": "Usage",
-        "coach_tips": "Tips",
+        "scenario": "用于结构化沟通与问题解决，通过情境、冲突、问题、答案四步，提升逻辑清晰度与说服力，适用于汇报、提案、咨询等场景。",
+        "coach_tips": "避免情境描述过长而模糊焦点；确保冲突与问题紧密关联；答案需直接回应问题，避免偏离；整体保持简洁，忌四步失衡。",
         "logic_flow": [
-            "A",
-            "B"
+            "Step1: Situation - 描述背景情境",
+            "Step2: Complication - 指出冲突或挑战",
+            "Step3: Question - 提出核心问题",
+            "Step4: Answer - 给出解决方案或答案"
         ]
     }
 ]
