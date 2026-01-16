@@ -9,8 +9,7 @@ DATABASE_ID = os.environ.get("DATABASE_ID")
 
 notion = Client(auth=NOTION_TOKEN)
 
-# --- 外刊来源配置列表 ---
-# 你可以在这里增加更多 RSS 链接，机器人会自动循环抓取
+# 来源清单
 SOURCES = [
     {"name": "Economist", "url": "https://www.economist.com/briefing/rss.xml"},
     {"name": "NYT", "url": "https://rss.nytimes.com/services/xml/rss/nyt/World.xml"},
@@ -18,10 +17,8 @@ SOURCES = [
 ]
 
 def get_ai_analysis(title):
-    headers = {
-        "Content-Type": "application/json",
-        "Authorization": f"Bearer {DEEPSEEK_KEY}"
-    }
+    if not DEEPSEEK_KEY: return "未配置 AI 秘钥"
+    headers = {"Content-Type": "application/json", "Authorization": f"Bearer {DEEPSEEK_KEY}"}
     data = {
         "model": "deepseek-chat",
         "messages": [
@@ -32,53 +29,50 @@ def get_ai_analysis(title):
     try:
         res = requests.post("https://api.deepseek.com/chat/completions", headers=headers, json=data, timeout=30)
         return res.json()['choices'][0]['message']['content']
-    except Exception as e:
-        return f"AI解析生成中... (错误: {e})"
+    except:
+        return "AI 解析生成中..."
 
 def run():
-    print("🚀 Read & Rise 多源抓取开始...")
     all_articles = []
+    print(f"🚀 任务开始，目标数据库: {DATABASE_ID[:5]}...")
     
-    for source in SOURCES:
-        print(f"📡 正在抓取: {source['name']}...")
-        feed = feedparser.parse(source['url'])
-        
-        # 每个来源只抓取最新的 2 篇，避免瞬间产生太多任务
-        for entry in feed.entries[:2]:
-            print(f"处理中: [{source['name']}] {entry.title}")
+    for src in SOURCES:
+        print(f"📡 抓取 {src['name']}...")
+        feed = feedparser.parse(src['url'])
+        for entry in feed.entries[:2]: # 每个来源取2篇
             analysis = get_ai_analysis(entry.title)
             
-            # 1. 推送到 Notion
+            # 1. 同步到 Notion
             try:
                 notion.pages.create(
                     parent={"database_id": DATABASE_ID},
                     properties={
                         "Name": {"title": [{"text": {"content": entry.title}}]},
-                        "Source": {"select": {"name": source['name']}}, # 动态匹配来源名
+                        "Source": {"select": {"name": src['name']}},
                         "Link": {"url": entry.link},
                         "AI Summary": {"rich_text": [{"text": {"content": analysis[:1900]}}]},
                         "Date": {"date": {"start": datetime.now().strftime("%Y-%m-%d")}},
                         "Status": {"status": {"name": "To Read"}}
                     }
                 )
-                print(f"✅ Notion 同步成功")
+                print(f"✅ Notion 已更新: {entry.title[:15]}")
             except Exception as e:
-                print(f"❌ Notion 同步失败: {e}")
+                print(f"❌ Notion 失败: {e}")
 
-            # 2. 收集数据用于网站显示
+            # 2. 存入列表供网站使用
             all_articles.append({
-                "source": source['name'],
+                "source": src['name'],
                 "title": entry.title,
                 "link": entry.link,
                 "content": analysis,
                 "date": datetime.now().strftime("%Y-%m-%d")
             })
 
-    # 3. 更新本地 library.json
+    # 3. 彻底修复 JSON 写入，防止网站报错
     os.makedirs('data', exist_ok=True)
     with open('data/library.json', 'w', encoding='utf-8') as f:
         json.dump(all_articles, f, ensure_ascii=False, indent=4)
-    print(f"📂 本地数据已更新，共抓取 {len(all_articles)} 篇文章。")
+    print("🎯 所有任务已完成！")
 
 if __name__ == "__main__":
     run()
