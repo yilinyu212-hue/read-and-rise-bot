@@ -1,244 +1,230 @@
 [
     {
         "level": "C1",
-        "en_excerpt": "Geopolitical tensions are increasingly shaping how multinational corporations make strategic decisions, forcing them to navigate complex trade-offs between market opportunities and political risks. Companies must now consider not only traditional factors like supply chain efficiency and consumer demand, but also how their operations might be affected by sanctions, tariffs, or diplomatic disputes. This shift represents a fundamental change in global business strategy, where commercial logic is being subordinated to geopolitical calculations.",
-        "cn_translation": "地缘政治紧张局势正日益影响跨国公司的战略决策，迫使它们在市场机遇与政治风险之间进行复杂的权衡。企业现在不仅需要考虑供应链效率和消费者需求等传统因素，还必须考虑其运营可能如何受到制裁、关税或外交争端的影响。这种转变代表了全球商业战略的根本性变化，商业逻辑正在让位于地缘政治考量。",
+        "en_excerpt": "Geopolitical tensions are increasingly shaping corporate strategies, forcing multinationals to navigate complex trade-offs between efficiency and resilience. Companies that once prioritized global supply chain optimization now face pressure to regionalize operations, diversify suppliers, and even accept higher costs to mitigate political risks. This represents a fundamental shift from the hyper-globalization paradigm that dominated business thinking for decades.",
+        "cn_translation": "地缘政治紧张局势正日益影响企业战略，迫使跨国公司在效率与韧性之间做出复杂的权衡。曾经优先考虑全球供应链优化的企业，现在面临区域化运营、供应商多元化甚至接受更高成本以降低政治风险的压力。这标志着数十年来主导商业思维的超全球化范式发生了根本性转变。",
         "vocabulary_pro": {
             "geopolitical tensions": "地缘政治紧张局势",
-            "multinational corporations": "跨国公司",
-            "strategic decisions": "战略决策",
-            "navigate trade-offs": "权衡取舍",
-            "supply chain efficiency": "供应链效率",
-            "consumer demand": "消费者需求",
-            "sanctions": "制裁",
-            "tariffs": "关税",
-            "diplomatic disputes": "外交争端",
-            "subordinated to": "从属于/让位于",
-            "geopolitical calculations": "地缘政治考量"
+            "corporate strategies": "企业战略",
+            "navigate complex trade-offs": "驾驭复杂的权衡",
+            "supply chain optimization": "供应链优化",
+            "regionalize operations": "区域化运营",
+            "diversify suppliers": "供应商多元化",
+            "mitigate political risks": "降低政治风险",
+            "hyper-globalization paradigm": "超全球化范式"
         },
-        "syntax_analysis": "1. 主句结构：'Geopolitical tensions are shaping how...'（现在进行时+宾语从句）\n2. 现在分词短语：'forcing them to navigate...'（作结果状语）\n3. 并列结构：'not only...but also...'（强调递进关系）\n4. 被动语态：'might be affected by...'（表示客观影响）\n5. 定语从句：'where commercial logic is being...'（修饰fundamental change）",
+        "syntax_analysis": "主句采用现在进行时态(are shaping)强调持续影响；forcing引导现在分词短语作结果状语；that引导定语从句修饰Companies；现在分词短语prioritizing...作后置定语；不定式短语to regionalize...作pressure的补语；that引导定语从句修饰paradigm。",
         "output_playbook": {
-            "speaking": [
-                "It's becoming increasingly clear that...",
-                "What this means in practice is that...",
-                "The bottom line is that companies can no longer afford to ignore...",
-                "At the end of the day, it all comes down to..."
-            ],
-            "writing": [
-                "This paradigm shift necessitates a fundamental reevaluation of...",
-                "Consequently, organizations are compelled to recalibrate their strategic priorities...",
-                "The convergence of commercial and geopolitical considerations has given rise to...",
-                "This development underscores the imperative for multinational enterprises to..."
-            ]
+            "speaking": "1. 'are increasingly shaping'（渐进影响表达）\n2. 'navigate trade-offs between A and B'（权衡表述）\n3. 'face pressure to...'（面临压力句式）\n4. 'represents a fundamental shift from...'（范式转变表达）",
+            "writing": "1. 'Geopolitical tensions are compelling corporations to...'（强力驱动句式）\n2. 'This paradigm shift necessitates a reevaluation of...'（必要性论述）\n3. 'The trade-off between efficiency gains and risk exposure...'（专业对比表达）\n4. 'Companies are strategically repositioning their...'（战略调整表述）"
         },
-        "insight": "作为商业英语教练，我观察到学员在讨论这个话题时常犯三个错误：1) 过度简化地缘政治影响，将其视为单一变量而非复杂系统；2) 未能区分短期规避策略与长期战略调整；3) 在表达权衡取舍时缺乏精准的商业术语。建议学员：首先建立'政治风险矩阵'分析框架，其次练习使用'contingency planning'、'strategic hedging'等专业表达，最后通过案例研究理解不同行业受影响程度的差异。",
-        "logic_flow": "A（地缘政治紧张加剧）→ B（跨国公司决策维度扩展：商业因素+政治因素）→ C（战略范式转变：从纯商业逻辑到地缘政治主导的复合决策）→ D（具体表现：供应链重组、市场选择调整、投资策略变化）→ E（长期影响：全球商业格局重构与企业竞争力重新定义）",
+        "insight": "核心教学点：帮助学员理解'战略权衡'（strategic trade-offs）在商业决策中的实际应用。通过'效率vs韧性'的具体案例，展示高级商务场景中如何用英语表达复杂决策过程。重点训练学员用'forcing...to...'、'face pressure to...'等结构描述外部压力下的商业调整。",
+        "logic_flow": "核心概念：地缘政治影响商业决策 -> 分支1：企业战略调整（供应链区域化/供应商多元化） -> 细节1：接受成本增加以降低风险 -> 核心概念：地缘政治影响商业决策 -> 分支2：范式转变（从超全球化到风险规避） -> 细节2：效率优先到韧性优先的价值观转变",
         "source": "Economist (简报)",
         "title": "Geopolitics is warping multinationals’ commercial decisions",
         "date": "2026-01-16"
     },
     {
         "level": "C1",
-        "en_excerpt": "Three technologies poised to redefine biotechnology by 2026 include CRISPR-based gene editing platforms, AI-driven drug discovery algorithms, and organ-on-a-chip systems. CRISPR tools are evolving beyond simple gene cuts to enable precise base editing and epigenetic modulation, allowing researchers to correct genetic mutations with unprecedented accuracy. Meanwhile, machine learning models can now predict molecular interactions and optimize compound libraries, slashing drug development timelines from years to months. These organ-mimicking microdevices provide human-relevant physiological data without ethical constraints, accelerating toxicology studies and personalized medicine approaches.",
-        "cn_translation": "到2026年将重新定义生物技术的三项技术包括基于CRISPR的基因编辑平台、AI驱动的药物发现算法和器官芯片系统。CRISPR工具正在从简单的基因切割发展为能够实现精确碱基编辑和表观遗传调控，使研究人员能够以前所未有的准确性纠正基因突变。同时，机器学习模型现在可以预测分子相互作用并优化化合物库，将药物开发时间从数年缩短至数月。这些模拟器官的微型设备在没有伦理限制的情况下提供与人类相关的生理数据，加速了毒理学研究和个性化医疗方法的发展。",
+        "en_excerpt": "Looking ahead to 2026, three transformative technologies are poised to redefine biotechnology: AI-driven drug discovery platforms that accelerate target identification, CRISPR-based gene editing systems with enhanced precision, and organ-on-a-chip microphysiological models that revolutionize preclinical testing. These innovations converge to address longstanding challenges in therapeutic development while raising profound ethical considerations about genetic manipulation and data privacy.",
+        "cn_translation": "展望2026年，三项变革性技术将重塑生物技术领域：加速靶点识别的AI驱动药物发现平台、精度更高的CRISPR基因编辑系统，以及彻底改变临床前测试的器官芯片微生理模型。这些创新汇聚在一起，旨在解决治疗开发中长期存在的挑战，同时引发关于基因操纵和数据隐私的深刻伦理思考。",
         "vocabulary_pro": {
-            "CRISPR-based gene editing platforms": "基于CRISPR的基因编辑平台",
-            "AI-driven drug discovery algorithms": "AI驱动的药物发现算法",
-            "organ-on-a-chip systems": "器官芯片系统",
-            "base editing": "碱基编辑",
-            "epigenetic modulation": "表观遗传调控",
-            "genetic mutations": "基因突变",
-            "machine learning models": "机器学习模型",
-            "molecular interactions": "分子相互作用",
-            "compound libraries": "化合物库",
-            "organ-mimicking microdevices": "模拟器官的微型设备",
-            "human-relevant physiological data": "与人类相关的生理数据",
-            "ethical constraints": "伦理限制",
-            "toxicology studies": "毒理学研究",
-            "personalized medicine approaches": "个性化医疗方法"
+            "transformative technologies": "变革性技术",
+            "poised to redefine": "蓄势待发重新定义",
+            "AI-driven drug discovery platforms": "AI驱动药物发现平台",
+            "accelerate target identification": "加速靶点识别",
+            "CRISPR-based gene editing systems": "基于CRISPR的基因编辑系统",
+            "enhanced precision": "增强的精度",
+            "organ-on-a-chip microphysiological models": "器官芯片微生理模型",
+            "revolutionize preclinical testing": "彻底改变临床前测试",
+            "converge to address": "汇聚以解决",
+            "longstanding challenges": "长期存在的挑战",
+            "therapeutic development": "治疗开发",
+            "profound ethical considerations": "深刻的伦理考量",
+            "genetic manipulation": "基因操纵",
+            "data privacy": "数据隐私"
         },
-        "syntax_analysis": "1. 'Three technologies poised to redefine...' - 过去分词短语作后置定语，修饰technologies\n2. 'CRISPR tools are evolving beyond simple gene cuts to enable...' - 现在进行时+不定式表目的结构\n3. 'allowing researchers to correct...' - 现在分词短语作结果状语\n4. 'Meanwhile, machine learning models can now predict...' - 情态动词+并列动词结构\n5. 'slashing drug development timelines...' - 现在分词短语作伴随状语\n6. 'These organ-mimicking microdevices provide...' - 复合形容词+主谓宾结构\n7. 'accelerating toxicology studies...' - 现在分词短语作结果状语",
+        "syntax_analysis": "复合句结构：主句'three transformative technologies are poised to redefine biotechnology'后接冒号引出三个并列名词短语作同位语，每个名词短语都带有定语从句（that accelerate.../with enhanced precision/that revolutionize...）。结尾用现在分词短语'raising profound ethical considerations'作伴随状语，体现技术发展带来的双重影响。",
         "output_playbook": {
             "speaking": [
-                "poised to redefine",
-                "evolving beyond",
-                "with unprecedented accuracy",
-                "slashing timelines",
-                "without ethical constraints",
-                "accelerating approaches"
+                "When discussing future trends, use 'poised to' instead of 'will' to sound more nuanced (e.g., 'These technologies are poised to disrupt traditional approaches').",
+                "Employ 'converge to address' when describing collaborative solutions (e.g., 'Multiple innovations converge to tackle healthcare disparities').",
+                "Use 'raising profound considerations' to introduce ethical dimensions in professional discussions."
             ],
             "writing": [
-                "technologies poised to redefine",
-                "evolving beyond simple X to enable Y",
-                "allowing researchers to Z with unprecedented accuracy",
-                "machine learning models can now predict and optimize",
-                "provide human-relevant data without constraints",
-                "accelerating studies and approaches"
+                "Parallel structure for listing innovations: '[Technology 1] that [function], [Technology 2] with [attribute], and [Technology 3] that [outcome].'",
+                "Academic hedging: 'are poised to' instead of definitive 'will' demonstrates cautious forecasting.",
+                "Dual-impact framing: Use present participle clauses ('while raising...') to show simultaneous positive and challenging consequences."
             ]
         },
-        "insight": "从教练视角看，这段文字展示了高级商务英语的典型特征：1) 使用专业术语时保持解释性语境（如'base editing'后紧跟功能说明）2) 通过对比结构突出技术优势（'from years to months'）3) 用动名词短语创造紧凑的信息密度（'accelerating toxicology studies'）4) 被动语态的审慎使用保持客观性（'are evolving'而非主观判断）。学员需注意科技英语中名词堆叠的处理技巧，如'AI-driven drug discovery algorithms'应理解为'算法驱动药物发现'而非字面翻译。",
-        "logic_flow": "A(三项核心技术并列引入) → B(分述CRISPR的精度突破) → C(转向AI的效率革命) → D(器官芯片的伦理优势) → E(综合加速行业变革)",
+        "insight": "从教练视角看，这段话完美示范了C1级商务/学术英语的核心能力：1) 使用精确的技术术语链（AI-driven→target identification→CRISPR-based→microphysiological）展现领域专业知识；2) 通过'poised to'/'converge to'等高级动词短语体现战略预见性；3) 用'while raising'结构平衡技术乐观主义与批判性思考——这正是高管在技术路线图演示中需要展现的辩证思维。学员应特别注意这种'技术描述+商业影响+伦理维度'的三层论证结构。",
+        "logic_flow": {
+            "核心概念": "2026年生物技术三大变革驱动力",
+            "分支1": "技术创新维度",
+            "细节1": "AI药物发现平台 → 加速靶点识别",
+            "细节2": "CRISPR基因编辑 → 精度提升",
+            "细节3": "器官芯片模型 → 临床前测试革命",
+            "分支2": "行业影响维度",
+            "细节4": "汇聚效应 → 解决治疗开发长期挑战",
+            "细节5": "伦理衍生问题 → 基因操纵与数据隐私考量"
+        },
         "source": "MIT Tech Review",
         "title": "Three technologies that will shape biotech in 2026",
         "date": "2026-01-16"
     },
     {
         "level": "C1",
-        "en_excerpt": "Gen Z's fascination with the #RichTok lifestyle has led many to turn to social media platforms like TikTok and Instagram for financial guidance, often prioritizing viral trends over traditional investment education. This shift reflects a broader cultural movement where financial literacy is increasingly shaped by algorithm-driven content and peer influence rather than conventional financial advisors.",
-        "cn_translation": "Z世代对#RichTok生活方式的迷恋，导致许多人转向TikTok和Instagram等社交媒体平台寻求财务指导，往往将病毒式传播的趋势置于传统投资教育之上。这种转变反映了一种更广泛的文化运动，即金融素养越来越多地由算法驱动的内容和同伴影响塑造，而非传统的财务顾问。",
+        "en_excerpt": "The #RichTok phenomenon highlights how Gen Z is turning to social media platforms like TikTok for financial guidance, often prioritizing viral trends over traditional investment wisdom. This digital-first approach to wealth-building reflects both their tech-savvy nature and skepticism toward conventional financial institutions, yet raises concerns about the reliability of crowd-sourced advice in high-stakes financial decisions.",
+        "cn_translation": "#RichTok现象凸显了Z世代如何转向TikTok等社交媒体平台寻求财务指导，常常将病毒式传播趋势置于传统投资智慧之上。这种数字优先的财富积累方式既反映了他们对技术的精通和对传统金融机构的怀疑，也引发了人们对高风险财务决策中众包建议可靠性的担忧。",
         "vocabulary_pro": {
-            "fascination": "迷恋",
+            "phenomenon": "现象",
             "prioritizing": "优先考虑",
-            "algorithm-driven": "算法驱动的",
-            "peer influence": "同伴影响",
-            "conventional": "传统的"
+            "viral trends": "病毒式传播趋势",
+            "tech-savvy": "精通技术的",
+            "skepticism": "怀疑态度",
+            "conventional financial institutions": "传统金融机构",
+            "crowd-sourced advice": "众包建议",
+            "high-stakes financial decisions": "高风险财务决策"
         },
-        "syntax_analysis": "主句使用现在完成时has led，体现行为对现在的持续影响；where引导定语从句修饰movement，说明文化运动的具体特征；rather than连接对比成分，突出新旧方式的差异。",
+        "syntax_analysis": "复合句结构：主句（The #RichTok phenomenon highlights...）包含how引导的宾语从句，从句中嵌套现在分词短语（prioritizing...）作伴随状语；第二句采用并列结构（reflects...and raises...），通过yet连接转折关系，其中包含介词短语（toward...）和介词宾语从句（about...）。",
         "output_playbook": {
-            "speaking": "In today's digital age, it's become second nature for Gen Z to seek out financial tips through bite-sized social media content rather than poring over lengthy investment guides.",
-            "writing": "The paradigm shift towards algorithm-curated financial advice underscores a generational preference for accessible, visually engaging content over conventional pedagogical approaches to wealth management."
+            "speaking": "地道表达：'digital-first approach'（数字优先策略）, 'wealth-building'（财富积累）, 'raises concerns about'（引发对...的担忧）, 'high-stakes'（高风险的）",
+            "writing": "高级表达：'highlights how...'（凸显...如何）, 'reflects both...and...'（既反映...又...）, 'skepticism toward'（对...的怀疑）, 'reliability of crowd-sourced advice'（众包建议的可靠性）"
         },
-        "insight": "这一现象揭示了数字原住民在信息获取方式上的根本性变革：他们将复杂的金融决策简化为可消费的社交媒体内容，这既体现了对即时性和视觉化沟通的偏好，也暴露出在算法泡沫中可能形成的认知偏差。教育者需要思考如何将传统金融知识的严谨性与新媒体传播的吸引力相结合。",
-        "logic_flow": "A. Z世代被#RichTok展示的财富生活方式吸引 → B. 转向社交媒体寻求快速、视觉化的投资建议 → C. 形成依赖算法和同辈影响的金融决策模式，与传统金融教育形成代际差异",
+        "insight": "教练视角：这种现象揭示了Z世代财务教育的代际断层——他们用'社交验证'替代专业认证，本质是信任体系的迁移。教学应引导学员区分'财务娱乐化内容'与'严谨投资知识'，培养数字时代的金融信息批判素养，而非简单否定其行为模式。",
+        "logic_flow": "核心概念：社交媒体投资建议现象 -> 分支1：行为特征（数字优先、趋势驱动） -> 细节1：技术亲近性与制度怀疑的并存；核心概念：社交媒体投资建议现象 -> 分支2：潜在风险（信息可靠性问题） -> 细节2：娱乐化内容与专业决策的冲突",
         "source": "Fortune (财富)",
         "title": "Gen Z’s pursuit of the #RichTok lifestyle sends them to social media for investing advice",
         "date": "2026-01-16"
     },
     {
         "level": "C1",
-        "en_excerpt": "Google has issued a stark warning to users about connecting to unsecured mobile networks, particularly public Wi-Fi hotspots. The tech giant emphasizes that these networks often lack proper encryption, making them vulnerable to data interception by malicious actors. Users are advised to avoid accessing sensitive information, such as banking details or personal emails, while connected to such networks. Instead, Google recommends using virtual private networks (VPNs) or cellular data for secure browsing. This advisory comes amid rising concerns over cyber threats and data privacy breaches globally.",
-        "cn_translation": "谷歌向用户发出严厉警告，提醒他们注意连接到不安全的移动网络，尤其是公共Wi-Fi热点。这家科技巨头强调，这些网络通常缺乏适当的加密措施，容易受到恶意行为者的数据截取。建议用户在连接到此类网络时，避免访问敏感信息，如银行详情或个人电子邮件。相反，谷歌推荐使用虚拟专用网络（VPN）或蜂窝数据进行安全浏览。这一建议是在全球对网络威胁和数据隐私泄露日益担忧的背景下提出的。",
+        "en_excerpt": "Mission has unveiled its first network music player, engineered specifically to complement the company's acclaimed 778X amplifier. This new player integrates high-resolution audio streaming capabilities with Mission's signature sound engineering, creating a seamless ecosystem for audiophiles. The device supports multiple streaming services, offers extensive connectivity options, and features a user-friendly interface designed for both novice and experienced users.",
+        "cn_translation": "Mission公司推出了其首款网络音乐播放器，专门设计以匹配该公司备受赞誉的778X放大器。这款新播放器集成了高分辨率音频流媒体功能与Mission标志性的声音工程，为音响发烧友打造了一个无缝的生态系统。该设备支持多种流媒体服务，提供广泛的连接选项，并配备了适合新手和经验丰富用户的友好界面。",
         "vocabulary_pro": {
-            "stark warning": "严厉警告",
-            "unsecured mobile networks": "不安全的移动网络",
-            "public Wi-Fi hotspots": "公共Wi-Fi热点",
-            "encryption": "加密措施",
-            "vulnerable to": "容易受到",
-            "data interception": "数据截取",
-            "malicious actors": "恶意行为者",
-            "sensitive information": "敏感信息",
-            "virtual private networks (VPNs)": "虚拟专用网络（VPN）",
-            "cellular data": "蜂窝数据",
-            "secure browsing": "安全浏览",
-            "advisory": "建议",
-            "cyber threats": "网络威胁",
-            "data privacy breaches": "数据隐私泄露"
+            "unveiled": "推出/发布",
+            "engineered specifically": "专门设计",
+            "complement": "匹配/补充",
+            "acclaimed": "备受赞誉的",
+            "integrates": "集成",
+            "high-resolution audio streaming": "高分辨率音频流媒体",
+            "signature sound engineering": "标志性声音工程",
+            "seamless ecosystem": "无缝生态系统",
+            "audiophiles": "音响发烧友",
+            "extensive connectivity options": "广泛的连接选项",
+            "user-friendly interface": "用户友好界面"
         },
-        "syntax_analysis": "本段采用复合句结构，以'Google has issued a stark warning'为主句，后接'about connecting to...'介词短语作补充。'The tech giant emphasizes that...'引入宾语从句，说明网络缺陷；'making them vulnerable...'现在分词短语作结果状语。'Users are advised to avoid...'使用被动语态提出建议，'while connected...'为省略的时间状语从句。'Instead, Google recommends...'通过对比结构提供解决方案。最后，'This advisory comes amid...'以独立句收尾，点明背景，增强逻辑连贯性。",
+        "syntax_analysis": "主句使用现在完成时'has unveiled'强调新产品发布。过去分词短语'engineered specifically...'作为后置定语修饰'network music player'。现在分词短语'creating a seamless ecosystem...'表示伴随结果。平行结构'supports..., offers..., and features...'列举产品功能，增强表达清晰度。",
         "output_playbook": {
-            "speaking": "1. 'Steer clear of public Wi-Fi for anything confidential.' (避免在公共Wi-Fi上处理机密事务) 2. 'It's a minefield out there—stick to your cellular data.' (网络环境险象环生，坚持使用蜂窝数据) 3. 'VPNs are your best bet for secure connections on the go.' (VPN是移动中安全连接的最佳选择) 4. 'Don't let your guard down with unsecured networks.' (面对不安全网络，切勿放松警惕)",
-            "writing": "1. 'Google's advisory underscores the perils of unencrypted networks, urging vigilance in digital interactions.' (谷歌的建议强调了未加密网络的危险，敦促在数字互动中保持警惕) 2. 'The proliferation of cyber threats necessitates robust measures, such as VPN adoption, to safeguard sensitive data.' (网络威胁的扩散需要采取VPN采用等有力措施来保护敏感数据) 3. 'This warning aligns with global trends emphasizing proactive cybersecurity in an interconnected world.' (这一警告与强调在互联世界中主动网络安全的全球趋势一致)"
+            "speaking": "1. 'This is engineered specifically to complement...' (专业产品描述)\n2. 'It creates a seamless ecosystem for...' (生态系统概念表达)\n3. 'The device supports X, offers Y, and features Z' (产品功能列举结构)",
+            "writing": "1. 'has unveiled its first [product], engineered specifically to complement...' (正式产品发布句式)\n2. 'integrates [feature A] with [feature B], creating [benefit]' (技术集成表达)\n3. 'designed for both novice and experienced users' (市场定位表述)"
         },
-        "insight": "从教练视角看，本主题不仅涉及语言学习，更关乎数字素养培养。C1学员应能：1) 批判性分析技术警告背后的社会因素（如隐私文化差异）；2) 在商务场景中应用这些概念（如远程办公安全协议）；3) 用高级词汇（如'attack vectors'攻击向量）讨论网络风险。教学可结合案例研究（如企业数据泄露事件），让学员模拟撰写安全备忘录或进行风险评估演示，提升职场应用能力。",
-        "logic_flow": "A -> 问题提出：谷歌警告不安全移动网络的风险（公共Wi-Fi缺乏加密） -> B -> 风险分析：数据易被截取，敏感信息暴露 -> C -> 解决方案：建议使用VPN或蜂窝数据替代 -> D -> 背景延伸：呼应全球网络威胁上升趋势，强化建议紧迫性",
+        "insight": "从教练视角看，这篇文章展示了高端科技产品文案的经典结构：1) 产品定位（首款/专门匹配）建立独特性 2) 技术规格（高分辨率/多服务支持）建立专业可信度 3) 用户体验（无缝生态/友好界面）建立市场吸引力。商业英语学习者应注意这种'技术规格+用户体验'的双重说服策略，这在高端消费品营销中尤为常见。",
+        "logic_flow": "核心概念：Mission推出首款网络音乐播放器 -> 分支1：技术匹配性（专门匹配778X放大器，集成高分辨率音频） -> 细节1：声音工程与生态系统构建 -> 分支2：用户价值（多服务支持，广泛连接，友好界面） -> 细节2：同时满足新手和专家用户需求",
         "source": "Forbes (创新)",
-        "title": "Disconnect From All These Mobile Networks, Google Warns",
+        "title": "Mission Announces First Network Music Player Designed To Match Mission’s 778X Amplifier",
         "date": "2026-01-16"
     },
     {
         "level": "C1",
-        "en_excerpt": "The tech industry's strategy of appeasing the Trump administration in hopes of favorable policies has created a dangerous precedent. By prioritizing short-term regulatory relief over long-term ethical principles, these companies have compromised their stated values of transparency and democratic engagement. Now, as political winds shift, they face mounting public backlash and potential regulatory reckoning for their Faustian bargains.",
-        "cn_translation": "科技行业为换取有利政策而讨好特朗普政府的策略已开创危险先例。这些公司将短期监管松绑置于长期道德原则之上，损害了其宣称的透明度和民主参与价值观。如今随着政治风向转变，它们因这种浮士德式交易面临日益增长的公众反弹和潜在的监管清算。",
+        "en_excerpt": "The tech industry's calculated embrace of Trump's potential return to power represents a Faustian bargain: short-term regulatory relief in exchange for long-term erosion of democratic norms and global trust. Companies that once championed progressive values now quietly recalibrate their political calculus, betting that appeasement will yield more favorable policies than confrontation.",
+        "cn_translation": "科技行业对特朗普可能重返政坛的精心算计式拥抱，实为一场浮士德式的交易：以短期监管松绑换取民主规范和全球信任的长期侵蚀。曾经倡导进步价值观的企业如今悄然调整政治算计，押注绥靖政策将比对抗带来更有利的政策环境。",
         "vocabulary_pro": {
-            "appeasement": "绥靖/妥协政策",
-            "precedent": "先例",
+            "calculated embrace": "精心算计的拥抱",
+            "Faustian bargain": "浮士德式交易（出卖灵魂换取利益）",
             "regulatory relief": "监管松绑",
-            "ethical principles": "道德原则",
-            "transparency": "透明度",
-            "democratic engagement": "民主参与",
-            "mounting backlash": "日益增长的反弹",
-            "reckoning": "清算/算账",
-            "Faustian bargains": "浮士德式交易（牺牲长远利益换取短期好处）"
+            "erosion of democratic norms": "民主规范的侵蚀",
+            "recalibrate political calculus": "重新调整政治算计",
+            "appeasement": "绥靖政策/姑息迁就"
         },
-        "syntax_analysis": "【复合句结构】主句'strategy has created precedent' + 现在分词短语'prioritizing...over...'作伴随状语 + 现在完成时'have compromised'表示持续影响 + 时间状语从句'as winds shift' + 并列谓语'face backlash and reckoning'。【修辞手法】隐喻'political winds'、'Faustian bargains'；对比'short-term vs long-term'。",
+        "syntax_analysis": "复合句结构：主句（The tech industry's embrace represents a bargain） + 冒号解释结构（short-term relief in exchange for long-term erosion） + 独立主格结构（Companies... now recalibrate...） + 现在分词短语作状语（betting that...）。使用隐喻（Faustian bargain）和商业政治混合术语（political calculus）增强修辞效果。",
         "output_playbook": {
-            "speaking": "1. 'coming due'（到期应付）→ 用于描述后果显现：'The social cost of that decision is coming due.' 2. 'mounting backlash'（日益增长的反弹）→ 描述累积压力：'We're seeing mounting backlash against fast fashion.' 3. 'Faustian bargain'（浮士德交易）→ 比喻危险妥协：'Accepting those terms would be a Faustian bargain.'",
-            "writing": "1. 'created a dangerous precedent'（开创危险先例）→ 政策分析：'The tax loophole creates a dangerous precedent for fiscal policy.' 2. 'compromised stated values'（损害宣称的价值观）→ 企业批判：'The partnership compromised their stated environmental values.' 3. 'regulatory reckoning'（监管清算）→ 商业预测：'The industry faces a regulatory reckoning over data practices.'"
+            "speaking": "1. 'represents a Faustian bargain'（比喻高风险交易） 2. 'quietly recalibrate their political calculus'（描述策略调整） 3. 'betting that appeasement will yield...'（表达风险决策）",
+            "writing": "1. 'calculated embrace of... represents...'（高级主语结构） 2. 'in exchange for long-term erosion of...'（对比结构） 3. 'championed progressive values now quietly recalibrate'（时态对比与副词修饰）"
         },
-        "insight": "【战略短视陷阱】企业常陷入'监管套利思维'：用短期合规成本交换长期价值观侵蚀。当企业将政府关系工具化时，实际上将自己质押给了政治周期波动。真正的企业韧性不在于规避监管，而在于建立超越政治周期的价值一致性——这正是苹果1984年广告'Why 1984 Won't Be Like 1984'的底层逻辑：用产品价值观定义行业，而非被政策定义。",
-        "logic_flow": "A（行为动机）→ 科技公司为获取政策优惠对特朗普政府采取绥靖策略 → B（核心矛盾）→ 短期监管利益与长期价值观产生根本冲突，导致企业公信力受损 → C（必然结果）→ 政治环境变化后，前期妥协反噬企业，面临公众信任危机与更严格监管",
+        "insight": "本文揭示了企业政治策略中的道德困境：当短期商业利益与长期价值观冲突时，多数企业选择前者。教学重点应放在：1) 商业伦理术语的精准使用（如Faustian bargain） 2) 政治经济交叉领域的论证逻辑 3) 如何用隐喻增强批判性论述的说服力。学员需练习在商务场景中讨论价值观妥协的英语表达。",
+        "logic_flow": "核心概念：科技企业的政治绥靖 -> 分支1：交易本质（短期利益 vs 长期代价） -> 细节1：监管松绑换取民主侵蚀 -> 分支2：企业行为转变 -> 细节2：从价值观倡导者变为政治算计者",
         "source": "Fast Company",
         "title": "The bill for tech’s Trump 2.0 appeasement may be coming due",
         "date": "2026-01-16"
     },
     {
         "level": "C1",
-        "en_excerpt": "The article details how Trump administration officials, including then-Education Secretary Betsy DeVos, described the president's interactions during an elementary school drop-off as emblematic of his leadership style—characterized by spontaneity, personal engagement, and a disregard for formal protocol. It highlights anecdotes where Trump bypassed security and staff to directly engage with children and parents, framing these actions as both endearing and disruptive, reflecting broader tensions between his unconventional approach and institutional norms.",
-        "cn_translation": "文章详述了特朗普政府官员，包括时任教育部长贝琪·德沃斯，如何将总统在小学接送孩子时的互动描述为其领导风格的缩影——以自发性、个人参与和忽视正式礼仪为特点。它强调了特朗普绕过安保和工作人员直接与孩子和家长互动的轶事，将这些行为描绘为既亲切又具破坏性，反映了他非传统方法与制度规范之间更广泛的紧张关系。",
+        "en_excerpt": "The article details how Trump administration officials, including then-Education Secretary Betsy DeVos, described the chaotic and contentious process of dropping off children at elementary schools as a metaphor for the administration's approach to governance. They framed the daily routine as a battle against bureaucratic obstacles, political opponents, and media scrutiny, emphasizing themes of parental choice, deregulation, and resistance to established norms.",
+        "cn_translation": "文章详细描述了特朗普政府官员（包括时任教育部长贝琪·德沃斯）如何将送孩子上小学的混乱和争议过程比喻为政府治理方式的隐喻。他们将这一日常事务描绘成对抗官僚障碍、政治对手和媒体监督的斗争，强调家长选择、去监管化和抵制既定规范的主题。",
         "vocabulary_pro": {
-            "emblematic": "象征性的；典型的",
-            "spontaneity": "自发性；自然",
-            "disregard for formal protocol": "忽视正式礼仪",
-            "bypassed": "绕过；避开",
-            "anecdotes": "轶事；趣闻",
-            "endearing": "讨人喜欢的；亲切的",
-            "disruptive": "破坏性的；扰乱性的",
-            "unconventional approach": "非传统方法",
-            "institutional norms": "制度规范",
-            "tensions": "紧张关系；矛盾"
+            "contentious": "有争议的；引起争论的",
+            "metaphor": "隐喻；比喻",
+            "bureaucratic obstacles": "官僚障碍",
+            "deregulation": "去监管化；放松管制",
+            "established norms": "既定规范；既有准则",
+            "scrutiny": "仔细审查；监督"
         },
-        "syntax_analysis": "主句使用 'The article details how...' 引出宾语从句，从句中包含 'including...' 作为插入语修饰 'officials'。破折号后使用 'characterized by...' 作为过去分词短语修饰 'leadership style'。'It highlights anecdotes where...' 引导定语从句描述轶事细节，'framing these actions as...' 为现在分词短语作状语，最后 'reflecting...' 为现在分词短语表示结果，体现句子结构的复杂性和逻辑层次。",
+        "syntax_analysis": "主句采用'how'引导的宾语从句结构，后接'including'分词短语作插入补充。比喻结构'as a metaphor for...'将具体行为抽象化。平行结构'battle against...'列举三个对抗对象，增强修辞力度。现在分词'emphasizing'引导结果状语，带出三个并列主题。",
         "output_playbook": {
-            "speaking": "In casual discussions, use phrases like 'It's kind of emblematic of how he operates' or 'That just goes to show his disregard for protocol' to sound natural. For example, 'Trump's drop-off antics were endearing to some but totally disruptive to the school's routine.'",
-            "writing": "In formal writing, employ structures such as 'These interactions serve as emblematic examples of leadership characterized by spontaneity' or 'This highlights the tensions between unconventional approaches and entrenched institutional norms.' Avoid contractions and use precise vocabulary like 'anecdotal evidence' or 'protocol deviations.'"
+            "speaking": "1. 'frame something as...'（将某事描绘成...）\n2. 'a battle against multiple fronts'（多线作战）\n3. 'resistance to established ways'（对既有方式的抵制）\n4. 'daily routine as political theater'（日常事务作为政治剧场）",
+            "writing": "1. 'serve as a potent metaphor for...'（成为...的有力隐喻）\n2. 'emblematic of the administration's governing philosophy'（象征政府的治理哲学）\n3. 'conflate personal anecdote with policy agenda'（将个人轶事与政策议程混为一谈）\n4. 'weave narrative threads through mundane activities'（通过日常活动编织叙事线索）"
         },
-        "insight": "从教练视角看，这篇文章不仅是政治报道，更是高级英语学习者分析领导力叙事、文化差异和媒体修辞的绝佳材料。学员可注意：如何用 'emblematic' 等词将具体事件抽象化，破折号和分词结构如何增强文本流畅性，以及 'endearing vs. disruptive' 等对立词汇如何构建平衡论述。建议练习改写句子，将简单描述（如 'Trump talked to kids'）升级为分析性表达（如 'His spontaneous engagement reflected a deliberate bypassing of institutional protocols'）。",
-        "logic_flow": "A. 文章以特朗普小学接送轶事为切入点 → B. 官员将此描述为领导风格象征（自发性、忽视礼仪） → C. 具体例子展示行为两面性（亲切 vs. 破坏性） → D. 最终指向非传统方法与制度规范的更广泛冲突",
+        "insight": "本文展示了政治修辞如何将日常生活经验转化为意识形态载体。高级学习者应注意：1) 隐喻的扩展使用如何构建政治叙事 2) 具体行为如何被赋予抽象政治意义 3) 官僚语言与日常语言的并置产生的讽刺效果。教学重点应放在识别文本中的意识形态编码和解构政治话语策略。",
+        "logic_flow": "核心概念：日常行为作为政治隐喻 -> 分支1：行为描述（混乱的送学过程）-> 细节1：官员的具体比喻 -> 细节2：对抗性框架 -> 分支2：政治意涵（治理哲学）-> 细节1：去监管化主题 -> 细节2：抵制规范",
         "source": "The Atlantic",
         "title": "Trump-Administration Officials Describe an Elementary-School Drop-Off",
         "date": "2026-01-16"
     },
     {
         "level": "C1",
-        "en_excerpt": "The top-tier routers for 2026 prioritize multi-gigabit speeds, AI-driven optimization, and seamless mesh networking to handle demanding applications like 4K streaming, competitive gaming, and remote work simultaneously. Key features include Wi-Fi 7 compatibility, dedicated gaming channels, and advanced security protocols that adapt to network traffic in real-time. For power users, models with customizable QoS settings and enterprise-grade hardware deliver unparalleled performance, while smart home integration ensures all connected devices operate efficiently without bottlenecks.",
-        "cn_translation": "2026年顶级路由器优先考虑多千兆速度、AI驱动优化和无缝网状网络，以同时处理4K流媒体、竞技游戏和远程办公等高要求应用。关键特性包括Wi-Fi 7兼容性、专用游戏通道和实时适应网络流量的高级安全协议。对于高级用户，具有可定制QoS设置和企业级硬件的型号提供无与伦比的性能，而智能家居集成确保所有连接设备高效运行，无瓶颈问题。",
+        "en_excerpt": "The TP-Link Archer AXE95 stands out as our top recommendation for 2026, particularly for power users who demand seamless connectivity across multiple devices. Its tri-band Wi-Fi 7 technology delivers unprecedented speeds up to 11 Gbps, while the 8 high-gain antennas ensure stable coverage throughout large homes. What truly distinguishes this router is its intelligent QoS (Quality of Service) system, which automatically prioritizes bandwidth for latency-sensitive applications like video conferencing and cloud gaming. The built-in security suite provides enterprise-grade protection against emerging cyber threats, making it a future-proof investment for both remote professionals and entertainment enthusiasts.",
+        "cn_translation": "TP-Link Archer AXE95作为我们2026年的首选推荐脱颖而出，特别适合需要跨多设备无缝连接的高级用户。其三频Wi-Fi 7技术提供高达11 Gbps的突破性速度，而8个高增益天线确保大型住宅的稳定覆盖。真正使这款路由器与众不同的是其智能QoS（服务质量）系统，可自动为视频会议和云游戏等对延迟敏感的应用优先分配带宽。内置安全套件提供企业级防护，抵御新兴网络威胁，使其成为远程专业人士和娱乐爱好者的未来型投资。",
         "vocabulary_pro": {
-            "top-tier": "顶级的",
-            "multi-gigabit speeds": "多千兆速度",
-            "AI-driven optimization": "AI驱动优化",
-            "seamless mesh networking": "无缝网状网络",
-            "demanding applications": "高要求应用",
-            "Wi-Fi 7 compatibility": "Wi-Fi 7兼容性",
-            "dedicated gaming channels": "专用游戏通道",
-            "advanced security protocols": "高级安全协议",
-            "real-time": "实时",
-            "power users": "高级用户",
-            "customizable QoS settings": "可定制QoS设置",
-            "enterprise-grade hardware": "企业级硬件",
-            "unparalleled performance": "无与伦比的性能",
-            "smart home integration": "智能家居集成",
-            "bottlenecks": "瓶颈"
+            "tri-band Wi-Fi 7 technology": "三频Wi-Fi 7技术",
+            "unprecedented speeds": "突破性速度",
+            "high-gain antennas": "高增益天线",
+            "latency-sensitive applications": "对延迟敏感的应用",
+            "enterprise-grade protection": "企业级防护",
+            "future-proof investment": "未来型投资",
+            "seamless connectivity": "无缝连接",
+            "power users": "高级用户"
         },
-        "syntax_analysis": "1. 复合句结构：主句 'The top-tier routers...prioritize...' 后接不定式短语 'to handle...' 表示目的，并用 'like' 引导举例。\n2. 并列结构：'multi-gigabit speeds, AI-driven optimization, and seamless mesh networking' 使用并列连词 'and' 连接三个名词短语。\n3. 定语从句：'that adapt to network traffic in real-time' 修饰 'advanced security protocols'，使用关系代词 'that' 引导。\n4. 对比结构：'while' 引导对比从句，对比 'power users' 和 'smart home integration' 的不同需求。",
+        "syntax_analysis": "主句采用'stands out as...'的系表结构，后接'particularly for...'的介词短语作状语。第二句用'while'连接两个并列分句，形成对比关系。第三句以'What truly distinguishes...'的名词性从句作主语，'which'引导非限制性定语从句修饰'QoS system'。最后一句通过现在分词短语'making it...'表示结果状语，'both...and...'结构平衡两个用户群体。",
         "output_playbook": {
-            "speaking": "1. 'prioritize X to handle Y'（优先考虑X以处理Y） - 用于描述产品设计重点。\n2. 'models with...deliver...'（具有...的型号提供...） - 专业产品介绍句式。\n3. 'ensures...without...'（确保...无...） - 强调解决方案的完整性。",
-            "writing": "1. 'simultaneously handle demanding applications like A, B, and C'（同时处理A、B、C等高要求应用） - 展示全面能力。\n2. 'adapt to network traffic in real-time'（实时适应网络流量） - 技术性动态描述。\n3. 'operate efficiently without bottlenecks'（高效运行无瓶颈） - 商业报告常用表达。"
+            "speaking": "1. 'What truly sets this apart is...'（强调独特卖点）\n2. 'It's particularly well-suited for...'（定位目标用户）\n3. 'The beauty of this system lies in...'（突出设计亮点）\n4. 'This makes it a solid choice for...'（给出购买建议）",
+            "writing": "1. 'stands out as the premier solution for...'（正式推荐）\n2. 'delivers unparalleled performance in...'（强调优势）\n3. 'is distinguished by its innovative...'（突出特性）\n4. 'represents a strategic investment in...'（提升价值定位）"
         },
-        "insight": "作为商务英语教练，我注意到这段文字完美展示了技术产品营销的三大核心策略：1) 用具体技术参数（如Wi-Fi 7、multi-gigabit）建立专业可信度；2) 通过应用场景（gaming, streaming, remote work）与用户需求直接挂钩；3) 使用对比结构（power users vs smart home）覆盖不同细分市场。学员应学习这种'技术规格+用户价值+市场覆盖'的三层论述结构，这在B2B技术销售和产品白皮书中极为有效。",
-        "logic_flow": "A（产品定位）→ 顶级路由器聚焦三大技术核心（速度、AI优化、网状网络）\nB（功能实现）→ 通过具体技术特性（Wi-Fi 7、游戏通道、安全协议）支持高要求应用\nC（用户价值）→ 为不同用户群体（高级用户、智能家居用户）提供定制化解决方案",
+        "insight": "作为商务英语教练，我注意到这段产品描述完美展示了高级说服技巧：1) 使用'power users'建立精英认同感 2) 通过具体数据(11 Gbps)建立可信度 3) 用'future-proof'缓解技术过时焦虑 4) 并列'remote professionals and entertainment enthusiasts'扩大目标市场。建议学员学习这种'技术规格+用户场景+价值主张'的三层论述结构。",
+        "logic_flow": "核心概念：2026年最佳路由器推荐 -> 分支1：技术优势（Wi-Fi 7速度、天线覆盖、QoS系统）-> 细节1：针对视频会议/游戏的优化 -> 分支2：附加价值（安全防护、投资回报）-> 细节2：适用于专业人士与爱好者双重场景",
         "source": "Wired (科技)",
         "title": "9 Best Wi-Fi Routers of 2026 for Working, Gaming, and Streaming",
         "date": "2026-01-16"
     },
     {
         "level": "C1",
-        "en_excerpt": "While corporate nature commitments have expanded significantly in recent years, progress remains uneven across sectors and regions. Many companies have made ambitious pledges to reduce their environmental impact, but implementation gaps persist due to varying regulatory frameworks, resource constraints, and competing business priorities. The divergence between commitment and action highlights the need for stronger accountability mechanisms and standardized reporting requirements to ensure meaningful progress toward sustainability goals.",
-        "cn_translation": "尽管近年来企业对自然的承诺显著扩大，但不同行业和地区的进展仍不均衡。许多公司已做出减少环境影响的雄心勃勃的承诺，但由于监管框架差异、资源限制和业务优先级竞争，执行差距持续存在。承诺与行动之间的分歧凸显了需要更强的问责机制和标准化报告要求，以确保在可持续发展目标上取得实质性进展。",
+        "en_excerpt": "Corporate nature commitments have expanded significantly in recent years, with over 1,000 companies now pledging to achieve net-zero emissions or similar climate targets. However, implementation remains highly uneven across sectors and regions. While technology and consumer goods firms often lead with ambitious roadmaps, heavy industries like steel and cement lag behind due to technical challenges and high transition costs. Furthermore, many commitments lack detailed interim milestones, raising concerns about accountability and actual progress.",
+        "cn_translation": "近年来，企业环保承诺显著扩大，目前已有超过1000家公司承诺实现净零排放或类似气候目标。然而，各行业和地区的实施情况极不均衡。虽然科技和消费品企业常以雄心勃勃的路线图领先，但钢铁和水泥等重工业因技术挑战和高转型成本而落后。此外，许多承诺缺乏详细的中期里程碑，引发了对问责制和实际进展的担忧。",
         "vocabulary_pro": {
-            "corporate nature commitments": "企业对自然的承诺",
-            "implementation gaps": "执行差距",
-            "regulatory frameworks": "监管框架",
-            "accountability mechanisms": "问责机制",
-            "standardized reporting requirements": "标准化报告要求",
-            "sustainability goals": "可持续发展目标"
+            "corporate nature commitments": "企业环保承诺",
+            "net-zero emissions": "净零排放",
+            "climate targets": "气候目标",
+            "implementation": "实施",
+            "uneven": "不均衡的",
+            "sectors and regions": "行业和地区",
+            "ambitious roadmaps": "雄心勃勃的路线图",
+            "heavy industries": "重工业",
+            "technical challenges": "技术挑战",
+            "transition costs": "转型成本",
+            "interim milestones": "中期里程碑",
+            "accountability": "问责制"
         },
-        "syntax_analysis": "主句使用'While...progress remains...'的让步状语从句结构，第二句用'but'连接转折，第三句采用'The divergence...highlights...'的主语从句+谓语结构，整体呈现'现象描述→问题分析→解决方案'的学术论证句式。",
+        "syntax_analysis": "1. 主句使用现在完成时（have expanded）表示持续影响；2. with引导独立主格结构补充数据；3. While引导对比状语从句，突出行业差异；4. due to引出原因状语；5. 现在分词raising作结果状语，体现逻辑递进",
         "output_playbook": {
-            "speaking": "地道表达：'implementation gaps persist'（执行差距持续存在）、'competing business priorities'（竞争的业务优先级）、'meaningful progress'（实质性进展）",
-            "writing": "高级表达：'divergence between commitment and action'（承诺与行动的分歧）、'ambitious pledges to reduce environmental impact'（减少环境影响的雄心承诺）、'stronger accountability mechanisms'（更强的问责机制）"
+            "speaking": "1. 'lag behind'（落后）替代'fall behind'更显动态；2. 'raising concerns about...'（引发...担忧）用于表达批判性观点；3. 'pledging to achieve'（承诺实现）比'promising to'更正式",
+            "writing": "1. 'implementation remains highly uneven'（实施仍高度不均衡）使用remains+adj结构强调持续状态；2. 'due to technical challenges and high transition costs'（由于技术挑战和高转型成本）用并列名词短语增强说服力；3. 'lack detailed interim milestones'（缺乏详细中期里程碑）用lack+adj+noun体现精确批评"
         },
-        "insight": "教练视角：本文揭示了ESG（环境、社会、治理）实践中的核心矛盾——企业往往擅长制定漂亮的承诺宣言，却在执行层面遇到结构性障碍。建议学员在商业讨论中区分'承诺修辞'与'实施路径'，重点关注：1) 监管差异如何影响跨国企业合规策略 2) 如何量化'资源约束'的具体影响 3) 平衡短期业务目标与长期可持续性的管理框架。",
-        "logic_flow": "A（现象观察）→ 企业自然承诺数量增长 → B（问题诊断）→ 行业/地区进展不均 + 承诺与执行脱节 → C（解决方案）→ 强化问责机制 + 标准化报告 → D（预期结果）→ 确保可持续发展目标实质性进展",
+        "insight": "本文揭示了ESG（环境、社会、治理）实践中的关键矛盾：承诺激增与执行滞后的差距。教学重点应引导学员：1) 区分'pledge'（意向声明）与'implementation'（实际执行）的商务语义差；2) 掌握批判性表达如'raising concerns about accountability'，避免绝对化评价；3) 理解行业术语如'heavy industries'在可持续发展语境中的特殊含义",
+        "logic_flow": {
+            "核心概念": "企业环保承诺的扩张与执行落差",
+            "分支1": "承诺现状 -> 数据支撑（超1000家公司承诺） -> 目标类型（净零排放等）",
+            "分支2": "执行问题 -> 行业差异（科技/消费品领先 vs 重工业落后） -> 原因分析（技术成本） -> 结构缺陷（缺乏中期里程碑） -> 后果影响（问责危机）"
+        },
         "source": "McKinsey (麦肯锡)",
         "title": "Corporate nature commitments have expanded, but progress is uneven",
         "date": "2026-01-16"

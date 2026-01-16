@@ -59,5 +59,19 @@
         ],
         "why_read": "这本书颠覆了传统对天赋的过度强调，提供了科学依据和实用策略，帮助个人在职业和生活中培养持久动力，适合追求长期目标者、教育工作者及管理者阅读。",
         "logic_flow": "定义毅力概念->论证毅力比天赋重要->分析毅力组成要素->提供培养方法->应用案例分析"
+    },
+    {
+        "title": "Zero to One",
+        "author": "AI Curated",
+        "tag": "Growth",
+        "img": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800",
+        "intro": "《Zero to One: Notes on Startups, or How to Build the Future》是由PayPal联合创始人彼得·蒂尔（Peter Thiel）撰写的商业哲学著作。本书基于蒂尔在斯坦福大学教授的创业课程内容整理而成，探讨了如何创建具有革命性价值的公司，从零到一实现垄断性创新，而非简单复制现有模式（从一到N）。蒂尔认为，真正的进步来自于垂直进步（创造新事物），而非水平进步（复制已有事物）。书中结合了硅谷创业经验、经济学理论和哲学思考，为创业者、投资者和商业领袖提供了颠覆性的思维框架。\n\n'Zero to One: Notes on Startups, or How to Build the Future' is a business philosophy book by Peter Thiel, co-founder of PayPal. Based on his startup course at Stanford University, the book explores how to create revolutionary companies that achieve monopolistic innovation from zero to one, rather than merely copying existing models (from one to N). Thiel argues that true progress comes from vertical progress (creating new things) rather than horizontal progress (copying existing things). Combining Silicon Valley entrepreneurial experience, economic theory, and philosophical reflection, the book provides a disruptive thinking framework for entrepreneurs, investors, and business leaders.",
+        "takeaways": [
+            "垄断是企业的理想状态：蒂尔颠覆性地提出，成功企业应追求垄断而非竞争。垄断企业通过创新建立护城河，创造长期价值；竞争性市场则导致利润微薄和资源浪费。真正的垄断来自于解决独特问题、拥有专利技术、网络效应或规模优势。",
+            "从零到一的垂直创新：进步分为两种类型——水平进步（全球化复制，从1到N）和垂直进步（技术创新，从0到1）。未来取决于垂直进步，即创造全新价值。创业者应专注于无人涉足的领域，通过技术突破实现指数级增长。",
+            "幂次法则与秘密探索：风险投资遵循幂次法则——少数成功案例带来绝大多数回报。因此，创业者应集中资源于最具潜力的方向。同时，世界上仍存在未被发现的秘密（如技术突破、市场机会），发现并利用这些秘密是创业成功的关键。"
+        ],
+        "why_read": "本书提供了与传统商学院教育截然不同的创业思维：1）颠覆竞争观念，强调垄断价值；2）结合哲学、历史和经济学的多维视角；3）基于PayPal等真实案例的实战洞察；4）帮助读者培养发现“秘密”和突破性创新的能力；5）语言精炼，概念深刻，适合反复阅读思考。无论你是创业者、投资者，还是希望理解未来商业趋势的读者，都能从中获得启发。",
+        "logic_flow": "主要概念：从零到一的创新 -> 细节1：垂直进步 vs 水平进步，细节2：垄断作为企业目标，细节3：幂次法则的应用；主要概念：创业方法论 -> 细节1：发现未被探索的秘密，细节2：打造垄断性技术，细节3：建立网络效应和规模优势；主要概念：未来展望 -> 细节1：全球化与技术的辩证关系，细节2：人工智能和绿色科技等前沿领域，细节3：个人与社会的创新责任"
     }
 ]
