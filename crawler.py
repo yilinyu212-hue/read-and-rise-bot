@@ -1,19 +1,13 @@
 import os, feedparser, json, requests
 from datetime import datetime
 
-# 1. DeepSeek 配置
+# 1. 配置
 API_KEY = os.environ.get("DEEPSEEK_API_KEY")
-API_URL = "https://api.deepseek.com/v1/chat/completions"
-
-# 2. 抓取源
-RSS_FEEDS = {
-    "Economist": "https://www.economist.com/briefing/rss.xml",
-    "NYT": "https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml"
-}
+API_URL = "https://api.deepseek.com/chat/completions" # 修正了地址
 
 def get_ai_analysis(title):
-    if not API_KEY:
-        return "未检测到 API Key"
+    if not API_KEY or len(API_KEY) < 10:
+        return "错误：GitHub Secrets 里的 DEEPSEEK_API_KEY 没填对，请重新检查！"
     
     headers = {
         "Content-Type": "application/json",
@@ -23,30 +17,32 @@ def get_ai_analysis(title):
     data = {
         "model": "deepseek-chat",
         "messages": [
-            {"role": "system", "content": "你是一位Read & Rise教育策展人。请用中文总结文章核心观点（100字），标注难度(A1-C2)，并提取3个核心词汇（含释义例句）。"},
+            {"role": "system", "content": "你是一位教育专家，请用中文总结文章核心观点。"},
             {"role": "user", "content": f"文章标题: {title}"}
         ]
     }
     
     try:
         response = requests.post(API_URL, headers=headers, json=data, timeout=30)
-        return response.json()['choices'][0]['message']['content']
+        res_json = response.json()
+        if 'choices' in res_json:
+            return res_json['choices'][0]['message']['content']
+        else:
+            return f"AI报错：{json.dumps(res_json)}"
     except Exception as e:
-        return f"AI 解析暂时不可用，请点击链接阅读原文。错误: {str(e)}"
+        return f"网络报错：{str(e)}"
 
 def run():
+    # 抓取经济学人
+    feed = feedparser.parse("https://www.economist.com/briefing/rss.xml")
     articles = []
-    for source, url in RSS_FEEDS.items():
-        feed = feedparser.parse(url)
-        if not feed.entries: continue
-        entry = feed.entries[0]
-        
-        print(f"正在处理: {entry.title}")
+    
+    for entry in feed.entries[:3]:
+        print(f"正在解析: {entry.title}")
         analysis = get_ai_analysis(entry.title)
-        
         articles.append({
             "title": entry.title,
-            "source": source,
+            "source": "The Economist",
             "link": entry.link,
             "content": analysis,
             "date": datetime.now().strftime("%Y-%m-%d")
@@ -55,7 +51,6 @@ def run():
     os.makedirs('data', exist_ok=True)
     with open('data/library.json', 'w', encoding='utf-8') as f:
         json.dump(articles, f, ensure_ascii=False, indent=4)
-    print("✅ 任务完成！")
 
 if __name__ == "__main__":
     run()
