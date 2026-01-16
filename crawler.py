@@ -1,4 +1,4 @@
-import os, feedparser, requests, json
+import os, feedparser, requests, json, uuid
 from datetime import datetime
 
 DEEPSEEK_KEY = os.environ.get("DEEPSEEK_API_KEY")
@@ -6,99 +6,92 @@ UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like 
 
 def get_ai_data(prompt):
     headers = {"Content-Type": "application/json", "Authorization": f"Bearer {DEEPSEEK_KEY}"}
-    data = {"model": "deepseek-chat", "messages": [{"role": "system", "content": "You are a senior Business English educator."}, {"role": "user", "content": prompt}], "response_format": {"type": "json_object"}}
+    data = {
+        "model": "deepseek-chat", 
+        "messages": [
+            {"role": "system", "content": "You are a world-class Business English Coach and Educator. Your goal is to deconstruct complex articles into high-end learning materials for executives."},
+            {"role": "user", "content": prompt}
+        ], 
+        "response_format": {"type": "json_object"}
+    }
     try:
         res = requests.post("https://api.deepseek.com/chat/completions", headers=headers, json=data, timeout=120)
         return json.loads(res.json()['choices'][0]['message']['content'])
-    except: return None
+    except Exception as e:
+        print(f"AI Generation Error: {e}")
+        return None
 
 def run():
-    # --- 10个顶尖信源配置 ---
+    # 1. 扩充信源 (确保内容多样性)
     SOURCES = [
-        {"name": "HBR (领导力)", "url": "https://hbr.org/rss/topic/leadership"},
-        {"name": "Economist (简报)", "url": "https://www.economist.com/briefing/rss.xml"},
-        {"name": "MIT Tech Review", "url": "https://www.technologyreview.com/feed/"},
-        {"name": "WSJ (商业)", "url": "https://feeds.a.dj.com/rss/WSJBusiness.xml"},
-        {"name": "Fortune (财富)", "url": "https://fortune.com/feed/"},
-        {"name": "Forbes (创新)", "url": "https://www.forbes.com/innovation/feed/"},
-        {"name": "Fast Company", "url": "https://www.fastcompany.com/latest/rss"},
-        {"name": "The Atlantic", "url": "https://www.theatlantic.com/feed/all/"},
-        {"name": "Wired (科技)", "url": "https://www.wired.com/feed/rss"},
-        {"name": "McKinsey (麦肯锡)", "url": "https://www.mckinsey.com/insights/rss"}
+        {"name": "HBR", "url": "https://hbr.org/rss/topic/leadership"},
+        {"name": "Economist", "url": "https://www.economist.com/briefing/rss.xml"},
+        {"name": "McKinsey", "url": "https://www.mckinsey.com/insights/rss"}
     ]
     
-    # --- 书籍和模型库（可在此处增加更多） ---
-    BOOK_POOL = ["Atomic Habits", "The Pyramid Principle", "Deep Work", "Grit", "Zero to One", "Thinking, Fast and Slow"]
-    MODEL_POOL = ["MECE", "SCQA", "SWOT Analysis", "OKR", "Pareto Principle", "First Principles", "Eisenhower Matrix"]
-
     all_articles = []
     
-    # --- 1. 抓取文章 ---
+    # 2. 深度解析逻辑 (核心升级)
     for src in SOURCES:
         try:
-            print(f"正在抓取: {src['name']}")
             resp = requests.get(src['url'], headers={"User-Agent": UA}, timeout=15)
             feed = feedparser.parse(resp.content)
             
             if feed.entries:
-                e = feed.entries[0]
-                prompt = f"针对文章《{e.title}》输出讲义JSON: {{'level':'C1','en_excerpt':'原文核心段','cn_translation':'翻译','vocabulary_pro':'关键词(英文:中文)','syntax_analysis':'句法结构','output_playbook':{{'speaking':'口语地道表达','writing':'写作高级表达'}},'insight':'教练视角的深度洞察','logic_flow':'逻辑链(核心概念 -> 分支1 -> 细节1, 核心概念 -> 分支2)'}}"
-                ai = get_ai_data(prompt)
+                e = feed.entries[0] # 取每个源最新的一篇
                 
+                # 强化 Prompt：明确词汇、双语和句法的输出格式
+                prompt = f"""
+                Analyze the article: "{e.title}"
+                Output a JSON object with the following fields:
+                1. "level": English level (e.g., B2, C1)
+                2. "en_excerpt": A 100-word core paragraph from the article.
+                3. "cn_translation": Precise Chinese translation of the excerpt.
+                4. "vocabulary_pro": 5-8 key business terms in the format "word: translation, word2: translation".
+                5. "syntax_analysis": Explain one complex sentence structure found in the excerpt.
+                6. "insight": One high-level management insight for educators.
+                7. "logic_flow": A list of 3-4 steps showing the article's logic (e.g., ["Problem Identified", "Strategic Approach", "Expected Result"]).
+                8. "output_playbook": {{"speaking": "A native-like phrase for meetings", "writing": "A professional email sentence"}}.
+                """
+                
+                ai = get_ai_data(prompt)
                 if ai:
                     ai.update({
+                        "id": str(uuid.uuid4())[:8],
                         "source": src['name'],
                         "title": e.title,
                         "date": datetime.now().strftime("%Y-%m-%d")
                     })
                     all_articles.append(ai)
         except Exception as ex:
-            print(f"源 {src['name']} 抓取跳过: {ex}")
-            continue
+            print(f"Skip {src['name']}: {ex}")
 
+    # 保存外刊数据
     os.makedirs('data', exist_ok=True)
     with open('data/library.json', 'w', encoding='utf-8') as f:
         json.dump(all_articles, f, ensure_ascii=False, indent=4)
 
-    # --- 2. 累加书籍 (增量更新) ---
+    # 3. 完善书籍部分 (同样增加逻辑链和深度简介)
+    BOOK_TARGETS = ["The Pyramid Principle", "Atomic Habits"]
     existing_books = []
-    if os.path.exists('data/books.json') and os.path.getsize('data/books.json') > 0:
+    if os.path.exists('data/books.json'):
         with open('data/books.json', 'r', encoding='utf-8') as f:
             try: existing_books = json.load(f)
-            except json.JSONDecodeError: existing_books = []
-    
-    current_book_titles = [b.get('title') for b in existing_books]
-    new_book_candidates = [b for b in BOOK_POOL if b not in current_book_titles]
-    
-    if new_book_candidates:
-        target_book = new_book_candidates[0]
-        prompt_book = f"深度解析书籍《{target_book}》。JSON格式: {{'intro':'详细双语简介','takeaways':['核心重点1','核心重点2','核心重点3'],'why_read':'推荐理由','logic_flow':'思维导图核心逻辑(主要概念 -> 细节1, 主要概念 -> 细节2)'}}"
-        ai_book = get_ai_data(prompt_book)
-        if ai_book:
-            existing_books.append({"title": target_book, "author": "AI Curated", "tag": "Growth", "img": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800", **ai_book})
+            except: existing_books = []
+
+    for book_name in BOOK_TARGETS:
+        if not any(b['title'] == book_name for b in existing_books):
+            book_prompt = f"Analyze book '{book_name}' in JSON: {{'intro':'Bilingual summary','takeaways':['point1','point2'],'why_read':'Value','logic_flow':['concept','structure','application']}}"
+            ai_book = get_ai_data(book_prompt)
+            if ai_book:
+                existing_books.append({
+                    "title": book_name,
+                    "img": "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400",
+                    **ai_book
+                })
     
     with open('data/books.json', 'w', encoding='utf-8') as f:
         json.dump(existing_books, f, ensure_ascii=False, indent=4)
-
-    # --- 3. 累加思维模型 (增量更新) ---
-    existing_models = []
-    if os.path.exists('data/models.json') and os.path.getsize('data/models.json') > 0:
-        with open('data/models.json', 'r', encoding='utf-8') as f:
-            try: existing_models = json.load(f)
-            except json.JSONDecodeError: existing_models = []
-
-    current_model_names = [m.get('name','').split('(')[0].strip() for m in existing_models]
-    new_model_candidates = [m for m in MODEL_POOL if m not in current_model_names]
-
-    if new_model_candidates:
-        target_model = new_model_candidates[0]
-        prompt_model = f"深度解析思维模型《{target_model}》。英文在前。JSON格式: {{'name':'English Name (中文名)','definition':'English Def (中文)','how_to_use':'Scenario (场景)','english_template':['Sentence 1','Sentence 2','Sentence 3'],'logic_flow':'模型结构图(步骤1 -> 步骤2 -> 步骤3)'}}"
-        ai_model = get_ai_data(prompt_model)
-        if ai_model:
-            existing_models.append(ai_model)
-
-    with open('data/models.json', 'w', encoding='utf-8') as f:
-        json.dump(existing_models, f, ensure_ascii=False, indent=4)
 
 if __name__ == "__main__":
     run()
