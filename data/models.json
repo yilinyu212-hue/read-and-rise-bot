@@ -1,32 +1,22 @@
 [
     {
-        "name": "MECE (Mutually Exclusive, Collectively Exhaustive)",
-        "definition": "A principle for structuring information where categories are mutually exclusive (no overlap) and collectively exhaustive (cover all possibilities). (一种信息结构化原则，要求分类相互独立不重叠，且完全穷尽所有可能性。)",
-        "how_to_use": "Used in problem-solving frameworks like issue trees, decision matrices, and brainstorming to ensure comprehensive analysis without redundancy. (应用于问题树、决策矩阵、头脑风暴等分析框架，确保分析全面且无重复。)",
+        "name": "MECE (Mutually Exclusive, Collectively Exhaustive) (相互独立，完全穷尽)",
+        "definition": "A principle for organizing information into distinct, non-overlapping categories that together cover all possibilities without gaps or overlaps. (一种将信息组织成互不重叠、完全覆盖所有可能性的分类原则，确保无遗漏无重复)",
+        "how_to_use": "Apply when structuring problems, brainstorming solutions, or analyzing data to ensure comprehensive and clear categorization. (适用于构建问题框架、头脑风暴解决方案或数据分析时，确保分类全面且清晰)",
         "english_template": [
-            "To address this challenge, we'll apply the MECE principle by breaking it down into three distinct categories: market factors, operational constraints, and financial considerations.",
-            "Our analysis follows a MECE structure—each recommendation targets a separate root cause while collectively covering all critical improvement areas.",
-            "By organizing the data into mutually exclusive customer segments, we ensure clear insights without overlap, and our segmentation is collectively exhaustive to represent the entire market."
+            "To analyze this issue using MECE, we'll break it down into mutually exclusive categories.",
+            "Our framework needs to be collectively exhaustive to cover all possible scenarios.",
+            "Let's ensure our categories are MECE to avoid overlap and gaps in our analysis."
         ]
     },
     {
-        "name": "First Principles Thinking (第一性原理思维)",
-        "definition": "A problem-solving approach that breaks down complex problems into their most fundamental, self-evident truths or basic elements, then builds up solutions from scratch rather than relying on analogies or existing assumptions. (一种解决问题的方法，将复杂问题分解为最基本、不言自明的真理或基本要素，然后从零开始构建解决方案，而不是依赖类比或现有假设。)",
-        "how_to_use": "When facing a complex challenge or innovation opportunity, identify and question all existing assumptions, deconstruct the problem to its core components, then reconstruct a solution based only on verified fundamental truths. This is particularly valuable in technology development, business model innovation, and scientific research. (当面临复杂挑战或创新机会时，识别并质疑所有现有假设，将问题解构到其核心组成部分，然后仅基于已验证的基本真理重建解决方案。这在技术开发、商业模式创新和科学研究中特别有价值。)",
+        "name": "SCQA Model (情境-冲突-问题-答案模型)",
+        "definition": "A structured communication framework that organizes information into four sequential components: Situation (establishes context), Complication (introduces conflict or challenge), Question (poses the core problem), and Answer (provides the solution). (一种结构化的沟通框架，将信息组织为四个连续部分：情境-建立背景，冲突-引入矛盾或挑战，问题-提出核心问题，答案-提供解决方案)",
+        "how_to_use": "Apply in business presentations, reports, or proposals to create logical narratives that guide audiences from context to resolution. Start with Situation to set the scene, then introduce Complication to highlight urgency, formulate Question to focus attention, and conclude with Answer to deliver value. (用于商业演示、报告或提案中，创建引导受众从背景到解决方案的逻辑叙述。从情境开始设定场景，引入冲突强调紧迫性，提出问题聚焦注意力，最后以答案提供价值)",
         "english_template": [
-            "Instead of asking 'How can we improve our current product?', we should ask 'What fundamental human need are we addressing, and what's the most direct way to fulfill it?' This first principles approach led us to completely reimagine our service architecture.",
-            "By breaking down the cost structure to its basic components - raw materials, manufacturing, and distribution - we discovered that 60% of our expenses came from legacy assumptions about supply chains that were no longer valid.",
-            "The breakthrough came when we stopped comparing ourselves to competitors and instead asked: 'If we were starting this industry today with current technology, what would the optimal solution look like?' This first principles thinking revealed entirely new market opportunities."
-        ]
-    },
-    {
-        "name": "SCQA (Situation-Complication-Question-Answer)",
-        "definition": "A structured communication framework that guides audiences through a logical narrative by presenting the Situation (current context), Complication (problem or challenge), Question (key inquiry), and Answer (solution or recommendation). (一种结构化的沟通框架，通过呈现情境（当前背景）、冲突（问题或挑战）、问题（关键疑问）和答案（解决方案或建议）来引导听众完成逻辑叙述。)",
-        "how_to_use": "Effective for business presentations, proposals, reports, and persuasive communications where clarity and logical flow are essential. Commonly applied in consulting, management, and strategic planning contexts. (适用于需要清晰逻辑流程的商业演示、提案、报告和说服性沟通。常用于咨询、管理和战略规划场景。)",
-        "english_template": [
-            "Situation: Our market share has remained stable at 15% for three consecutive quarters. Complication: However, recent competitor innovations threaten to disrupt our core product line. Question: How can we proactively defend our position while exploring new growth avenues? Answer: We recommend a dual-strategy approach combining defensive R&D investments with exploratory market testing.",
-            "Situation: The department consistently meets quarterly targets with 95% accuracy. Complication: Yet employee surveys reveal declining engagement scores across all teams. Question: What systemic changes could address this morale challenge without compromising performance? Answer: Implementing flexible work arrangements paired with targeted recognition programs has proven effective in similar organizations.",
-            "Situation: Global supply chains have operated efficiently under current protocols. Complication: Emerging geopolitical tensions create unprecedented volatility in raw material availability. Question: How might we reconfigure our sourcing strategy to ensure business continuity? Answer: A diversified supplier portfolio with regional redundancy offers the most resilient path forward."
+            "Given the current market expansion (Situation), we're facing increased competition from new entrants (Complication). How can we maintain our market leadership? (Question) Our proposed strategy involves three key initiatives... (Answer)",
+            "While our sales have grown steadily (Situation), customer retention rates have declined by 15% this quarter (Complication). What's causing this disconnect? (Question) Our analysis reveals two primary factors requiring immediate attention... (Answer)",
+            "The team successfully launched the product (Situation), but user adoption remains below projections (Complication). How do we accelerate market penetration? (Question) We recommend implementing a revised marketing campaign focused on... (Answer)"
         ]
     }
 ]
