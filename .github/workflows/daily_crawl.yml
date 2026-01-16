@@ -31,12 +31,10 @@ jobs:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
         run: python crawler.py
 
-      - name: Commit and Push
+     - name: Commit and Push
         run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/library.json
-          # 如果没有变化就跳过，防止报错
-          git commit -m "Auto-update library data" || exit 0
-          # 强制推送，解决你截图中的冲突问题
-          git push origin main --force
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add data/*.json
+          git commit -m "Update Library and Bookshelf Data" || exit 0
+          git push origin main --force  # <-- 关键：添加 --force 解决之前的冲突
