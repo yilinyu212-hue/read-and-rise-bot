@@ -1,4 +1,4 @@
-name: Read & Rise Daily Auto-Update
+name: Read & Rise Daily Update
 
 on:
   schedule:
@@ -13,28 +13,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
-
-      - name: Install dependencies
+      - name: Install
         run: pip install requests feedparser
-
-      - name: Run AI Crawler
+      - name: Run Crawler
         env:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
         run: python crawler.py
-
-      - name: Force Sync and Push
+      - name: Force Commit
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action Bot"
           git add data/*.json
-          # 修复冲突的核心命令：先拉取远程，如果冲突则以本地新生成的为准
-          git pull origin main --rebase -X theirs
-          git commit -m "🤖 Auto-update content" || exit 0
-          git push origin main
+          # 强制覆盖远程冲突
+          git fetch origin main
+          git reset --soft origin/main
+          git commit -m "🤖 Restore & Update Content" || exit 0
+          git push origin main --force
