@@ -2,12 +2,12 @@ import os, requests, json, feedparser, uuid
 from datetime import datetime
 
 # 获取 API Key
-DEEPSEEK_KEY = os.environ.get("DEEPSEEK_API_KEY", "").strip()
+API_KEY = os.environ.get("DEEPSEEK_API_KEY", "").strip()
 
 def ask_ai(prompt):
-    if not DEEPSEEK_KEY: return None
+    if not API_KEY: return None
     url = "https://api.deepseek.com/chat/completions"
-    headers = {"Content-Type": "application/json", "Authorization": f"Bearer {DEEPSEEK_KEY}"}
+    headers = {"Content-Type": "application/json", "Authorization": f"Bearer {API_KEY}"}
     payload = {
         "model": "deepseek-chat",
         "messages": [
@@ -21,51 +21,41 @@ def ask_ai(prompt):
         data = res.json()
         if "choices" in data:
             return json.loads(data['choices'][0]['message']['content'])
-        return None
     except: return None
+    return None
 
 def run():
     os.makedirs("data", exist_ok=True)
     
-    # 1. 抓取外刊 (HBR Leadership)
-    print("Fetching HBR Articles...")
+    # 1. 抓取外刊
+    print("Processing Articles...")
     feed = feedparser.parse("https://hbr.org/rss/topic/leadership")
     articles = []
     for e in feed.entries[:3]:
-        # 这里的 Prompt 增加了“教练视角”和“避坑指南”
-        prompt = f"""
-        Analyze article: '{e.title}'. 
-        Output JSON: {{
-            "title": "Title",
-            "source": "HBR",
-            "en_excerpt": "100-word paragraph",
-            "cn_translation": "Translation",
-            "vocabulary_pro": "word:mean, word2:mean",
-            "insight": "AI 抓不到的中国企业本土化落地难点或高管避坑指南",
-            "output_playbook": {{"speaking": "10-second power phrase for Monday morning", "writing": "email template"}},
-            "logic_flow": ["Step 1", "Step 2", "Step 3"]
-        }}
-        """
-        res = ask_ai(prompt)
+        res = ask_ai(f"Analyze article: '{e.title}'. Output JSON: {{'title':'{e.title}','source':'HBR','en_excerpt':'100 words','cn_translation':'翻译','vocabulary_pro':'word:mean','insight':'避坑指南','output_playbook':{{'speaking':'phrase'}},'logic_flow':['A','B','C']}}")
         if res:
             res.update({"id": str(uuid.uuid4())[:6], "date": datetime.now().strftime("%m-%d")})
             articles.append(res)
     
-    # 2. 模拟思维模型 (确保 models.json 不再为空)
+    # 2. 抓取/生成思维模型
+    print("Processing Models...")
     models = []
-    for m_name in ["MECE Principle", "SCQA Framework"]:
-        m_prompt = f"Analyze model '{m_name}' for leaders. JSON: {{'name':'{m_name}','scenario':'Usage','coach_tips':'Tips','logic_flow':['A','B']}}"
-        res_m = ask_ai(m_prompt)
+    for m in ["MECE Principle", "SCQA Framework"]:
+        res_m = ask_ai(f"Analyze model: '{m}'. Output JSON: {{'name':'{m}','scenario':'场景','coach_tips':'避坑指南','logic_flow':['Step1','Step2']}}")
         if res_m: models.append(res_m)
 
-    # 3. 模拟书籍 (确保 books.json 不再为空)
-    books = [{"title": "The Pyramid Principle", "intro": "Logical thinking for executives.", "logic_flow": ["Build Top", "Support Groups"]}]
+    # 3. 抓取/生成书籍推荐
+    print("Processing Books...")
+    books = []
+    for b in ["The Pyramid Principle", "Atomic Habits"]:
+        res_b = ask_ai(f"Summarize book: '{b}'. Output JSON: {{'title':'{b}','intro':'简介','takeaways':['A','B'],'coach_tips':'高管阅读建议'}}")
+        if res_b: books.append(res_b)
 
-    # 保存所有文件
+    # 保存全量数据
     with open("data/library.json", "w", encoding="utf-8") as f: json.dump(articles, f, ensure_ascii=False, indent=4)
     with open("data/models.json", "w", encoding="utf-8") as f: json.dump(models, f, ensure_ascii=False, indent=4)
     with open("data/books.json", "w", encoding="utf-8") as f: json.dump(books, f, ensure_ascii=False, indent=4)
-    print("All data updated.")
+    print("Sync Completed.")
 
 if __name__ == "__main__":
     run()
