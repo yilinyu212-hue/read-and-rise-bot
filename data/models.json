@@ -77,5 +77,16 @@
             "Regularly review and adjust focus to maintain alignment with the most critical factors."
         ],
         "logic_flow": "识别关键因素 -> 分析贡献比例 -> 优先分配资源 -> 持续优化聚焦"
+    },
+    {
+        "name": "First Principles Thinking (第一性原理思维)",
+        "definition": "A problem-solving approach that breaks down complex issues into their most fundamental truths or basic elements, then rebuilds solutions from the ground up rather than relying on analogies or existing assumptions. (一种解决问题的方法，将复杂问题分解为最基本的真理或基本要素，然后从零开始重建解决方案，而不是依赖类比或现有假设。)",
+        "how_to_use": "When facing innovation challenges, strategic decisions, or complex problems where conventional thinking leads to incremental improvements rather than breakthroughs. (当面临创新挑战、战略决策或复杂问题时，传统思维只能带来渐进式改进而非突破性解决方案的场景。)",
+        "english_template": [
+            "Let's identify the fundamental components of this problem by asking 'What do we know to be absolutely true?'",
+            "By separating facts from assumptions, we can reconstruct the solution from basic principles rather than industry conventions.",
+            "This approach requires us to challenge every premise and rebuild our strategy from the ground up."
+        ],
+        "logic_flow": "Identify Problem -> Deconstruct into Fundamental Elements -> Verify Basic Truths -> Reconstruct Solution from Verified Principles -> Test Against Original Problem"
     }
 ]
