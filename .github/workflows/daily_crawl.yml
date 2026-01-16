@@ -1,7 +1,12 @@
-name: Daily Content Update
+name: Read & Rise Daily Auto-Update
+
 on:
   schedule:
+    # 这里的 cron 表达式代表每天国际标准时间 (UTC) 00:00 运行
+    # 对应北京时间 (CST) 早上 08:00
     - cron: '0 0 * * *'
+  
+  # 保留手动触发功能，方便你随时想更新时点击
   workflow_dispatch:
 
 permissions:
@@ -11,22 +16,30 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
+
       - name: Install dependencies
         run: |
           pip install requests feedparser
-      - name: Run Crawler
+
+      - name: Run AI Crawler
         env:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
         run: python crawler.py
-      - name: Commit and Push
+
+      - name: Commit and Push Changes
         run: |
           git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config --local user.name "GitHub Action Bot"
+          # 尝试拉取最新的远程改动，防止冲突
+          git pull origin main --rebase
           git add data/*.json
-          git commit -m "Update data" || exit 0
-          git push origin main --force
+          # 如果没有内容更新，则跳过 commit
+          git commit -m "🤖 Auto-update: Daily Content [$(date +'%Y-%m-%d')]" || exit 0
+          git push origin main
