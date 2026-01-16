@@ -33,14 +33,11 @@ def push_to_notion(title, link, content):
             parent={"database_id": DATABASE_ID},
             properties={
                 "Name": {"title": [{"text": {"content": title}}]},
-                "Source": {"url": link},
+                "Source": {"select": {"name": "Economist"}}, # 匹配你的 Source 选项
+                "Link": {"url": link},                       # 匹配你的 Link 列
+                "AI Summary": {"rich_text": [{"text": {"content": content[:1900]}}]}, # 匹配 AI Summary
                 "Date": {"date": {"start": datetime.now().strftime("%Y-%m-%d")}}
-            },
-            children=[{
-                "object": "block",
-                "type": "paragraph",
-                "paragraph": {"rich_text": [{"text": {"content": content[:1900]}}]} # 防止超过Notion字数限制
-            }]
+            }
         )
     except Exception as e:
         print(f"Notion推送失败: {e}")
