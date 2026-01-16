@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          fetch-depth: 0 # 确保获取完整历史记录以解决冲突
+          fetch-depth: 0 
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -34,12 +34,11 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          # 强行重置本地分支，确保与远程一致
+          # 核心修复：强行重置本地状态，确保提交成功
           git fetch origin main
+          git checkout main
           git reset --hard origin/main
-          # 再次生成文件夹并添加新数据
           mkdir -p data
           git add data/library.json
-          # 如果没有变化则不报错
           git commit -m "Auto-update library data" || exit 0
-          git push origin main
+          git push -f origin main
