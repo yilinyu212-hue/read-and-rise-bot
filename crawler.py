@@ -1,7 +1,6 @@
 import os, feedparser, requests, json
 from datetime import datetime
 
-# 配置 API KEY
 DEEPSEEK_KEY = os.environ.get("DEEPSEEK_API_KEY")
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36"
 
@@ -14,28 +13,20 @@ def get_ai_data(prompt):
     except: return None
 
 def run():
-    # 8个外刊源
+    # 1. 配置：文章、书籍、思维模型
     SOURCES = [
         {"name": "HBR", "url": "https://hbr.org/rss/topic/leadership"},
-        {"name": "Economist", "url": "https://www.economist.com/briefing/rss.xml"},
-        {"name": "WSJ", "url": "https://feeds.a.dj.com/rss/WSJBusiness.xml"},
-        {"name": "Fortune", "url": "https://fortune.com/feed/"},
-        {"name": "FT", "url": "https://www.ft.com/?format=rss"},
-        {"name": "Forbes", "url": "https://www.forbes.com/innovation/feed/"},
-        {"name": "MIT Tech", "url": "https://www.technologyreview.com/feed/"},
-        {"name": "Atlantic", "url": "https://www.theatlantic.com/feed/all/"}
+        {"name": "Economist", "url": "https://www.economist.com/briefing/rss.xml"}
     ]
-    # 推荐书单
     BOOK_LIST = [
-        {"title": "Atomic Habits", "author": "James Clear", "tag": "Personal Growth"},
-        {"title": "The Pyramid Principle", "author": "Barbara Minto", "tag": "Logic"},
-        {"title": "High Output Management", "author": "Andrew Grove", "tag": "Leadership"}
+        {"title": "Atomic Habits", "author": "James Clear", "tag": "Personal Growth"}
     ]
+    # 【新板块】以后想加模型，直接往这个括号里填名字
+    MODEL_LIST = ["MECE", "First Principles", "SCQA"]
 
-    all_articles = []
-    all_books = []
+    all_articles, all_books, all_models = [], [], []
 
-    # 抓取文章
+    # 引擎 A：外刊
     for src in SOURCES:
         try:
             feed = feedparser.parse(requests.get(src['url'], headers={"User-Agent": UA}, timeout=15).content)
@@ -47,21 +38,24 @@ def run():
                     all_articles.append(ai)
         except: continue
 
-    # 解析书籍
+    # 引擎 B：书籍
     for b in BOOK_LIST:
         ai_b = get_ai_data(f"为书籍《{b['title']}》输出教案JSON: {{'intro':'简介','takeaways':['重点1','重点2','重点3'],'why_read':'理由'}}")
         if ai_b:
             all_books.append({"title": b['title'], "author": b['author'], "tag": b['tag'], "img": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800", **ai_b})
 
-    # --- 关键：确保路径和保存 ---
+    # 引擎 C：思维模型（新功能）
+    for m in MODEL_LIST:
+        ai_m = get_ai_data(f"请详细解析思维模型《{m}》。输出教案JSON: {{'name':'模型中文名','definition':'双语定义','how_to_use':'职场应用场景','english_template':'如果你在演讲中使用此模型，请给出3个高阶英语句型'}}")
+        if ai_m:
+            all_models.append(ai_m)
+
+    # 保存数据
     data_dir = os.path.join(os.getcwd(), 'data')
     os.makedirs(data_dir, exist_ok=True)
-    
-    with open(os.path.join(data_dir, 'library.json'), 'w', encoding='utf-8') as f:
-        json.dump(all_articles, f, ensure_ascii=False, indent=4)
-    with open(os.path.join(data_dir, 'books.json'), 'w', encoding='utf-8') as f:
-        json.dump(all_books, f, ensure_ascii=False, indent=4)
-    print("Done!")
+    with open(os.path.join(data_dir, 'library.json'), 'w', encoding='utf-8') as f: json.dump(all_articles, f, ensure_ascii=False, indent=4)
+    with open(os.path.join(data_dir, 'books.json'), 'w', encoding='utf-8') as f: json.dump(all_books, f, ensure_ascii=False, indent=4)
+    with open(os.path.join(data_dir, 'models.json'), 'w', encoding='utf-8') as f: json.dump(all_models, f, ensure_ascii=False, indent=4)
+    print("All Data Updated!")
 
-if __name__ == "__main__":
-    run()
+if __name__ == "__main__": run()
