@@ -1,8 +1,22 @@
-import os, requests, json, feedparser, uuid
+import os, requests, json, feedparser, uuid, time
 from datetime import datetime
 
 # 获取 API Key
 API_KEY = os.environ.get("DEEPSEEK_API_KEY", "").strip()
+
+# --- 10 个顶级商业/领导力源 ---
+SOURCES = [
+    ("HBR Leadership", "https://hbr.org/rss/topic/leadership"),
+    ("McKinsey Insights", "https://www.mckinsey.com/insights/rss"),
+    ("MIT Sloan Management", "https://sloanreview.mit.edu/feed/"),
+    ("Strategy+Business", "https://www.strategy-business.com/rss/all_articles"),
+    ("Wharton Knowledge", "https://knowledge.wharton.upenn.edu/feed/"),
+    ("Insead Knowledge", "https://knowledge.insead.edu/rss/all"),
+    ("Forbes Leadership", "https://www.forbes.com/leadership/feed/"),
+    ("Fast Company Strategy", "https://www.fastcompany.com/strategy/rss"),
+    ("Entrepreneur Leadership", "https://www.entrepreneur.com/topic/leadership.rss"),
+    ("Inc Strategy", "https://www.inc.com/rss/strategy-and-operations")
+]
 
 def ask_ai(prompt):
     if not API_KEY: return None
@@ -26,36 +40,51 @@ def ask_ai(prompt):
 
 def run():
     os.makedirs("data", exist_ok=True)
-    
-    # 1. 抓取外刊
-    print("Processing Articles...")
-    feed = feedparser.parse("https://hbr.org/rss/topic/leadership")
     articles = []
-    for e in feed.entries[:3]:
-        res = ask_ai(f"Analyze article: '{e.title}'. Output JSON: {{'title':'{e.title}','source':'HBR','en_excerpt':'100 words','cn_translation':'翻译','vocabulary_pro':'word:mean','insight':'避坑指南','output_playbook':{{'speaking':'phrase'}},'logic_flow':['A','B','C']}}")
-        if res:
-            res.update({"id": str(uuid.uuid4())[:6], "date": datetime.now().strftime("%m-%d")})
-            articles.append(res)
-    
-    # 2. 抓取/生成思维模型
-    print("Processing Models...")
-    models = []
-    for m in ["MECE Principle", "SCQA Framework"]:
-        res_m = ask_ai(f"Analyze model: '{m}'. Output JSON: {{'name':'{m}','scenario':'场景','coach_tips':'避坑指南','logic_flow':['Step1','Step2']}}")
-        if res_m: models.append(res_m)
 
-    # 3. 抓取/生成书籍推荐
-    print("Processing Books...")
-    books = []
-    for b in ["The Pyramid Principle", "Atomic Habits"]:
-        res_b = ask_ai(f"Summarize book: '{b}'. Output JSON: {{'title':'{b}','intro':'简介','takeaways':['A','B'],'coach_tips':'高管阅读建议'}}")
-        if res_b: books.append(res_b)
+    print(f"--- Starting Multi-Source Sync: {len(SOURCES)} Sources ---")
+
+    for name, url in SOURCES:
+        try:
+            print(f"Fetching {name}...")
+            feed = feedparser.parse(requests.get(url, timeout=15).content)
+            if not feed.entries: continue
+            
+            # 每个源只取最新的一篇，确保多样性
+            entry = feed.entries[0]
+            prompt = f"""
+            Analyze this executive article: '{entry.title}'. 
+            Output a JSON playbook for a leader:
+            {{
+                "title": "{entry.title}",
+                "source": "{name}",
+                "en_excerpt": "Select a 100-word critical paragraph from a leader's perspective",
+                "cn_translation": "Professional Chinese translation",
+                "vocabulary_pro": "word:contextual_meaning (list 5)",
+                "insight": "AI 无法察觉的高管避坑指南 (针对中国本土落地)",
+                "output_playbook": {{"speaking": "A 10-second power phrase for Monday", "writing": "Formal email template excerpt"}},
+                "logic_flow": ["Step 1", "Step 2", "Step 3"]
+            }}
+            """
+            res = ask_ai(prompt)
+            if res:
+                res.update({"id": str(uuid.uuid4())[:6], "date": datetime.now().strftime("%Y-%m-%d")})
+                articles.append(res)
+                print(f"✅ Success: {entry.title}")
+            
+            time.sleep(1) # 避免 API 频率过快
+        except Exception as e:
+            print(f"❌ Failed {name}: {e}")
+
+    # 2. 确保书籍和模型也不为空
+    models = [{"name": "SCQA Framework", "scenario": "High-stakes presentation", "coach_tips": "Avoid burying the lead.", "logic_flow": ["Situation", "Complication", "Question", "Answer"]}]
+    books = [{"title": "The Pyramid Principle", "intro": "The gold standard for logical thinking.", "takeaways": ["Start with conclusion", "Group ideas"], "coach_tips": "Focus on the governing thought."}]
 
     # 保存全量数据
     with open("data/library.json", "w", encoding="utf-8") as f: json.dump(articles, f, ensure_ascii=False, indent=4)
     with open("data/models.json", "w", encoding="utf-8") as f: json.dump(models, f, ensure_ascii=False, indent=4)
     with open("data/books.json", "w", encoding="utf-8") as f: json.dump(books, f, ensure_ascii=False, indent=4)
-    print("Sync Completed.")
+    print(f"Sync Finished. Total Articles: {len(articles)}")
 
 if __name__ == "__main__":
     run()
