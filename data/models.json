@@ -56,14 +56,15 @@
         "logic_flow": "List tasks -> Assess urgency/importance -> Categorize into quadrants -> Execute based on priority"
     },
     {
-        "name": "Objectives and Key Results (OKR) (目标与关键成果)",
-        "definition": "A goal-setting framework where Objectives define ambitious qualitative goals, and Key Results are measurable outcomes that track progress toward those objectives. (一种目标设定框架，其中目标定义雄心勃勃的定性目标，关键成果是可衡量的结果，用于跟踪实现这些目标的进展。)",
-        "how_to_use": "Used in organizational strategy alignment, team performance management, and personal development planning to ensure focus on high-impact priorities. (用于组织战略对齐、团队绩效管理和个人发展规划，确保专注于高影响力的优先事项。)",
+        "name": "OKR (Objectives and Key Results)",
+        "definition": "A goal-setting framework that helps organizations define and track objectives and their outcomes. OKR consists of an Objective (a clearly defined goal) and Key Results (measurable outcomes that track achievement of the objective).",
+        "how_to_use": "Used in business planning, team alignment, and performance tracking. Common scenarios include quarterly planning sessions, project kickoffs, and organizational strategy development.",
         "english_template": [
-            "Our objective is to [ambitious qualitative goal].",
-            "Key results will include [measurable outcome 1], [measurable outcome 2], and [measurable outcome 3].",
-            "We will review progress quarterly to adjust tactics as needed."
+            "Our Q3 Objective is to increase market share in the European region.",
+            "Key Result 1: Achieve 15% revenue growth in Germany.",
+            "Key Result 2: Launch 3 new products in France by September.",
+            "Key Result 3: Secure partnerships with 5 major distributors."
         ],
-        "logic_flow": "设定鼓舞人心的目标 -> 定义可衡量的关键成果 -> 定期跟踪进展 -> 季度复盘调整"
+        "logic_flow": "Set Vision -> Define Objectives -> Establish Key Results -> Align Teams -> Execute -> Review Progress -> Reflect & Adjust"
     }
 ]
