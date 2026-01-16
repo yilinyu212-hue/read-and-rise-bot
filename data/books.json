@@ -1,91 +1,53 @@
 [
     {
-        "title": "Atomic Habits",
-        "author": "James Clear",
-        "tag": "Growth",
-        "img": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800",
-        "intro": "《Atomic Habits》由詹姆斯·克利尔（James Clear）撰写，是一本关于习惯养成与行为改变的实用指南。书中提出“原子习惯”概念，指微小、渐进但持续的行为改变，通过复合效应最终带来显著成果。作者结合心理学、神经科学和个人经验，系统阐述了习惯形成的四大法则：提示、渴望、反应和奖励，并提供了可操作的策略帮助读者建立好习惯、戒除坏习惯。本书强调身份认同在习惯养成中的核心作用，主张从“成为什么样的人”出发，而非仅仅关注目标达成。",
-        "takeaways": [
-            "习惯形成的四大法则：提示（Cue）、渴望（Craving）、反应（Response）、奖励（Reward），构成习惯循环，是行为改变的基础框架。",
-            "身份认同驱动习惯：真正的改变源于身份认同的转变，即从“我想达成某个目标”转变为“我是某种人”，例如从“我想减肥”变为“我是健康的人”。",
-            "环境设计的重要性：通过优化环境减少坏习惯的提示、增加好习惯的提示，例如将水果放在显眼处、将手机移出卧室，让好习惯更容易执行。",
-            "两分钟规则：将新习惯简化为两分钟内可完成的行为（如“读一页书”而非“读一本书”），降低启动阻力，利用一致性逐步扩展。",
-            "习惯追踪与即时奖励：使用习惯追踪器（如日历打勾）提供视觉反馈，并设计即时奖励（如完成锻炼后享受一杯茶）以增强坚持动力。",
-            "复利效应：微小习惯的每日改进（如1%）通过长期复合会带来巨大变化，强调耐心与持续性的价值，而非追求速成。"
-        ],
-        "why_read": "本书以科学为基础，提供了一套清晰、可操作的习惯养成系统，适合任何希望提升个人效率、健康或技能的人。其核心逻辑简单易懂，案例丰富，能帮助读者打破“依赖意志力”的误区，通过环境设计和身份认同实现持久改变。无论是职场人士、学生还是自我提升爱好者，都能从中获得实用策略，应用于学习、健身、财务管理等生活各方面。",
-        "mindmap": "中心主题：Atomic Habits -> 分支1：核心理念（原子习惯、复利效应、身份认同） -> 分支2：习惯循环四大法则（提示->渴望->反应->奖励） -> 分支3：实用策略（环境设计、两分钟规则、习惯叠加、追踪奖励） -> 分支4：应用领域（健康、学习、工作、人际关系）"
-    },
-    {
         "title": "The Pyramid Principle",
-        "author": "Barbara Minto",
-        "tag": "Logic",
-        "img": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800",
-        "intro": "《金字塔原理》（The Pyramid Principle）是芭芭拉·明托（Barbara Minto）于1973年出版的经典商业沟通与思维训练著作。该书系统阐述了如何通过结构化思维清晰、高效地表达复杂观点，核心思想是将信息组织成金字塔结构——先提出中心结论，再分层展开论据。书中强调自上而下的表达逻辑：从核心结论出发，逐层用MECE（相互独立、完全穷尽）原则分组论据，确保逻辑严谨。该书广泛应用于咨询、管理、写作等领域，被誉为麦肯锡等顶尖机构的思维训练基石。",
+        "intro": "The Pyramid Principle, authored by Barbara Minto, is a foundational communication framework that emphasizes structuring ideas in a top-down, hierarchical manner to enhance clarity and persuasiveness. It is widely used in business consulting, report writing, and presentations to ensure logical flow and effective argumentation.",
         "takeaways": [
-            "金字塔结构原则：任何复杂观点都应组织成金字塔形式，顶部是核心结论，下层是支撑论据，底层是具体数据或事实。这种结构符合人类认知习惯，便于理解和记忆。",
-            "MECE分析法：分组论据时必须遵循“相互独立、完全穷尽”原则，确保逻辑严谨无重叠或遗漏。这是构建清晰逻辑链条的关键工具。",
-            "SCQA故事框架：通过情境（Situation）、冲突（Complication）、问题（Question）、答案（Answer）四步构建引人入胜的叙述逻辑，适用于报告、演讲等场景。",
-            "自上而下表达与自下而上思考：表达时应先结论后细节；思考时可从事实归纳出结论，再反向验证金字塔结构。",
-            "应用场景扩展：不仅适用于商业报告，还可用于解决问题、制定战略、日常沟通，提升整体思维效率。"
+            "Start with the answer or conclusion first to immediately engage the audience and provide context.",
+            "Group and summarize supporting ideas into logical clusters that collectively justify the main point.",
+            "Ensure each level of the pyramid logically supports the one above it, maintaining a coherent structure throughout."
         ],
-        "why_read": "推荐理由：1. 提升逻辑表达能力：帮助读者在复杂信息中快速提炼核心观点，使沟通更清晰有力。2. 职场必备技能：尤其适合咨询、管理、写作等专业人士，是麦肯锡等企业内训经典教材。3. 实用性强：提供具体工具（如MECE、SCQA）和案例，可直接应用于工作场景。4. 思维训练价值：培养结构化思维习惯，提升分析和解决问题能力。",
-        "mindmap": "金字塔原理核心逻辑导图：\n中心主题：结构化思维与表达\n├─ 核心理念：金字塔结构（结论先行）\n│  ├─ 顶层：核心结论/中心思想\n│  ├─ 中层：关键论据分组（MECE原则）\n│  └─ 底层：具体数据/事实支撑\n├─ 方法论\n│  ├─ 构建方式：自上而下（先结论）或自下而上（归纳总结）\n│  ├─ 逻辑工具：MECE（相互独立、完全穷尽）\n│  └─ 叙述框架：SCQA（情境-冲突-问题-答案）\n├─ 应用场景\n│  ├─ 商业报告与提案\n│  ├─ 问题分析与解决\n│  ├─ 演讲与沟通\n│  └─ 写作与表达训练\n└─ 实践价值：提升逻辑清晰度、沟通效率与决策质量"
+        "logic_flow": [
+            "State the main idea or conclusion at the top of the pyramid.",
+            "Organize supporting arguments into mutually exclusive and collectively exhaustive (MECE) groups below.",
+            "Arrange ideas in a logical order (e.g., chronological, structural, or comparative) within each group to build a compelling narrative."
+        ],
+        "img": "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400"
     },
     {
-        "title": "Deep Work",
-        "author": "AI Curated",
-        "tag": "Recommended",
-        "img": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800",
-        "intro": "《Deep Work》由卡尔·纽波特所著，探讨在分心时代如何通过深度工作实现高效产出与个人成长。书中定义了深度工作为在无干扰状态下专注进行认知要求高的活动，并批判了现代社会对浅层工作的过度推崇。",
+        "title": "Atomic Habits",
+        "intro": "Bilingual summary: 'Atomic Habits' by James Clear is a practical guide to building good habits and breaking bad ones through small, incremental changes. The book emphasizes that success comes from the compound effect of daily habits rather than dramatic transformations. 原子习惯》是詹姆斯·克利尔所著的一本实用指南，通过微小、渐进的变化来培养好习惯并改掉坏习惯。本书强调成功来自于日常习惯的复合效应，而非戏剧性的转变。",
         "takeaways": [
-            "深度工作需刻意练习与系统化安排，如设定固定工作时间与减少数字干扰",
-            "浅层工作虽必要但应最小化，因其对价值创造贡献有限",
-            "深度工作能力是21世纪稀缺技能，能带来经济回报与职业满足感"
+            "Habits are the compound interest of self-improvement - small changes accumulate into remarkable results over time",
+            "The Four Laws of Behavior Change: Make it obvious, attractive, easy, and satisfying (and their inverses for breaking bad habits)"
         ],
-        "why_read": "本书提供实用策略帮助读者在信息过载环境中提升专注力，适用于知识工作者、学生及任何希望提高生产力的人。",
-        "logic_flow": "问题诊断（分心文化降低生产力） -> 概念定义（深度vs浅层工作） -> 实践框架（四大准则：工作深度化、拥抱无聊、戒除社交媒体、减少浅层工作） -> 长期价值（职业成功与生活意义）"
-    },
-    {
-        "title": "Grit",
-        "author": "Auto-Selected",
-        "tag": "Classic",
-        "img": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800",
-        "intro": "《Grit》由心理学家安吉拉·达克沃斯（Angela Duckworth）所著，探讨了成功的关键因素——毅力（grit）。作者通过大量研究和个人经历，论证了毅力比天赋更能预测长期成就，并提供了培养毅力的实用方法。",
-        "takeaways": [
-            "毅力是激情与坚持的结合，比天赋更能决定长期成功",
-            "培养毅力需要刻意练习、成长型思维和明确的目标",
-            "通过兴趣、练习、目的和希望四个要素可以系统性提升毅力"
+        "logic_flow": [
+            "Introduction to the power of atomic habits and the 1% improvement principle",
+            "Explanation of the habit loop: cue, craving, response, reward",
+            "Detailed breakdown of the Four Laws of Behavior Change with practical applications",
+            "Advanced tactics for habit formation including habit stacking and environment design",
+            "Strategies for maintaining habits through plateaus and setbacks"
         ],
-        "why_read": "这本书颠覆了传统对天赋的过度强调，提供了科学依据和实用策略，帮助个人在职业和生活中培养持久动力，适合追求长期目标者、教育工作者及管理者阅读。",
-        "logic_flow": "定义毅力概念->论证毅力比天赋重要->分析毅力组成要素->提供培养方法->应用案例分析"
-    },
-    {
-        "title": "Zero to One",
-        "author": "AI Curated",
-        "tag": "Growth",
-        "img": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800",
-        "intro": "《Zero to One: Notes on Startups, or How to Build the Future》是PayPal联合创始人彼得·蒂尔（Peter Thiel）的经典著作，基于他在斯坦福大学的创业课程讲义整理而成。本书探讨了如何从零到一创造全新价值，而非简单复制现有模式（从一到多）。蒂尔认为，真正的创新不是竞争现有市场，而是通过技术垄断创造全新市场，实现指数级增长。书中结合硅谷创业案例，提出了独特的商业哲学和投资策略，强调垂直进步（创造新事物）而非水平进步（复制已有模式）。\n\n\"Zero to One: Notes on Startups, or How to Build the Future\" is a seminal work by PayPal co-founder Peter Thiel, based on his Stanford University startup course lectures. The book explores how to create entirely new value from scratch (zero to one), rather than simply replicating existing models (one to many). Thiel argues that true innovation isn't about competing in existing markets but creating new markets through technological monopolies to achieve exponential growth. Combining Silicon Valley startup cases, the book presents unique business philosophies and investment strategies, emphasizing vertical progress (creating new things) over horizontal progress (copying existing models).",
-        "takeaways": [
-            "垄断思维优于竞争思维：成功企业应追求垄断地位，通过技术创新建立护城河，而非在红海市场中恶性竞争。垄断带来定价权、持续利润和资源投入创新的能力。",
-            "从0到1的垂直创新：真正的进步是创造全新事物（从0到1），而非简单复制已有模式（从1到n）。这需要突破性技术、独特商业模式或未被满足的市场需求。",
-            "幂次法则与秘密理论：风险投资和创业成功遵循幂次法则——少数公司创造绝大部分价值。创业者应寻找被他人忽视的“秘密”（独特认知），并据此建立难以复制的优势。"
-        ],
-        "why_read": "本书提供了颠覆传统的商业思维框架，尤其适合创业者、投资者和创新者阅读。蒂尔的反主流观点挑战了“竞争促进进步”的常识，强调垄断创新才是经济增长的核心动力。书中融合了哲学思考、技术趋势和实战案例，既有理论深度又有实操价值。阅读本书能帮助读者跳出模仿思维，培养从零创造价值的勇气和能力，同时理解技术垄断时代的商业本质。",
-        "logic_flow": "核心概念：从0到1创造新价值 -> 细节1：垂直进步（技术创新）vs水平进步（全球化复制）；细节2：垄断企业特征（专利技术、网络效应、规模经济、品牌优势）\n核心概念：竞争与垄断辩证法 -> 细节1：竞争导致利润消失和模仿思维；细节2：创造性垄断带来长期价值和社会进步\n核心概念：幂次法则与投资策略 -> 细节1：风险投资回报遵循极端不均衡分布；细节2：投资应聚焦少数具有垄断潜力的公司\n核心概念：发现秘密与未来预测 -> 细节1：成功基于未被广泛认可的独特认知；细节2：明确乐观（规划未来）vs不明确乐观（随机应对）"
+        "img": "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400"
     },
     {
         "title": "Thinking, Fast and Slow",
-        "author": "AI Curated",
-        "tag": "Growth",
-        "img": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800",
-        "intro": "《思考，快与慢》是诺贝尔经济学奖得主丹尼尔·卡尼曼的经典著作，系统性地揭示了人类思维的两套系统及其对决策的影响。本书基于作者数十年的行为经济学研究，挑战了传统理性经济人假设，展示了直觉与理性思维的互动如何塑造我们的判断、选择和行动。\n\n\"Thinking, Fast and Slow\" is a seminal work by Nobel laureate Daniel Kahneman, systematically revealing the two systems of human thinking and their impact on decision-making. Based on decades of behavioral economics research, the book challenges the traditional assumption of rational economic agents, demonstrating how the interaction between intuition and rational thinking shapes our judgments, choices, and actions.",
+        "intro": "Bilingual summary: This groundbreaking book by Nobel laureate Daniel Kahneman explores the two systems that drive human thinking: System 1 (fast, intuitive, emotional) and System 2 (slow, deliberate, logical). Through decades of research, Kahneman reveals how these systems shape our judgments, decisions, and behaviors, often leading to predictable errors and biases.",
         "takeaways": [
-            "人类思维由系统1（快速、直觉、自动）和系统2（缓慢、理性、需努力）组成，两者共同作用但常导致认知偏差",
-            "常见的认知偏差包括锚定效应、可得性启发、过度自信等，这些偏差在商业、投资和个人决策中普遍存在",
-            "通过认识思维系统的运作机制，我们可以改善决策质量，减少错误判断，在复杂环境中做出更理性的选择"
+            "System 1 operates automatically and quickly with little effort, while System 2 requires conscious effort and is slower but more logical.",
+            "Cognitive biases like anchoring, availability heuristic, and overconfidence frequently distort our judgments and decisions.",
+            "Prospect theory explains how people value gains and losses differently, leading to irrational financial decisions.",
+            "The experiencing self and remembering self perceive happiness differently, affecting life evaluations.",
+            "Understanding these systems can improve decision-making in personal, professional, and policy contexts."
         ],
-        "why_read": "本书提供了理解人类决策本质的科学框架，对商业决策、投资策略、政策制定和个人生活都具有重要指导意义。卡尼曼将复杂的心理学研究转化为通俗易懂的洞察，帮助读者识别自身思维盲点，提升批判性思维能力。",
-        "logic_flow": "主要概念：双系统思维模型 -> 细节1：系统1特征（快速、直觉、情感驱动、易受偏见影响），细节2：系统2特征（缓慢、理性、逻辑分析、需认知努力）\n主要概念：认知偏差与启发法 -> 细节1：常见偏差类型（锚定效应、可得性启发、代表性启发），细节2：偏差在现实决策中的表现（投资错误、管理失误、日常判断）\n主要概念：决策心理学应用 -> 细节1：改善决策的方法（放慢思考、外部视角、事前验尸），细节2：在商业和个人生活中的实践价值"
+        "logic_flow": [
+            "Introduction to System 1 (fast, intuitive) and System 2 (slow, deliberate) thinking",
+            "Exploration of cognitive biases and heuristics that System 1 relies on",
+            "Analysis of overconfidence and flaws in human judgment",
+            "Discussion of prospect theory and loss aversion in decision-making",
+            "Examination of the two selves: experiencing vs. remembering",
+            "Practical applications for improving decisions and reducing biases"
+        ],
+        "img": "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=400"
     }
 ]
