@@ -2,7 +2,7 @@ name: Read & Rise Daily Auto-Update
 
 on:
   schedule:
-    - cron: '0 0 * * *' # 北京时间早8点
+    - cron: '0 0 * * *' 
   workflow_dispatch:
 
 permissions:
@@ -15,7 +15,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0 # 获取完整历史以方便 rebase
+          fetch-depth: 0 
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -35,10 +35,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action Bot"
           git add data/*.json
-          # 核心修复：先把本地改动暂存(stash)，pull之后再放回来
-          git stash
+          # 核心修复：先拉取远程改动并合并
           git pull origin main --rebase
-          git stash pop || echo "No changes to pop"
-          git add data/*.json
           git commit -m "🤖 Auto-update: Daily Content [$(date +'%Y-%m-%d')]" || exit 0
           git push origin main
