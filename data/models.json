@@ -1,0 +1,51 @@
+[
+    {
+        "name": "相互独立，完全穷尽",
+        "definition": {
+            "chinese": "MECE是一种结构化思考原则，要求将问题分解为相互独立（Mutually Exclusive）且完全穷尽（Collectively Exhaustive）的部分，确保分类不重叠且无遗漏。",
+            "english": "MECE is a structured thinking principle that requires breaking down a problem into Mutually Exclusive and Collectively Exhaustive components, ensuring classifications do not overlap and leave no gaps."
+        },
+        "how_to_use": {
+            "chinese": "1. 项目规划：将项目任务分解为不重叠的子任务，确保覆盖所有关键环节。\n2. 市场分析：对客户群体进行无遗漏分类（如按年龄、地域、消费行为），避免重复统计。\n3. 问题诊断：将复杂问题拆解为独立因素（如技术、流程、人员），系统化排查根源。\n4. 报告撰写：用MECE结构组织内容（如SWOT分析中的优势、劣势、机会、威胁），提升逻辑严谨性。",
+            "english": "1. Project Planning: Decompose project tasks into non-overlapping subtasks to ensure all critical aspects are covered.\n2. Market Analysis: Categorize customer segments exhaustively (e.g., by age, region, consumption behavior) to avoid duplicate counting.\n3. Problem Diagnosis: Break down complex issues into independent factors (e.g., technology, process, personnel) for systematic root cause analysis.\n4. Report Writing: Organize content with MECE structure (e.g., SWOT analysis: strengths, weaknesses, opportunities, threats) to enhance logical rigor."
+        },
+        "english_template": [
+            "By applying the MECE principle, we can categorize these challenges into three distinct, non-overlapping dimensions: operational efficiency, market penetration, and talent retention.",
+            "This framework ensures our analysis is both mutually exclusive—avoiding redundancy in the data—and collectively exhaustive, leaving no critical factor unexamined.",
+            "To structure our discussion, I propose a MECE approach that divides the strategy into four exhaustive components: product innovation, customer engagement, supply chain optimization, and financial sustainability."
+        ]
+    },
+    {
+        "name": "第一性原理",
+        "definition": {
+            "chinese": "第一性原理是一种通过将复杂问题分解为最基本的、不可再分的元素，并基于这些基础元素重新构建解决方案的思维方式。它强调回归事物本质，摆脱既有假设和惯例的束缚，从零开始进行逻辑推理。",
+            "english": "First Principles thinking is a problem-solving approach that involves breaking down complex issues into their most fundamental, irreducible elements, and then reconstructing solutions from these basic building blocks. It emphasizes returning to the essence of things, freeing oneself from existing assumptions and conventions, and reasoning from the ground up."
+        },
+        "how_to_use": {
+            "chinese": "1. 战略规划：当公司面临行业颠覆时，使用第一性原理重新定义核心业务价值，而非简单模仿竞争对手。\n2. 产品创新：在开发新产品时，从用户最基本需求出发，而非受限于现有技术或市场惯例。\n3. 流程优化：分析业务流程时，质疑“我们一直这样做”的假设，识别并重构低效环节。\n4. 决策制定：在复杂决策中，区分事实与假设，基于基础数据而非经验直觉做判断。\n5. 问题解决：遇到棘手问题时，将其分解为基本组成部分，寻找根本原因而非表面症状。",
+            "english": "1. Strategic Planning: When a company faces industry disruption, use First Principles to redefine core business value rather than simply imitating competitors.\n2. Product Innovation: When developing new products, start from users' most fundamental needs rather than being constrained by existing technologies or market conventions.\n3. Process Optimization: When analyzing business processes, question assumptions like 'we've always done it this way,' identify inefficient links, and reconstruct them.\n4. Decision Making: In complex decisions, distinguish facts from assumptions, and make judgments based on fundamental data rather than experience or intuition.\n5. Problem Solving: When encountering difficult problems, break them down into basic components to find root causes rather than surface symptoms."
+        },
+        "english_template": [
+            "By applying First Principles thinking, we can deconstruct this challenge into its fundamental components and rebuild our strategy from the ground up, rather than relying on incremental improvements to existing approaches.",
+            "If we strip away all the assumptions and conventions surrounding this market, what remains are the basic human needs we must address - that's where true innovation begins.",
+            "Let's not ask how we can improve our current process by 10%; instead, let's question why this process exists at all and rebuild it based on first principles of efficiency and value creation."
+        ]
+    },
+    {
+        "name": "结构化沟通模型",
+        "definition": {
+            "中文": "SCQA是一种结构化思维与沟通框架，通过情境（Situation）、冲突（Complication）、问题（Question）、答案（Answer）四个逻辑环节，帮助职场人士清晰表达观点、分析问题并提出解决方案。",
+            "英文": "SCQA is a structured thinking and communication framework that guides professionals through four logical components: Situation, Complication, Question, and Answer, enabling clear articulation of ideas, problem analysis, and solution proposals."
+        },
+        "how_to_use": {
+            "场景1": "项目汇报：先描述项目背景（S），再说明遇到的挑战或变化（C），提出核心待解决问题（Q），最后展示解决方案或成果（A）。",
+            "场景2": "提案说服：陈述当前市场/业务现状（S），指出客户痛点或未满足需求（C），聚焦关键决策问题（Q），系统呈现方案价值（A）。",
+            "场景3": "问题分析报告：客观呈现事实背景（S），识别矛盾点或异常数据（C），定义分析要解决的核心疑问（Q），用数据推导结论与建议（A）。"
+        },
+        "english_template": [
+            "Building on the current situation where [Situation], we are facing a complication that [Complication], which raises the critical question: [Question]. Our analysis leads to an answer where [Answer].",
+            "The context of [Situation] has been disrupted by [Complication], prompting us to address [Question]. Through rigorous evaluation, we propose [Answer] as the most viable path forward.",
+            "While [Situation] represents our baseline, the emergence of [Complication] necessitates a reevaluation of how we approach [Question]. Our findings indicate that [Answer] provides a strategic resolution."
+        ]
+    }
+]
