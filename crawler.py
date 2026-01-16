@@ -6,38 +6,63 @@ UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like 
 
 def get_ai_data(prompt):
     headers = {"Content-Type": "application/json", "Authorization": f"Bearer {DEEPSEEK_KEY}"}
-    data = {"model": "deepseek-chat", "messages": [{"role": "system", "content": "You are a senior educator."}, {"role": "user", "content": prompt}], "response_format": {"type": "json_object"}}
+    data = {"model": "deepseek-chat", "messages": [{"role": "system", "content": "You are a senior Business English educator."}, {"role": "user", "content": prompt}], "response_format": {"type": "json_object"}}
     try:
         res = requests.post("https://api.deepseek.com/chat/completions", headers=headers, json=data, timeout=120)
         return json.loads(res.json()['choices'][0]['message']['content'])
     except: return None
 
-def save_json(filename, data):
-    os.makedirs('data', exist_ok=True)
-    with open(f'data/{filename}', 'w', encoding='utf-8') as f:
-        json.dump(data, f, ensure_ascii=False, indent=4)
-
 def run():
-    # 1. 抓取外刊
-    articles = []
-    feed = feedparser.parse(requests.get("https://hbr.org/rss/topic/leadership", headers={"User-Agent": UA}).content)
-    if feed.entries:
-        e = feed.entries[0]
-        ai = get_ai_data(f"解析文章《{e.title}》输出讲义JSON: {{'level':'C1','en_excerpt':'原文','cn_translation':'翻译','vocabulary_pro':'词汇','syntax_analysis':'句法','output_playbook':{{'speaking':'口语','writing':'写作'}},'insight':'洞察','logic_flow':'逻辑链'}}")
-        if ai:
-            ai.update({"source": "HBR", "title": e.title, "date": datetime.now().strftime("%Y-%m-%d")})
-            articles.append(ai)
-    save_json('library.json', articles)
+    # --- 10个顶尖信源配置 ---
+    SOURCES = [
+        {"name": "HBR (领导力)", "url": "https://hbr.org/rss/topic/leadership"},
+        {"name": "Economist (简报)", "url": "https://www.economist.com/briefing/rss.xml"},
+        {"name": "MIT Tech Review", "url": "https://www.technologyreview.com/feed/"},
+        {"name": "WSJ (商业)", "url": "https://feeds.a.dj.com/rss/WSJBusiness.xml"},
+        {"name": "Fortune (财富)", "url": "https://fortune.com/feed/"},
+        {"name": "Forbes (创新)", "url": "https://www.forbes.com/innovation/feed/"},
+        {"name": "Fast Company", "url": "https://www.fastcompany.com/latest/rss"},
+        {"name": "The Atlantic", "url": "https://www.theatlantic.com/feed/all/"},
+        {"name": "Wired (科技)", "url": "https://www.wired.com/feed/rss"},
+        {"name": "McKinsey (麦肯锡)", "url": "https://www.mckinsey.com/insights/rss"}
+    ]
 
-    # 2. 初始书籍 (直接生成，确保不为空)
-    book_ai = get_ai_data("解析《Atomic Habits》: {{'intro':'简介','takeaways':['1','2','3'],'why_read':'理由','logic_flow':'逻辑'}}")
-    if book_ai:
-        books = [{"title": "Atomic Habits", "author": "James Clear", "tag": "Growth", "img": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800", **book_ai}]
-        save_json('books.json', books)
+    all_articles = []
+    
+    for src in SOURCES:
+        try:
+            print(f"正在抓取: {src['name']}")
+            resp = requests.get(src['url'], headers={"User-Agent": UA}, timeout=15)
+            feed = feedparser.parse(resp.content)
+            
+            if feed.entries:
+                # 选取每个源最新的一篇
+                e = feed.entries[0]
+                prompt = f"针对文章《{e.title}》输出讲义JSON: {{'level':'C1','en_excerpt':'原文核心段','cn_translation':'翻译','vocabulary_pro':'关键词(英文:中文)','syntax_analysis':'句法结构','output_playbook':{{'speaking':'口语地道表达','writing':'写作高级表达'}},'insight':'教练视角的深度洞察','logic_flow':'逻辑链(A -> B -> C)'}}"
+                ai = get_ai_data(prompt)
+                
+                if ai:
+                    ai.update({
+                        "source": src['name'],
+                        "title": e.title,
+                        "date": datetime.now().strftime("%Y-%m-%d")
+                    })
+                    all_articles.append(ai)
+        except Exception as ex:
+            print(f"源 {src['name']} 抓取跳过: {ex}")
+            continue
 
-    # 3. 初始模型
-    model_ai = get_ai_data("解析《MECE》: {{'name':'MECE (相互独立，完全穷尽)','definition':'定义','how_to_use':'用法','english_template':['S1','S2'],'logic_flow':'逻辑'}}")
-    if model_ai:
-        save_json('models.json', [model_ai])
+    # 强制保存，确保即使只有部分源成功也能显示
+    os.makedirs('data', exist_ok=True)
+    with open('data/library.json', 'w', encoding='utf-8') as f:
+        json.dump(all_articles, f, ensure_ascii=False, indent=4)
 
-if __name__ == "__main__": run()
+    # --- 兜底逻辑：确保书籍和模型不为空 ---
+    if not os.path.exists('data/books.json') or os.path.getsize('data/books.json') < 10:
+        book_init = get_ai_data("解析《Atomic Habits》: {'intro':'简介','takeaways':['1','2','3'],'why_read':'理由','logic_flow':'逻辑'}")
+        if book_init:
+            with open('data/books.json', 'w', encoding='utf-8') as f:
+                json.dump([{"title": "Atomic Habits", "author": "James Clear", "img": "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=800", **book_init}], f, ensure_ascii=False)
+
+if __name__ == "__main__":
+    run()
