@@ -12,23 +12,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # 获取全部历史，防止推送失败
+
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
+
       - name: Install dependencies
-        run: pip install feedparser requests  # 确保有 requests
+        run: pip install feedparser requests
+
       - name: Run Script
         env:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
         run: python crawler.py
+
       - name: Commit and Push
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git fetch origin main
-          git reset --hard origin/main
-          mkdir -p data
           git add data/library.json
-          git commit -m "Auto-update data" || exit 0
-          git push -f origin main
+          # 如果没有变化就跳过，防止报错
+          git commit -m "Auto-update library data" || exit 0
+          # 强制推送，解决你截图中的冲突问题
+          git push origin main --force
