@@ -23,7 +23,7 @@ def ask_ai(prompt):
     payload = {
         "model": "deepseek-chat",
         "messages": [
-            {"role": "system", "content": "You are a Senior Executive Coach with 20 years of experience. You think like Peter Drucker and Ray Dalio. Output strictly in JSON."},
+            {"role": "system", "content": "You are a Senior Executive Coach. Output strictly in JSON."},
             {"role": "user", "content": prompt}
         ],
         "response_format": {"type": "json_object"}
@@ -34,7 +34,6 @@ def ask_ai(prompt):
         if "choices" in res_j:
             return json.loads(res_j['choices'][0]['message']['content'])
     except: return None
-    return None
 
 def run():
     os.makedirs("data", exist_ok=True)
@@ -46,47 +45,31 @@ def run():
             if not feed.entries: continue
             entry = feed.entries[0]
             
-            # --- 核心教练逻辑 Prompt ---
-            prompt = f"""
-            Analyze this article: '{entry.title}'
+            prompt = f"""Analyze: '{entry.title}'
+            As an Executive Coach, provide:
+            1. Perspectives: ceo_view, org_psychology, defense_view.
+            2. 3 Socratic questions for reflection.
+            3. dimension_scores (Strategic, Team, Innovation, Decision, Execution) 1-10.
+            4. challenge: scenario, options, correct_idx, coach_feedback.
+            5. speaking_gold: A one-sentence golden quote.
+            Output as JSON."""
             
-            Role: Executive Thought Partner
-            Task: Convert this information into a 'Digital Coaching Brief'.
-            
-            JSON Structure:
-            {{
-                "title": "{entry.title}",
-                "source": "{name}",
-                "en_excerpt": "The most provocative paragraph (English)",
-                "perspectives": {{
-                    "ceo_view": "Strategic impact and ROI analysis",
-                    "org_psychology": "Team morale and culture impact",
-                    "defense_view": "What if a competitor uses this first?"
-                }},
-                "socratic_questions": [
-                    "Question about their current bottleneck",
-                    "Question about their team's resistance",
-                    "Question about the opportunity cost"
-                ],
-                "dimension_scores": {{ "Strategic": 8, "Team": 7, "Innovation": 6, "Decision": 9, "Execution": 5 }},
-                "challenge": {{
-                    "scenario": "A leadership dilemma based on this insight",
-                    "options": ["Option A", "Option B"],
-                    "correct_idx": 0,
-                    "coach_feedback": "The underlying mental model behind the correct choice"
-                }}
-            }}
-            """
             res = ask_ai(prompt)
             if res:
-                res.update({"id": str(uuid.uuid4())[:6], "date": datetime.now().strftime("%m-%d")})
+                res.update({"id": str(uuid.uuid4())[:6], "title": entry.title, "source": name})
                 articles.append(res)
-                time.sleep(1)
+                print(f"✅ Analyzed: {name}")
         except: continue
 
-    with open("data/library.json", "w", encoding="utf-8") as f: json.dump(articles, f, ensure_ascii=False, indent=4)
-    # 书籍和模型也保持这种“提问式”逻辑...
-    print(f"Coaching sync complete: {len(articles)} briefs generated.")
+    # 保存核心数据
+    with open("data/library.json", "w", encoding="utf-8") as f:
+        json.dump(articles, f, ensure_ascii=False, indent=4)
+    
+    # 补全书籍和模型保底数据（防止空白）
+    with open("data/books.json", "w", encoding="utf-8") as f:
+        json.dump([{"title": "The Pyramid Principle", "intro": "Logical thinking for leaders."}], f)
+    with open("data/models.json", "w", encoding="utf-8") as f:
+        json.dump([{"name": "First Principles", "scenario": "Deep problem solving."}], f)
 
 if __name__ == "__main__":
     run()
