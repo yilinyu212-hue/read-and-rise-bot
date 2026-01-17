@@ -1,105 +1,77 @@
 [
     {
-        "cn_title": "气候乐观主义：企业转型的务实新视角",
+        "cn_title": "气候乐观主义：企业转型的新‘为什么’与实战机遇",
         "en_title": "The new ‘whys’: A pragmatic case for climate optimism",
-        "coaching_brief": "本文为国内企业主提供了气候行动的商业化视角，强调从‘成本负担’转向‘增长机遇’。实战意义在于：帮助高管重构气候战略，将ESG融入核心业务，通过创新驱动长期竞争力，避免被动合规风险，提升品牌价值与市场信任。",
+        "coaching_brief": "本文提出气候乐观主义作为企业战略转型的‘新为什么’，强调从被动应对转向主动创新。针对国内企业主，实战洞察包括：将气候挑战视为增长机遇，如开发绿色产品或服务；通过ESG（环境、社会、治理）框架提升品牌价值和融资能力；利用政策支持和市场趋势，如碳中和目标，驱动业务模式变革。建议企业主聚焦长期价值，而非短期成本，以增强竞争力和韧性。",
         "socratic_questions": [
-            "如果气候行动不再是成本中心，而是利润增长点，你的业务模式需要如何重构？",
-            "在短期业绩压力与长期气候承诺之间，如何平衡股东与利益相关者的期望？",
-            "如何将气候风险转化为组织创新与文化变革的催化剂？"
+            "在您的企业中，如何将气候相关风险转化为具体的创新项目或收入来源？",
+            "如果忽略气候乐观主义趋势，您的企业可能在哪些方面面临战略滞后或市场淘汰风险？",
+            "如何激励团队从‘为什么必须做’转向‘为什么可以做’，以推动气候行动的文化变革？"
         ],
         "lingo_asset": {
-            "vocabulary": [
-                "pragmatic (务实的)",
-                "climate optimism (气候乐观主义)",
-                "ESG integration (ESG整合)"
-            ],
-            "golden_sentence": "The shift from seeing climate action as a cost to recognizing it as a driver of innovation and growth is the new imperative for business leadership.",
-            "usage_tip": "在战略会议中引用此句，引导团队跳出合规思维，将气候议题转化为商业机遇讨论，激发创新解决方案。"
+            "golden_sentence": "The new ‘whys’ shift the narrative from fear and obligation to opportunity and innovation.",
+            "usage_tip": "在战略会议或团队动员中，用此句强调气候行动不是负担，而是驱动业务增长和创新的催化剂，鼓励员工探索绿色解决方案。"
         },
         "case_lab": {
-            "scenario": "一家传统制造企业面临碳中和压力，董事会纠结于短期投入与长期转型。作为CEO，你需要在年度战略会上提出气候路线图，既要满足监管要求，又要保持市场竞争力，同时平衡内部资源分配与外部投资者期待。",
-            "key_dilemma": "如何在有限的资源下，将气候行动从‘合规负担’转化为‘增长引擎’，实现商业价值与社会责任的双赢？"
+            "scenario": "一家传统制造业企业面临环保法规收紧和消费者偏好变化，通过采纳气候乐观主义视角，重新定义其‘为什么’，转型为循环经济模式，开发可回收产品线，并利用ESG投资提升市场估值。"
         },
         "dimension_scores": {
             "Strategic": 8,
             "Decision": 7,
-            "Innovation": 6,
-            "Execution": 7,
-            "Team": 8
+            "Team": 9
         },
-        "id": "9b2f77",
         "source": "McKinsey",
-        "date": "2026-01-17"
+        "date": "2026-01-17",
+        "id": "7d7c4d"
     },
     {
-        "cn_title": "全员领导力：赋能团队的七大实战策略",
+        "cn_title": "全员领导力：赋予团队真正权力的7大策略",
         "en_title": "Leaders at All Levels: 7 Strategies to Give Your Team Real Power",
-        "coaching_brief": "这篇文章对国内企业主的核心实战意义在于：在VUCA时代，传统金字塔式管理已显疲态。通过赋能团队，激发基层主动性，不仅能提升组织敏捷性，还能有效应对市场快速变化。国内企业主可借鉴这些策略，打破层级束缚，培养“全员领导力”，从而在创新和执行力上获得竞争优势。",
+        "coaching_brief": "国内企业主常面临权力集中、中层执行力不足、基层创新受限的挑战。本文强调通过授权赋能，将领导力分散到各个层级，能激发团队潜能、提升决策效率、增强组织韧性。实战中，企业主需从‘控制者’转变为‘赋能者’，建立信任文化，明确授权边界，并提供必要支持，从而在快速变化的市场中保持竞争力。",
         "socratic_questions": [
-            "如果你的团队突然拥有更多决策权，你最担心失去控制的是什么？这种担忧背后反映了组织文化的哪些深层问题？",
-            "在赋能团队的过程中，如何平衡‘给予自由’和‘保持战略一致性’？请分享一个你尝试过但失败或成功的具体例子。",
-            "假设你必须从文章中选一个策略立即实施，你会选哪个？为什么这个策略对你当前的组织挑战最对症？"
+            "如果您的团队拥有更多自主权，您认为最大的风险是什么？如何平衡授权与控制？",
+            "在您的组织中，哪些层级或岗位最需要被赋予更多权力？为什么？",
+            "回顾一次成功或失败的授权经历，您学到了哪些关于信任和责任的教训？"
         ],
         "lingo_asset": {
-            "vocabulary": [
-                "Empowerment (赋能)",
-                "Distributed leadership (分布式领导力)",
-                "Autonomy (自主权)",
-                "Accountability (问责制)",
-                "Psychological safety (心理安全)"
-            ],
-            "golden_sentence": "Real power isn't about control; it's about creating an environment where every team member feels trusted and capable of making decisions that drive the organization forward.",
-            "usage_tip": "在团队会议或一对一沟通中，引用此句来阐述从‘控制型’到‘信任型’领导风格的转变，强调赋能的核心是激发内在动力而非外部监督。例如，当讨论授权决策时，可用此句引导反思：'我们是否在创造这样的环境？'"
+            "golden_sentence": "Leaders at All Levels: 7 Strategies to Give Your Team Real Power",
+            "usage_tip": "在团队会议或培训中，引用此标题强调领导力不应局限于高层，鼓励全员参与决策和创新，适用于推动组织变革或提升团队士气的场景。"
         },
         "case_lab": {
-            "scenario": "一家中型科技公司面临创新瓶颈和市场反应迟缓的问题。CEO意识到传统自上而下的决策流程拖慢了产品迭代速度。她考虑推行‘全员领导力’计划，授权跨职能团队自主决策，但担心失去对战略方向的控制，引发部门混乱。",
-            "key_dilemma": "如何在充分赋能团队以提升敏捷性和创新的同时，确保组织整体战略的一致性和可控性？"
+            "scenario": "一家中型科技公司面临市场快速变化，高层决策迟缓，基层员工创新建议常被忽视。通过实施‘全员领导力’策略，公司重新设计组织结构，赋予团队更多自主权，结果新产品开发周期缩短30%，员工满意度显著提升。"
         },
         "dimension_scores": {
             "Strategic": 8,
             "Decision": 7,
-            "Innovation": 6,
-            "Execution": 7,
-            "Team": 8
+            "Team": 9
         },
-        "id": "09d411",
         "source": "MIT Sloan",
-        "date": "2026-01-17"
+        "date": "2026-01-17",
+        "id": "12ef41"
     },
     {
-        "cn_title": "Saks Global破产内幕与奢侈品零售未来启示录",
+        "cn_title": "Saks Global破产案：奢侈品零售的未来变革与实战启示",
         "en_title": "Inside Saks Global’s Bankruptcy and the Future of Luxury Retail",
-        "coaching_brief": "本文剖析Saks Global破产案例，揭示奢侈品零售在数字化、消费升级和供应链变革中的脆弱性。对国内企业主而言，它警示了过度依赖传统渠道、忽视消费者体验转型的风险，强调在高端市场必须平衡品牌传承与创新敏捷性，以应对不确定经济环境。",
+        "coaching_brief": "Saks Global的破产揭示了奢侈品零售在数字化、供应链和客户体验转型中的深层挑战。国内企业主应关注：1. 传统高端品牌如何平衡线上渠道与实体店体验，避免渠道冲突；2. 供应链韧性在全球化波动中的关键作用，特别是库存管理和供应商关系；3. 数据驱动的个性化营销如何重塑奢侈品消费决策，提升客户忠诚度。实战中，需警惕过度扩张导致的现金流断裂，并借鉴Saks的教训，强化敏捷运营能力。",
         "socratic_questions": [
-            "在奢侈品零售领域，如何平衡品牌历史传承与数字化转型的紧迫性？",
-            "当面临供应链中断或消费者行为突变时，企业应优先保护短期利润还是长期品牌价值？",
-            "从Saks Global的案例中，你能识别出哪些早期预警信号，以及如何将其转化为组织韧性？"
+            "在奢侈品零售中，如何设计线上线下融合策略，既能扩大市场份额，又不损害品牌高端形象？",
+            "面对供应链中断风险，企业应如何构建弹性库存系统，同时避免过度库存带来的财务压力？",
+            "数据和技术在提升奢侈品客户体验方面有哪些具体应用场景，如何平衡隐私保护与个性化服务？"
         ],
         "lingo_asset": {
-            "vocabulary": [
-                "Bankruptcy (破产)",
-                "Luxury Retail (奢侈品零售)",
-                "Digital Transformation (数字化转型)",
-                "Consumer Experience (消费者体验)",
-                "Supply Chain Disruption (供应链中断)"
-            ],
-            "golden_sentence": "The bankruptcy of Saks Global underscores the peril of clinging to outdated retail models in an era where consumer expectations are rapidly evolving.",
-            "usage_tip": "在战略会议中引用此句，强调企业必须主动适应市场变化，避免因守旧而陷入危机，可用于激发团队对创新和敏捷性的讨论。"
+            "golden_sentence": "The bankruptcy underscores the need for luxury retailers to adapt to shifting consumer behaviors and digital transformation.",
+            "usage_tip": "在讨论企业转型或行业趋势时，用于强调外部变化（如消费者行为、技术）对传统模式的冲击，引导团队思考适应性策略。"
         },
         "case_lab": {
-            "scenario": "一家传统高端零售企业，面临线上竞争加剧、消费者偏好转向体验式购物，同时供应链成本上升。管理层需决定是否大幅投资数字化转型，还是坚守实体店优势，但风险是可能失去市场份额或资金链断裂。",
-            "key_dilemma": "核心矛盾在于：在奢侈品行业，如何既维护品牌的高端形象和传统价值，又必须快速响应数字化和消费者体验的新需求，以避免被市场淘汰。"
+            "scenario": "一家传统高端零售企业面临销售下滑和竞争加剧，需在保持品牌调性的同时，推动数字化转型和供应链优化。"
         },
         "dimension_scores": {
             "Strategic": 8,
             "Decision": 7,
-            "Innovation": 6,
-            "Execution": 7,
-            "Team": 8
+            "Team": 9
         },
-        "id": "ccb718",
         "source": "Wharton",
-        "date": "2026-01-17"
+        "date": "2026-01-17",
+        "id": "93b60a"
     }
 ]
