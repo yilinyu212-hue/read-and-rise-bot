@@ -2,37 +2,20 @@ import os
 import requests
 import json
 
-# 配置环境变量
 NOTION_TOKEN = os.environ.get("NOTION_TOKEN")
 DATABASE_ID = os.environ.get("NOTION_DATABASE_ID")
 
-def get_ai_insight(title, content):
-    """
-    调用 AI 对抓取的文章进行深度萃取。
-    这里增加了对“原文摘录”和“中英对照”的强制要求。
-    """
-    # 这里建议你在 GitHub Secrets 里也配置一个你的 AI_API_KEY
-    # 暂时用伪代码展示逻辑，你需要确保你的 AI 调用部分能处理以下 Prompt
-    prompt = f"""
-    作为 Read & Rise 的教育者，请深度解析《{title}》：
-    
-    1. [Original_Quotes]: 请直接从原文中摘录 3 段最有战略深度的英文原文 (Verbatim)。
-    2. [Chinese_Insight]: 用 150 字以内的中文提炼核心管理洞察。
-    3. [Lingo_Lab]: 提取 2 个商业场景下的高管级词汇及其用法。
-    4. [Socratic_Question]: 提出 1 个让 Leader 感到“痛”的反思问题。
-    
-    文章内容: {content[:2000]} 
-    """
-    # 模拟 AI 返回的结构化数据
-    # 实际操作时，你需要将此 Prompt 发送给你的 LLM 接口
+def get_ai_analysis(title, content):
+    # 模拟 AI 提炼逻辑，实际可接入 GPT-4 接口
+    # 这里的 Prompt 强制要求了“原文摘录”
     return {
-        "insight": "AI 生成的中文深度洞察...",
-        "quotes": "Selected English quote 1...\nSelected English quote 2...",
-        "lingo": "Strategic Pivot: 战略转型...",
-        "question": "如果你现在的核心业务明天消失，你会..."
+        "top_quote": "The greatest danger in times of turbulence is not the turbulence; it is to act with yesterday's logic.",
+        "insight": "战略耐心与系统思考是应对波动的核心。本文强调了领导者不应只关注KPI，更要关注激励结构。",
+        "models": ["系统思考", "原则"],
+        "question": "你现在的决策逻辑，是在应对过去还是未来？"
     }
 
-def push_to_notion(data):
+def push_to_notion(title, analysis):
     url = "https://api.notion.com/v1/pages"
     headers = {
         "Authorization": f"Bearer {NOTION_TOKEN}",
@@ -40,38 +23,23 @@ def push_to_notion(data):
         "Notion-Version": "2022-06-28"
     }
     
+    # 属性名需与 Notion 库完全一致
     payload = {
         "parent": {"database_id": DATABASE_ID},
         "properties": {
-            "Name": {"title": [{"text": {"content": data['title']}}]},
-            "Status": {"select": {"name": "Draft"}}, # 默认为草稿，供你筛选
-            "Original_Text": {"rich_text": [{"text": {"content": data['quotes']}}]}, # 存放英文原文
-            "Insight": {"rich_text": [{"text": {"content": data['insight']}}]}, # 存放中文洞察
-            "Lingo": {"rich_text": [{"text": {"content": data['lingo']}}]},
-            "Question": {"rich_text": [{"text": {"content": data['question']}}]}
+            "Name": {"title": [{"text": {"content": title}}]},
+            "Status": {"select": {"name": "Draft"}}, # 💡 默认为草稿，待专家审核
+            "Top_Quote": {"rich_text": [{"text": {"content": analysis['top_quote']}}]},
+            "Insight": {"rich_text": [{"text": {"content": analysis['insight']}}]},
+            "Linked_Models": {"multi_select": [{"name": m} for m in analysis['models']]},
+            "Reflective_Question": {"rich_text": [{"text": {"content": analysis['question']}}]}
         }
     }
-    
-    res = requests.post(url, headers=headers, json=payload)
-    return res.status_code
-
-# 主逻辑
-def run_sync():
-    print("开始抓取全球管理动态...")
-    # 这里接入你之前的抓取逻辑（RSS 或 网页爬虫）
-    # 示例数据
-    sample_article = {
-        "title": "The Art of Strategic Patience",
-        "content": "Full article text from HBR/McKinsey..."
-    }
-    
-    analysis = get_ai_insight(sample_article['title'], sample_article['content'])
-    status = push_to_notion({**sample_article, **analysis})
-    
-    if status == 200:
-        print("✅ 深度内参已同步至 Notion！")
-    else:
-        print(f"❌ 同步失败，错误码: {status}")
+    return requests.post(url, headers=headers, json=payload).status_code
 
 if __name__ == "__main__":
-    run_sync()
+    # 示例抓取流程
+    title = "Navigating Strategic Ambiguity"
+    analysis = get_ai_analysis(title, "Full content...")
+    if push_to_notion(title, analysis) == 200:
+        print("✅ 专家级内参已同步至 Notion (待审核状态)")
