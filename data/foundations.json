@@ -1,0 +1,21 @@
+[
+  {
+    "id": "book_001",
+    "title": "《原则》 (Principles)",
+    "expert_id": "ReadRise_Educator",
+    "models": [
+      {"name": "极度透明", "logic": "在不透明的组织中，信息偏差是决策最大的敌人。"},
+      {"name": "痛苦+反思=进步", "logic": "失败不是终点，而是数据反馈。"}
+    ],
+    "linked_tags": ["领导力", "决策", "企业文化"]
+  },
+  {
+    "id": "book_002",
+    "title": "《第五项修炼》",
+    "expert_id": "ReadRise_Educator",
+    "models": [
+      {"name": "系统思考", "logic": "不要只看症状（反馈下降），要看结构（系统激励机制）。"}
+    ],
+    "linked_tags": ["系统论", "组织架构", "变革管理"]
+  }
+]
