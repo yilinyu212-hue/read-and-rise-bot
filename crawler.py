@@ -41,14 +41,20 @@ def run_automation():
     # 1. 查找待处理任务
     query_url = f"https://api.notion.com/v1/databases/{DATABASE_ID}/query"
     query_data = {"filter": {"property": "Status", "select": {"equals": "Pending"}}}
-    tasks = requests.post(query_url, headers=HEADERS, json=query_data).json().get("results", [])
+    res = requests.post(query_url, headers=HEADERS, json=query_data).json()
+    tasks = res.get("results", [])
     
     print(f"发现 {len(tasks)} 条新任务")
     
     for task in tasks:
         page_id = task["id"]
-        name = task["properties"]["Name"]["title"][0]["text"]["content"]
-        cat = task["properties"].get("Category", {}).get("select", {}).get("name", "📖 Book")
+        # 稳健获取标题逻辑
+        properties = task["properties"]
+        title_list = properties.get("Name", {}).get("title", [])
+        if not title_list: continue
+        
+        name = title_list[0]["text"]["content"]
+        cat = properties.get("Category", {}).get("select", {}).get("name", "📖 Book")
         
         print(f"正在加工: {name}...")
         content = ask_deepseek(name, cat)
