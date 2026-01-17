@@ -2,48 +2,27 @@ name: Read & Rise Auto-Coach
 
 on:
   schedule:
-    # 每天北京时间早上 8:00 (UTC 0:00) 自动运行
-    - cron: '0 0 * * *'
-  workflow_dispatch: # 允许你在 GitHub 页面上点“Run workflow”手动触发
+    - cron: '0 0 * * *' # 每天早上8点执行
+  workflow_dispatch:      # 允许你手动点击运行
 
 jobs:
-  build_and_crawl:
+  run-daily-task:
     runs-on: ubuntu-latest
-
     steps:
-      # 1. 拉取你的仓库代码
       - name: Checkout Code
         uses: actions/checkout@v3
 
-      # 2. 安装 Python 环境
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
 
-      # 3. 安装必要的插件
       - name: Install Dependencies
-        run: |
-          pip install requests feedparser
+        run: pip install requests feedparser
 
-      # 4. 运行抓取与解析脚本
-      - name: Run Crawler
+      - name: Run AI Coach
         env:
-          # 这些是在 GitHub Settings -> Secrets 里配置的钥匙
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
           NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
         run: python crawler.py
-
-      # 5. (可选) 如果你希望自动同步到你的腾讯云服务器，可以加上这一段
-      - name: Sync to Tencent Server
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SERVER_IP }}
-          username: ubuntu
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          script: |
-            cd /home/ubuntu
-            git pull
-            pkill -9 streamlit || true
-            nohup streamlit run app.py --server.port 8501 > /dev/null 2>&1 &
