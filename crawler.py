@@ -2,7 +2,7 @@ import os
 import requests
 import json
 
-# 环境获取
+# --- 1. 配置环境（从 GitHub Secrets 读取） ---
 DEEPSEEK_KEY = os.environ.get("DEEPSEEK_API_KEY", "").strip()
 NOTION_TOKEN = os.environ.get("NOTION_TOKEN", "").strip()
 DATABASE_ID = os.environ.get("NOTION_DATABASE_ID", "").strip()
@@ -13,66 +13,103 @@ HEADERS = {
     "Notion-Version": "2022-06-28"
 }
 
+# --- 2. 核心函数：调用 DeepSeek 生成双语教练内容 ---
 def ask_deepseek(name, category):
     url = "https://api.deepseek.com/chat/completions"
+    
+    # 🚨 这里的 Prompt 已经过“企业教练”逻辑调优
     prompt = f"""
-    作为 Read & Rise 首席教育专家，请针对{category}《{name}》进行深度建模：
-    1. [Hi_Leader]: 一句深入人心的教育者寄语。
-    2. [Top_Quote]: 1句最有穿透力的英文原文。
-    3. [Mental_Model]: 提炼1个核心思维模型（包含模型名和深度逻辑）。
-    4. [Socratic_Question]: 1个扎心的苏格拉底式提问。
+    You are the Chief Executive Coach for "Read & Rise". 
+    Target: {category} named "{name}".
+    Please provide a bilingual (English & Chinese) deep analysis:
+
+    1. [Original Title & Author]: List the full original English name and author.
+    2. [Core Concept]: Identify 1 core English professional term (e.g., 'Radical Candor') with a deep Chinese explanation.
+    3. [Executive Gold Quote]: One powerful quote in original English + precise Chinese translation.
+    4. [Coaching Actionable]: 3 specific Chinese practical tips for leaders/educators.
+    5. [Socratic Reflection]: One powerful Socratic question in both English and Chinese.
+
+    Format the output elegantly with clear headings.
     """
+    
     payload = {
         "model": "deepseek-chat",
         "messages": [
-            {"role": "system", "content": "你是一位拥有全球视野的管理学教育家。"},
+            {"role": "system", "content": "You are a world-class Executive Coach proficient in English and Chinese."},
             {"role": "user", "content": prompt}
         ],
-        "temperature": 0.7
+        "temperature": 0.5
     }
+    
     try:
-        res = requests.post(url, headers={"Authorization": f"Bearer {DEEPSEEK_KEY}"}, json=payload, timeout=60)
-        return res.json()['choices'][0]['message']['content']
+        response = requests.post(url, headers={"Authorization": f"Bearer {DEEPSEEK_KEY}"}, json=payload, timeout=60)
+        res_data = response.json()
+        if response.status_code == 200:
+            return res_data['choices'][0]['message']['content']
+        else:
+            print(f"⚠️ DeepSeek Error: {res_data.get('error', {}).get('message')}")
+            return None
     except Exception as e:
-        print(f"❌ AI 生成失败: {e}")
+        print(f"❌ Connection Error: {e}")
         return None
 
+# --- 3. 核心函数：连接 Notion 自动化 ---
 def run_automation():
-    # 1. 查找待处理任务
+    # A. 查询 Status 为 "Pending" 的条目
     query_url = f"https://api.notion.com/v1/databases/{DATABASE_ID}/query"
-    query_data = {"filter": {"property": "Status", "select": {"equals": "Pending"}}}
-    res = requests.post(query_url, headers=HEADERS, json=query_data).json()
-    tasks = res.get("results", [])
+    query_data = {
+        "filter": {
+            "property": "Status",
+            "select": {"equals": "Pending"}
+        }
+    }
     
-    print(f"发现 {len(tasks)} 条新任务")
-    
+    try:
+        res = requests.post(query_url, headers=HEADERS, json=query_data).json()
+        tasks = res.get("results", [])
+    except Exception as e:
+        print(f"❌ Failed to connect to Notion: {e}")
+        return
+
+    print(f"🚀 Found {len(tasks)} pending tasks.")
+
     for task in tasks:
         page_id = task["id"]
-        # 稳健获取标题逻辑
-        properties = task["properties"]
-        title_list = properties.get("Name", {}).get("title", [])
-        if not title_list: continue
-        
+        # 获取书名/项目名
+        title_list = task["properties"].get("Name", {}).get("title", [])
+        if not title_list:
+            continue
+            
         name = title_list[0]["text"]["content"]
-        cat = properties.get("Category", {}).get("select", {}).get("name", "📖 Book")
+        cat = task["properties"].get("Category", {}).get("select", {}).get("name", "📖 Book")
         
-        print(f"正在加工: {name}...")
+        print(f"🔍 Processing: {name}...")
+        
+        # B. 调用 AI 生成内容
         content = ask_deepseek(name, cat)
         
         if content:
-            # 2. 写回 Notion 并设为 Draft
+            # C. 将内容写回 Notion，并将状态改为 "Draft" (待审核)
             update_url = f"https://api.notion.com/v1/pages/{page_id}"
             update_data = {
                 "properties": {
-                    "Content_Payload": {"rich_text": [{"text": {"content": content}}]},
-                    "Status": {"select": {"name": "Draft"}}
+                    "Content_Payload": {
+                        "rich_text": [{"text": {"content": content}}]
+                    },
+                    "Status": {
+                        "select": {"name": "Draft"}
+                    }
                 }
             }
-            requests.patch(update_url, headers=HEADERS, json=update_data)
-            print(f"✅ {name} 已存入 Notion")
+            patch_res = requests.patch(update_url, headers=HEADERS, json=update_data)
+            if patch_res.status_code == 200:
+                print(f"✅ Success: {name} is now in 'Draft' with AI content.")
+            else:
+                print(f"❌ Failed to update Notion: {patch_res.text}")
 
+# --- 4. 运行入口 ---
 if __name__ == "__main__":
-    if DEEPSEEK_KEY:
-        run_automation()
+    if not all([DEEPSEEK_KEY, NOTION_TOKEN, DATABASE_ID]):
+        print("❌ Error: Missing API keys in Environment Variables.")
     else:
-        print("❌ 缺少 API Key，请检查 Secrets 配置")
+        run_automation()
