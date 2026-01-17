@@ -1,12 +1,12 @@
 import os, requests, json, feedparser, uuid, time
 from datetime import datetime
 
-# 核心配置
 API_KEY = os.environ.get("DEEPSEEK_API_KEY", "").strip()
+
 SOURCES = [
-    ("McKinsey Insights", "https://www.mckinsey.com/insights/rss"),
     ("HBR Leadership", "https://hbr.org/rss/topic/leadership"),
-    ("MIT Sloan Management", "https://sloanreview.mit.edu/feed/"),
+    ("McKinsey Insights", "https://www.mckinsey.com/insights/rss"),
+    ("MIT Sloan", "https://sloanreview.mit.edu/feed/"),
     ("Strategy+Business", "https://www.strategy-business.com/rss/all_articles"),
     ("Wharton Knowledge", "https://knowledge.wharton.upenn.edu/feed/"),
     ("Insead Knowledge", "https://knowledge.insead.edu/rss/all"),
@@ -16,45 +16,29 @@ SOURCES = [
     ("Inc Strategy", "https://www.inc.com/rss/strategy-and-operations")
 ]
 
-# 教亮级 Prompt：设定价值阈值
-PROMPT_TEMPLATE = """
-Task: You are the Intelligence Engine for 'Read & Rise'. 
-Content to Analyze: {title}
-
-Strict Filter Rules:
-1. If the content is PR news, generic motivation, or repetitive corporate fluff, output: {{"status": "discard"}}
-2. If it contains original logic, data-backed insights, or deep leadership challenges, proceed.
-
-Output JSON Format ONLY:
-{{
-    "status": "retain",
-    "core_issue": "一句话总结核心议题",
-    "fact_check": ["关键数据点或事实1", "事实2", "事实3"],
-    "leader_value": "为什么企业 Leader 需要关注这个？(So What)",
-    "golden_phrase": "一句话实战金句",
-    "dimension_scores": {{"Strategic": 8, "Team": 7, "Innovation": 6, "Decision": 9, "Execution": 5}},
-    "deep_tags": ["#组织演化", "#决策模型"]
-}}
-"""
-
 def ask_ai(prompt):
     if not API_KEY: return None
     url = "https://api.deepseek.com/chat/completions"
     headers = {"Content-Type": "application/json", "Authorization": f"Bearer {API_KEY}"}
     payload = {
-        "model": "deepseek-chat", # 这里建议未来升级为 deepseek-reasoner 开启 O1 级别的逻辑
-        "messages": [{"role": "system", "content": "You are an Elite Executive Coach. Output valid JSON."}, {"role": "user", "content": prompt}],
+        "model": "deepseek-chat",
+        "messages": [
+            {"role": "system", "content": "You are a Senior Executive Coach with 20 years of experience. You think like Peter Drucker and Ray Dalio. Output strictly in JSON."},
+            {"role": "user", "content": prompt}
+        ],
         "response_format": {"type": "json_object"}
     }
     try:
         res = requests.post(url, headers=headers, json=payload, timeout=60)
-        return json.loads(res.json()['choices'][0]['message']['content'])
+        res_j = res.json()
+        if "choices" in res_j:
+            return json.loads(res_j['choices'][0]['message']['content'])
     except: return None
+    return None
 
 def run():
     os.makedirs("data", exist_ok=True)
     articles = []
-    print(f"--- 探针启动：{datetime.now()} ---")
     
     for name, url in SOURCES:
         try:
@@ -62,23 +46,47 @@ def run():
             if not feed.entries: continue
             entry = feed.entries[0]
             
-            res = ask_ai(PROMPT_TEMPLATE.format(title=entry.title))
+            # --- 核心教练逻辑 Prompt ---
+            prompt = f"""
+            Analyze this article: '{entry.title}'
             
-            if res and res.get("status") == "retain":
-                res.update({
-                    "id": str(uuid.uuid4())[:6],
-                    "source": name,
-                    "original_title": entry.title,
-                    "date": datetime.now().strftime("%Y-%m-%d")
-                })
+            Role: Executive Thought Partner
+            Task: Convert this information into a 'Digital Coaching Brief'.
+            
+            JSON Structure:
+            {{
+                "title": "{entry.title}",
+                "source": "{name}",
+                "en_excerpt": "The most provocative paragraph (English)",
+                "perspectives": {{
+                    "ceo_view": "Strategic impact and ROI analysis",
+                    "org_psychology": "Team morale and culture impact",
+                    "defense_view": "What if a competitor uses this first?"
+                }},
+                "socratic_questions": [
+                    "Question about their current bottleneck",
+                    "Question about their team's resistance",
+                    "Question about the opportunity cost"
+                ],
+                "dimension_scores": {{ "Strategic": 8, "Team": 7, "Innovation": 6, "Decision": 9, "Execution": 5 }},
+                "challenge": {{
+                    "scenario": "A leadership dilemma based on this insight",
+                    "options": ["Option A", "Option B"],
+                    "correct_idx": 0,
+                    "coach_feedback": "The underlying mental model behind the correct choice"
+                }}
+            }}
+            """
+            res = ask_ai(prompt)
+            if res:
+                res.update({"id": str(uuid.uuid4())[:6], "date": datetime.now().strftime("%m-%d")})
                 articles.append(res)
-                print(f"✅ 捕获硬核内容: {entry.title[:30]}...")
-            else:
-                print(f"🗑️ 过滤无效信息: {entry.title[:30]}...")
+                time.sleep(1)
         except: continue
 
-    with open("data/library.json", "w", encoding="utf-8") as f:
-        json.dump(articles, f, ensure_ascii=False, indent=4)
+    with open("data/library.json", "w", encoding="utf-8") as f: json.dump(articles, f, ensure_ascii=False, indent=4)
+    # 书籍和模型也保持这种“提问式”逻辑...
+    print(f"Coaching sync complete: {len(articles)} briefs generated.")
 
 if __name__ == "__main__":
     run()
