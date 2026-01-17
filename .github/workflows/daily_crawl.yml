@@ -1,14 +1,13 @@
-name: Read and Rise Automation
+name: Read and Rise Expert System
 
 on:
-  workflow_dispatch: # 允许你手动在 GitHub 点击按钮运行
+  workflow_dispatch: # 允许手动运行
   schedule:
-    - cron: '0 2 * * *' # 每天凌晨 2 点自动运行（可选）
+    - cron: '0 2 * * *' # 每天凌晨2点自动更新
 
 jobs:
-  run-daily-sync:
+  sync-and-generate:
     runs-on: ubuntu-latest
-    
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
@@ -19,14 +18,11 @@ jobs:
           python-version: '3.9'
 
       - name: Install Dependencies
-        run: |
-          pip install requests plotly streamlit
+        run: pip install requests streamlit pandas
 
-      - name: Run Read & Rise Crawler
+      - name: Run DeepSeek Automation
         env:
-          # 🚨 这里映射你在 GitHub Secrets 里的那两把钥匙
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
           NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
-        run: |
-          # 切换到 crawler.py 运行真正的爬虫和 AI 提炼逻辑
-          python crawler.py
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+        run: python crawler.py
