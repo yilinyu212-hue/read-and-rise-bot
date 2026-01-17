@@ -22,9 +22,12 @@ jobs:
         run: pip install requests feedparser plotly
 
       - name: Run Crawler
+       - name: Run Crawler
         env:
-          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
-        run: python notion_test.py
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+        run: |
+          python notion_test.py
 
       - name: Force Sync Data
         run: |
