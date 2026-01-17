@@ -1,80 +1,87 @@
 [
     {
+        "cn_title": "气候乐观主义的新‘为什么’：务实案例解析",
         "en_title": "The new ‘whys’: A pragmatic case for climate optimism",
-        "cn_title": "新‘为何’：气候乐观主义的务实案例",
-        "coaching_brief": "这篇文章从务实角度论证气候乐观主义，提醒国内企业主：环保不仅是成本，更是战略机遇。在全球绿色转型浪潮中，忽视气候议题可能错失市场先机、降低竞争力。通过重新定义‘为何’行动，企业可挖掘节能减排中的创新潜力，提升品牌价值，实现可持续发展与商业增长的双赢。",
+        "coaching_brief": "文章揭示气候行动不仅是道德责任，更是商业机遇。企业主应重新定义‘为什么’行动，从风险规避转向价值创造。例如，将减排融入供应链优化，可降低成本并提升品牌溢价。务实乐观意味着将气候挑战转化为创新驱动力，通过绿色技术投资抢占市场先机，实现可持续增长。",
         "socratic_questions": [
-            "您的企业当前如何应对气候相关风险与机遇？是否将环保纳入长期战略？",
-            "在节能减排方面，您的团队是否具备创新思维？如何激励员工参与绿色实践？",
-            "面对日益严格的环保法规和消费者绿色偏好，您的决策流程是否足够敏捷以抓住转型机会？"
+            "如果气候行动能直接提升你的利润率，你会如何调整战略优先级？",
+            "你的企业如何将环境风险转化为客户信任和竞争优势？",
+            "在资源有限的情况下，哪些气候举措能同时驱动短期效益和长期韧性？"
         ],
-        "action_steps": [
-            "立即评估企业碳足迹和环保合规性，制定3年绿色转型路线图，明确减排目标和投资计划。",
-            "组建跨部门绿色创新小组，鼓励员工提出节能降耗创意，并设立奖励机制，将环保绩效纳入考核。",
-            "主动与供应链伙伴合作，推广绿色采购标准，同时开发低碳产品或服务，利用环保优势进行市场差异化宣传。"
-        ],
-        "dimension_scores": {
-            "战略": 8,
-            "团队": 7,
-            "创新": 9,
-            "决策": 7,
-            "执行": 6
+        "lingo_asset": {
+            "vocabulary": [
+                "pragmatic (务实的)",
+                "climate optimism (气候乐观主义)",
+                "value creation (价值创造)"
+            ],
+            "golden_sentence": "Optimism is not about ignoring the challenges, but about seeing the opportunities within them.",
+            "usage_tip": "在团队会议中，用此句激励员工将业务障碍视为创新突破口，例如在讨论成本压力时，引导团队探索节能方案以同时削减开支和增强可持续性。"
         },
-        "id": "b8c17e",
-        "source": "McKinsey Insights",
+        "scores": {
+            "Strategic": 8,
+            "Decision": 7,
+            "Execution": 9
+        },
+        "source": "McKinsey",
         "date": "2026-01-17",
-        "title": "新‘为何’：气候乐观主义的务实案例"
+        "id": "7f5fa7"
     },
     {
+        "cn_title": "全员领导力：赋予团队真正权力的7大战略",
         "en_title": "Leaders at All Levels: 7 Strategies to Give Your Team Real Power",
-        "cn_title": "全员领导力：赋予团队真实权力的7大策略",
-        "coaching_brief": "国内企业主常陷入集权管理，导致团队依赖性强、创新不足。本文强调赋能团队，能提升执行效率、激发创新，适合寻求突破增长瓶颈、打造敏捷组织的中小企业主。通过分散权力，可培养后备人才，增强企业韧性。",
+        "coaching_brief": "国内企业主常陷入权力集中困境，导致团队依赖性强、创新不足。本文强调通过授权、透明沟通和培养领导力文化，将权力下放至一线员工。实战中，建议从明确责任边界开始，逐步建立信任机制，结合本土文化调整激励方式，避免授权变成放任。关键在于平衡控制与自主，激发团队内生动力，提升整体执行力与应变能力。",
         "socratic_questions": [
-            "你的团队在多大程度上能自主决策，而不事事请示你？",
-            "如果团队拥有更多权力，你认为会带来哪些具体收益和潜在风险？",
-            "回顾过去一年，有哪些案例显示团队因缺乏授权而错失机会或效率低下？"
+            "在您的企业中，哪些决策可以安全地下放给团队，以测试他们的自主能力？",
+            "当授权后出现失误时，您如何平衡问责与学习，避免团队因恐惧而退缩？",
+            "如何设计激励机制，确保权力下放不仅能提升效率，还能增强员工的归属感和责任感？"
         ],
-        "action_steps": [
-            "第一步：识别并授权关键任务，如项目决策权给中层，设定明确边界和问责机制。",
-            "第二步：建立定期反馈循环，通过周会或工具跟踪授权效果，及时调整支持资源。",
-            "第三步：开展领导力培训，培养团队成员的决策和协作能力，强化文化认同。"
-        ],
-        "dimension_scores": {
-            "战略": 8,
-            "团队": 9,
-            "创新": 7,
-            "决策": 8,
-            "执行": 9
+        "lingo_asset": {
+            "vocabulary": [
+                "Empowerment (授权)",
+                "Accountability (问责制)",
+                "Autonomy (自主权)",
+                "Transparency (透明度)",
+                "Delegation (委派)"
+            ],
+            "golden_sentence": "Real power comes not from holding control, but from giving it away wisely to those who are ready to lead.",
+            "usage_tip": "在管理会议或培训中，用此句强调授权的重要性，鼓励管理者信任团队，并举例说明如何通过明智授权提升整体绩效和员工成长。"
         },
-        "id": "7ec6c5",
-        "source": "MIT Sloan Review",
+        "scores": {
+            "Strategic": 8,
+            "Decision": 7,
+            "Execution": 9
+        },
+        "source": "MIT Sloan",
         "date": "2026-01-17",
-        "title": "全员领导力：赋予团队真实权力的7大策略"
+        "id": "9e9288"
     },
     {
+        "cn_title": "Saks Global破产案与奢侈品零售的未来：战略转型与市场适应力的启示",
         "en_title": "Inside Saks Global’s Bankruptcy and the Future of Luxury Retail",
-        "cn_title": "Saks Global破产内幕与奢侈品零售的未来战略启示",
-        "coaching_brief": "本文分析Saks Global破产案例，揭示奢侈品零售在数字化、供应链和客户体验方面的挑战。国内企业主可从中学习如何避免过度扩张、优化成本结构，并适应消费升级趋势，提升品牌韧性。",
+        "coaching_brief": "Saks Global的破产揭示了奢侈品零售在数字化和消费习惯变迁中的脆弱性。国内企业主应警惕过度依赖传统渠道，加速线上线下融合，强化品牌体验与客户忠诚度。关键在于灵活调整供应链、投资数据驱动决策，并保持对新兴市场趋势的敏锐洞察，避免重蹈覆辙。",
         "socratic_questions": [
-            "您的企业是否在扩张中忽视了现金流和成本控制？",
-            "如何平衡线上与线下渠道，以应对消费者行为变化？",
-            "在竞争加剧时，您的品牌差异化策略是否足够清晰？"
+            "在奢侈品零售行业，如何平衡传统实体店体验与数字化渠道的投入，以最大化客户价值？",
+            "面对消费习惯的快速变化，企业应如何设计敏捷的供应链和库存管理策略，以减少市场波动带来的风险？",
+            "从Saks Global的案例中，我们可以学到哪些关于品牌定位和客户忠诚度维护的关键教训，以在竞争激烈的市场中保持优势？"
         ],
-        "action_steps": [
-            "评估当前业务模式，识别潜在风险点，制定现金流管理计划。",
-            "调研目标客户需求，优化线上线下融合体验，提升服务附加值。",
-            "定期复盘战略执行效果，调整资源配置，强化团队应变能力。"
-        ],
-        "dimension_scores": {
-            "战略": 6,
-            "团队": 5,
-            "创新": 7,
-            "决策": 4,
-            "执行": 5
+        "lingo_asset": {
+            "vocabulary": [
+                "bankruptcy (破产)",
+                "luxury retail (奢侈品零售)",
+                "strategic transformation (战略转型)",
+                "digital disruption (数字化颠覆)",
+                "customer loyalty (客户忠诚度)"
+            ],
+            "golden_sentence": "The future of luxury retail hinges on adapting to digital shifts while preserving the essence of brand experience.",
+            "usage_tip": "在管理会议中，用此句强调数字化转型与品牌核心价值并重的重要性，引导团队讨论如何平衡创新与传统，以制定可持续增长策略。"
         },
-        "id": "744d22",
-        "source": "Wharton Knowledge",
+        "scores": {
+            "Strategic": 8,
+            "Decision": 7,
+            "Execution": 9
+        },
+        "source": "Wharton",
         "date": "2026-01-17",
-        "title": "Saks Global破产内幕与奢侈品零售的未来战略启示"
+        "id": "d3532e"
     }
 ]
