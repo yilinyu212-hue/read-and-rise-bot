@@ -24,7 +24,7 @@ jobs:
       - name: Run Crawler
         env:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
-        run: python crawler.py
+        run: python notion_test.py
 
       - name: Force Sync Data
         run: |
