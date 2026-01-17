@@ -1,17 +1,17 @@
-name: Read & Rise Enterprise Sync
+name: Read and Rise Daily Sync
+
 on:
+  workflow_dispatch: # 允许你手动点击按钮运行
   schedule:
-    - cron: '0 0 * * *'
-  workflow_dispatch:
+    - cron: '0 0 * * *' # 每天凌晨自动运行
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v4
@@ -19,21 +19,20 @@ jobs:
           python-version: '3.9'
 
       - name: Install dependencies
-        run: pip install requests feedparser plotly
+        run: |
+          pip install requests plotly streamlit
 
-      - name: Run Crawler
-       - name: Run Crawler
+      - name: Run Notion Test
         env:
+          # 🚨 这里是关键：将 GitHub 的 Secrets 映射给 Python
           NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
           NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
         run: |
           python notion_test.py
 
-      - name: Force Sync Data
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
-          git add data/*.json
-          git commit -m "Auto-update Coaching Data" || exit 0
-          # 核心修复：强制推送，解决图片中的冲突报错
-          git push origin main --force
+      # 等测试通了，再把下面这行前面的 # 删掉，运行真正的爬虫
+      # - name: Run Crawler
+      #   env:
+      #     NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+      #     NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
+      #   run: python crawler.py
