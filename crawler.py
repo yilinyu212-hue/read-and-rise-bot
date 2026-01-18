@@ -62,9 +62,13 @@ def ai_process_content(title, source_name):
         return "AI 内容生成中，请先阅读标题。"
 
 def sync_to_feishu(token, title, link, source_name):
-    print(f"🧠 正在为《{title}》生成深度解析...")
+    print(f"🧠 正在分析: 《{title}》...")
     ai_content = ai_process_content(title, source_name)
     
+    # --- [新增：强制在日志里打印前 100 个字，确认 AI 真的说话了] ---
+    print(f"📝 AI 返回片段: {ai_content[:100]}...") 
+    # -------------------------------------------------------
+
     url = f"https://open.feishu.cn/open-apis/bitable/v1/apps/{APP_TOKEN}/tables/{TABLE_ID}/records"
     payload = {
         "fields": {
@@ -75,8 +79,15 @@ def sync_to_feishu(token, title, link, source_name):
         }
     }
     
-    res = requests.post(url, headers={"Authorization": f"Bearer {token}"}, json=payload).json()
-    return res.get("code") == 0
+    res_req = requests.post(url, headers={"Authorization": f"Bearer {token}"}, json=payload)
+    res = res_req.json()
+    
+    if res.get("code") == 0:
+        print(f"✅ 成功写入飞书！记录ID: {res.get('data', {}).get('record', {}).get('record_id')}")
+        return True
+    else:
+        print(f"❌ 写入飞书失败: {res.get('msg')}")
+        return False
 
 def run():
     token = get_feishu_token()
