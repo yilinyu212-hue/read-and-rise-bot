@@ -1,15 +1,17 @@
-name: Read & Rise Auto-Coach
+name: Read and Rise Daily Crawler
 
 on:
   schedule:
-    - cron: '0 0 * * *' # 每天早上8点执行
-  workflow_dispatch:      # 允许你手动点击运行
+    # 每天北京时间早上 8 点自动运行 (UTC 0点)
+    - cron: '0 0 * * *'
+  workflow_dispatch: # 允许手动点击运行按钮
 
 jobs:
-  run-daily-task:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout Code
+      - name: Checkout code
         uses: actions/checkout@v3
 
       - name: Set up Python
@@ -17,13 +19,17 @@ jobs:
         with:
           python-version: '3.9'
 
-      - name: Install Dependencies
-        run: pip install requests feedparser
+      - name: Install dependencies
+        run: |
+          pip install requests feedparser
 
       - name: Run Crawler
         env:
+          # 这里是把 GitHub Secrets 里的值“取出来”映射给代码用的环境变量
           FEISHU_APP_ID: ${{ secrets.FEISHU_APP_ID }}
           FEISHU_APP_SECRET: ${{ secrets.FEISHU_APP_SECRET }}
           FEISHU_APP_TOKEN: ${{ secrets.FEISHU_APP_TOKEN }}
-          FEISHU_TABLE_ID: ${{ secrets.FEISHU_TABLE_ID }}
+          TABLE_ID: ${{ secrets.TABLE_ID }}
+          # 必须包含这一行，AI 才会生效
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
         run: python crawler.py
