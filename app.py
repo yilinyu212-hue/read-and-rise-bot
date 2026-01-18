@@ -2,114 +2,58 @@ import streamlit as st
 import pandas as pd
 import json
 import os
-from datetime import datetime
 
-# 1. 页面基本配置
-st.set_page_config(page_title="Read & Rise | AI Business Coach", layout="wide", page_icon="🧘")
+# 1. 页面配置与导航
+st.set_page_config(page_title="Read & Rise | AI Business Coach", layout="wide")
 
-# 2. 注入专业级 CSS 样式
-st.markdown("""
-    <style>
-    .welcome-text { font-size: 3rem; font-weight: 800; color: #10416F; margin-bottom: 0; }
-    .coach-card {
-        background-color: #ffffff;
-        padding: 25px;
-        border-radius: 12px;
-        border-left: 6px solid #10416F;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        margin-bottom: 20px;
-    }
-    .model-badge {
-        background-color: #e3f2fd;
-        color: #0d47a1;
-        padding: 4px 12px;
-        border-radius: 4px;
-        font-weight: bold;
-        font-size: 0.85rem;
-    }
-    .quote-box {
-        background-color: #f8f9fa;
-        border-left: 5px solid #10416F;
-        padding: 20px;
-        font-style: italic;
-        margin: 20px 0;
-        border-radius: 5px;
-        color: #333;
-    }
-    </style>
-""", unsafe_allow_html=True)
+# 侧边栏导航
+with st.sidebar:
+    st.image("https://via.placeholder.com/150?text=Read+%26+Rise", width=100) # 建议放你的Logo
+    st.title("Navigation")
+    page = st.radio("前往 (Go to):", ["🚀 今日内参", "🧠 思维模型", "📚 跨界书单"])
+    st.divider()
+    st.info("💡 **Coach Tip:**\nReading in English is the best way to master global leadership language.")
 
-# --- 头部区域 ---
-col_head, col_date = st.columns([3, 1])
-with col_head:
-    st.markdown('<p class="welcome-text">Hi, Leaders!</p>', unsafe_allow_html=True)
-    st.markdown("#### 欢迎回到您的 AI Business Coach 空间")
-with col_date:
-    st.markdown(f"### 📅 {datetime.now().strftime('%Y-%m-%d')}")
-    st.caption("Intelligence status: Strategic Sync Active")
+# 2. 模拟双语数据展示函数 (让内容更丰富)
+def display_bilingual_content(title_en, title_cn, content):
+    with st.container():
+        st.markdown(f"### {title_en} | {title_cn}")
+        col_en, col_cn = st.columns(2)
+        with col_en:
+            st.markdown("#### 🇬🇧 English Insight")
+            st.caption("Key takeaways for global communication")
+            # 这里放置 AI 生成的英文摘要
+            st.write(content.get('en', 'Content loading...'))
+        with col_cn:
+            st.markdown("#### 🇨🇳 教练解读")
+            st.caption("针对中国企业家的实战建议")
+            # 这里放置 AI 生成的中文深度拆解
+            st.write(content.get('cn', '内容解析中...'))
+        st.divider()
 
-st.divider()
+# --- 页面逻辑分流 ---
 
-# --- 数据读取逻辑 ---
-articles = []
-if os.path.exists("data.json"):
-    try:
-        with open("data.json", "r", encoding="utf-8") as f:
-            articles = json.load(f)
-    except Exception as e:
-        st.error(f"数据读取失败，请检查 crawler.py 是否运行成功: {e}")
+if page == "🚀 今日内参":
+    st.markdown('<p style="font-size:3rem; font-weight:800; color:#10416F;">Hi, Leaders!</p>', unsafe_allow_html=True)
+    
+    # 增加搜索功能：提升交互期待感
+    search_query = st.text_input("🔍 搜索全球讯息 (Search Global Insights):", placeholder="输入关键词，如 AI, Strategy...")
+    
+    # 这里放置你之前的雷达图和文章列表
+    # ... (代码同上，但在展示时调用 display_bilingual_content)
 
-# --- 核心看板区 (金句 & 能力图) ---
-col_left, col_right = st.columns([2, 1])
+elif page == "🧠 思维模型":
+    st.header("🧠 商业思维模型库 (Mental Models)")
+    st.write("掌握全球通用的决策语言。")
+    
+    # 示例卡片
+    with st.expander("The First Principle | 第一性原理"):
+        st.markdown("""
+        - **Definition**: Breaking down complex problems into basic elements and reassembling them from the ground up.
+        - **实战应用**: 剥离行业噪音，回归商业本质。
+        - **English Phrasing**: "Let's strip away the assumptions and look at the core value."
+        """)
 
-with col_left:
-    st.markdown("### 🖋️ 当日金句")
-    # 尝试从第一篇文章提炼金句，如果没有则显示默认
-    default_quote = "战略的本质是选择不做什么。在这个充满噪音的时代，领导者的首要任务是保持清醒的舍弃感。"
-    st.markdown(f'<div class="quote-box">“{default_quote}”</div>', unsafe_allow_html=True)
-
-    st.markdown("### 🧠 今日重点思维模型")
-    st.info("**第二曲线 (The Second Curve)**: 当第一条曲线达到巅峰前，就开始投入资源寻找新的增长点。这意味着领导者必须具备在辉煌时感知危机的洞察力。")
-
-with col_right:
-    st.markdown("### 📊 今日情报赋能")
-    if articles and 'scores' in articles[0]:
-        # 汇总今日所有文章的平均分
-        try:
-            avg_scores = {
-                '战略思维': sum(a['scores']['战略思维'] for a in articles) / len(articles),
-                '组织进化': sum(a['scores']['组织进化'] for a in articles) / len(articles),
-                '决策韧性': sum(a['scores']['决策韧性'] for a in articles) / len(articles),
-                '行业洞察': sum(a['scores']['行业洞察'] for a in articles) / len(articles),
-                '技术视野': sum(a['scores']['技术视野'] for a in articles) / len(articles),
-            }
-            chart_data = pd.DataFrame(list(avg_scores.items()), columns=['维度', '提升分值'])
-            st.bar_chart(chart_data.set_index('维度'))
-        except:
-            st.warning("评分数据解析中，请稍后刷新...")
-    else:
-        st.caption("暂无动态评分数据，请运行最新版爬虫。")
-
-st.divider()
-
-# --- 资讯详情区 ---
-st.markdown("### 🏹 深度解析：全球商业内参")
-
-if not articles:
-    st.warning("目前没有最新资讯。请确保 crawler.py 已成功运行并同步到服务器。")
-else:
-    for art in articles:
-        with st.container():
-            st.markdown(f'''
-                <div class="coach-card">
-                    <p style="color:#0d47a1; font-weight:700; margin-bottom:5px;">{art.get('source', 'GLOBAL INSIGHT')}</p>
-                    <h2 style="margin-top:0;">{art.get('title')}</h2>
-                </div>
-            ''', unsafe_allow_html=True)
-            
-            # 兼容新旧数据结构
-            content = art.get('analysis') if art.get('analysis') else art.get('content', '内容解析中...')
-            
-            st.markdown(content)
-            st.link_button(f"🌐 阅读原文: {art.get('title')}", art.get('link'))
-            st.markdown("<br>", unsafe_allow_html=True)
+elif page == "📚 跨界书单":
+    st.header("📚 领导者书单 (Leader's Library)")
+    # 展示书籍和案例
