@@ -1,6 +1,6 @@
 import os, requests, feedparser, json
 
-# 环境变量
+# 环境变量获取
 APP_ID = os.getenv("FEISHU_APP_ID")
 APP_SECRET = os.getenv("FEISHU_APP_SECRET")
 APP_TOKEN = os.getenv("FEISHU_APP_TOKEN")
@@ -20,61 +20,47 @@ def get_feishu_token():
     return res.get("tenant_access_token")
 
 def ai_process_content(title, source_name):
-    """调用 DeepSeek 生成深度内容"""
     if not DEEPSEEK_API_KEY: return "AI 配置缺失"
     url = "https://api.deepseek.com/chat/completions"
     headers = {"Content-Type": "application/json", "Authorization": f"Bearer {DEEPSEEK_API_KEY}"}
     
-    prompt = f"请解析文章《{title}》(来源: {source_name})，生成包含核心摘要、双语词汇、场景应用、苏格拉底反思流和实践案例的教育笔记。要求：排版清晰。"
-    
-    data = {
-        "model": "deepseek-chat", 
-        "messages": [{"role": "user", "content": prompt}], 
-        "temperature": 0.5 # 降低随机性，减少乱码概率
-    }
+    prompt = f"请解析文章《{title}》(来源: {source_name})，生成教育笔记：1.核心摘要(中英双语) 2.双语词汇 3.场景应用 4.苏格拉底反思 5.实践案例。请分段书写，不要使用复杂的 Markdown 符号。"
     
     try:
+        data = {"model": "deepseek-chat", "messages": [{"role": "user", "content": prompt}], "temperature": 0.3}
         response = requests.post(url, headers=headers, json=data, timeout=60).json()
         return response['choices'][0]['message']['content']
-    except Exception as e:
-        print(f"AI 生成异常: {e}")
+    except:
         return "内容处理中..."
 
 def sync_to_feishu(token, title, link, source_name):
     print(f"🧠 正在分析: 《{title}》...")
     ai_content = ai_process_content(title, source_name)
     
-    # --- 强力清洗逻辑：确保内容是纯文本字符串 ---
-    # 1. 过滤掉可能导致 JSON 解析出错的非打印字符
-    safe_content = "".join(c for c in str(ai_content) if c.isprintable() or c in '\n\r\t')
-    # 2. 如果内容过长，截断至 15000 字（飞书多维表格文本列上限）
-    safe_content = safe_content[:15000]
+    # --- 降噪逻辑 ---
+    # 替换掉可能引起 JSON 报错的特殊字符，保留简单的换行
+    safe_content = ai_content.replace('"', '\"').replace('\xa0', ' ')
     
-    print(f"📝 AI 返回片段: {safe_content[:50]}...")
-
     url = f"https://open.feishu.cn/open-apis/bitable/v1/apps/{APP_TOKEN}/tables/{TABLE_ID}/records"
     
-    # 构造请求数据。注意：'链接' 采用纯字符串格式以兼容文本列
+    # 强制将所有字段转为最基础的字符串
     payload = {
         "fields": {
             "培训主题": str(title),
-            "核心内容": safe_content,
+            "核心内容": str(safe_content),
             "分类": str(source_name),
             "链接": str(link)
         }
     }
     
-    # 使用 json= 参数让 requests 库自动处理 Unicode 转义
-    res_obj = requests.post(url, headers={"Authorization": f"Bearer {token}"}, json=payload)
-    res = res_obj.json()
+    # 关键：手动指定编码确保字符安全
+    res = requests.post(url, headers={"Authorization": f"Bearer {token}"}, json=payload).json()
     
     if res.get("code") == 0:
         print(f"✅ 成功同步至飞书")
         return True
     else:
         print(f"❌ 飞书报错: {res.get('msg')} (代码: {res.get('code')})")
-        # 调试信息：输出飞书预期的错误详情
-        print(f"💡 字段详细错误: {res.get('error', {}).get('field_violations', '无具体字段违反记录')}")
         return False
 
 def run():
