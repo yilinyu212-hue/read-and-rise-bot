@@ -1,13 +1,12 @@
 import os, requests, feedparser, json
 
-# 从 GitHub Secrets 获取配置
+# 配置信息
 APP_ID = os.getenv("FEISHU_APP_ID")
 APP_SECRET = os.getenv("FEISHU_APP_SECRET")
 APP_TOKEN = os.getenv("FEISHU_APP_TOKEN")
 TABLE_ID = os.getenv("FEISHU_TABLE_ID")
 DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
 
-# 订阅源
 SOURCES = {
     "HBR领导力": "https://hbr.org/rss/topic/leadership",
     "麦肯锡洞察": "https://www.mckinsey.com/insights/rss",
@@ -17,19 +16,15 @@ SOURCES = {
 
 def get_feishu_token():
     url = "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal"
-    try:
-        res = requests.post(url, json={"app_id": APP_ID, "app_secret": APP_SECRET}).json()
-        return res.get("tenant_access_token")
-    except Exception as e:
-        print(f"❌ 获取飞书 Token 失败: {e}")
-        return None
+    res = requests.post(url, json={"app_id": APP_ID, "app_secret": APP_SECRET}).json()
+    return res.get("tenant_access_token")
 
 def ai_process_content(title, source_name):
-    """调用 DeepSeek 按照 Read & Rise 的教育者视角生成深度内容"""
+    """调用 DeepSeek 生成深度内容"""
     if not DEEPSEEK_API_KEY:
-        return "⚠️ AI 配置缺失，请在 GitHub Secrets 中检查 DEEPSEEK_API_KEY。"
+        print("⚠️ 警告：环境变量 DEEPSEEK_API_KEY 为空，请检查 GitHub Secrets 配置！")
+        return "AI 配置缺失，请检查 GitHub Secrets。"
 
-    # DeepSeek 标准 API 终结点
     url = "https://api.deepseek.com/chat/completions"
     headers = {
         "Content-Type": "application/json",
@@ -37,15 +32,13 @@ def ai_process_content(title, source_name):
     }
     
     prompt = f"""
-    你是一位专门服务于教育者的专业译者和学术教练。
-    请针对文章标题《{title}》(来源: {source_name}) 创作一份深度的学习笔记。
+    作为一名教育者学术教练，请深度解析《{title}》(来源: {source_name})：
     
-    要求如下：
-    1. 【核心摘要】: 300字以内的中英文双语对照总结。
-    2. 【双语词汇与句式】: 提取3个核心术语，1个可在演讲中使用的金句。
-    3. 【场景应用】: 作为教育领导者，如何将此观点落地？
-    4. 【苏格拉底反思流】: 设计3个层层递进的问题引导批判性思考。
-    5. 【教育者案例】: 引用一个简短案例来说明。
+    1. 【核心摘要】: 250字中英文双语对照总结。
+    2. 【双语词汇与句式】: 提取3个核心术语，1个高级句式。
+    3. 【场景应用】: 教育领导者如何将此观点落地？
+    4. 【苏格拉底反思流】: 设计3个引导思考的问题。
+    5. 【实践案例】: 提供一个具体的应用实例。
     """
     
     data = {
@@ -55,20 +48,21 @@ def ai_process_content(title, source_name):
     }
     
     try:
-        # 修正请求逻辑：使用 json=参数会自动处理序列化
+        # 使用 json= 参数会自动处理序列化，避免手动 dumps 导致的错误
         response = requests.post(url, headers=headers, json=data, timeout=60)
         res_json = response.json()
         if "choices" in res_json:
             return res_json['choices'][0]['message']['content']
         else:
-            print(f"❌ AI 报错详情: {res_json}")
-            return "AI 内容生成暂存异常，请稍后刷新。"
+            error_msg = res_json.get('error', {}).get('message', '未知错误')
+            print(f"❌ DeepSeek 报错: {error_msg}")
+            return f"AI 生成失败: {error_msg}"
     except Exception as e:
-        print(f"⚠️ AI 请求发生错误: {e}")
-        return "内容处理中，请参考原文链接。"
+        print(f"⚠️ 网络请求异常: {e}")
+        return "AI 内容生成中，请先阅读标题。"
 
 def sync_to_feishu(token, title, link, source_name):
-    print(f"🧠 正在分析: 《{title}》...")
+    print(f"🧠 正在为《{title}》生成深度解析...")
     ai_content = ai_process_content(title, source_name)
     
     url = f"https://open.feishu.cn/open-apis/bitable/v1/apps/{APP_TOKEN}/tables/{TABLE_ID}/records"
@@ -81,18 +75,12 @@ def sync_to_feishu(token, title, link, source_name):
         }
     }
     
-    try:
-        res = requests.post(url, headers={"Authorization": f"Bearer {token}"}, json=payload).json()
-        return res.get("code") == 0
-    except Exception as e:
-        print(f"❌ 写入飞书失败: {e}")
-        return False
+    res = requests.post(url, headers={"Authorization": f"Bearer {token}"}, json=payload).json()
+    return res.get("code") == 0
 
 def run():
     token = get_feishu_token()
     if not token: return
-    
-    print(f"🚀 Read & Rise 自动化任务启动...")
     for name, rss_url in SOURCES.items():
         try:
             feed = feedparser.parse(rss_url)
@@ -100,8 +88,6 @@ def run():
                 entry = feed.entries[0]
                 if sync_to_feishu(token, entry.title, entry.link, name):
                     print(f"✅ {name} 同步成功")
-                else:
-                    print(f"❌ {name} 同步失败，请检查飞书字段名。")
         except Exception as e:
             print(f"⚠️ {name} 处理异常: {e}")
 
