@@ -24,9 +24,8 @@ RSS_SOURCES = [
 ]
 
 BOOKS_TO_READ = ["《The Second Curve》", "《Principles》", "《High Output Management》", "《Zero to One》"]
-MENTAL_MODELS = ["第一性原理", "第二曲线", "飞轮效应", "反脆弱", "复利效应", "机会成本", "胜任力圈"]
+MENTAL_MODELS = ["第一性原理 First Principles", "第二曲线 Second Curve", "飞轮效应 Flywheel Effect", "反脆弱 Antifragility", "复利效应 Compounding", "机会成本 Opportunity Cost"]
 
-# ================= 2. AI 解析逻辑 =================
 def ai_call(prompt):
     url = "https://api.deepseek.com/chat/completions"
     headers = {"Authorization": f"Bearer {DEEPSEEK_API_KEY}", "Content-Type": "application/json"}
@@ -37,28 +36,27 @@ def ai_call(prompt):
         if "```" in content:
             content = content.split("```")[1].replace("json", "").strip()
         return json.loads(content)
-    except Exception as e:
-        print(f"AI Error: {e}")
-        return None
+    except: return None
 
-# ================= 3. 执行同步 =================
 def run_sync():
-    final_data = {"articles": [], "books": [], "weekly_question": "", "update_time": datetime.now().strftime("%Y-%m-%d %H:%M")}
+    final_data = {"articles": [], "books": [], "weekly_question_en": "", "weekly_question_cn": "", "update_time": datetime.now().strftime("%Y-%m-%d %H:%M")}
     all_titles = []
     
-    print("📡 正在同步智库源并进行跨维度联动...")
+    # 1. 文章抓取与中英双语联动
     for source in RSS_SOURCES:
         try:
             feed = feedparser.parse(source['url'])
             for item in feed.entries[:1]:
                 prompt = f"""Analyze '{item.title}'. 
-                1. Match with ONE model from {MENTAL_MODELS}. 
-                2. Suggest ONE book from {BOOKS_TO_READ}.
+                1. Match ONE model from {MENTAL_MODELS}. 
+                2. Recommend ONE book from {BOOKS_TO_READ}.
                 Output JSON: {{
-                    "en_summary": "3 executive points", "cn_analysis": "### 🧠 思维模型\\n...\\n\\n### 🛠️ 决策建议\\n...",
-                    "related_model": "模型名", "related_book": "关联书目",
-                    "scores": {{"战略": 80, "组织": 85, "决策": 70, "视野": 90, "洞察": 80}},
-                    "vocabulary": {{"Term": "Meaning"}}
+                    "en_summary": "3 bullet points", 
+                    "cn_analysis": "中文深度解析",
+                    "related_model": "Model Name (中文名)", 
+                    "related_book": "Book Name",
+                    "scores": {{"Strategy": 80, "Org": 85, "Insight": 90, "Tech": 70, "Decision": 80}},
+                    "vocabulary": {{"Word": "中文含义"}}
                 }}"""
                 res = ai_call(prompt)
                 if res:
@@ -67,18 +65,20 @@ def run_sync():
                     all_titles.append(item.title)
         except: continue
 
-    print("📚 正在生成书籍精读笔记...")
+    # 2. 书籍笔记
     for book in BOOKS_TO_READ:
         res = ai_call(f"Deep summary for '{book}'. Output JSON: {{'book_title': '{book}', 'first_principle': '...', 'insights': ['...'], 'executive_phrasing': '...'}}")
         if res: final_data["books"].append(res)
 
-    print("🎙️ 正在生成教练提问...")
-    q_res = ai_call(f"Based on titles {all_titles[:5]}, generate ONE deep coaching question for a CEO. JSON: {{'q': '...'}}")
-    final_data["weekly_question"] = q_res.get('q', "作为领导者，你如何重构核心业务的成本结构？") if q_res else ""
+    # 3. 生成中英双语教练提问 (Bilingual Inquiry)
+    q_prompt = f"Based on news {all_titles[:5]}, generate ONE deep coaching question for a CEO. Output JSON: {{'en': 'Question in English', 'cn': '对应的中文提问'}}"
+    q_res = ai_call(q_prompt)
+    if q_res:
+        final_data["weekly_question_en"] = q_res.get('en', "How can you leverage first principles to restructure your cost?")
+        final_data["weekly_question_cn"] = q_res.get('cn', "你如何利用第一性原理重新构架你的成本结构？")
 
     with open("data.json", "w", encoding="utf-8") as f:
         json.dump(final_data, f, ensure_ascii=False, indent=4)
-    print("✅ 同步完成！数据已更新。")
 
 if __name__ == "__main__":
     run_sync()
