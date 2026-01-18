@@ -6,7 +6,6 @@ APP_SECRET = os.getenv("FEISHU_APP_SECRET")
 APP_TOKEN = os.getenv("FEISHU_APP_TOKEN")
 TABLE_ID = os.getenv("FEISHU_TABLE_ID")
 
-# 你的 8 个核心源
 SOURCES = {
     "HBR领导力": "https://hbr.org/rss/topic/leadership",
     "麦肯锡洞察": "https://www.mckinsey.com/insights/rss",
@@ -26,23 +25,38 @@ def get_token():
 def sync(token, title, link, source_name):
     url = f"https://open.feishu.cn/open-apis/bitable/v1/apps/{APP_TOKEN}/tables/{TABLE_ID}/records"
     
-    data = {
+    # 方案 A: 飞书标准超链接对象格式
+    payload_a = {
         "fields": {
             "培训主题": title,
-            "核心内容": f"来自 {source_name} 的最新洞察。AI 摘要生成中...",
+            "核心内容": f"来自 {source_name} 的最新洞察。AI 摘要同步中...",
             "分类": "外刊",
-            # --- [核心修改：将 {"url": link} 改为纯 link 字符串] ---
-            "链接": link 
-            # ---------------------------------------------------
+            "链接": {"url": link, "title": "阅读原文"}
         }
     }
     
-    res = requests.post(url, headers={"Authorization": f"Bearer {token}"}, json=data).json()
-    if res.get("code") != 0:
-        # 如果还是报错，这里会打印出详细原因
-        print(f"❌ 同步失败原因: {res.get('msg')} (代码: {res.get('code')})")
-        return False
-    return True
+    # 方案 B: 纯文本格式 (有时飞书列类型看似是超链接，但API只收文本)
+    payload_b = {
+        "fields": {
+            "培训主题": title,
+            "核心内容": f"来自 {source_name} 的最新洞察。AI 摘要同步中...",
+            "分类": "外刊",
+            "链接": link
+        }
+    }
+
+    # 先试方案 A
+    res = requests.post(url, headers={"Authorization": f"Bearer {token}"}, json=payload_a).json()
+    if res.get("code") == 0:
+        return True
+    
+    # A 不行再试 B
+    res = requests.post(url, headers={"Authorization": f"Bearer {token}"}, json=payload_b).json()
+    if res.get("code") == 0:
+        return True
+    
+    print(f"❌ 全部格式转换失败: {res.get('msg')} (代码: {res.get('code')})")
+    return False
 
 def run():
     token = get_token()
@@ -56,7 +70,7 @@ def run():
                 if sync(token, entry.title, entry.link, name):
                     print(f"✅ 成功同步: {name}")
         except Exception as e:
-            print(f"⚠️ 源 {name} 连接超时")
+            print(f"⚠️ 源 {name} 异常: {e}")
 
 if __name__ == "__main__":
     run()
