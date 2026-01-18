@@ -26,19 +26,20 @@ def get_token():
 def sync(token, title, link, source_name):
     url = f"https://open.feishu.cn/open-apis/bitable/v1/apps/{APP_TOKEN}/tables/{TABLE_ID}/records"
     
-    # --- [关键修改：确保这里的 Key 和你飞书表格的列名一模一样] ---
     data = {
         "fields": {
-            "培训主题": title, 
+            "培训主题": title,
             "核心内容": f"来自 {source_name} 的最新洞察。AI 摘要生成中...",
             "分类": "外刊",
-            "链接": {"url": link, "title": "阅读原文"}
+            # --- [核心修改：将 {"url": link} 改为纯 link 字符串] ---
+            "链接": link 
+            # ---------------------------------------------------
         }
     }
-    # --------------------------------------------------------
     
     res = requests.post(url, headers={"Authorization": f"Bearer {token}"}, json=data).json()
     if res.get("code") != 0:
+        # 如果还是报错，这里会打印出详细原因
         print(f"❌ 同步失败原因: {res.get('msg')} (代码: {res.get('code')})")
         return False
     return True
