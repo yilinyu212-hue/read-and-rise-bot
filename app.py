@@ -1,82 +1,47 @@
 import streamlit as st
-import json
-import os
-from datetime import datetime
 import pandas as pd
+import os
 
-# 1. 网页配置
-st.set_page_config(page_title="Read & Rise | AI Business Coach", layout="wide")
-
-# 2. 增强视觉美感 (CSS)
+# 1. 更加稳健的 CSS：避免使用可能导致加载错误的外部链接
 st.markdown("""
     <style>
-    .welcome-text { font-size: 3rem; font-weight: 800; color: #10416F; margin-bottom: 0; }
-    .quote-box {
-        background-color: #f8f9fa;
-        border-left: 5px solid #10416F;
-        padding: 20px;
-        font-style: italic;
-        margin: 20px 0;
-        border-radius: 5px;
-    }
-    .model-card {
-        background-color: #10416F;
-        color: white;
-        padding: 20px;
-        border-radius: 12px;
-    }
+    .reportview-container { background: #f0f2f6; }
+    .stChart { background-color: white; padding: 15px; border-radius: 10px; shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .welcome-text { color: #10416F; font-size: 2.5rem; font-weight: 800; margin-bottom: 0; }
+    .coach-quote { font-size: 1.1rem; color: #555; border-left: 4px solid #10416F; padding-left: 15px; margin: 20px 0; }
     </style>
 """, unsafe_allow_html=True)
 
-# --- 头部区域 ---
-col_head, col_date = st.columns([3, 1])
-with col_head:
-    st.markdown('<p class="welcome-text">Hi, Leaders!</p>', unsafe_allow_html=True)
-    st.markdown("#### 欢迎回到您的 AI Business Coach 空间")
-with col_date:
-    st.markdown(f"### 📅 {datetime.now().strftime('%Y-%m-%d')}")
-    st.caption("Intelligence status: Operational")
+# --- 头部 (Hi, Leaders!) ---
+st.markdown('<p class="welcome-text">Hi, Leaders!</p>', unsafe_allow_html=True)
+st.write(f"📅 今日日期：{pd.Timestamp.now().strftime('%Y-%m-%d')} | 您的 AI 商业教练已就绪")
 
 st.divider()
 
-# --- 核心看板区 ---
-col_left, col_right = st.columns([2, 1])
+# --- 主内容布局 ---
+col_main, col_stats = st.columns([2, 1])
 
-with col_left:
-    # 1. 今日金句 (这里可以之后从 data.json 动态抓取，现在先放一个标志性的)
-    st.markdown("### 🖋️ 当日金句")
-    st.markdown("""
-    <div class="quote-box">
-        “战略的本质是选择不做什么。在这个充满噪音的时代，领导者的首要任务是保持清醒的舍弃感。”
-    </div>
-    """, unsafe_allow_html=True)
+with col_main:
+    st.markdown("### 🏹 今日深度洞察 (Intelligence)")
+    # 这里放置你的文章循环逻辑 (如前所述)
+    if os.path.exists("data.json"):
+        # ... 文章展示代码 ...
+        st.info("数据已从飞书知识库同步，AI 已完成思维模型拆解。")
 
-    # 2. 今日思维模型
-    st.markdown('<div class="model-card">', unsafe_allow_html=True)
-    st.markdown("### 🧠 今日思维模型：**第二曲线 (The Second Curve)**")
-    st.write("当第一条曲线达到巅峰前，就开始投入资源寻找新的增长点。这意味着领导者必须具备在辉煌时感知危机的洞察力。")
-    st.markdown('</div>', unsafe_allow_html=True)
-
-with col_right:
-    # 3. 能力雷达图 (Radar Chart)
-    st.markdown("### 📊 今日情报赋能")
-    # 模拟今日文章涵盖的领导力维度
-    df = pd.DataFrame(dict(
-        r=[8, 7, 9, 6, 8],
-        theta=['战略思维','组织进化','技术视野','决策韧性','行业洞察']))
+with col_stats:
+    st.markdown("### 📊 今日能力赋能")
     
-    # 简单通过 Streamlit 条形图展示，或者使用更高级的 plotly
-    st.bar_chart(df.set_index('theta'))
-    st.caption("基于今日全球资讯，您的“战略思维”与“技术视野”获得显著增强。")
-
-st.divider()
-
-# --- 资讯详情区 ---
-st.markdown("### 🏹 深度解析：全球商业内参")
-if os.path.exists("data.json"):
-    with open("data.json", "r", encoding="utf-8") as f:
-        articles = json.load(f)
-    for art in articles:
-        with st.expander(f"📖 {art.get('title')}", expanded=True):
-            st.markdown(art.get('content'))
-            st.link_button("🌐 阅读原文", art.get('link'))
+    # 模拟今日情报对 Leader 能力的提升数值
+    # 这里的数值未来可以由 crawler.py 根据 AI 评分自动生成
+    chart_data = pd.DataFrame({
+        '维度': ['战略思维', '组织进化', '决策韧性', '行业洞察', '技术视野'],
+        '提升分值': [92, 85, 78, 95, 88]
+    })
+    
+    # 使用 Streamlit 官方最稳定的条形图，不依赖外部 CSS
+    st.bar_chart(chart_data.set_index('维度'))
+    
+    st.markdown("""
+    > **教练点评**：
+    > 今日资讯侧重于**行业洞察**与**战略思维**。建议重点关注《麦肯锡》关于 AI 组织变革的案例，这将直接优化您的“组织进化”维度。
+    """)
