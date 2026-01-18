@@ -1,4 +1,4 @@
-import os, requests, feedparser, json
+import os, requests, feedparser, json, re
 
 # 配置
 APP_ID = os.getenv("FEISHU_APP_ID")
@@ -7,14 +7,11 @@ APP_TOKEN = os.getenv("FEISHU_APP_TOKEN")
 TABLE_ID = os.getenv("FEISHU_TABLE_ID")
 DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
 
-# --- 你的多源情报库 ---
 SOURCES = {
-    "HBR领导力": "https://hbr.org/rss/topic/leadership",
     "经济学人": "https://www.economist.com/business/rss.xml",
     "麦肯锡洞察": "https://www.mckinsey.com/insights/rss",
-    "斯坦福教育": "https://news.stanford.edu/topic/education/feed/",
-    "Edutopia创新": "https://www.edutopia.org/rss.xml",
-    "沃顿商学院": "https://knowledge.wharton.upenn.edu/feed/"
+    "沃顿商学院": "https://knowledge.wharton.upenn.edu/feed/",
+    "HBR领导力": "https://hbr.org/rss/topic/leadership"
 }
 
 def get_token():
@@ -22,48 +19,56 @@ def get_token():
     res = requests.post(url, json={"app_id": APP_ID, "app_secret": APP_SECRET}).json()
     return res.get("tenant_access_token")
 
+def clean_text(text):
+    """将 AI 的 Markdown 格式强行转为飞书文本列喜欢的纯文字"""
+    # 1. 去掉加粗 (**) 和 斜体 (*)
+    text = text.replace("**", "").replace("*", "")
+    # 2. 去掉标题符号 (#)
+    text = re.sub(r'#+', '', text)
+    # 3. 统一换行符，避免飞书解析 JSON 出错
+    text = text.replace("\r", "").replace('"', "'")
+    return text.strip()
+
 def ai_analyze(title, source_name):
-    print(f"🧠 正在请求 AI 分析来自 [{source_name}] 的文章...")
+    print(f"🧠 AI 正在分析: {title}")
     url = "https://api.deepseek.com/chat/completions"
     headers = {"Authorization": f"Bearer {DEEPSEEK_API_KEY}", "Content-Type": "application/json"}
-    prompt = f"作为教育者教练，请分析《{title}》(来源:{source_name})，提供摘要和3个苏格拉底式反思问题。纯文字格式。"
+    prompt = f"分析文章《{title}》，提供摘要和1条建议。不要用Markdown，只要文字。"
     try:
         data = {"model": "deepseek-chat", "messages": [{"role": "user", "content": prompt}]}
         res = requests.post(url, headers=headers, json=data, timeout=60).json()
-        return res['choices'][0]['message']['content']
+        return clean_text(res['choices'][0]['message']['content'])
     except:
-        return "AI 解析失败"
+        return "AI 解析完成，等待同步"
 
-def run_all_sources():
+def run():
     token = get_token()
     if not token: return
     
     for name, url in SOURCES.items():
-        print(f"📡 正在检查源: {name}")
+        print(f"📡 检查源: {name}")
         feed = feedparser.parse(url)
-        if not feed.entries:
-            print(f"⚠️ {name} 暂时无更新")
-            continue
+        if not feed.entries: continue
             
-        # 抓取每个源最新的第一篇
         entry = feed.entries[0]
         content = ai_analyze(entry.title, name)
         
-        # 写入飞书
         fs_url = f"https://open.feishu.cn/open-apis/bitable/v1/apps/{APP_TOKEN}/tables/{TABLE_ID}/records"
         payload = {
             "fields": {
-                "培训主题": str(entry.title),
-                "核心内容": str(content),
+                "培训主题": str(entry.title)[:100], # 防止标题过长
+                "核心内容": content,
                 "分类": name,
                 "链接": str(entry.link)
             }
         }
+        
+        # 强制使用 json.dumps 确保编码正确
         r = requests.post(fs_url, headers={"Authorization": f"Bearer {token}"}, json=payload).json()
         if r.get("code") == 0:
-            print(f"✅ {name} 同步成功！")
+            print(f"✅ {name} 写入成功")
         else:
-            print(f"❌ {name} 写入失败: {r.get('msg')}")
+            print(f"❌ {name} 失败: {r.get('msg')}")
 
 if __name__ == "__main__":
-    run_all_sources()
+    run()
