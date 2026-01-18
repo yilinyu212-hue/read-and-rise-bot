@@ -2,58 +2,81 @@ import streamlit as st
 import pandas as pd
 import json
 import os
+from datetime import datetime
 
-# 1. 页面配置与导航
+# 1. 页面配置
 st.set_page_config(page_title="Read & Rise | AI Business Coach", layout="wide")
 
-# 侧边栏导航
+# 2. 侧边栏导航 (打造平台感)
 with st.sidebar:
-    st.image("https://via.placeholder.com/150?text=Read+%26+Rise", width=100) # 建议放你的Logo
-    st.title("Navigation")
-    page = st.radio("前往 (Go to):", ["🚀 今日内参", "🧠 思维模型", "📚 跨界书单"])
+    st.markdown("### 🏹 Read & Rise")
+    st.caption("Empowering Leaders with Global Insights")
+    menu = st.radio("导航 (Navigation)", ["🚀 今日内参 Briefing", "🧠 思维模型 Library", "📖 英文教练 Coaching"])
     st.divider()
-    st.info("💡 **Coach Tip:**\nReading in English is the best way to master global leadership language.")
+    st.markdown("#### 💬 Coach Status")
+    st.success("AI Coach is Online")
 
-# 2. 模拟双语数据展示函数 (让内容更丰富)
-def display_bilingual_content(title_en, title_cn, content):
-    with st.container():
-        st.markdown(f"### {title_en} | {title_cn}")
-        col_en, col_cn = st.columns(2)
-        with col_en:
-            st.markdown("#### 🇬🇧 English Insight")
-            st.caption("Key takeaways for global communication")
-            # 这里放置 AI 生成的英文摘要
-            st.write(content.get('en', 'Content loading...'))
-        with col_cn:
-            st.markdown("#### 🇨🇳 教练解读")
-            st.caption("针对中国企业家的实战建议")
-            # 这里放置 AI 生成的中文深度拆解
-            st.write(content.get('cn', '内容解析中...'))
-        st.divider()
+# --- 核心数据加载 ---
+def load_data():
+    if os.path.exists("data.json"):
+        with open("data.json", "r", encoding="utf-8") as f:
+            return json.load(f)
+    return []
 
-# --- 页面逻辑分流 ---
+articles = load_data()
 
-if page == "🚀 今日内参":
-    st.markdown('<p style="font-size:3rem; font-weight:800; color:#10416F;">Hi, Leaders!</p>', unsafe_allow_html=True)
+# --- 频道 1：今日内参 ---
+if menu == "🚀 今日内参 Briefing":
+    st.markdown('<p style="font-size:3rem; font-weight:800; color:#10416F; margin-bottom:0;">Hi, Leaders!</p>', unsafe_allow_html=True)
+    st.write(f"📅 {datetime.now().strftime('%Y-%m-%d')} | 您的全球商业同步已完成")
     
-    # 增加搜索功能：提升交互期待感
-    search_query = st.text_input("🔍 搜索全球讯息 (Search Global Insights):", placeholder="输入关键词，如 AI, Strategy...")
-    
-    # 这里放置你之前的雷达图和文章列表
-    # ... (代码同上，但在展示时调用 display_bilingual_content)
+    # 搜索框 (增加交互感)
+    search = st.text_input("🔍 搜索关键词 (Search keywords):", placeholder="e.g. AI, Management, Strategy")
 
-elif page == "🧠 思维模型":
-    st.header("🧠 商业思维模型库 (Mental Models)")
-    st.write("掌握全球通用的决策语言。")
+    col_main, col_stats = st.columns([2, 1])
     
-    # 示例卡片
-    with st.expander("The First Principle | 第一性原理"):
-        st.markdown("""
-        - **Definition**: Breaking down complex problems into basic elements and reassembling them from the ground up.
-        - **实战应用**: 剥离行业噪音，回归商业本质。
-        - **English Phrasing**: "Let's strip away the assumptions and look at the core value."
-        """)
+    with col_main:
+        if not articles:
+            st.warning("内容正在生成中，请稍后...")
+        else:
+            for art in articles:
+                if search.lower() in art['title'].lower():
+                    with st.expander(f"📌 {art['title']}", expanded=True):
+                        tab1, tab2 = st.tabs(["🇨🇳 中文深度拆解", "🇬🇧 English Summary"])
+                        with tab1:
+                            st.markdown(art.get('cn_analysis', '解析同步中...'))
+                        with tab2:
+                            st.info(art.get('en_summary', 'Summary syncing...'))
+                        st.link_button("🌐 阅读原文 Original Link", art['link'])
 
-elif page == "📚 跨界书单":
-    st.header("📚 领导者书单 (Leader's Library)")
-    # 展示书籍和案例
+    with col_stats:
+        st.markdown("### 📊 能力赋能图谱")
+        # 这里放置之前的 bar_chart 逻辑
+        if articles:
+            chart_data = pd.DataFrame(list(articles[0]['scores'].items()), columns=['维度', '分值'])
+            st.bar_chart(chart_data.set_index('维度'))
+
+# --- 频道 2：思维模型馆 ---
+elif menu == "🧠 思维模型 Library":
+    st.header("🧠 商业思维模型库")
+    st.write("掌握全球顶尖决策者的“底层逻辑”。")
+    # 示例数据
+    models = {
+        "第一性原理 (First Principles)": "Going back to the basic truths and building up from there.",
+        "第二曲线 (The Second Curve)": "Finding new growth before the first peak declines.",
+        "MECE原则": "Mutually Exclusive, Collectively Exhaustive."
+    }
+    for m, d in models.items():
+        st.subheader(m)
+        st.info(d)
+
+# --- 频道 3：英文教练 ---
+elif menu == "📖 英文教练 Coaching":
+    st.header("📖 领导者英文教练")
+    st.write("帮助您在国际会议和跨国交流中更专业地表达。")
+    if articles:
+        st.markdown("#### 🔑 今日核心术语 (Key Vocabulary)")
+        # 提取 crawler.py 传过来的 vocabulary 字段
+        vocab = articles[0].get('vocabulary', {"Strategic Pivot": "战略转型", "Leverage": "杠杆作用/利用"})
+        for word, mean in vocab.items():
+            st.markdown(f"- **{word}**: {mean}")
