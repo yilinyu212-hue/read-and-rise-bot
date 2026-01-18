@@ -5,30 +5,31 @@ import os
 import time
 from datetime import datetime
 
-# ================= 配置区 =================
+# ================= 1. 环境与配置 =================
+# 从 GitHub Secrets 自动获取
 DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
 
-# 订阅源：涵盖全球顶尖商业内参
+# 聚焦全球顶尖商业洞察的源
 RSS_SOURCES = [
-    {"name": "Harvard Business Review", "url": "https://hbr.org/rss/feed/topics/leadership"},
-    {"name": "McKinsey Insights", "url": "https://www.mckinsey.com/insights/rss"},
-    {"name": "Economist - Business", "url": "https://www.economist.com/business/rss.xml"}
+    {"name": "Harvard Business Review", "url": "[https://hbr.org/rss/feed/topics/leadership](https://hbr.org/rss/feed/topics/leadership)"},
+    {"name": "McKinsey Insights", "url": "[https://www.mckinsey.com/insights/rss](https://www.mckinsey.com/insights/rss)"},
+    {"name": "Economist - Business", "url": "[https://www.economist.com/business/rss.xml](https://www.economist.com/business/rss.xml)"}
 ]
 
-# ================= AI 教练解析逻辑 =================
+# ================= 2. AI 教练深度解析模块 =================
 def ai_analyze(title, source_name):
     """
     扮演 AI Business Coach & English Mentor 
-    进行双语拆解、打分并提取高阶词汇
+    进行结构化双语拆解、能力评分及词汇提取
     """
     print(f"🤖 AI Coach 正在深度拆解: 《{title}》...")
-    url = "https://api.deepseek.com/chat/completions"
+    url = "[https://api.deepseek.com/chat/completions](https://api.deepseek.com/chat/completions)"
     headers = {
         "Authorization": f"Bearer {DEEPSEEK_API_KEY}",
         "Content-Type": "application/json"
     }
     
-    # 针对 Leaders 的专业 Prompt
+    # 针对 Leaders 的专业 Prompt，强制要求 JSON 格式
     prompt = f"""
     You are a world-class AI Business Coach and Executive English Mentor. 
     Analyze the article "{title}" from {source_name}.
@@ -50,7 +51,8 @@ def ai_analyze(title, source_name):
       }}
     }}
     
-    Important: Use \\n for line breaks in the cn_analysis field. Do not include any Markdown block markers like ```json.
+    Important: Use \\n for line breaks in the cn_analysis field. 
+    Do NOT include any Markdown code block markers like ```json in your response.
     """
     
     try:
@@ -62,36 +64,45 @@ def ai_analyze(title, source_name):
         response = requests.post(url, headers=headers, json=data, timeout=60)
         res_json = response.json()
         
-        # 提取并清理内容
+        # 获取 AI 返回的原始字符串
         content_raw = res_json['choices'][0]['message']['content'].strip()
-        # 移除可能存在的 Markdown 代码块标记
+        
+        # --- 健壮性处理：剔除 AI 可能自带的 Markdown 代码块标记 ---
         if content_raw.startswith("```"):
-            content_raw = content_raw.split("\n", 1)[1].rsplit("\n", 1)[0].strip()
+            # 兼容 ```json 或 ``` 格式
+            lines = content_raw.splitlines()
+            if lines[0].startswith("```"):
+                lines = lines[1:]
+            if lines[-1].startswith("```"):
+                lines = lines[:-1]
+            content_raw = "\n".join(lines).strip()
             
+        # 尝试转为 JSON
         return json.loads(content_raw)
         
     except Exception as e:
-        print(f"❌ 解析失败: {e}")
-        # 兜底数据，防止网页崩溃
+        print(f"❌ 解析失败 ({title}): {e}")
+        # 兜底数据，确保流程不中断
         return {
-            "en_summary": "English insights are being processed...",
-            "cn_analysis": "### ⚠️ 正在同步\n教练正在深度解析此文章，请稍后刷新。",
+            "en_summary": "Insight processing in progress...",
+            "cn_analysis": "### ⚠️ 解析同步中\n教练正在深度解析此篇外刊，请稍后刷新查看深度洞察。",
             "scores": {"战略思维": 60, "组织进化": 60, "决策韧性": 60, "行业洞察": 60, "技术视野": 60},
-            "vocabulary": {"Insight": "洞察", "Strategy": "战略"}
+            "vocabulary": {"Strategic Shift": "战略转型", "Benchmark": "标杆"}
         }
 
-# ================= 任务运行主逻辑 =================
+# ================= 3. 主运行逻辑 =================
 def run_sync():
     all_articles = []
     
     for source in RSS_SOURCES:
-        print(f"📡 正在抓取: {source['name']}...")
+        print(f"📡 正在拉取: {source['name']}...")
         try:
             feed = feedparser.parse(source['url'])
-            # 每个源只取前 2 篇最新文章，确保质量
+            # 选取每个源最新的 2 篇，保持高质量与低配额消耗
             for item in feed.entries[:2]:
                 analysis_result = ai_analyze(item.title, source['name'])
                 
+                # 组装完整数据对象
                 article_data = {
                     "title": item.title,
                     "link": item.link,
@@ -103,16 +114,18 @@ def run_sync():
                     "vocabulary": analysis_result.get("vocabulary")
                 }
                 all_articles.append(article_data)
-                time.sleep(1) # 礼貌抓取
+                time.sleep(1.5) # 礼貌频率，防止被封 IP
+                
         except Exception as e:
             print(f"❌ 源 {source['name']} 抓取异常: {e}")
 
-    # 保存到服务器本地 data.json
+    # --- 最终持久化存储 ---
+    # 这会覆盖旧的 data.json，生成全新的结构化数据供 app.py 读取
     output_path = "data.json"
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(all_articles, f, ensure_ascii=False, indent=4)
     
-    print(f"✅ 同步完成！共处理 {len(all_articles)} 篇精英内参。")
+    print(f"✅ 任务大功告成！已为 Leaders 同步 {len(all_articles)} 篇双语商业内参。")
 
 if __name__ == "__main__":
     run_sync()
