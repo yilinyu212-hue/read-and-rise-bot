@@ -1,72 +1,69 @@
 import os, requests, feedparser, json
 
-# 配置信息
+# 配置
 APP_ID = os.getenv("FEISHU_APP_ID")
 APP_SECRET = os.getenv("FEISHU_APP_SECRET")
 APP_TOKEN = os.getenv("FEISHU_APP_TOKEN")
 TABLE_ID = os.getenv("FEISHU_TABLE_ID")
 DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
 
-def run_task():
-    print("🚀 步骤 1: 开始运行爬虫...")
-    
-    # 获取 Token
-    t_url = "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal"
-    res = requests.post(t_url, json={"app_id": APP_ID, "app_secret": APP_SECRET}).json()
-    token = res.get("tenant_access_token")
-    if not token:
-        print("❌ 错误: 无法获取飞书 Token，请检查 APP_ID 和 SECRET")
-        return
-    print("✅ 步骤 2: 飞书授权成功")
+# --- 你的多源情报库 ---
+SOURCES = {
+    "HBR领导力": "https://hbr.org/rss/topic/leadership",
+    "经济学人": "https://www.economist.com/business/rss.xml",
+    "麦肯锡洞察": "https://www.mckinsey.com/insights/rss",
+    "斯坦福教育": "https://news.stanford.edu/topic/education/feed/",
+    "Edutopia创新": "https://www.edutopia.org/rss.xml",
+    "沃顿商学院": "https://knowledge.wharton.upenn.edu/feed/"
+}
 
-    # 抓取 RSS
-    feed_url = "https://hbr.org/rss/topic/leadership"
-    print(f"📡 步骤 3: 正在尝试抓取源: {feed_url}")
-    feed = feedparser.parse(feed_url)
-    
-    if not feed.entries:
-        print("⚠️ 提示: RSS 源目前没有文章，任务停止。")
-        return
-    
-    entry = feed.entries[0]
-    print(f"📄 找到文章: 《{entry.title}》")
+def get_token():
+    url = "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal"
+    res = requests.post(url, json={"app_id": APP_ID, "app_secret": APP_SECRET}).json()
+    return res.get("tenant_access_token")
 
-    # AI 分析
-    print("🧠 步骤 4: 正在请求 DeepSeek AI 进行深度解析 (预计耗时 1 分钟)...")
-    ai_url = "https://api.deepseek.com/chat/completions"
-    headers = {"Content-Type": "application/json", "Authorization": f"Bearer {DEEPSEEK_API_KEY}"}
-    prompt = f"分析文章《{entry.title}》，生成：1.摘要 2.教育者应用建议 3.苏格拉底反思。纯文字格式。"
-    
+def ai_analyze(title, source_name):
+    print(f"🧠 正在请求 AI 分析来自 [{source_name}] 的文章...")
+    url = "https://api.deepseek.com/chat/completions"
+    headers = {"Authorization": f"Bearer {DEEPSEEK_API_KEY}", "Content-Type": "application/json"}
+    prompt = f"作为教育者教练，请分析《{title}》(来源:{source_name})，提供摘要和3个苏格拉底式反思问题。纯文字格式。"
     try:
-        ai_res = requests.post(ai_url, headers=headers, json={
-            "model": "deepseek-chat",
-            "messages": [{"role": "user", "content": prompt}]
-        }, timeout=120).json()
-        content = ai_res['choices'][0]['message']['content']
-        print("✅ 步骤 5: AI 内容生成完毕！")
-    except Exception as e:
-        print(f"❌ AI 步骤失败: {e}")
-        return
+        data = {"model": "deepseek-chat", "messages": [{"role": "user", "content": prompt}]}
+        res = requests.post(url, headers=headers, json=data, timeout=60).json()
+        return res['choices'][0]['message']['content']
+    except:
+        return "AI 解析失败"
 
-    # 写入飞书
-    print("💾 步骤 6: 正在将内容写入飞书多维表格...")
-    fs_url = f"https://open.feishu.cn/open-apis/bitable/v1/apps/{APP_TOKEN}/tables/{TABLE_ID}/records"
-    payload = {
-        "fields": {
-            "培训主题": str(entry.title),
-            "核心内容": str(content),
-            "分类": "HBR实战",
-            "链接": str(entry.link)
+def run_all_sources():
+    token = get_token()
+    if not token: return
+    
+    for name, url in SOURCES.items():
+        print(f"📡 正在检查源: {name}")
+        feed = feedparser.parse(url)
+        if not feed.entries:
+            print(f"⚠️ {name} 暂时无更新")
+            continue
+            
+        # 抓取每个源最新的第一篇
+        entry = feed.entries[0]
+        content = ai_analyze(entry.title, name)
+        
+        # 写入飞书
+        fs_url = f"https://open.feishu.cn/open-apis/bitable/v1/apps/{APP_TOKEN}/tables/{TABLE_ID}/records"
+        payload = {
+            "fields": {
+                "培训主题": str(entry.title),
+                "核心内容": str(content),
+                "分类": name,
+                "链接": str(entry.link)
+            }
         }
-    }
-    
-    final_res = requests.post(fs_url, headers={"Authorization": f"Bearer {token}"}, json=payload).json()
-    
-    if final_res.get("code") == 0:
-        print("🎉 恭喜！数据已成功存入飞书。")
-    else:
-        print(f"❌ 飞书保存失败! 错误码: {final_res.get('code')}, 信息: {final_res.get('msg')}")
-        print(f"🔍 调试信息: {final_res.get('error', {})}")
+        r = requests.post(fs_url, headers={"Authorization": f"Bearer {token}"}, json=payload).json()
+        if r.get("code") == 0:
+            print(f"✅ {name} 同步成功！")
+        else:
+            print(f"❌ {name} 写入失败: {r.get('msg')}")
 
 if __name__ == "__main__":
-    run_task()
+    run_all_sources()
