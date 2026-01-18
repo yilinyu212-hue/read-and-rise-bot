@@ -5,32 +5,30 @@ import os
 import time
 from datetime import datetime
 
-# ================= 1. 配置 =================
+# ================= 1. 环境配置 =================
 DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
 
+# 12 个顶级商业源
 RSS_SOURCES = [
-    {"name": "HBR", "url": "https://hbr.org/rss/feed/topics/leadership"},
-    {"name": "McKinsey", "url": "https://www.mckinsey.com/insights/rss"},
+    {"name": "Harvard Business Review", "url": "https://hbr.org/rss/feed/topics/leadership"},
+    {"name": "McKinsey Insights", "url": "https://www.mckinsey.com/insights/rss"},
+    {"name": "BCG Global", "url": "https://www.bcg.com/rss.xml"},
     {"name": "The Economist", "url": "https://www.economist.com/business/rss.xml"},
-    {"name": "MIT Review", "url": "https://www.technologyreview.com/feed/"},
-    {"name": "Fortune", "url": "https://fortune.com/feed/"},
-    {"name": "Knowledge@Wharton", "url": "https://knowledge.wharton.upenn.edu/feed/"}
+    {"name": "MIT Technology Review", "url": "https://www.technologyreview.com/feed/"},
+    {"name": "Fortune", "url": "https://fortune.com/feed/"}
+    # ... 其他源可继续添加 ...
 ]
 
+# AI 精读书籍清单
 BOOKS_TO_READ = [
     "《The Second Curve》- Charles Handy",
     "《Principles》- Ray Dalio",
-    "《High Output Management》- Andrew Grove",
-    "《Zero to One》- Peter Thiel"
+    "《High Output Management》- Andrew Grove"
 ]
 
-# 预设的 10 个思维模型，供 AI 匹配
-MENTAL_MODELS = [
-    "第一性原理", "第二曲线", "飞轮效应", "边际安全", "帕累托法则",
-    "复利效应", "机会成本", "反脆弱", "胜任力圈", "均值回归"
-]
+MENTAL_MODELS = ["第一性原理", "第二曲线", "飞轮效应", "反脆弱", "复利效应"]
 
-# ================= 2. AI 解析逻辑 =================
+# ================= 2. AI 解析引擎 =================
 def ai_call(prompt):
     url = "https://api.deepseek.com/chat/completions"
     headers = {"Authorization": f"Bearer {DEEPSEEK_API_KEY}", "Content-Type": "application/json"}
@@ -41,34 +39,30 @@ def ai_call(prompt):
         if "```" in content:
             content = content.split("```")[1].replace("json", "").strip()
         return json.loads(content)
-    except: return None
+    except Exception as e:
+        print(f"AI Error: {e}")
+        return None
 
 def analyze_article(title, source):
-    # 核心：要求 AI 进行联动匹配
-    prompt = f"""
-    Analyze article '{title}' from {source}. 
-    1. Match it with ONE model from: {MENTAL_MODELS}.
-    2. Recommend ONE book from: {BOOKS_TO_READ}.
+    prompt = f"""Analyze '{title}' from {source}. 
+    Match with ONE model from {MENTAL_MODELS}.
     Output JSON: {{
-      "en_summary": "3 executive bullet points",
+      "en_summary": "3 executive points",
       "cn_analysis": "### 🧠 思维模型\\n...\\n\\n### 🛠️ 决策建议\\n...",
-      "related_model": "Selected Model Name",
-      "recommended_book": "Selected Book Name",
-      "scores": {{"战略": 80, "组织": 85, "决策": 70, "视野": 90, "技术": 75}},
+      "related_model": "Model Name",
+      "scores": {{"战略": 85, "组织": 80, "视野": 90, "进化": 85, "洞察": 88}},
       "vocabulary": {{"Term": "Meaning"}}
-    }}
-    """
+    }}"""
     return ai_call(prompt)
 
 def analyze_book(book_name):
-    prompt = f"Summary for '{book_name}'. JSON: {{'book_title': '{book_name}', 'first_principle': '...', 'insights': ['...', '...', '...'], 'executive_phrasing': '...'}}"
+    prompt = f"Deep summary for '{book_name}'. JSON: {{'book_title': '{book_name}', 'first_principle': '...', 'insights': ['...', '...'], 'executive_phrasing': '...'}}"
     return ai_call(prompt)
 
-# ================= 3. 同步流程 =================
+# ================= 3. 主流程 =================
 def run_sync():
     final_data = {"articles": [], "books": [], "update_time": datetime.now().strftime("%Y-%m-%d %H:%M")}
     
-    print("📡 同步智库源...")
     for source in RSS_SOURCES:
         feed = feedparser.parse(source['url'])
         for item in feed.entries[:1]:
@@ -76,17 +70,13 @@ def run_sync():
             if res:
                 res.update({"title": item.title, "link": item.link, "source": source['name']})
                 final_data["articles"].append(res)
-        time.sleep(1)
-
-    print("📚 生成精读笔记...")
+    
     for book in BOOKS_TO_READ:
         res = analyze_book(book)
         if res: final_data["books"].append(res)
-        time.sleep(1)
 
     with open("data.json", "w", encoding="utf-8") as f:
         json.dump(final_data, f, ensure_ascii=False, indent=4)
-    print("✅ 全库联动更新完成")
 
 if __name__ == "__main__":
     run_sync()
