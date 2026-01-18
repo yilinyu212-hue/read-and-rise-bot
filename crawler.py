@@ -6,7 +6,7 @@ from datetime import datetime
 # --- 1. 配置区 (已替换为你的飞书凭证) ---
 DEEPSEEK_KEY = "sk-500a770ac8e74c4cb38286ba27164c4a"
 APP_ID = "cli_a9e6e2fabcb8dcb2"
-APP_SECRET = "vUfd8KGIZ3zo26J0jGrTJbDBSZTAaBm"
+APP_SECRET = "6lqhEevwakrsPvEjknF4L8gM0BSGSmLI"
 APP_TOKEN = "BNnhbUIMMaQFgKshPnKc7BEInwh"
 TABLE_ID = "tblZHZLDmuMr7irX"
 
