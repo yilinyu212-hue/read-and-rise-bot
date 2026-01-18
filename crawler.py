@@ -1,6 +1,6 @@
 import os, requests, feedparser, json
 
-# 配置信息
+# 配置（从环境变量读取）
 APP_ID = os.getenv("FEISHU_APP_ID")
 APP_SECRET = os.getenv("FEISHU_APP_SECRET")
 APP_TOKEN = os.getenv("FEISHU_APP_TOKEN")
@@ -20,73 +20,50 @@ def get_feishu_token():
     return res.get("tenant_access_token")
 
 def ai_process_content(title, source_name):
-    """调用 DeepSeek 生成深度内容"""
-    if not DEEPSEEK_API_KEY:
-        print("⚠️ 警告：环境变量 DEEPSEEK_API_KEY 为空，请检查 GitHub Secrets 配置！")
-        return "AI 配置缺失，请检查 GitHub Secrets。"
-
+    """调用 DeepSeek 生成内容"""
+    if not DEEPSEEK_API_KEY: return "AI 配置缺失"
     url = "https://api.deepseek.com/chat/completions"
-    headers = {
-        "Content-Type": "application/json",
-        "Authorization": f"Bearer {DEEPSEEK_API_KEY}"
-    }
-    
-    prompt = f"""
-    作为一名教育者学术教练，请深度解析《{title}》(来源: {source_name})：
-    
-    1. 【核心摘要】: 250字中英文双语对照总结。
-    2. 【双语词汇与句式】: 提取3个核心术语，1个高级句式。
-    3. 【场景应用】: 教育领导者如何将此观点落地？
-    4. 【苏格拉底反思流】: 设计3个引导思考的问题。
-    5. 【实践案例】: 提供一个具体的应用实例。
-    """
-    
-    data = {
-        "model": "deepseek-chat",
-        "messages": [{"role": "user", "content": prompt}],
-        "temperature": 0.7
-    }
+    headers = {"Content-Type": "application/json", "Authorization": f"Bearer {DEEPSEEK_API_KEY}"}
+    prompt = f"请解析文章《{title}》(来源: {source_name})，生成包含核心摘要、双语词汇、场景应用、苏格拉底反思流和实践案例的教育笔记。请用清晰的Markdown格式。"
+    data = {"model": "deepseek-chat", "messages": [{"role": "user", "content": prompt}], "temperature": 0.7}
     
     try:
-        # 使用 json= 参数会自动处理序列化，避免手动 dumps 导致的错误
-        response = requests.post(url, headers=headers, json=data, timeout=60)
-        res_json = response.json()
-        if "choices" in res_json:
-            return res_json['choices'][0]['message']['content']
-        else:
-            error_msg = res_json.get('error', {}).get('message', '未知错误')
-            print(f"❌ DeepSeek 报错: {error_msg}")
-            return f"AI 生成失败: {error_msg}"
-    except Exception as e:
-        print(f"⚠️ 网络请求异常: {e}")
-        return "AI 内容生成中，请先阅读标题。"
+        response = requests.post(url, headers=headers, json=data, timeout=60).json()
+        return response['choices'][0]['message']['content']
+    except:
+        return "AI 解析生成中..."
 
 def sync_to_feishu(token, title, link, source_name):
     print(f"🧠 正在分析: 《{title}》...")
     ai_content = ai_process_content(title, source_name)
     
-    # --- [新增：强制在日志里打印前 100 个字，确认 AI 真的说话了] ---
-    print(f"📝 AI 返回片段: {ai_content[:100]}...") 
-    # -------------------------------------------------------
+    # --- 关键修复：清洗文本，防止 WrongRequestBody ---
+    # 确保内容是纯字符串，并移除可能导致 JSON 解析错误的极其罕见字符
+    safe_content = str(ai_content).replace('\ufffd', '') 
+    print(f"📝 AI 返回片段: {safe_content[:50]}...")
 
     url = f"https://open.feishu.cn/open-apis/bitable/v1/apps/{APP_TOKEN}/tables/{TABLE_ID}/records"
+    
+    # 构造标准飞书请求体
     payload = {
         "fields": {
-            "培训主题": title,
-            "核心内容": ai_content,
-            "分类": source_name,
+            "培训主题": str(title),
+            "核心内容": safe_content,
+            "分类": str(source_name),
             "链接": str(link)
         }
     }
     
-    res_req = requests.post(url, headers={"Authorization": f"Bearer {token}"}, json=payload)
-    res = res_req.json()
+    # 使用 json= 自动处理所有转义
+    res = requests.post(url, headers={"Authorization": f"Bearer {token}"}, json=payload).json()
     
     if res.get("code") == 0:
-        print(f"✅ 成功写入飞书！记录ID: {res.get('data', {}).get('record', {}).get('record_id')}")
+        print(f"✅ 成功同步至飞书")
         return True
     else:
-        print(f"❌ 写入飞书失败: {res.get('msg')}")
+        print(f"❌ 飞书报错: {res.get('msg')} (代码: {res.get('code')})")
+        # 调试用：如果还报错，打印出发送的字段名，核对是否匹配
+        print(f"🔍 当前尝试写入的字段名: {list(payload['fields'].keys())}")
         return False
 
 def run():
@@ -96,11 +73,10 @@ def run():
         try:
             feed = feedparser.parse(rss_url)
             if feed.entries:
-                entry = feed.entries[0]
-                if sync_to_feishu(token, entry.title, entry.link, name):
-                    print(f"✅ {name} 同步成功")
+                if sync_to_feishu(token, feed.entries[0].title, feed.entries[0].link, name):
+                    print(f"🎉 {name} 任务完成")
         except Exception as e:
-            print(f"⚠️ {name} 处理异常: {e}")
+            print(f"⚠️ 异常: {e}")
 
 if __name__ == "__main__":
     run()
