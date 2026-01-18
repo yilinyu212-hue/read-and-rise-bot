@@ -1,6 +1,6 @@
 import os, requests, feedparser, json
 
-# 环境变量获取
+# 环境变量
 APP_ID = os.getenv("FEISHU_APP_ID")
 APP_SECRET = os.getenv("FEISHU_APP_SECRET")
 APP_TOKEN = os.getenv("FEISHU_APP_TOKEN")
@@ -23,8 +23,8 @@ def ai_process_content(title, source_name):
     if not DEEPSEEK_API_KEY: return "AI 配置缺失"
     url = "https://api.deepseek.com/chat/completions"
     headers = {"Content-Type": "application/json", "Authorization": f"Bearer {DEEPSEEK_API_KEY}"}
-    
-    prompt = f"请解析文章《{title}》(来源: {source_name})，生成教育笔记：1.核心摘要(中英双语) 2.双语词汇 3.场景应用 4.苏格拉底反思 5.实践案例。请分段书写，不要使用复杂的 Markdown 符号。"
+    # 强制 AI 不要输出任何 Markdown 符号，只用空格和换行
+    prompt = f"分析文章《{title}》(来源: {source_name})，生成包含摘要、词汇、应用、反思的笔记。要求：纯文字，不要使用星号或井号等符号。"
     
     try:
         data = {"model": "deepseek-chat", "messages": [{"role": "user", "content": prompt}], "temperature": 0.3}
@@ -37,23 +37,20 @@ def sync_to_feishu(token, title, link, source_name):
     print(f"🧠 正在分析: 《{title}》...")
     ai_content = ai_process_content(title, source_name)
     
-    # --- 降噪逻辑 ---
-    # 替换掉可能引起 JSON 报错的特殊字符，保留简单的换行
-    safe_content = ai_content.replace('"', '\"').replace('\xa0', ' ')
+    # 极限脱敏：移除所有可能引起飞书报错的控制字符
+    clean_content = "".join(c for c in ai_content if c.isprintable() or c == '\n')
     
     url = f"https://open.feishu.cn/open-apis/bitable/v1/apps/{APP_TOKEN}/tables/{TABLE_ID}/records"
-    
-    # 强制将所有字段转为最基础的字符串
     payload = {
         "fields": {
             "培训主题": str(title),
-            "核心内容": str(safe_content),
+            "核心内容": str(clean_content),
             "分类": str(source_name),
             "链接": str(link)
         }
     }
     
-    # 关键：手动指定编码确保字符安全
+    # 使用 json= 参数确保所有转义由库自动完成
     res = requests.post(url, headers={"Authorization": f"Bearer {token}"}, json=payload).json()
     
     if res.get("code") == 0:
