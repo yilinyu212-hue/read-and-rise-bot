@@ -27,37 +27,33 @@ def get_feishu_token():
         return None
 
 def ai_analyze(title, source_name):
-    """调用 DeepSeek AI 进行深度教育解析"""
-    print(f"🧠 AI 正在深度解析文章: 《{title}》...")
+    print(f"🧠 AI 正在为 Leaders 解析文章: 《{title}》...")
     url = "https://api.deepseek.com/chat/completions"
     headers = {"Authorization": f"Bearer {DEEPSEEK_API_KEY}", "Content-Type": "application/json"}
     
-    # 结构化 Prompt，确保网页排版好看
+    # 针对各行各业 Leaders 的专属指令
     prompt = f"""
-    作为教育专家，请解析文章《{title}》(来源:{source_name})。
-    请按以下格式输出，不要使用复杂的 Markdown 符号：
+    作为一名顶尖的领导力教练，请深度解析《{title}》(来源:{source_name})。
+    
+    请按以下模块输出，专为高管和管理者设计：
 
-    ### 🖋️ 核心摘要
-    (请用200字以内提炼教育者必读的3个重点)
+    ### 📌 战略决策参考 (Executive Summary)
+    (请提炼出对跨行业管理最有价值的 3 个核心决策点)
 
-    ### 💬 教育箴言 (Bilingual Quotes)
-    (请提供一句中英对照的金句)
+    ### 🔑 领导力洞察
+    (这篇文章对管理团队、文化建设或自我进化有何启发？)
 
-    ### ❓ 苏格拉底反思
-    1. (反思问题1)
-    2. (反思问题2)
+    ### ❓ 决策思考
+    1. (如果您面临类似挑战，您的第一步行动是什么？)
+    2. (这个观点如何挑战了您现有的管理常识？)
     """
     
     try:
-        data = {
-            "model": "deepseek-chat", 
-            "messages": [{"role": "user", "content": prompt}],
-            "temperature": 0.5
-        }
+        data = {"model": "deepseek-chat", "messages": [{"role": "user", "content": prompt}], "temperature": 0.4}
         res = requests.post(url, headers=headers, json=data, timeout=120).json()
         return res['choices'][0]['message']['content']
     except Exception as e:
-        return f"AI 解析遇到一点小问题: {str(e)}"
+        return f"解析生成中... {str(e)}"
 
 def run_sync():
     token = get_feishu_token()
