@@ -1,17 +1,15 @@
-name: Read and Rise Daily Crawler
+name: Read & Rise Auto Sync
 
 on:
+  workflow_dispatch:
   schedule:
-    # 每天北京时间早上 8 点自动运行 (UTC 0点)
-    - cron: '0 0 * * *'
-  workflow_dispatch: # 允许手动点击运行按钮
+    - cron: '0 0 * * *' # 每天凌晨自动运行
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v3
 
       - name: Set up Python
@@ -19,17 +17,34 @@ jobs:
         with:
           python-version: '3.9'
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: |
           pip install requests feedparser
 
       - name: Run Crawler
         env:
-          # 这里是把 GitHub Secrets 里的值“取出来”映射给代码用的环境变量
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
           FEISHU_APP_ID: ${{ secrets.FEISHU_APP_ID }}
           FEISHU_APP_SECRET: ${{ secrets.FEISHU_APP_SECRET }}
-          FEISHU_APP_TOKEN: ${{ secrets.FEISHU_APP_TOKEN }}
+          APP_TOKEN: ${{ secrets.APP_TOKEN }}
           TABLE_ID: ${{ secrets.TABLE_ID }}
-          # 必须包含这一行，AI 才会生效
-          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
         run: python crawler.py
+
+      - name: Deploy to Tencent Cloud
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          source: "data.json,app.py"
+          target: "/home/ubuntu/" # 直接同步到网页运行的根目录
+
+      - name: Restart Streamlit Service
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.REMOTE_HOST }}
+          username: ${{ secrets.REMOTE_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          script: |
+            fuser -k 8501/tcp || true
+            nohup streamlit run /home/ubuntu/app.py --server.address 0.0.0.0 &
