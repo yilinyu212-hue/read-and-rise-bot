@@ -1,92 +1,107 @@
 import streamlit as st
-import json, os, requests, plotly.graph_objects as go
+import json, os, plotly.graph_objects as go
 from datetime import datetime
 
-st.set_page_config(page_title="Read & Rise", layout="wide", page_icon="🏹")
+st.set_page_config(page_title="Read & Rise", layout="wide")
 
-# --- 高端 UI 视觉设计 ---
+# --- 焕新 UI 样式：明亮、高级、易读 ---
 st.markdown("""
 <style>
-    .main { background-color: #F1F5F9; }
-    .stApp { background-color: #F1F5F9; }
-    [data-testid="stSidebar"] { background: #0F172A; }
-    .brief-card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); margin-bottom: 25px; border-top: 5px solid #38BDF8; }
-    .audio-section { background: #1E293B; color: white; padding: 20px; border-radius: 15px; margin-bottom: 30px; }
-    .stButton>button { width: 100%; background-color: #38BDF8; color: white; border: none; font-weight: bold; }
+    .stApp { background-color: #F8FAFC; }
+    [data-testid="stSidebar"] { background-color: #0F172A; }
+    .executive-card { 
+        background-color: white; 
+        padding: 30px; 
+        border-radius: 20px; 
+        box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        margin-bottom: 25px;
+        border-left: 6px solid #3B82F6;
+    }
+    h1, h2, h3 { color: #1E293B !important; font-family: 'Inter', sans-serif; }
+    p, li { color: #475569 !important; font-size: 1.05rem; line-height: 1.6; }
+    .level-tag { 
+        background: #EFF6FF; color: #1D4ED8; padding: 4px 12px; border-radius: 20px; 
+        font-size: 0.8rem; font-weight: bold; border: 1px solid #DBEAFE;
+    }
+    .topic-tag { 
+        background: #F1F5F9; color: #64748B; padding: 4px 12px; border-radius: 20px; 
+        font-size: 0.8rem; margin-right: 5px;
+    }
 </style>
 """, unsafe_allow_html=True)
 
-def load_data():
-    if not os.path.exists("data.json"): return {"briefs": [], "books": []}
+# 数据加载辅助（修复了 KeyError 问题）
+def load_all():
+    default = {"briefs": [], "books": []}
+    if not os.path.exists("data.json"): return default
     with open("data.json", "r", encoding="utf-8") as f:
-        d = json.load(f)
-        if "books" not in d: d["books"] = []
-        return d
+        try:
+            d = json.load(f)
+            if "books" not in d: d["books"] = []
+            if "briefs" not in d: d["briefs"] = []
+            return d
+        except: return default
 
-data = load_data()
+data = load_all()
 
 # --- 侧边导航 ---
-st.sidebar.markdown("<h1 style='color:white; text-align:center;'>🏹 Read & Rise</h1>", unsafe_allow_html=True)
-menu = st.sidebar.radio("", ["🏠 决策仪表盘", "🚀 全球商业内参", "📚 资产智库", "⚙️ 资产录入"])
+st.sidebar.markdown("<h2 style='color:white; text-align:center;'>🏹 Read & Rise</h2>", unsafe_allow_html=True)
+menu = st.sidebar.radio("", ["🏠 决策面板", "🚀 全球内参", "📚 资产智库"])
 
-if menu == "🏠 决策仪表盘":
-    st.markdown("### Executive Dashboard")
+if menu == "🏠 决策面板":
+    st.markdown("<h1>Executive Dashboard</h1>", unsafe_allow_html=True)
+    st.write(f"更新时间：{data.get('update_time', 'Syncing...')}")
     
-    # 🎙️ 语音播报模块
-    st.markdown('<div class="audio-section"><h4>🎙️ 每日全球商业播报 (BBC Style)</h4><p style="opacity:0.8;">基于最新的 6 大商业信源自动生成</p></div>', unsafe_allow_html=True)
     if os.path.exists("daily_briefing.mp3"):
         st.audio("daily_briefing.mp3")
-    else:
-        st.info("🕒 音频正在通过 GitHub 后台生成中...")
-
-    # 雷达图分析
+    
+    st.divider()
+    # 雷达图数据可视化
     if data['briefs']:
-        scores = data['briefs'][0].get('model_scores', {"Strategy":50, "Innovation":50, "Execution":50, "Insight":50})
+        art = data['briefs'][0]
+        scores = art.get('model_scores', {"Strategy":80, "Innovation":70, "Execution":75})
         fig = go.Figure(data=go.Scatterpolar(
             r=list(scores.values())+[list(scores.values())[0]],
             theta=list(scores.keys())+[list(scores.keys())[0]],
-            fill='toself', line=dict(color='#38BDF8')
+            fill='toself', line=dict(color='#3B82F6')
         ))
-        fig.update_layout(polar=dict(radialaxis=dict(visible=True, range=[0, 100])), height=400)
+        fig.update_layout(polar=dict(radialaxis=dict(visible=True, range=[0, 100])), height=400, margin=dict(t=30, b=30))
         st.plotly_chart(fig, use_container_width=True)
 
-elif menu == "🚀 全球商业内参":
-    st.markdown("### 🚀 Global Market Intelligence")
+elif menu == "🚀 全球内参":
+    st.markdown("<h1>Global Intelligence</h1>", unsafe_allow_html=True)
+    
     for i, art in enumerate(data.get("briefs", [])):
-        st.markdown(f'<div class="brief-card">', unsafe_allow_html=True)
-        st.subheader(f"📍 {art['source']} | {art['title']}")
-        
-        c1, c2 = st.columns(2)
-        with c1:
-            st.markdown("**🇬🇧 Executive Summary (EN)**")
-            st.write(art.get('en_summary'))
-        with c2:
-            st.markdown("**🇨🇳 深度策略分析 (CN)**")
-            st.write(art.get('cn_analysis'))
-        
-        st.divider()
-        if st.button(f"📥 存入 Read & Rise 数字资产库", key=f"btn_{i}"):
-            data["books"].append({"title": art['title'], "concept": art['source'], "insight": art['cn_analysis']})
-            with open("data.json", "w", encoding="utf-8") as f:
-                json.dump(data, f, ensure_ascii=False, indent=4)
-            st.toast(f"《{art['title']}》已永久入库")
-        st.markdown('</div>', unsafe_allow_html=True)
-
-elif menu == "📚 资产智库":
-    st.header("📚 已数字化的知识资产")
-    for b in data.get("books", []):
-        with st.container(border=True):
-            st.subheader(b['title'])
-            st.caption(f"来源/模型: {b.get('concept', 'Manual')}")
-            st.write(b.get('insight'))
-
-elif menu == "⚙️ 资产录入":
-    with st.form("add_asset"):
-        t = st.text_input("资产/书名/模型名称")
-        c = st.text_input("所属分类/核心逻辑")
-        i = st.text_area("深度洞察与应用建议")
-        if st.form_submit_button("同步至智库"):
-            data["books"].append({"title":t, "concept":c, "insight":i})
-            with open("data.json", "w", encoding="utf-8") as f:
-                json.dump(data, f, ensure_ascii=False, indent=4)
-            st.success("资产入库成功！")
+        with st.container():
+            st.markdown(f"""
+            <div class="executive-card">
+                <span class="level-tag">{art.get('reading_level', 'General')}</span>
+                <h2 style="margin-top:10px;">{art['title']}</h2>
+                <p style="color:#94A3B8;">Source: {art['source']}</p>
+                <div style="margin-bottom:20px;">
+                    {" ".join([f'<span class="topic-tag">#{t}</span>' for t in art.get('tags', [])])}
+                </div>
+            </div>
+            """, unsafe_allow_html=True)
+            
+            t1, t2, t3 = st.tabs(["💡 中英深度解析", "🧠 反思流 (Reflections)", "🛠️ 行动建议"])
+            with t1:
+                col_en, col_cn = st.columns(2)
+                with col_en:
+                    st.markdown("**Executive Summary**")
+                    st.write(art.get('en_summary', 'Generating...'))
+                with col_cn:
+                    st.markdown("**深度决策分析**")
+                    st.write(art.get('cn_analysis', '解析生成中...'))
+            with t2:
+                for q in art.get('reflection_flow', []):
+                    st.info(f"❓ {q}")
+            with t3:
+                for act in art.get('action_points', []):
+                    st.success(f"✅ {act}")
+            
+            if st.button("📥 存入 Read & Rise 数字资产库", key=f"save_{i}"):
+                data["books"].append({"title": art['title'], "insight": art['cn_analysis']})
+                with open("data.json", "w", encoding="utf-8") as f:
+                    json.dump(data, f, ensure_ascii=False, indent=4)
+                st.balloons()
