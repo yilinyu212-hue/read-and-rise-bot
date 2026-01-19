@@ -1,7 +1,7 @@
 name: Read & Rise Strategic Sync
 on:
   schedule:
-    - cron: '0 22 * * *'
+    - cron: '0 22 * * *' # 北京时间清晨6点
   workflow_dispatch:
 jobs:
   build:
