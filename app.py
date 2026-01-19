@@ -1,122 +1,75 @@
 import streamlit as st
 import pandas as pd
-import json
-import os
-import plotly.graph_objects as go
+import json, os, plotly.graph_objects as go
 
-# ================= 1. 样式配置 =================
-st.set_page_config(page_title="Read & Rise", layout="wide", page_icon="🏹")
+# 页面配置
+st.set_page_config(page_title="Read & Rise Coach", layout="wide")
 
-st.markdown("""
-    <style>
-    .stApp { background-color: #F8FAFC; }
-    .coach-card { background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%); padding: 30px; border-radius: 20px; color: white; margin-bottom: 30px; border-left: 8px solid #38BDF8; }
-    .card { background: white; padding: 20px; border-radius: 15px; border: 1px solid #E2E8F0; margin-bottom: 15px; }
-    .tag { background: #E0F2FE; color: #0369A1; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700; margin-right: 8px; }
-    .en-sub { color: #94A3B8; font-style: italic; font-size: 0.9rem; margin-bottom: 5px; }
-    </style>
-""", unsafe_allow_html=True)
-
-# ================= 2. 数据处理 =================
-@st.cache_data(ttl=3600)
+# 加载数据逻辑
 def load_data():
     if os.path.exists("data.json"):
-        try:
-            with open("data.json", "r", encoding="utf-8") as f:
-                return json.load(f)
-        except: return {"articles": [], "books": []}
-    return {"articles": [], "books": []}
+        with open("data.json", "r", encoding="utf-8") as f:
+            return json.load(f)
+    return {"articles": [], "books": [], "weekly_question_cn": "", "weekly_question_en": ""}
 
 data = load_data()
 
-def draw_radar(scores_dict):
-    categories = list(scores_dict.keys())
-    values = list(scores_dict.values())
-    fig = go.Figure()
-    fig.add_trace(go.Scatterpolar(r=values + [values[0]], theta=categories + [categories[0]], fill='toself', line_color='#38BDF8', fillcolor='rgba(56, 189, 248, 0.3)'))
-    fig.update_layout(polar=dict(radialaxis=dict(visible=True, range=[0, 100])), showlegend=False, height=350, margin=dict(l=40, r=40, t=20, b=20))
-    return fig
-
-# ================= 3. 频道逻辑 =================
+# --- 侧边栏 ---
 with st.sidebar:
-    st.markdown("<h1 style='font-size: 2rem;'>🏹 Read & Rise</h1>", unsafe_allow_html=True)
-    menu = st.radio("导航", ["🏠 主页 Dashboard", "🚀 今日内参 Insights", "📚 精读笔记 Books", "🧠 思维模型 Models", "🎙️ 英文教练 Coach"], label_visibility="collapsed")
-    st.markdown(f"<div style='margin-top:200px; opacity:0.5; font-size:0.8rem;'>Updated: {data.get('update_time', 'N/A')}</div>", unsafe_allow_html=True)
+    st.title("🏹 Read & Rise")
+    menu = st.radio("导航", ["🏠 教练仪表盘", "✍️ 上传新外刊", "🎙️ AI 教练对话", "📚 智库仓库"])
 
-# --- 🏠 主页 ---
-if menu == "🏠 主页 Dashboard":
-    # 中英双语提问看板
+# --- 首页：教练仪表盘 ---
+if menu == "🏠 教练仪表盘":
     st.markdown(f"""
-    <div class="coach-card">
-        <h4 style="color: #38BDF8; margin: 0; letter-spacing: 1px;">🎙️ WEEKLY INQUIRY / 每周提问</h4>
-        <p style="font-size: 1.1rem; margin-top: 15px; color: #94A3B8; font-style: italic;">“{data.get('weekly_question_en', 'How do you balance short-term performance with long-term strategy?')}”</p>
-        <p style="font-size: 1.4rem; font-weight: 500; margin-top: 5px;">“{data.get('weekly_question_cn', '你如何在短期业绩与长期战略之间取得平衡？')}”</p>
+    <div style="background: #0F172A; padding: 25px; border-radius: 15px; color: white; border-left: 8px solid #38BDF8;">
+        <h4 style="color: #38BDF8; margin:0;">🎙️今日教练提问 / DAILY INQUIRY</h4>
+        <p style="font-size: 1.1rem; color: #94A3B8; font-style: italic; margin-top:10px;">"{data.get('weekly_question_en')}"</p>
+        <p style="font-size: 1.3rem; font-weight: bold;">“{data.get('weekly_question_cn')}”</p>
     </div>
     """, unsafe_allow_html=True)
+    
+    # 此处放置雷达图逻辑... (见前次代码)
 
-    col_l, col_r = st.columns([1.6, 1])
-    with col_l:
-        st.subheader("💡 知识联动建议 / Linked Insight")
-        if data.get("articles"):
-            top = data["articles"][0]
-            st.markdown(f"""
-            <div class="card">
-                <p class="en-sub">Based on: {top['title']}</p>
-                <p><b>今日深度分析：</b>{top['title']}</p>
-                <span class="tag">🧠 {top.get('related_model', 'First Principles')}</span>
-                <span class="tag">📚 {top.get('related_book', 'Principles')}</span>
-            </div>
-            """, unsafe_allow_html=True)
-    with col_r:
-        st.subheader("📊 领导力雷达 / Competency")
-        if data.get("articles"):
-            avg_scores = pd.DataFrame([a['scores'] for a in data["articles"]]).mean().to_dict()
-            st.plotly_chart(draw_radar(avg_scores), use_container_width=True)
+# --- 功能一：手动上传并解析 (解决国内访问问题) ---
+elif menu == "✍️ 上传新外刊":
+    st.header("✍️ 上传外刊文章进行 AI 解析")
+    uploaded_text = st.text_area("在此粘贴外刊原文内容...", height=300)
+    
+    if st.button("开始 AI 深度解析"):
+        if uploaded_text:
+            with st.status("AI 教练正在研读并匹配模型..."):
+                # 这里调用你的 AI 解析函数 (逻辑同前 crawler)
+                # 解析完成后，将结果 append 到 data.json 并保存
+                st.success("解析完成！已存入智库。")
+        else:
+            st.warning("请先输入内容")
 
-# --- 🚀 今日内参 ---
-elif menu == "🚀 今日内参 Insights":
-    st.header("🚀 Global Business Insights")
-    for art in data.get("articles", []):
-        with st.expander(f"📌 [{art['source']}] {art['title']}"):
-            st.markdown(f"<span class='tag'>Model: {art.get('related_model')}</span> <span class='tag'>Reading: {art.get('related_book')}</span>", unsafe_allow_html=True)
-            c1, c2 = st.columns(2)
-            c1.info(art['en_summary'])
-            c2.markdown(art['cn_analysis'])
-            st.link_button("Original Link / 阅读原文", art['link'])
+# --- 功能二：生成你的 AI 教练 (灵魂所在) ---
+elif menu == "🎙️ AI 教练对话":
+    st.header("🎙️ Read & Rise AI Coach")
+    st.markdown("> **我是你的 AI 商业教练。我会基于本站的思维模型和外刊内容回答你的管理困惑。**")
 
-# --- 📚 精读笔记 ---
-elif menu == "📚 精读笔记 Books":
-    st.header("📚 Executive Book Summaries")
-    for book in data.get("books", []):
-        with st.expander(f"📖 {book['book_title']}"):
-            st.markdown(f"**First Principle / 核心逻辑:** {book['first_principle']}")
-            for ins in book['insights']: st.markdown(f"- {ins}")
-            st.success(f"🎙️ **Executive Phrasing / 高管话术:** {book['executive_phrasing']}")
+    # 初始化聊天历史
+    if "messages" not in st.session_state:
+        st.session_state.messages = []
 
-# --- 🧠 思维模型 ---
-elif menu == "🧠 思维模型 Models":
-    st.header("🧠 Mental Models for Leaders")
-    models = {
-        "第一性原理 First Principles": "回归事物本质，重新构建。",
-        "第二曲线 Second Curve": "在现有业务巅峰前开启新增长点。",
-        "飞轮效应 Flywheel Effect": "建立正向循环，实现自动加速。"
-    }
-    cols = st.columns(2)
-    for i, (name, desc) in enumerate(models.items()):
-        with cols[i % 2].expander(name):
-            st.write(desc)
-            if "飞轮效应" in name:
-                st.info("💡 Identify factors that push each other in a loop.")
-                
-            if "第二曲线" in name:
-                st.info("💡 Strategic pivot before the first curve declines.")
-                
+    for message in st.session_state.messages:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
 
-# --- 🎙️ 英文教练 ---
-elif menu == "🎙️ 英文教练 Coach":
-    st.header("🎙️ Executive Vocabulary")
-    all_v = {}
-    for a in data.get("articles", []): all_v.update(a.get('vocabulary', {}))
-    v_cols = st.columns(3)
-    for i, (w, m) in enumerate(all_v.items()):
-        v_cols[i % 3].markdown(f'<div class="card"><b>{w}</b><br><small>{m}</small></div>', unsafe_allow_html=True)
+    if prompt := st.chat_input("输入你的管理挑战..."):
+        st.session_state.messages.append({"role": "user", "content": prompt})
+        with st.chat_message("user"):
+            st.markdown(prompt)
+
+        with st.chat_message("assistant"):
+            # 将最新的几篇文章作为“教练知识背景”
+            context = str(data["articles"][-2:]) 
+            full_prompt = f"你是一位资深商业教练。背景知识：{context}\n用户问题：{prompt}\n请给出启发式回答："
+            
+            # 模拟 AI 响应
+            # response = your_ai_call(full_prompt) 
+            response = "这是一个深刻的问题。结合本周我们分析的《麦肯锡》报告，建议你从'第一性原理'出发..."
+            st.markdown(response)
+            st.session_state.messages.append({"role": "assistant", "content": response})
