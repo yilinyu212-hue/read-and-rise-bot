@@ -1,90 +1,125 @@
 import streamlit as st
-import json, os
+import json, os, requests
 
-st.set_page_config(page_title="Read & Rise", layout="wide")
+st.set_page_config(page_title="Read & Rise", layout="wide", page_icon="🏹")
 
-# --- 极简明亮 UI 样式 ---
+# --- 高端明亮 UI 样式 ---
 st.markdown("""
 <style>
     .stApp { background-color: #F8FAFC; }
-    .welcome-card { background: white; padding: 40px; border-radius: 24px; border-left: 10px solid #2563EB; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
-    .content-card { background: white; padding: 25px; border-radius: 16px; border: 1px solid #E2E8F0; margin-bottom: 20px; }
-    .vocab-card { background: #F1F5F9; padding: 12px; border-radius: 10px; border-left: 4px solid #64748B; margin: 5px 0; }
-    .type-tag { background: #DBEAFE; color: #1E40AF; padding: 2px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; }
+    .welcome-card { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-left: 8px solid #2563EB; }
+    .coach-bubble { background: #EEF2FF; padding: 15px; border-radius: 15px; border: 1px solid #C7D2FE; margin-bottom: 10px; }
     h1, h2, h3 { color: #1E293B !important; }
 </style>
 """, unsafe_allow_html=True)
 
+# 数据加载
 def load_data():
-    if not os.path.exists("data.json"): return {"items": []}
+    if not os.path.exists("data.json"): return {"items": [], "books": []}
     with open("data.json", "r", encoding="utf-8") as f:
-        return json.load(f)
+        d = json.load(f)
+        if "items" not in d: d["items"] = []
+        if "books" not in d: d["books"] = []
+        return d
 
 data = load_data()
 
-# --- 侧边栏 ---
-st.sidebar.markdown("# 🏹 Read & Rise")
-menu = st.sidebar.radio("模块导航", ["🏠 首页 Dashboard", "📚 智库详情 (包含音频)"])
+# --- AI Coach 核心引擎 ---
+def call_ai_coach(user_input, context_content=""):
+    api_key = os.getenv("DEEPSEEK_API_KEY")
+    if not api_key: return "❌ 教练处于离线状态，请检查 API Key 配置。"
+    
+    # 注入教练人格：专业、尖锐、具有全球视野
+    system_prompt = f"""You are the 'Read & Rise' AI Executive Coach. 
+    Your goal is to help leaders think deeper. 
+    Current Article Context: {context_content}
+    Always respond in Chinese, but keep key business terms in English. 
+    Encourage the user to apply mental models to their real business cases."""
+    
+    try:
+        res = requests.post("https://api.deepseek.com/chat/completions",
+            headers={"Authorization": f"Bearer {api_key}"},
+            json={
+                "model": "deepseek-chat",
+                "messages": [
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": user_input}
+                ],
+                "temperature": 0.7
+            })
+        return res.json()['choices'][0]['message']['content']
+    except:
+        return "⚠️ Coach 正在思考中（连接超时），请稍后再试。"
+
+# --- 侧边栏导航 ---
+st.sidebar.markdown("<h1 style='color:white; text-align:center;'>🏹 Read & Rise</h1>", unsafe_allow_html=True)
+menu = st.sidebar.radio("模块导航", ["🏠 首页 Dashboard", "🚀 全球商业内参", "📚 资产智库", "🧠 咨询教练 Coach"])
 
 if menu == "🏠 首页 Dashboard":
-    st.markdown('<div class="welcome-card"><h1>Hi, Leaders! 👋</h1><p>今天为您准备了来自全球 10 大信源的简报及 5 本必读名著精华。</p></div>', unsafe_allow_html=True)
+    st.markdown('<div class="welcome-card"><h1>Hi, Leaders! 👋</h1><p>我是您的 AI Coach。今天已为您更新 10+ 全球信源及 5 本必读名著。您可以随时向我提问。</p></div>', unsafe_allow_html=True)
     
+    # 今日推荐
     st.write("")
-    st.subheader("🔥 今日重点推荐 (Top Picks)")
-    
-    # 采用 2x2 网格展示推荐
-    cols = st.columns(2)
-    for idx, item in enumerate(data.get("items", [])[:4]):
-        with cols[idx % 2]:
-            st.markdown(f"""
-            <div class="content-card">
-                <span class="type-tag">{item.get('type')}</span>
-                <h3 style="margin-top:10px;">{item.get('cn_title')}</h3>
-                <p style="font-size:0.9rem; color:#64748B;">{item.get('en_title')}</p>
-            </div>
-            """, unsafe_allow_html=True)
-            if st.button(f"查看详情与收听音频 #{idx}", key=f"goto_{idx}"):
-                st.session_state.selected_item = item
-                st.info("已在侧边栏选中，请点击『智库详情』查看")
+    if data['items']:
+        top = data['items'][0]
+        st.subheader(f"🔥 今日首推：{top.get('cn_title')}")
+        if os.path.exists(top.get('audio_file', '')):
+            st.audio(top['audio_file'])
+        
+        # 快捷对话入口
+        if st.button("🎙️ 就此主题咨询 AI 教练"):
+            st.session_state.coach_context = top.get('en_summary')
+            st.info("已切换至当前主题，请前往『咨询教练』模块开始对话。")
 
-elif menu == "📚 智库详情 (包含音频)":
-    st.header("Intelligence & Audio Hub")
+elif menu == "🚀 全球商业内参":
+    st.header("Intelligence Hub")
+    for i, item in enumerate(data.get("items", [])):
+        with st.expander(f"📍 [{item.get('type')}] {item.get('cn_title')}"):
+            if os.path.exists(item.get("audio_file", "")):
+                st.audio(item["audio_file"])
+            
+            # 分页展示
+            tabs = st.tabs(["💡 解析", "🔤 词汇", "❓ 反思", "📥 存入智库"])
+            with tabs[0]:
+                st.write(f"**EN Summary:** {item.get('en_summary')}")
+                st.success(f"**CN Analysis:** {item.get('cn_analysis')}")
+            with tabs[1]:
+                for v in item.get('vocab_cards', []):
+                    st.write(f"**{v['word']}** : {v['meaning']}")
+            with tabs[2]:
+                st.write(item.get('reflection_flow'))
+            with tabs[3]:
+                if st.button("📥 永久收藏至智库资产", key=f"save_{i}"):
+                    data["books"].append({"title": item['en_title'], "insight": item['cn_analysis']})
+                    # 此处省略保存 data.json 代码
+
+elif menu == "🧠 咨询教练 Coach":
+    st.header("🏹 Read & Rise AI Coach")
+    st.caption("基于全球视野与管理思维的 1-on-1 咨询")
+
+    # 初始化对话历史
+    if "messages" not in st.session_state:
+        st.session_state.messages = []
     
-    items = data.get("items", [])
-    if not items:
-        st.warning("暂无同步数据，请检查 GitHub Actions 运行状态。")
-    else:
-        for i, item in enumerate(items):
-            with st.expander(f"📍 [{item.get('type')}] {item.get('cn_title')} | {item.get('en_title')}"):
-                
-                # 🎙️ 独立音频播放
-                if os.path.exists(item.get("audio_file", "")):
-                    st.write("🎧 **AI 朗读播报 (听力练习):**")
-                    st.audio(item.get("audio_file"))
-                
-                t1, t2, t3, t4 = st.tabs(["💡 深度解析", "📖 案例拆解", "❓ 反思流", "🔤 词汇卡"])
-                
-                with t1:
-                    c1, c2 = st.columns(2)
-                    c1.markdown("**Executive Summary (EN)**")
-                    c1.info(item.get('en_summary'))
-                    c2.markdown("**战略决策建议 (CN)**")
-                    c2.success(item.get('cn_analysis'))
-                
-                with t2:
-                    st.markdown("#### 🔍 相关案例应用")
-                    st.write(item.get('case_study', '正在生成案例...'))
-                
-                with t3:
-                    st.markdown("#### 🧠 领导力反思问题")
-                    for q in item.get('reflection_flow', []):
-                        st.info(f"❓ {q}")
-                
-                with t4:
-                    st.markdown("#### 🔤 核心词汇卡片 (English Focus)")
-                    for v in item.get('vocab_cards', []):
-                        st.markdown(f"""<div class="vocab-card">
-                            <strong>{v['word']}</strong> <small>{v.get('phonetic','')}</small><br>
-                            <em>{v['meaning']}</em><br>
-                            <small>Ex: {v['example']}</small>
-                        </div>""", unsafe_allow_html=True)
+    # 显示历史消息
+    for message in st.session_state.messages:
+        with st.chat_message(message["role"]):
+            st.markdown(message["content"])
+
+    # 对话输入
+    if prompt := st.chat_input("您可以问我：'这篇文章对我的团队管理有什么启发？'"):
+        st.session_state.messages.append({"role": "user", "content": prompt})
+        with st.chat_message("user"):
+            st.markdown(prompt)
+
+        with st.chat_message("assistant"):
+            # 获取上下文（如果用户是从某篇文章点过来的）
+            context = st.session_state.get("coach_context", "General business advice")
+            response = call_ai_coach(prompt, context)
+            st.markdown(response)
+        st.session_state.messages.append({"role": "assistant", "content": response})
+
+elif menu == "📚 资产智库":
+    st.header("📚 数字化资产库")
+    for b in data.get("books", []):
+        st.info(f"**{b['title']}**\n\n{b.get('insight')}")
