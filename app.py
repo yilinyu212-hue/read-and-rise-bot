@@ -4,120 +4,115 @@ import json, os, requests
 st.set_page_config(page_title="Read & Rise", layout="wide", page_icon="🏹")
 DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
 
-# --- UI 视觉：清新商务风 ---
+# --- UI 视觉：清新明亮的教育/商务风 ---
 st.markdown("""
 <style>
-    [data-testid="stSidebar"] { display: none; }
-    .stApp { background-color: #F0F2F6; }
+    /* 侧边栏背景色 */
+    [data-testid="stSidebar"] { background-color: #F8FAFC; border-right: 1px solid #E2E8F0; }
+    .stApp { background-color: #FFFFFF; }
     
-    /* 去掉黑底，改用极简白色 Header */
-    .header-section { 
-        background: white; 
-        padding: 40px; 
-        text-align: center; 
-        border-radius: 0 0 40px 40px; 
-        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-        margin-bottom: 30px;
-    }
-    .main-title { color: #1E293B; font-size: 3rem; font-weight: 800; margin: 0; }
-    .slogan { color: #64748B; font-size: 1.3rem; font-style: italic; margin-top: 5px; }
-    
-    /* 卡片呼吸感 */
-    .note-card { background: white; padding: 30px; border-radius: 24px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); border: 1px solid #E2E8F0; margin-bottom: 25px; }
-    .card-title { color: #0F172A; font-size: 1.8rem; font-weight: 700; margin-bottom: 15px; }
-    .section-tag { color: #3B82F6; text-transform: uppercase; letter-spacing: 1px; font-weight: 700; font-size: 0.9rem; }
+    /* 顶部导航去掉黑底 */
+    .nav-container { background: white; padding: 20px; border-bottom: 1px solid #F1F5F9; margin-bottom: 20px; }
+    .main-title { color: #0F172A; font-size: 2.2rem; font-weight: 800; text-align: center; margin:0; }
+    .slogan { color: #64748B; text-align: center; font-style: italic; font-size: 1rem; }
+
+    /* 卡片样式 */
+    .note-card { background: #FFFFFF; padding: 30px; border-radius: 16px; border: 1px solid #F1F5F9; box-shadow: 0 4px 12px rgba(0,0,0,0.03); margin-bottom: 20px; }
+    .read-header { color: #2563EB; font-weight: 800; font-size: 1.4rem; border-bottom: 2px solid #DBEAFE; padding-bottom: 8px; margin-bottom: 15px; }
+    .rise-header { color: #059669; font-weight: 800; font-size: 1.4rem; border-bottom: 2px solid #DCFCE7; padding-bottom: 8px; margin-bottom: 15px; }
 </style>
 """, unsafe_allow_html=True)
 
-# 清新版 Header
-st.markdown("""
-<div class="header-section">
-    <h1 class="main-title">Read & Rise</h1>
-    <div class="slogan">Read to Rise, Rise to Lead.</div>
-</div>
-""", unsafe_allow_html=True)
+# 顶部导航渲染
+st.markdown('<div class="nav-container"><h1 class="main-title">Read & Rise</h1><div class="slogan">Read to Rise, Rise to Lead.</div></div>', unsafe_allow_html=True)
 
-# 状态与导航
-if "page" not in st.session_state: st.session_state.page = "Dashboard"
-if "messages" not in st.session_state: st.session_state.messages = []
+if "page" not in st.session_state: st.session_state.page = "🏠 Dashboard"
 
-n1, n2, n3 = st.columns(3)
-if n1.button("🏠 Dashboard", use_container_width=True): st.session_state.page = "Dashboard"
-if n2.button("🚀 Intelligence", use_container_width=True): st.session_state.page = "Intelligence"
-if n3.button("🧠 AI Coach", use_container_width=True): st.session_state.page = "Coach"
+# 侧边栏导航
+with st.sidebar:
+    st.image("https://cdn-icons-png.flaticon.com/512/3429/3429149.png", width=80)
+    st.markdown("### Menu")
+    if st.button("🏠 Dashboard", use_container_width=True): st.session_state.page = "🏠 Dashboard"
+    if st.button("🚀 Intelligence Hub", use_container_width=True): st.session_state.page = "🚀 Intelligence Hub"
+    if st.button("🧠 AI Coach", use_container_width=True): st.session_state.page = "🧠 AI Coach"
 
 def load_data():
     if os.path.exists("data.json"):
         with open("data.json", "r", encoding="utf-8") as f:
-            try: return json.load(f).get("items", [])
+            try:
+                res = json.load(f)
+                return res.get("items", [])
             except: return []
     return []
 
 items = load_data()
 
-# --- 1. Dashboard (Hi, Leaders! 回归) ---
-if st.session_state.page == "Dashboard":
-    st.markdown("### Hi, Leaders! 👋")
-    if items:
-        top = items[0]
-        st.markdown(f"""<div class="note-card">
-            <div class="section-tag">Featured Insight</div>
-            <div class="card-title">{top.get('cn_title')}</div>
-            <p style='color: #475569;'>{top.get('cn_analysis')[:200]}...</p>
-        </div>""", unsafe_allow_html=True)
-    else: st.info("Intelligence is being curated...")
+# --- 页面内容 ---
 
-# --- 2. Intelligence (左右分屏卡片) ---
-elif st.session_state.page == "Intelligence":
+if st.session_state.page == "🏠 Dashboard":
+    st.markdown("### Hi, Leaders! 👋")
+    st.info("欢迎回到您的私人智库。今天我们为您准备了来自 HBR、McKinsey 等渠道的深度洞察。")
     if items:
-        titles = [i.get('cn_title') for i in items]
-        selected = st.selectbox("Select Study Item:", titles)
-        it = next(i for i in items if i['cn_title'] == selected)
+        with st.expander("📌 今日速览", expanded=True):
+            for i, it in enumerate(items):
+                st.write(f"{i+1}. {it.get('cn_title')}")
+
+elif st.session_state.page == "🚀 Intelligence Hub":
+    if items:
+        # 左侧边栏增加文章选择列表，模拟“分页”
+        with st.sidebar:
+            st.divider()
+            st.markdown("### 📚 Select Article")
+            titles = [i.get('cn_title') for i in items]
+            selected_title = st.radio("Choose to Read:", titles)
         
+        it = next(i for i in items if i['cn_title'] == selected_title)
+        
+        st.subheader(it.get('cn_title'))
         if os.path.exists(it.get('audio_file','')): 
-            st.write("🎧 **Leadership Audio Briefing (Long Version)**")
+            st.caption("🎧 Leadership Audio Briefing (Ryan, UK)")
             st.audio(it['audio_file'])
         
         col1, col2 = st.columns(2, gap="large")
         with col1:
             st.markdown(f"""<div class="note-card">
-                <div class="section-tag" style="color:#2563EB;">📚 Read (Input)</div>
-                <div style="font-size:1.2rem; font-weight:600; margin:10px 0;">{it.get('cn_title')}</div>
-                <p>{it.get('cn_analysis')}</p>
-                <hr style="border:0.5px solid #F1F5F9;">
-                <p style="color:#64748B; font-size:0.9rem; font-style:italic;"><b>Audio Script:</b> {it.get('en_summary')}</p>
+                <div class="read-header">Read (Input)</div>
+                <p style="line-height:1.8;">{it.get('cn_analysis')}</p>
+                <hr style="opacity:0.2">
+                <p style="color:#64748B; font-size:0.9rem;"><b>Audio Script:</b> {it.get('en_summary')}</p>
             </div>""", unsafe_allow_html=True)
             
         with col2:
             st.markdown(f"""<div class="note-card">
-                <div class="section-tag" style="color:#059669;">🚀 Rise (Growth)</div>
-                <div style="font-size:1.2rem; font-weight:600; margin:10px 0;">Case Study</div>
+                <div class="rise-header">Rise (Cognition)</div>
+                <b>Management Case Study:</b>
                 <p>{it.get('case_study')}</p>
-                <hr style="border:0.5px solid #F1F5F9;">
-                <div class="section-tag" style="color:#059669;">Reflection</div>
+                <hr style="opacity:0.2">
+                <b>Leadership Reflection:</b>
                 <ul>{''.join([f'<li>{r}</li>' for r in it.get('reflection_flow', [])])}</ul>
             </div>""", unsafe_allow_html=True)
-            if st.button("🧠 Consult with AI Coach", use_container_width=True):
-                st.session_state.messages.append({"role": "user", "content": f"Let's discuss: {it.get('cn_title')}"})
-                st.session_state.page = "Coach"
+            if st.button("🧠 就此议题开启 Coach 对话", use_container_width=True):
+                st.session_state.messages.append({"role": "user", "content": f"关于《{it.get('cn_title')}》，我想进行深度对话。"})
+                st.session_state.page = "🧠 AI Coach"
                 st.rerun()
 
-# --- 3. Coach (深度对话) ---
-elif st.session_state.page == "Coach":
+elif st.session_state.page == "🧠 AI Coach":
     st.header("🧠 AI Executive Coach")
     for m in st.session_state.messages:
         with st.chat_message(m["role"]): st.markdown(m["content"])
 
-    if prompt := st.chat_input("Ask about leadership or language..."):
+    if prompt := st.chat_input("Speak with your mentor..."):
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"): st.markdown(prompt)
         
         if DEEPSEEK_API_KEY:
-            headers = {"Authorization": f"Bearer {DEEPSEEK_API_KEY}", "Content-Type": "application/json"}
-            payload = {"model": "deepseek-chat", "messages": [{"role": "system", "content": "You are a mentor for educators and leaders. Provide deep, actionable coaching."}] + st.session_state.messages}
-            res = requests.post("https://api.deepseek.com/chat/completions", headers=headers, json=payload, timeout=60)
-            ans = res.json()['choices'][0]['message']['content']
-        else: ans = "Brain offline (API Key Missing)."
+            try:
+                headers = {"Authorization": f"Bearer {DEEPSEEK_API_KEY}"}
+                payload = {"model": "deepseek-chat", "messages": [{"role": "system", "content": "You are a mentor for leaders. Provide deep, bilingual advice."}] + st.session_state.messages}
+                res = requests.post("https://api.deepseek.com/chat/completions", headers=headers, json=payload, timeout=60)
+                ans = res.json()['choices'][0]['message']['content']
+            except: ans = "Brain offline..."
+        else: ans = "API Key error."
 
         with st.chat_message("assistant"):
             st.markdown(ans)
