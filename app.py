@@ -1,99 +1,92 @@
 import streamlit as st
-import json, os, requests
+import json, os, requests, plotly.graph_objects as go
 from datetime import datetime
 
-st.set_page_config(page_title="Read & Rise | Executive Terminal", layout="wide", page_icon="🏹")
+st.set_page_config(page_title="Read & Rise", layout="wide", page_icon="🏹")
 
-# --- 数据管理 ---
+# --- 高端 UI 视觉设计 ---
+st.markdown("""
+<style>
+    .main { background-color: #F1F5F9; }
+    .stApp { background-color: #F1F5F9; }
+    [data-testid="stSidebar"] { background: #0F172A; }
+    .brief-card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); margin-bottom: 25px; border-top: 5px solid #38BDF8; }
+    .audio-section { background: #1E293B; color: white; padding: 20px; border-radius: 15px; margin-bottom: 30px; }
+    .stButton>button { width: 100%; background-color: #38BDF8; color: white; border: none; font-weight: bold; }
+</style>
+""", unsafe_allow_html=True)
+
 def load_data():
-    if not os.path.exists("data.json"):
-        return {"briefs": [], "books": [], "update_time": ""}
+    if not os.path.exists("data.json"): return {"briefs": [], "books": []}
     with open("data.json", "r", encoding="utf-8") as f:
         d = json.load(f)
         if "books" not in d: d["books"] = []
         return d
 
-def save_data(d):
-    with open("data.json", "w", encoding="utf-8") as f:
-        json.dump(d, f, ensure_ascii=False, indent=4)
-
 data = load_data()
 
-# --- AI Coach 逻辑 ---
-def call_coach(user_input, art):
-    api_key = os.getenv("DEEPSEEK_API_KEY")
-    if not api_key: return "❌ Coach 离线：请在服务器配置 API Key。"
-    
-    # 资产库上下文
-    context = "\n".join([f"资产:{b['title']}\n逻辑:{b['insight']}" for b in data['books']])
-    
-    prompt = f"你是 Read&Rise 教练。背景文章：{art['title']}。已知资产库逻辑：{context}。请结合这些资产回答：{user_input}"
-    
-    try:
-        res = requests.post("https://api.deepseek.com/chat/completions",
-            headers={"Authorization": f"Bearer {api_key}"},
-            json={"model": "deepseek-chat", "messages": [{"role": "user", "content": prompt}]})
-        return res.json()['choices'][0]['message']['content']
-    except: return "⚠️ Coach 正在闭关思考，请稍候。"
+# --- 侧边导航 ---
+st.sidebar.markdown("<h1 style='color:white; text-align:center;'>🏹 Read & Rise</h1>", unsafe_allow_html=True)
+menu = st.sidebar.radio("", ["🏠 决策仪表盘", "🚀 全球商业内参", "📚 资产智库", "⚙️ 资产录入"])
 
-# --- UI 渲染 ---
-st.sidebar.title("🏹 READ & RISE")
-menu = st.sidebar.radio("功能模块", ["🏠 Dashboard", "🚀 全球快报", "📚 资产智库", "⚙️ 资产录入"])
-
-if menu == "🏠 Dashboard":
-    st.markdown("### Hi, Leaders! 👋")
-    st.write(f"今日同步时间：{data.get('update_time', '暂未更新')}")
+if menu == "🏠 决策仪表盘":
+    st.markdown("### Executive Dashboard")
     
+    # 🎙️ 语音播报模块
+    st.markdown('<div class="audio-section"><h4>🎙️ 每日全球商业播报 (BBC Style)</h4><p style="opacity:0.8;">基于最新的 6 大商业信源自动生成</p></div>', unsafe_allow_html=True)
     if os.path.exists("daily_briefing.mp3"):
         st.audio("daily_briefing.mp3")
-        st.caption("🎙️ BBC 风格每日内参 (英音)")
-    
-    st.divider()
-    c1, c2 = st.columns(2)
-    c1.metric("今日快报", len(data.get("briefs", [])))
-    c2.metric("累计资产", len(data.get("books", [])))
+    else:
+        st.info("🕒 音频正在通过 GitHub 后台生成中...")
 
-elif menu == "🚀 全球快报":
+    # 雷达图分析
+    if data['briefs']:
+        scores = data['briefs'][0].get('model_scores', {"Strategy":50, "Innovation":50, "Execution":50, "Insight":50})
+        fig = go.Figure(data=go.Scatterpolar(
+            r=list(scores.values())+[list(scores.values())[0]],
+            theta=list(scores.keys())+[list(scores.keys())[0]],
+            fill='toself', line=dict(color='#38BDF8')
+        ))
+        fig.update_layout(polar=dict(radialaxis=dict(visible=True, range=[0, 100])), height=400)
+        st.plotly_chart(fig, use_container_width=True)
+
+elif menu == "🚀 全球商业内参":
+    st.markdown("### 🚀 Global Market Intelligence")
     for i, art in enumerate(data.get("briefs", [])):
-        with st.expander(f"📍 {art['source']} | {art['title']}", expanded=(i==0)):
-            col1, col2 = st.columns(2)
-            with col1:
-                st.subheader("🇬🇧 Executive Summary")
-                st.write(art.get('en_summary'))
-            with col2:
-                st.subheader("🇨🇳 深度价值拆解")
-                st.write(art.get('cn_analysis'))
-            
-            # 一键转存智库
-            if st.button("📥 存入资产智库", key=f"save_{i}"):
-                new_asset = {"title": art['title'], "concept": art['source'], "insight": art['cn_analysis']}
-                data["books"].append(new_asset)
-                save_data(data)
-                st.success("已转存至底层智库！")
-            
-            # 开启对话
-            if st.button("🎙️ 呼叫 Coach", key=f"coach_{i}"):
-                st.session_state.active_art = art
-
-    if "active_art" in st.session_state:
+        st.markdown(f'<div class="brief-card">', unsafe_allow_html=True)
+        st.subheader(f"📍 {art['source']} | {art['title']}")
+        
+        c1, c2 = st.columns(2)
+        with c1:
+            st.markdown("**🇬🇧 Executive Summary (EN)**")
+            st.write(art.get('en_summary'))
+        with c2:
+            st.markdown("**🇨🇳 深度策略分析 (CN)**")
+            st.write(art.get('cn_analysis'))
+        
         st.divider()
-        st.chat_message("assistant").write(f"正在为您解析《{st.session_state.active_art['title']}》，您可以提问。")
-        if p := st.chat_input("输入您的问题..."):
-            st.chat_message("user").write(p)
-            st.chat_message("assistant").write(call_coach(p, st.session_state.active_art))
+        if st.button(f"📥 存入 Read & Rise 数字资产库", key=f"btn_{i}"):
+            data["books"].append({"title": art['title'], "concept": art['source'], "insight": art['cn_analysis']})
+            with open("data.json", "w", encoding="utf-8") as f:
+                json.dump(data, f, ensure_ascii=False, indent=4)
+            st.toast(f"《{art['title']}》已永久入库")
+        st.markdown('</div>', unsafe_allow_html=True)
 
 elif menu == "📚 资产智库":
-    st.header("📚 Read & Rise 数字资产库")
+    st.header("📚 已数字化的知识资产")
     for b in data.get("books", []):
         with st.container(border=True):
             st.subheader(b['title'])
-            st.write(b['insight'])
+            st.caption(f"来源/模型: {b.get('concept', 'Manual')}")
+            st.write(b.get('insight'))
 
 elif menu == "⚙️ 资产录入":
-    with st.form("manual_add"):
-        t = st.text_input("书名/思维模型")
-        i = st.text_area("核心逻辑/洞察")
-        if st.form_submit_button("入库"):
-            data["books"].append({"title":t, "concept":"Manual", "insight":i})
-            save_data(data)
-            st.success("资产已入库")
+    with st.form("add_asset"):
+        t = st.text_input("资产/书名/模型名称")
+        c = st.text_input("所属分类/核心逻辑")
+        i = st.text_area("深度洞察与应用建议")
+        if st.form_submit_button("同步至智库"):
+            data["books"].append({"title":t, "concept":c, "insight":i})
+            with open("data.json", "w", encoding="utf-8") as f:
+                json.dump(data, f, ensure_ascii=False, indent=4)
+            st.success("资产入库成功！")
