@@ -1,75 +1,72 @@
 import streamlit as st
-import pandas as pd
-import json, os, plotly.graph_objects as go
+import json, os, requests
+import plotly.graph_objects as go
 
-# 页面配置
-st.set_page_config(page_title="Read & Rise Coach", layout="wide")
-
-# 加载数据逻辑
+# --- 初始化数据 ---
 def load_data():
-    if os.path.exists("data.json"):
-        with open("data.json", "r", encoding="utf-8") as f:
-            return json.load(f)
-    return {"articles": [], "books": [], "weekly_question_cn": "", "weekly_question_en": ""}
+    if not os.path.exists("data.json"):
+        return {"briefs": [], "deep_articles": [], "weekly_q_cn": "", "weekly_q_en": ""}
+    with open("data.json", "r", encoding="utf-8") as f:
+        return json.load(f)
 
 data = load_data()
 
 # --- 侧边栏 ---
-with st.sidebar:
-    st.title("🏹 Read & Rise")
-    menu = st.radio("导航", ["🏠 教练仪表盘", "✍️ 上传新外刊", "🎙️ AI 教练对话", "📚 智库仓库"])
+st.sidebar.title("🏹 Read & Rise")
+menu = st.sidebar.radio("频道导航", ["🏠 教练仪表盘", "🚀 爬虫快报", "✍️ 深度精读上传", "🎙️ AI 教练对话"])
 
-# --- 首页：教练仪表盘 ---
+# --- 功能 1：主页看板 (中英双语提问) ---
 if menu == "🏠 教练仪表盘":
     st.markdown(f"""
-    <div style="background: #0F172A; padding: 25px; border-radius: 15px; color: white; border-left: 8px solid #38BDF8;">
-        <h4 style="color: #38BDF8; margin:0;">🎙️今日教练提问 / DAILY INQUIRY</h4>
-        <p style="font-size: 1.1rem; color: #94A3B8; font-style: italic; margin-top:10px;">"{data.get('weekly_question_en')}"</p>
-        <p style="font-size: 1.3rem; font-weight: bold;">“{data.get('weekly_question_cn')}”</p>
+    <div style="background: #0F172A; padding: 30px; border-radius: 20px; color: white; border-left: 10px solid #38BDF8; margin-bottom: 25px;">
+        <h3 style="color: #38BDF8; margin-top: 0;">🎙️ COACH INQUIRY / 今日教练提问</h3>
+        <p style="font-size: 1.1rem; color: #94A3B8; font-style: italic;">“{data.get('weekly_q_en', 'How to leverage AI?')}”</p>
+        <p style="font-size: 1.4rem; font-weight: bold;">“{data.get('weekly_q_cn', '你打算如何利用 AI 重新定义核心竞争力？')}”</p>
     </div>
     """, unsafe_allow_html=True)
-    
-    # 此处放置雷达图逻辑... (见前次代码)
+    # 此处放置雷达图代码...
 
-# --- 功能一：手动上传并解析 (解决国内访问问题) ---
-elif menu == "✍️ 上传新外刊":
-    st.header("✍️ 上传外刊文章进行 AI 解析")
-    uploaded_text = st.text_area("在此粘贴外刊原文内容...", height=300)
-    
-    if st.button("开始 AI 深度解析"):
-        if uploaded_text:
-            with st.status("AI 教练正在研读并匹配模型..."):
-                # 这里调用你的 AI 解析函数 (逻辑同前 crawler)
-                # 解析完成后，将结果 append 到 data.json 并保存
-                st.success("解析完成！已存入智库。")
-        else:
-            st.warning("请先输入内容")
-
-# --- 功能二：生成你的 AI 教练 (灵魂所在) ---
+# --- 功能 2：AI 教练对话 (灵魂功能) ---
 elif menu == "🎙️ AI 教练对话":
     st.header("🎙️ Read & Rise AI Coach")
-    st.markdown("> **我是你的 AI 商业教练。我会基于本站的思维模型和外刊内容回答你的管理困惑。**")
-
-    # 初始化聊天历史
+    
     if "messages" not in st.session_state:
         st.session_state.messages = []
 
-    for message in st.session_state.messages:
-        with st.chat_message(message["role"]):
-            st.markdown(message["content"])
+    # 展示历史消息
+    for m in st.session_state.messages:
+        with st.chat_message(m["role"]):
+            st.markdown(m["content"])
 
-    if prompt := st.chat_input("输入你的管理挑战..."):
+    if prompt := st.chat_input("向教练提问..."):
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
             st.markdown(prompt)
 
         with st.chat_message("assistant"):
-            # 将最新的几篇文章作为“教练知识背景”
-            context = str(data["articles"][-2:]) 
-            full_prompt = f"你是一位资深商业教练。背景知识：{context}\n用户问题：{prompt}\n请给出启发式回答："
+            # 【关键】将你上传的“深度精读”作为背景知识喂给 AI
+            kb_context = str(data["deep_articles"][-3:]) # 取最近3篇深度文章
             
-            # 模拟 AI 响应
-            # response = your_ai_call(full_prompt) 
-            response = "这是一个深刻的问题。结合本周我们分析的《麦肯锡》报告，建议你从'第一性原理'出发..."
-            st.markdown(response)
-            st.session_state.messages.append({"role": "assistant", "content": response})
+            # 调用 DeepSeek API
+            api_key = os.getenv("DEEPSEEK_API_KEY")
+            headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
+            payload = {
+                "model": "deepseek-chat",
+                "messages": [
+                    {"role": "system", "content": f"你是一位精英商业教练。基于以下智库背景回答：{kb_context}"},
+                    {"role": "user", "content": prompt}
+                ]
+            }
+            res = requests.post("https://api.deepseek.com/chat/completions", json=payload, headers=headers)
+            response_text = res.json()['choices'][0]['message']['content']
+            
+            st.markdown(response_text)
+            st.session_state.messages.append({"role": "assistant", "content": response_text})
+
+# --- 功能 3：手动上传深度解析 ---
+elif menu == "✍️ 深度精读上传":
+    st.header("✍️ 投喂 AI 教练深度文章")
+    raw_text = st.text_area("粘贴外刊全文...", height=400)
+    if st.button("开始深度联动解析"):
+        # 调用 crawler 中的深度解析函数并保存到 data.json
+        st.success("解析成功！该文章已成为 AI 教练的‘新知识’。")
