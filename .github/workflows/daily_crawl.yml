@@ -1,45 +1,28 @@
 name: Read & Rise Strategic Sync
-
 on:
   schedule:
-    - cron: '0 22 * * *' # 北京时间早晨6点
-  workflow_dispatch:      # 支持手动触发
-
+    - cron: '0 22 * * *'
+  workflow_dispatch:
 jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write # 授予写入权限
-
+      contents: write
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.10'
-
       - name: Install dependencies
-        run: |
-          pip install requests feedparser edge-tts asyncio
-
-      - name: Run Digital Brain Crawler
+        run: pip install requests feedparser edge-tts asyncio
+      - name: Run Crawler
         env:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
         run: python crawler.py
-
       - name: Commit and Push
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "ReadRise-Bot"
-          git add data.json daily_briefing.mp3 || echo "No files"
-          if git diff --quiet && git diff --staged --quiet; then
-            echo "No changes"
-          else
-            git commit -m "🏹 Auto-sync: Daily Insight $(date)"
-            # 使用 --force 强制覆盖解决 [rejected] 报错
-            git push origin main --force
-          fi
+          git add data.json daily_briefing.mp3
+          git commit -m "Auto-sync $(date)" || echo "No changes"
+          git push origin main --force
