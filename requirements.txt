@@ -3,3 +3,5 @@ pandas
 requests
 feedparser
 plotly
+edge-tts
+asyncio
