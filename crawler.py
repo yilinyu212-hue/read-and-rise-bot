@@ -1,7 +1,6 @@
 import requests, feedparser, json, os, random
 from datetime import datetime
 
-# 环境变量
 DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
 
 RSS_SOURCES = [
@@ -14,17 +13,15 @@ RSS_SOURCES = [
 def ai_analyze(title, link):
     if not DEEPSEEK_API_KEY: return None
     url = "https://api.deepseek.com/chat/completions"
-    prompt = f"""作为教育智库专家解析文章: "{title}"。必须返回严格 JSON：
-    {{
-        "en_summary": ["Point 1", "Point 2"],
-        "cn_summary": ["要点1", "要点2"],
-        "golden_sentences": [{{"en":"quote", "cn":"金句"}}],
-        "vocab_bank": [{{"word":"Term", "meaning":"含义", "example":"Example"}}],
-        "case_study": "背景-决策-结果深度解析",
-        "reflection_flow": ["反思问题1", "反思问题2"],
-        "teaching_tips": "给教育者的3个落地应用建议",
-        "model_scores": {{"战略": 85, "组织": 70, "创新": 90, "洞察": 80, "执行": 75}}
-    }}"""
+    prompt = f"""作为顶级商业顾问解析文章: "{title}"。
+    必须返回 JSON 格式，包含：
+    1. cn_summary: 3条最利于决策的中文摘要
+    2. en_summary: 3条英文核心点
+    3. case_study: 文章中的商业实战案例解析
+    4. reflection_flow: 3个针对管理者的深度提问
+    5. vocab_bank: 3个高阶商业词汇(含例句)
+    6. model_scores: 对该文的“战略、创新、洞察、组织、执行”五个维度打分(0-100)
+    """
     try:
         res = requests.post(url, headers={"Authorization": f"Bearer {DEEPSEEK_API_KEY}"}, json={
             "model": "deepseek-chat", "messages": [{"role": "user", "content": prompt}],
@@ -36,13 +33,19 @@ def ai_analyze(title, link):
     except: return None
 
 def run_sync():
-    # 保留旧书
-    existing_books = []
+    # 保留旧书数据
+    books = []
     if os.path.exists("data.json"):
-        with open("data.json", "r", encoding="utf-8") as f:
-            existing_books = json.load(f).get("books", [])
+        try:
+            with open("data.json", "r", encoding="utf-8") as f:
+                books = json.load(f).get("books", [])
+        except: pass
 
-    data = {"briefs": [], "books": existing_books, "update_time": datetime.now().strftime("%Y-%m-%d %H:%M")}
+    data = {
+        "briefs": [], 
+        "books": books, 
+        "update_time": datetime.now().strftime("%Y-%m-%d %H:%M")
+    }
     
     for s in RSS_SOURCES:
         feed = feedparser.parse(s['url'])
