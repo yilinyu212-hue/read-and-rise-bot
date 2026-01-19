@@ -1,47 +1,48 @@
 import requests, feedparser, json, os, asyncio, edge_tts
 from datetime import datetime
 
-# 环境变量读取
 DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
 
+# 1. 扩充抓取源
 RSS_SOURCES = [
     {"name": "McKinsey", "url": "https://www.mckinsey.com/insights/rss"},
     {"name": "HBR", "url": "https://hbr.org/rss/feed/topics/leadership"},
-    {"name": "MIT Tech Review", "url": "https://www.technologyreview.com/feed/"},
-    {"name": "Economist", "url": "https://www.economist.com/business/rss.xml"}
+    {"name": "Economist", "url": "https://www.economist.com/business/rss.xml"},
+    {"name": "Fortune", "url": "https://fortune.com/feed/all/"},
+    {"name": "MIT Tech Review", "url": "https://www.technologyreview.com/feed/"}
 ]
 
 def ai_analyze(title, link):
-    if not DEEPSEEK_API_KEY: 
-        return None
+    if not DEEPSEEK_API_KEY: return None
     url = "https://api.deepseek.com/chat/completions"
     
-    # 修正点：JSON 的大括号必须使用 {{ }} 转义，否则会报 Invalid format specifier
-    prompt = f"""作为顶级商业顾问解析文章: '{title}'。必须返回严格的 JSON 格式：
+    # 修正大括号转义，并要求中英双语
+    prompt = f"""Analyze this article: '{title}'. 
+    Must return a strict JSON format with exactly these keys:
     {{
-        "cn_summary": ["3条要点"],
-        "case_study": "案例解析",
-        "reflection_flow": ["深度提问"],
-        "vocab_bank": [{{"word":"Term","meaning":"含义","example":"例句"}}],
-        "model_scores": {{"战略":85,"创新":80,"洞察":90,"组织":70,"执行":75}}
+        "en_summary": "One paragraph English executive summary.",
+        "cn_analysis": "300字中文深度决策解析。",
+        "actions": ["Action 1", "Action 2", "Action 3"],
+        "model_scores": {{"Strategy": 90, "Innovation": 80, "Execution": 85}}
     }}"""
+    
     try:
         res = requests.post(url, headers={"Authorization": f"Bearer {DEEPSEEK_API_KEY}"}, json={
-            "model": "deepseek-chat", "messages": [{"role": "user", "content": prompt}],
-            "response_format": {"type": "json_object"}, "temperature": 0.3
+            "model": "deepseek-chat", 
+            "messages": [{"role": "user", "content": prompt}],
+            "response_format": {"type": "json_object"},
+            "temperature": 0.3
         }, timeout=60)
-        content = json.loads(res.json()['choices'][0]['message']['content'])
-        content.update({"title": title, "link": link})
-        return content
+        return json.loads(res.json()['choices'][0]['message']['content'])
     except: return None
 
 async def generate_audio(text):
-    # 使用 RyanNeural (BBC 风格伦敦腔)
+    # 使用 RyanNeural (BBC 风格)
     communicate = edge_tts.Communicate(text, "en-GB-RyanNeural")
     await communicate.save("daily_briefing.mp3")
 
 def run_sync():
-    print("🚀 开始数据同步...")
+    print("🚀 启动 Read & Rise 多源同步...")
     books = []
     if os.path.exists("data.json"):
         try:
@@ -51,22 +52,21 @@ def run_sync():
 
     data = {"briefs": [], "books": books, "update_time": datetime.now().strftime("%Y-%m-%d %H:%M")}
     
+    # 多源抓取
     for s in RSS_SOURCES:
         feed = feedparser.parse(s['url'])
         if feed.entries:
             res = ai_analyze(feed.entries[0].title, feed.entries[0].link)
             if res:
-                res["source"] = s['name']
+                res.update({"source": s['name'], "title": feed.entries[0].title, "link": feed.entries[0].link})
                 data["briefs"].append(res)
+                print(f"✅ 已入库: {s['name']}")
     
+    # 生成 BBC 音频
     if data["briefs"]:
-        titles = " | ".join([b['title'] for b in data['briefs'][:3]])
-        script_prompt = f"Act as a BBC anchor. Summarize these in 150 words: {titles}. Start with 'Hi, Leaders! This is your Read and Rise daily briefing.'"
-        res = requests.post("https://api.deepseek.com/chat/completions", 
-            headers={"Authorization": f"Bearer {DEEPSEEK_API_KEY}"},
-            json={"model": "deepseek-chat", "messages": [{"role": "user", "content": script_prompt}]})
-        script = res.json()['choices'][0]['message']['content']
-        asyncio.run(generate_audio(script))
+        script_text = f"Hi Leaders! Today's briefings cover {len(data['briefs'])} insights from McKinsey, HBR and more. Let's dive in."
+        asyncio.run(generate_audio(script_text))
+        print("🎙️ 语音播报已更新")
 
     with open("data.json", "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
