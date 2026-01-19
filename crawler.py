@@ -3,7 +3,7 @@ from datetime import datetime
 
 DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
 
-# 🌍 15+ 全球顶级智库与商业源
+# 🌍 15+ 全球智库源
 RSS_SOURCES = [
     {"name": "McKinsey", "url": "https://www.mckinsey.com/insights/rss"},
     {"name": "HBR", "url": "https://hbr.org/rss/feed/topics/leadership"},
@@ -11,14 +11,14 @@ RSS_SOURCES = [
     {"name": "Fortune", "url": "https://fortune.com/feed/"},
     {"name": "MIT Tech Review", "url": "https://www.technologyreview.com/feed/"},
     {"name": "BCG", "url": "https://www.bcg.com/rss.xml"},
-    {"name": "Knowledge@Wharton", "url": "https://knowledge.wharton.upenn.edu/feed/"},
     {"name": "Stanford eCorner", "url": "https://ecorner.stanford.edu/feed/"},
     {"name": "Wired", "url": "https://www.wired.com/feed/category/business/latest/rss"},
     {"name": "World Economic Forum", "url": "https://www.weforum.org/agenda/feed"}
 ]
 
+# 💡 随机提问池
 QUESTION_POOL = [
-    {"cn": "如果用‘第一性原理’重构你的产品，你会删掉哪个功能？", "en": "If you rebuilt your product using 'First Principles', which feature would you remove?"},
+    {"cn": "如果用‘第一性原理’重构你的业务，你会删掉哪个功能？", "en": "If you rebuilt your business using 'First Principles', which feature would you remove?"},
     {"cn": "面对 2026 的剧变，你的布局是否具备‘反脆弱’特征？", "en": "Does your layout possess 'anti-fragile' characteristics?"},
     {"cn": "你目前的决策，是基于‘过去经验’还是‘未来趋势’？", "en": "Is your current decision based on 'past experience' or 'future trends'?"}
 ]
@@ -31,7 +31,7 @@ def ai_analyze(title, link):
         "cn_summary": ["中文要点1", "要点2"],
         "golden_sentences": [{{"en":"quote", "cn":"金句"}}],
         "vocab_bank": [{{"word":"Term", "meaning":"含义", "example":"Example"}}],
-        "case_study": "深度解析：背景-决策-结果",
+        "case_study": "背景-决策-结果",
         "reflection_flow": ["反思1", "反思2"],
         "related_model": "模型名称",
         "model_scores": {{"战略": 85, "组织": 70, "创新": 90, "洞察": 80, "执行": 75}}
@@ -47,13 +47,21 @@ def ai_analyze(title, link):
     except: return None
 
 def run_sync():
-    data = {"briefs": [], "books": [], "weekly_question": random.choice(QUESTION_POOL), "update_time": datetime.now().strftime("%Y-%m-%d %H:%M")}
+    # 保持书籍数据不丢失
+    books = []
     if os.path.exists("data.json"):
         try:
             with open("data.json", "r", encoding="utf-8") as f:
                 old = json.load(f)
-                data["books"] = old.get("books", []) # 保留书籍库
+                books = old.get("books", [])
         except: pass
+
+    data = {
+        "briefs": [], 
+        "books": books, 
+        "weekly_question": random.choice(QUESTION_POOL), 
+        "update_time": datetime.now().strftime("%Y-%m-%d %H:%M")
+    }
     
     for s in RSS_SOURCES:
         feed = feedparser.parse(s['url'])
