@@ -3,7 +3,7 @@ import json, os, requests
 
 # --- 1. 基础配置与安全 ---
 st.set_page_config(page_title="Read & Rise", layout="wide", page_icon="🏹")
-ADMIN_PASSWORD = "your_private_password" # 👈 修改为你自己的管理密码
+ADMIN_PASSWORD = "readrise2026" # 👈 修改为你自己的管理密码
 
 if "authenticated" not in st.session_state: st.session_state.authenticated = False
 if "messages" not in st.session_state: st.session_state.messages = []
