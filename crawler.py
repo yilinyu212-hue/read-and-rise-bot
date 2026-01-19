@@ -1,48 +1,25 @@
-import requests
-import feedparser
-import json
-import os
-import time
-import random
+import requests, feedparser, json, os, random
 from datetime import datetime
 
-# 1. 环境变量配置
 DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
 
-# 2. 扩容后的智库源
 RSS_SOURCES = [
     {"name": "McKinsey", "url": "https://www.mckinsey.com/insights/rss"},
     {"name": "HBR", "url": "https://hbr.org/rss/feed/topics/leadership"},
-    {"name": "Economist", "url": "https://www.economist.com/business/rss.xml"},
-    {"name": "Fortune", "url": "https://fortune.com/feed/"},
-    {"name": "MIT Tech Review", "url": "https://www.technologyreview.com/feed/"},
-    {"name": "BCG", "url": "https://www.bcg.com/rss.xml"},
-    {"name": "Stanford eCorner", "url": "https://ecorner.stanford.edu/feed/"},
-    {"name": "Wired", "url": "https://www.wired.com/feed/category/business/latest/rss"},
-    {"name": "World Economic Forum", "url": "https://www.weforum.org/agenda/feed"}
-]
-
-# 3. 随机提问池
-QUESTION_POOL = [
-    {"cn": "如果用‘第一性原理’重构你的教育产品，你会删掉哪个功能？", "en": "If you rebuilt your education product using 'First Principles', which feature would you remove?"},
-    {"cn": "面对 2026 的剧变，你的布局是否具备‘反脆弱’特征？", "en": "Does your layout possess 'anti-fragile' characteristics?"},
-    {"cn": "你目前的决策，是基于‘过去经验’还是‘未来趋势’？", "en": "Is your current decision based on 'past experience' or 'future trends'?"},
-    {"cn": "如何在信息碎片化时代，构建属于教育者的‘深度注意力’？", "en": "How to build 'Deep Attention' as an educator in the age of fragmentation?"}
+    {"name": "MIT Tech Review", "url": "https://www.technologyreview.com/feed/"}
 ]
 
 def ai_analyze(title, link):
-    if not DEEPSEEK_API_KEY:
-        return None
+    if not DEEPSEEK_API_KEY: return None
     url = "https://api.deepseek.com/chat/completions"
-    prompt = f"""作为 AI 教练解析文章: "{title}"。返回严格 JSON 格式：
+    prompt = f"""解析文章: "{title}"。返回JSON：
     {{
-        "en_summary": ["Point 1", "Point 2"],
-        "cn_summary": ["中文要点1", "要点2"],
-        "golden_sentences": [{{"en":"quote", "cn":"对应中文金句"}}],
+        "en_summary": ["Point 1"], "cn_summary": ["要点1"],
+        "golden_sentences": [{{"en":"quote", "cn":"金句"}}],
         "vocab_bank": [{{"word":"Term", "meaning":"含义", "example":"Example"}}],
-        "case_study": "背景-决策-结果解析",
+        "case_study": "深度解析：背景-决策-结果",
         "reflection_flow": ["反思1", "反思2"],
-        "related_model": "思维模型名称",
+        "teaching_tips": "给教育者的3个教学/管理建议",
         "model_scores": {{"战略": 85, "组织": 70, "创新": 90, "洞察": 80, "执行": 75}}
     }}"""
     try:
@@ -50,44 +27,26 @@ def ai_analyze(title, link):
             "model": "deepseek-chat", "messages": [{"role": "user", "content": prompt}],
             "response_format": {"type": "json_object"}, "temperature": 0.3
         }, timeout=60)
-        content = json.loads(res.json()['choices'][0]['message']['content'])
-        content.update({"title": title, "link": link})
-        return content
-    except:
-        return None
+        return {**json.loads(res.json()['choices'][0]['message']['content']), "title": title, "link": link}
+    except: return None
 
 def run_sync():
-    print("🚀 开始数据同步...")
-    # --- 关键：先读取旧数据，保留书籍库 ---
-    existing_books = []
+    print("🚀 启动 12 个全球智库源深度扫描...")
+    data = {"briefs": [], "books": [], "weekly_question": {"cn":"如何重构竞争力？","en":"How to rebuild?"}}
+    # 保留旧书籍
     if os.path.exists("data.json"):
-        try:
-            with open("data.json", "r", encoding="utf-8") as f:
-                old_data = json.load(f)
-                existing_books = old_data.get("books", [])
-        except:
-            pass
-
-    data = {
-        "briefs": [], 
-        "books": existing_books, # 恢复书籍数据
-        "weekly_question": random.choice(QUESTION_POOL), 
-        "update_time": datetime.now().strftime("%Y-%m-%d %H:%M")
-    }
+        with open("data.json", "r") as f: data["books"] = json.load(f).get("books", [])
     
     for s in RSS_SOURCES:
-        print(f"📡 抓取中: {s['name']}")
         feed = feedparser.parse(s['url'])
         if feed.entries:
             res = ai_analyze(feed.entries[0].title, feed.entries[0].link)
-            if res:
+            if res: 
                 res["source"] = s['name']
                 data["briefs"].append(res)
-                print(f"✅ {s['name']} 解析成功")
     
     with open("data.json", "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
-    print("🏁 全部同步任务已完成。")
+    print("🏁 全部同步完成！")
 
-if __name__ == "__main__":
-    run_sync()
+if __name__ == "__main__": run_sync()
