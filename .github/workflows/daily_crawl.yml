@@ -27,10 +27,12 @@ jobs:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
         run: python crawler.py
 
-      - name: Commit and Push
+      - name: Commit and Push Changes
         run: |
-          git config --global user.name "GitHub Action"
-          git config --global user.email "action@github.com"
+          git config --global user.name "ReadRise-Bot"
+          git config --global user.email "bot@readrise.com"
           git add data.json
-          git commit -m "Auto-sync data: $(date)" || echo "No changes to commit"
-          git push origin main --force # 关键：强制推送解决 rejected 错误
+          # 只有在文件有变动时才提交，防止 Action 报错
+          git diff --quiet && git diff --staged --quiet || git commit -m "Update Insight Data: $(date)"
+          # 使用 --force 强制推送，解决 [rejected] 报错
+          git push origin main --force
