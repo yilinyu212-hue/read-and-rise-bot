@@ -3,36 +3,51 @@ from datetime import datetime
 
 DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
 
-# ================= 引擎 1：爬虫快报逻辑 =================
-def fetch_rss_briefs():
-    sources = [{"name": "HBR", "url": "https://hbr.org/rss/feed/topics/leadership"}] # 此处添加你那12个源
-    briefs = []
-    for s in sources:
-        try:
-            feed = feedparser.parse(s['url'])
-            for item in feed.entries[:2]: # 每个源只取2条，保证响应速度
-                briefs.append({"title": item.title, "link": item.link, "source": s['name']})
-        except: continue
-    return briefs
+# 12个顶级源
+RSS_SOURCES = [
+    {"name": "HBR", "url": "https://hbr.org/rss/feed/topics/leadership"},
+    {"name": "McKinsey", "url": "https://www.mckinsey.com/insights/rss"},
+    # ... 其他10个源 ...
+]
 
-# ================= 引擎 2：深度解析逻辑 (供上传使用) =================
-def ai_deep_analyze(content, mode="brief"):
+def ai_call(prompt, is_json=True):
     url = "https://api.deepseek.com/chat/completions"
     headers = {"Authorization": f"Bearer {DEEPSEEK_API_KEY}", "Content-Type": "application/json"}
-    
-    # 根据模式调整 Prompt：爬虫用简版，上传用深度版
-    if mode == "deep":
-        prompt = f"你作为 Read & Rise 首席教练，深度解析这篇文章：{content}。要求：中英双语提问、匹配思维模型、推荐书籍、高管话术。"
-    else:
-        prompt = f"简要总结这篇文章的核心要点（中英双语）：{content}"
-        
-    data = {
+    payload = {
         "model": "deepseek-chat",
-        "messages": [{"role": "system", "content": "你是一位拥有麦肯锡背景的商业教练。"},
-                     {"role": "user", "content": prompt}],
-        "response_format": {"type": "json_object"} # 确保返回 JSON
+        "messages": [{"role": "system", "content": "你是一位拥有麦肯锡背景的商业教练。"}, {"role": "user", "content": prompt}],
+        "temperature": 0.3
     }
-    # 此处省略 requests.post 逻辑，确保返回解析后的 JSON 数据
-    return response.json()['choices'][0]['message']['content']
+    if is_json: payload["response_format"] = {"type": "json_object"}
+    
+    try:
+        res = requests.post(url, headers=headers, json=payload, timeout=60)
+        content = res.json()['choices'][0]['message']['content']
+        return json.loads(content) if is_json else content
+    except: return None
 
-# 最终保存逻辑会把 briefs 和 deep_articles 合并存入 data.json
+def run_rss_sync():
+    # 爬虫逻辑：仅抓取标题和链接，做简单的中英总结
+    print("📡 开启爬虫快报同步...")
+    data = {"briefs": [], "deep_articles": [], "weekly_question": {}, "update_time": ""}
+    # 如果文件已存在，先读取保留 deep_articles
+    if os.path.exists("data.json"):
+        with open("data.json", "r", encoding="utf-8") as f:
+            data = json.load(f)
+
+    new_briefs = []
+    for s in RSS_SOURCES:
+        feed = feedparser.parse(s['url'])
+        for item in feed.entries[:1]: # 每个源抓一条
+            summary_prompt = f"Summarize this title in 1 sentence (Bilingual): {item.title}"
+            summary = ai_call(summary_prompt, is_json=False)
+            new_briefs.append({"title": item.title, "link": item.link, "source": s['name'], "summary": summary})
+    
+    data["briefs"] = new_briefs
+    data["update_time"] = datetime.now().strftime("%Y-%m-%d %H:%M")
+    
+    with open("data.json", "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=4)
+
+if __name__ == "__main__":
+    run_rss_sync()
