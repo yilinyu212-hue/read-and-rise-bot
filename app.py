@@ -1,61 +1,67 @@
 import streamlit as st
-import json, os, requests
+import json, os
 
-st.set_page_config(page_title="Read & Rise", layout="wide", page_icon="🏹")
+st.set_page_config(page_title="Read & Rise", layout="wide")
 
-# --- UI 视觉：修复侧边栏颜色对比 ---
+# --- 极简商务 UI 修复 ---
 st.markdown("""
 <style>
     [data-testid="stSidebar"] { background-color: #0F172A !important; }
-    [data-testid="stSidebar"] * { color: #FFFFFF !important; }
+    [data-testid="stSidebar"] * { color: white !important; }
     .stApp { background-color: #F8FAFC; }
-    .content-card { background: white; padding: 20px; border-radius: 12px; border: 1px solid #E2E8F0; margin-bottom: 20px; }
+    .card { background: white; padding: 20px; border-radius: 10px; border: 1px solid #E2E8F0; margin-bottom: 15px; }
 </style>
 """, unsafe_allow_html=True)
 
-def load_data():
-    # 增加对 library_data.json 的兼容
-    path = "data.json" if os.path.exists("data.json") else "library_data.json"
-    if not os.path.exists(path): return {"items": []}
-    with open(path, "r", encoding="utf-8") as f:
-        try:
-            d = json.load(f)
-            # 容错：如果数据是旧格式，自动转为新列表
-            if isinstance(d, dict) and "items" not in d:
-                return {"items": d.get("books", []) + d.get("articles", [])}
-            return d
-        except: return {"items": []}
+def load_all_data():
+    # 尝试加载所有可能的数据文件
+    files = ["data.json", "library_data.json"]
+    all_items = []
+    update_time = "Unknown"
+    for f_name in files:
+        if os.path.exists(f_name):
+            try:
+                with open(f_name, "r", encoding="utf-8") as f:
+                    d = json.load(f)
+                    if isinstance(d, dict):
+                        # 兼容新老格式：items, books, articles
+                        all_items.extend(d.get("items", []) + d.get("books", []) + d.get("articles", []))
+                        update_time = d.get("update_time", update_time)
+            except: pass
+    return {"items": all_items, "time": update_time}
 
-data = load_data()
+data = load_all_data()
 
-# --- 导航 ---
-st.sidebar.markdown("## 🏹 READ & RISE")
-menu = st.sidebar.radio("Navigation", ["🏠 Dashboard", "🚀 Intelligence Hub", "🧠 AI Coach"])
+st.sidebar.title("🏹 Read & Rise")
+menu = st.sidebar.radio("Navigation", ["Dashboard", "Intelligence", "AI Coach"])
 
-if menu == "🏠 Dashboard":
-    st.title("Hi, Leaders! 👋")
-    # 修复截图中的 KeyError: 'en_title'，增加 get() 默认值
+if menu == "Dashboard":
+    st.header("Hi, Leaders! 👋")
     if data["items"]:
         top = data["items"][0]
-        st.subheader(f"🔥 今日首荐：{top.get('cn_title', '新内容加载中')}")
-        if os.path.exists(top.get('audio_file', '')): st.audio(top['audio_file'])
-        st.info(top.get('cn_analysis', '暂无深度解析'))
+        # 使用 .get() 绝对防止 KeyError
+        st.subheader(f"🔥 Today's Pick: {top.get('cn_title', top.get('title', 'New Strategy'))}")
+        audio = top.get('audio_file', '')
+        if os.path.exists(audio): st.audio(audio)
+        st.info(top.get('cn_analysis', top.get('insight', 'Analysis is being generated...')))
     else:
-        st.warning("数据正在同步中，请运行生产程序...")
+        st.warning("Data sync in progress. Please run 'python3 crawler.py' in the terminal.")
 
-elif menu == "🚀 Intelligence Hub":
-    st.header("Intelligence Hub")
-    for item in data.get("items", []):
+elif menu == "Intelligence":
+    st.header("Global Strategy Hub")
+    for item in data["items"]:
         with st.container():
-            st.markdown(f'<div class="content-card"><h3>{item.get("cn_title", "Untitled")}</h3></div>', unsafe_allow_html=True)
-            with st.expander("查看详情"):
-                # 兼容所有可能的键名，防止 KeyError
-                st.write(f"**EN Title:** {item.get('en_title', item.get('title', 'N/A'))}")
-                st.success(item.get('cn_analysis', item.get('insight', '解析生成中...')))
+            # 这里的字段名通过 .get 兼容所有版本
+            title = item.get('cn_title', item.get('title', 'Untitled'))
+            st.markdown(f'<div class="card"><h3>📍 {title}</h3></div>', unsafe_allow_html=True)
+            with st.expander("Explore Details"):
+                st.write(f"**Original:** {item.get('en_title', 'N/A')}")
+                st.success(f"**Insight:**\n{item.get('cn_analysis', item.get('insight', 'Processing...'))}")
+                audio = item.get('audio_file', '')
+                if os.path.exists(audio): st.audio(audio)
 
-elif menu == "🧠 AI Coach":
+elif menu == "AI Coach":
     st.header("🧠 AI Executive Coach")
-    st.write("我是你的专属教练。")
-    # 简单的对话占位
-    if p := st.chat_input("向我提问..."):
-        st.write(f"正在分析您关于 '{p}' 的问题...")
+    st.write("I am your strategic advisor. How can I help you today?")
+    if p := st.chat_input("Ask me anything..."):
+        st.write(f"Analysing your query: {p}...")
