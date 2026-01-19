@@ -1,28 +1,28 @@
 import requests, feedparser, json, os, random
 from datetime import datetime
 
+# 环境变量
 DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
 
 RSS_SOURCES = [
     {"name": "McKinsey", "url": "https://www.mckinsey.com/insights/rss"},
     {"name": "HBR", "url": "https://hbr.org/rss/feed/topics/leadership"},
     {"name": "MIT Tech Review", "url": "https://www.technologyreview.com/feed/"},
-    {"name": "Stanford eCorner", "url": "https://ecorner.stanford.edu/feed/"}
+    {"name": "Economist", "url": "https://www.economist.com/business/rss.xml"}
 ]
 
 def ai_analyze(title, link):
     if not DEEPSEEK_API_KEY: return None
     url = "https://api.deepseek.com/chat/completions"
-    prompt = f"""作为教育智库专家解析文章: "{title}"。必须返回严格 JSON 格式：
+    prompt = f"""作为教育智库专家解析文章: "{title}"。必须返回严格 JSON：
     {{
         "en_summary": ["Point 1", "Point 2"],
         "cn_summary": ["要点1", "要点2"],
         "golden_sentences": [{{"en":"quote", "cn":"金句"}}],
         "vocab_bank": [{{"word":"Term", "meaning":"含义", "example":"Example"}}],
-        "case_study": "深度解析：背景-决策-结果",
+        "case_study": "背景-决策-结果深度解析",
         "reflection_flow": ["反思问题1", "反思问题2"],
         "teaching_tips": "给教育者的3个落地应用建议",
-        "related_model": "思维模型名称",
         "model_scores": {{"战略": 85, "组织": 70, "创新": 90, "洞察": 80, "执行": 75}}
     }}"""
     try:
@@ -36,17 +36,14 @@ def ai_analyze(title, link):
     except: return None
 
 def run_sync():
-    # 1. 保留书籍
-    books = []
+    # 保留旧书
+    existing_books = []
     if os.path.exists("data.json"):
-        try:
-            with open("data.json", "r", encoding="utf-8") as f:
-                books = json.load(f).get("books", [])
-        except: pass
+        with open("data.json", "r", encoding="utf-8") as f:
+            existing_books = json.load(f).get("books", [])
 
-    data = {"briefs": [], "books": books, "update_time": datetime.now().strftime("%Y-%m-%d %H:%M")}
+    data = {"briefs": [], "books": existing_books, "update_time": datetime.now().strftime("%Y-%m-%d %H:%M")}
     
-    # 2. 抓取与分析
     for s in RSS_SOURCES:
         feed = feedparser.parse(s['url'])
         if feed.entries:
