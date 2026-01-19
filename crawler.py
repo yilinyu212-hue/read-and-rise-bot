@@ -1,9 +1,7 @@
-import requests, feedparser, json, os, random
+import requests, feedparser, json, os, asyncio, edge_tts
 from datetime import datetime
 
-# 环境变量
 DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY") # 用于 TTS 语音合成
 
 RSS_SOURCES = [
     {"name": "McKinsey", "url": "https://www.mckinsey.com/insights/rss"},
@@ -15,7 +13,14 @@ RSS_SOURCES = [
 def ai_analyze(title, link):
     if not DEEPSEEK_API_KEY: return None
     url = "https://api.deepseek.com/chat/completions"
-    prompt = f"作为顶级商业顾问解析文章: '{title}'。返回 JSON，包含 cn_summary(3条), case_study, reflection_flow(3条), vocab_bank(3个), model_scores(战略/创新/洞察/组织/执行 0-100)。"
+    prompt = f"""作为顶级商业顾问解析文章: '{title}'。返回 JSON:
+    {{
+        "cn_summary": ["3条决策摘要"],
+        "case_study": "实战案例解析",
+        "reflection_flow": ["3个深度提问"],
+        "vocab_bank": [{"word":"Term","meaning":"含义","example":"例句"}],
+        "model_scores": {{"战略":85,"创新":80,"洞察":90,"组织":70,"执行":75}}
+    }}"""
     try:
         res = requests.post(url, headers={"Authorization": f"Bearer {DEEPSEEK_API_KEY}"}, json={
             "model": "deepseek-chat", "messages": [{"role": "user", "content": prompt}],
@@ -26,34 +31,13 @@ def ai_analyze(title, link):
         return content
     except: return None
 
-# 🎙️ 新增：生成 BBC 风格播报稿并转为音频
-def generate_audio_briefing(briefs):
-    if not briefs or not OPENAI_API_KEY: return
-    
-    # 1. 生成稿件
-    titles = " | ".join([b['title'] for b in briefs[:3]])
-    script_prompt = f"根据今日头条：{titles}，写一段 300 字 BBC 风格播报稿。开头：'Hi, Leaders! This is your Read and Rise daily briefing...'，侧重于给高管的决策建议。"
-    
-    try:
-        # 调用 DeepSeek 生成稿件
-        res = requests.post("https://api.deepseek.com/chat/completions", headers={"Authorization": f"Bearer {DEEPSEEK_API_KEY}"}, json={
-            "model": "deepseek-chat", "messages": [{"role": "user", "content": script_prompt}]
-        })
-        script = res.json()['choices'][0]['message']['content']
-
-        # 2. 调用 OpenAI TTS 生成音频
-        audio_res = requests.post(
-            "https://api.openai.com/v1/audio/speech",
-            headers={"Authorization": f"Bearer {OPENAI_API_KEY}"},
-            json={"model": "tts-1", "voice": "onyx", "input": script}
-        )
-        with open("daily_briefing.mp3", "wb") as f:
-            f.write(audio_res.content)
-        print("✅ 音频播报生成成功")
-    except Exception as e:
-        print(f"❌ 音频生成失败: {e}")
+async def generate_audio(text):
+    # 使用 RyanNeural，公认最像 BBC 的伦敦男声
+    communicate = edge_tts.Communicate(text, "en-GB-RyanNeural")
+    await communicate.save("daily_briefing.mp3")
 
 def run_sync():
+    print("🚀 开始数据同步与内参制作...")
     books = []
     if os.path.exists("data.json"):
         try:
@@ -70,12 +54,24 @@ def run_sync():
             if res:
                 res["source"] = s['name']
                 data["briefs"].append(res)
+                print(f"✅ 已解析: {s['name']}")
     
-    # 执行音频生成
-    generate_audio_briefing(data["briefs"])
-    
+    # 生成 BBC 播报
+    if data["briefs"]:
+        titles = " | ".join([b['title'] for b in data['briefs'][:3]])
+        script_prompt = f"Create a 150-word BBC-style briefing script based on: {titles}. Start with 'Hi, Leaders! This is your Read and Rise daily briefing.' Be sharp and insightful."
+        try:
+            res = requests.post("https://api.deepseek.com/chat/completions", 
+                headers={"Authorization": f"Bearer {DEEPSEEK_API_KEY}"},
+                json={"model": "deepseek-chat", "messages": [{"role": "user", "content": script_prompt}]})
+            script = res.json()['choices'][0]['message']['content']
+            asyncio.run(generate_audio(script))
+            print("🎙️ 语音播报制作完成")
+        except: print("⚠️ 语音制作跳过")
+
     with open("data.json", "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
+    print("🏁 全部任务已完成")
 
 if __name__ == "__main__":
     run_sync()
