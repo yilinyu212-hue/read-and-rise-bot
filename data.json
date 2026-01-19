@@ -1,1 +1,140 @@
-{}
+{
+    "briefs": [
+        {
+            "en_summary": [
+                "The article argues for climate optimism by shifting from 'why' questions about climate change to 'how' questions about solutions, highlighting that focusing on practical actions and existing successes can foster hope and drive progress.",
+                "It presents evidence of declining costs in renewable energy, technological innovations, and policy shifts as reasons for optimism, suggesting that pragmatic engagement with climate solutions is more effective than despair."
+            ],
+            "cn_summary": [
+                "文章主张气候乐观主义，将关注点从气候变化的'为什么'转向解决方案的'如何'，强调聚焦实际行动和已有成就可以激发希望并推动进展。",
+                "它列举了可再生能源成本下降、技术创新和政策转变等证据作为乐观的理由，认为务实参与气候解决方案比绝望更有效。"
+            ],
+            "golden_sentences": [
+                {
+                    "en": "The new 'whys' are not about why climate change is happening, but why we can solve it.",
+                    "cn": "新的'为什么'不是关于气候变化为何发生，而是关于我们为何能解决它。"
+                }
+            ],
+            "vocab_bank": [
+                {
+                    "word": "pragmatic",
+                    "meaning": "务实的、实用的",
+                    "example": "A pragmatic approach focuses on achievable solutions rather than idealistic goals."
+                },
+                {
+                    "word": "climate optimism",
+                    "meaning": "气候乐观主义",
+                    "example": "Climate optimism emphasizes progress in renewable energy and policy."
+                },
+                {
+                    "word": "renewable energy",
+                    "meaning": "可再生能源",
+                    "example": "Solar and wind power are examples of renewable energy sources."
+                }
+            ],
+            "case_study": "背景：全球面临气候危机，常引发悲观情绪。决策：作者转向分析可再生能源成本下降（如太阳能价格降低80%）、电动汽车普及等成功案例。结果：证明务实行动可驱动变革，鼓励人们从'问题导向'转向'解决方案导向'，增强集体行动信心。",
+            "reflection_flow": [
+                "如何将个人对气候的担忧转化为具体行动？",
+                "在气候变化讨论中，平衡现实挑战与乐观证据有何价值？"
+            ],
+            "related_model": "解决方案导向思维（Solution-Focused Thinking）",
+            "title": "The new ‘whys’: A pragmatic case for climate optimism",
+            "link": "https://www.mckinsey.com/capabilities/sustainability/our-insights/the-new-whys-a-pragmatic-case-for-climate-optimism",
+            "source": "McKinsey"
+        },
+        {
+            "en_summary": [
+                "The article uses the supermarket self-checkout as a parable to discuss the trade-offs between efficiency and human interaction in modern service systems.",
+                "It explores how automation, while increasing speed and reducing labor costs, can lead to a loss of personal service, increased customer responsibility, and potential social isolation."
+            ],
+            "cn_summary": [
+                "文章以超市自助结账为寓言，探讨现代服务系统中效率与人性化互动之间的权衡。",
+                "分析了自动化在提高速度和降低人力成本的同时，可能导致个性化服务缺失、顾客责任增加以及潜在的社会疏离感。"
+            ],
+            "golden_sentences": [
+                {
+                    "en": "The self-checkout stands as a monument to efficiency, yet its silent screens speak volumes about what we sacrifice at the altar of convenience.",
+                    "cn": "自助结账台是效率的纪念碑，然而它沉默的屏幕却诉说着我们在便利祭坛上所牺牲的一切。"
+                }
+            ],
+            "vocab_bank": [
+                {
+                    "word": "parable",
+                    "meaning": "寓言；比喻",
+                    "example": "The story serves as a parable for modern technological dilemmas."
+                },
+                {
+                    "word": "trade-off",
+                    "meaning": "权衡；取舍",
+                    "example": "There's always a trade-off between speed and accuracy in this system."
+                },
+                {
+                    "word": "automation",
+                    "meaning": "自动化",
+                    "example": "The factory increased production through automation."
+                },
+                {
+                    "word": "social isolation",
+                    "meaning": "社会隔离；社交孤立",
+                    "example": "Excessive screen time can contribute to social isolation."
+                }
+            ],
+            "case_study": "背景：传统超市结账需要收银员与顾客互动。决策：超市引入自助结账系统以降低成本、提高效率。结果：顾客获得更快结账体验但失去人际互动，承担扫描和装袋工作，超市减少人工成本但可能影响顾客满意度。",
+            "reflection_flow": [
+                "我们是否过度追求效率而忽视了基本的人际连接价值？",
+                "当技术解决方案成为默认选择时，我们如何保留人性化服务的空间？"
+            ],
+            "related_model": "技术接受模型(TAM)与效率-人性化权衡框架",
+            "title": "The parable of the supermarket self-checkout",
+            "link": "https://www.economist.com/business/2026/01/15/the-parable-of-the-supermarket-self-checkout",
+            "source": "Economist"
+        },
+        {
+            "en_summary": [
+                "The article claims former President Trump is charging world leaders $1 billion each for their countries to join a 'Board of Peace' for Gaza.",
+                "This appears to be a satirical or fabricated story, as no credible sources confirm such a proposal from Trump or any official political entity."
+            ],
+            "cn_summary": [
+                "文章声称前总统特朗普向各国领导人收取每人10亿美元，以让其国家加入加沙的'和平委员会'。",
+                "这似乎是一则讽刺或虚构的报道，因为没有可靠消息来源证实特朗普或任何官方政治实体提出过此类提议。"
+            ],
+            "golden_sentences": [
+                {
+                    "en": "Trump is charging world leaders $1 billion each for their countries to permanently join Gaza 'Board of Peace'.",
+                    "cn": "特朗普正向各国领导人每人收取10亿美元，以让其国家永久加入加沙'和平委员会'。"
+                }
+            ],
+            "vocab_bank": [
+                {
+                    "word": "Board of Peace",
+                    "meaning": "和平委员会",
+                    "example": "The article mentions a 'Board of Peace' for Gaza, though it appears to be a fictional concept."
+                },
+                {
+                    "word": "satirical",
+                    "meaning": "讽刺的",
+                    "example": "The story is likely satirical, poking fun at political fundraising or international diplomacy."
+                },
+                {
+                    "word": "fabricated",
+                    "meaning": "虚构的",
+                    "example": "No evidence supports this as a real event; it seems fabricated for humorous or critical purposes."
+                }
+            ],
+            "case_study": "背景：文章描述了一个看似离奇的政治提议，涉及特朗普、国际领导人和加沙问题。决策：假设这是真实事件，它可能反映对政治资金筹集或国际和平进程的夸张批评。结果：由于缺乏可信来源，这很可能是一则讽刺新闻，旨在引发对政治腐败或和平倡议成本的讨论，而非报告事实。",
+            "reflection_flow": [
+                "如何区分真实新闻与讽刺或虚假信息？关键步骤包括核查来源、寻找多方证实和评估内容合理性。",
+                "这类故事可能反映公众对政治资金或国际外交的担忧，即使以幽默形式呈现，也值得思考其背后的社会情绪。"
+            ],
+            "related_model": "信息可信度评估模型",
+            "title": "Trump is charging world leaders $1 billion each for their countries to permanently join Gaza ‘Board of Peace’",
+            "link": "https://fortune.com/2026/01/18/trump-gaza-board-of-peace-1-billion-contribution/",
+            "source": "Fortune"
+        }
+    ],
+    "weekly_question": {
+        "cn": "面对 2026 的挑战，如何通过‘第一性原理’重构核心竞争力？",
+        "en": "How to leverage First Principles to rebuild competitiveness?"
+    },
+    "update_time": "2026-01-19 04:20"
+}
