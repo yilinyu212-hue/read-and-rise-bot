@@ -6,24 +6,25 @@ DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
 RSS_SOURCES = [
     {"name": "HBR", "url": "https://hbr.org/rss/feed/topics/leadership"},
     {"name": "McKinsey", "url": "https://www.mckinsey.com/insights/rss"},
-    {"name": "Economist", "url": "https://www.economist.com/business/rss.xml"},
-    {"name": "MIT Tech", "url": "https://www.technologyreview.com/feed/"}
+    {"name": "Economist", "url": "https://www.economist.com/business/rss.xml"}
 ]
 
 def ai_analyze(title):
     url = "https://api.deepseek.com/chat/completions"
+    # 使用 {{ }} 避免 f-string 解析冲突
     prompt = f"""
-    You are an Executive Coach & English Trainer. Analyze: '{title}'.
+    You are an Executive Coach & English Trainer. Analyze: '{title}'. 
     Return STRICT JSON:
     {{
-        "cn_title": "中文标题",
+        "cn_title": "吸引管理者的中文标题",
         "en_title": "{title}",
-        "en_summary": "A 2-sentence English professional summary of this article for audio reading.",
-        "cn_analysis": "300字深度中文教练视角分析。",
-        "case_study": "针对管理者的实战应用案例。",
+        "en_audio_summary": "A 3-sentence professional summary in English for leadership training.",
+        "cn_analysis": "300字深度解析：Read (输入) & Rise (领导力认知)。",
+        "case_study": "针对此趋势的企业实战管理案例。",
         "reflection_flow": ["反思问题1", "反思问题2"],
-        "vocab_cards": [{{"word": "Key Term", "meaning": "地道用法"}}]
+        "vocab_cards": [{{"word": "Keyword", "meaning": "地道管理表达"}}]
     }}"""
+    
     try:
         res = requests.post(url, 
             headers={"Authorization": f"Bearer {DEEPSEEK_API_KEY}"}, 
@@ -33,22 +34,22 @@ def ai_analyze(title):
     except: return None
 
 async def gen_voice(text, filename):
-    # 现在朗读的是 en_summary（摘要），而不是标题，时长会增加到 20-30 秒
-    communicate = edge_tts.Communicate(text, "en-GB-RyanNeural")
-    await communicate.save(filename)
+    try:
+        communicate = edge_tts.Communicate(text, "en-GB-RyanNeural")
+        await communicate.save(filename)
+    except: pass
 
 def main():
     all_data = []
     for i, s in enumerate(RSS_SOURCES):
         feed = feedparser.parse(s['url'])
         if feed.entries:
-            entry = feed.entries[0]
-            content_str = ai_analyze(entry.title)
-            if content_str:
-                item = json.loads(content_str)
+            content = ai_analyze(feed.entries[0].title)
+            if content:
+                item = json.loads(content)
                 audio_fn = f"audio_{i}.mp3"
-                # 使用英文摘要生成语音
-                asyncio.run(gen_voice(item.get('en_summary', entry.title), audio_fn))
+                # 朗读 3 句长的英文摘要，不再只是朗读标题
+                asyncio.run(gen_voice(item.get('en_audio_summary', feed.entries[0].title), audio_fn))
                 item['audio_file'] = audio_fn
                 all_data.append(item)
     
