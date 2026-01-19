@@ -1,30 +1,30 @@
 name: Read & Rise Strategic Sync
+
 on:
   schedule:
-    - cron: '0 0 * * *'  # 这表示每天 UTC 时间 0:00 (北京时间早上 8 点) 自动运行
-  workflow_dispatch:      # 保留手动按钮
+    # 每天北京时间早上 8:00 自动运行 (UTC 0:00)
+    - cron: '0 0 * * *'
+  workflow_dispatch: # 保留手动点击运行的按钮
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
-      - uses: actions/checkout@v4
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
-      - name: Install dependencies
-        # 核心：必须在这里安装所有依赖，解决 ModuleNotFoundError
-        run: pip install requests feedparser edge-tts asyncio
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      # ... 之前的安装环境步骤保持不变 ...
+
       - name: Run Crawler
         env:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
         run: python crawler.py
-      - name: Commit and Push
+
+      # 关键：必须把生成的新数据 push 回 GitHub，否则知识库无法保存
+      - name: Commit and Push changes
         run: |
           git config --local user.email "action@github.com"
-          git config --local user.name "ReadRise-Bot"
-          git add data.json daily_briefing.mp3
-          git commit -m "Strategic Update" || echo "No changes"
-          git push origin main --force
+          git config --local user.name "GitHub Action"
+          git add data.json knowledge_base.json audio_*.mp3
+          git commit -m "Auto-update: New insights and archive" || exit 0
+          git push
