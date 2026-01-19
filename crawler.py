@@ -3,30 +3,46 @@ from datetime import datetime
 
 DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
 
+# 1. 10个顶级信源 + 5本核心书籍
 RSS_SOURCES = [
     {"name": "McKinsey", "url": "https://www.mckinsey.com/insights/rss"},
     {"name": "HBR", "url": "https://hbr.org/rss/feed/topics/leadership"},
-    {"name": "Economist", "url": "https://www.economist.com/business/rss.xml"}
+    {"name": "Economist", "url": "https://www.economist.com/business/rss.xml"},
+    {"name": "MIT Tech Review", "url": "https://www.technologyreview.com/feed/"},
+    {"name": "Fast Company", "url": "https://www.fastcompany.com/business/rss"},
+    {"name": "Fortune", "url": "https://fortune.com/feed/all/"},
+    {"name": "Wired", "url": "https://www.wired.com/feed/rss"},
+    {"name": "TechCrunch", "url": "https://feedpress.me/techcrunch"},
+    {"name": "Aeon", "url": "https://aeon.co/feed.rss"}, # 深度哲学/行为
+    {"name": "Strategy+Business", "url": "https://www.strategy-business.com/rss"}
 ]
 
-def ai_analyze(title, link):
+RECOMMENDED_BOOKS = [
+    "High Output Management by Andy Grove",
+    "Principles by Ray Dalio",
+    "Thinking, Fast and Slow by Daniel Kahneman",
+    "Atomic Habits by James Clear",
+    "The Lean Startup by Eric Ries"
+]
+
+def ai_analyze(content_title, type="article"):
     if not DEEPSEEK_API_KEY: return None
     url = "https://api.deepseek.com/chat/completions"
     
-    # 定义严格的 JSON 结构，包含单词和模型
-    prompt = f"""As a business mentor, analyze: '{title}'. 
-    Return a strict JSON format (double curly braces):
+    prompt = f"""As a business mentor, analyze this {type}: '{content_title}'. 
+    Return a STRICT JSON (double curly braces):
     {{{{
-        "en_title": "{title}",
+        "en_title": "{content_title}",
         "cn_title": "中文标题",
-        "reading_level": "B2/C1 (Strategic)",
-        "en_summary": "150-word English summary.",
-        "cn_analysis": "300字中文深度拆解。",
-        "mental_model": {{"name": "思维模型名称", "logic": "该模型如何应用到此案例"}},
-        "vocabulary": [
-            {{"word": "word1", "phonetic": "/.../", "meaning": "中文", "example": "Eng sentence"}}
+        "type": "{type}",
+        "en_summary": "150-word executive summary.",
+        "cn_analysis": "300字中文深度拆解(含战略意义)。",
+        "case_study": "本内容关联的商业/实际案例拆解",
+        "reflection_flow": ["反思问题1", "反思问题2"],
+        "vocab_cards": [
+            {{"word": "word", "phonetic": "/.../", "meaning": "含义", "example": "sentence"}}
         ],
-        "reflection": ["Reflection 1", "Reflection 2"]
+        "audio_script": "A clear, natural reading script for this summary."
     }}}}"""
     
     try:
@@ -42,27 +58,30 @@ async def generate_voice(text, filename):
     await communicate.save(filename)
 
 def run_sync():
-    print("🏹 Read & Rise 工厂启动...")
-    data = {"briefs": [], "books": [], "update_time": datetime.now().strftime("%Y-%m-%d %H:%M")}
-    if os.path.exists("data.json"):
-        try:
-            with open("data.json", "r", encoding="utf-8") as f:
-                data["books"] = json.load(f).get("books", [])
-        except: pass
+    data = {"items": [], "update_time": datetime.now().strftime("%Y-%m-%d %H:%M")}
+    
+    # 处理书籍 (Highly Recommended)
+    print("📚 正在生成书籍精华...")
+    for book in RECOMMENDED_BOOKS:
+        res = ai_analyze(book, type="Book")
+        if res:
+            audio_fn = f"audio_book_{RECOMMENDED_BOOKS.index(book)}.mp3"
+            asyncio.run(generate_voice(res['audio_script'], audio_fn))
+            res["audio_file"] = audio_fn
+            data["items"].append(res)
 
+    # 处理外刊 (Top 10 Sources)
+    print("🚀 正在同步全球外刊...")
     for s in RSS_SOURCES:
         feed = feedparser.parse(s['url'])
         if feed.entries:
-            res = ai_analyze(feed.entries[0].title, feed.entries[0].link)
+            res = ai_analyze(feed.entries[0].title, type="Article")
             if res:
                 res["source"] = s['name']
-                # 为每篇文章生成单独的语音文件名（可选，此处先生成全局简报）
-                data["briefs"].append(res)
-    
-    if data["briefs"]:
-        # 生成全局简报音频
-        full_text = " . ".join([b['en_summary'] for b in data['briefs'][:2]])
-        asyncio.run(generate_voice(full_text, "daily_briefing.mp3"))
+                audio_fn = f"audio_art_{RSS_SOURCES.index(s)}.mp3"
+                asyncio.run(generate_voice(res['audio_script'], audio_fn))
+                res["audio_file"] = audio_fn
+                data["items"].append(res)
 
     with open("data.json", "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
