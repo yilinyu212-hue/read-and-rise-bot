@@ -6,42 +6,36 @@ DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
 RSS_SOURCES = [
     {"name": "HBR", "url": "https://hbr.org/rss/feed/topics/leadership"},
     {"name": "McKinsey", "url": "https://www.mckinsey.com/insights/rss"},
-    {"name": "Economist", "url": "https://www.economist.com/business/rss.xml"},
-    {"name": "Strategy+Business", "url": "https://www.strategy-business.com/rss"}
+    {"name": "Economist", "url": "https://www.economist.com/business/rss.xml"}
 ]
 
 def ai_analyze(title):
     url = "https://api.deepseek.com/chat/completions"
-    # 使用占位符避免 f-string 大括号冲突
-    raw_prompt = """
-    You are an AI Mentor for Educators & Leaders. Analyze the article: '{title}'.
-    Return a STRICT JSON object with these keys:
-    "cn_title" (attractive chinese title), 
-    "en_title" (original title),
-    "en_summary" (A 120-word deep professional English summary for audio training),
-    "cn_analysis" (300-word deep chinese analysis),
-    "case_study" (practical management case),
-    "reflection_flow" (list of 2 questions),
-    "vocab_cards" (list of 2 word/meaning objects).
+    # 使用占位符，彻底避开 f-string 语法冲突
+    prompt_template = """
+    You are an AI Mentor. Analyze: '{title}'. 
+    Return a STRICT JSON object with:
+    "cn_title": "吸引人的中文标题",
+    "en_summary": "120-word deep professional summary for audio recording",
+    "cn_analysis": "300字深度解析",
+    "mental_model": "对应的思维模型名称(如：第一性原理, 复利效应等)",
+    "case_study": "实战案例",
+    "vocab_list": [{"word": "Keyword", "meaning": "中文意思", "usage": "例句"}],
+    "reflection": ["反思1", "反思2"]
     """
-    prompt = raw_prompt.replace("{title}", title)
+    prompt = prompt_template.replace("{title}", title)
     
     try:
-        headers = {"Authorization": f"Bearer {DEEPSEEK_API_KEY}", "Content-Type": "application/json"}
-        payload = {
-            "model": "deepseek-chat", 
-            "messages": [{"role": "user", "content": prompt}], 
-            "response_format": {"type": "json_object"}
-        }
-        res = requests.post(url, headers=headers, json=payload, timeout=60)
+        res = requests.post(url, 
+            headers={"Authorization": f"Bearer {DEEPSEEK_API_KEY}"}, 
+            json={"model": "deepseek-chat", "messages": [{"role": "user", "content": prompt}], "response_format": {"type": "json_object"}},
+            timeout=60)
         return res.json()['choices'][0]['message']['content']
-    except Exception as e:
-        print(f"Error: {e}")
-        return None
+    except: return None
 
 async def gen_voice(text, filename):
     try:
-        # Ryan 是深沉的英音男声，适合领导力内容
+        # Ryan 的深沉英音更适合长时间收听
         communicate = edge_tts.Communicate(text, "en-GB-RyanNeural")
         await communicate.save(filename)
     except: pass
@@ -51,15 +45,12 @@ def main():
     for i, s in enumerate(RSS_SOURCES):
         feed = feedparser.parse(s['url'])
         if feed.entries:
-            # 抓取每个来源的第一篇文章，确保多来源
-            entry = feed.entries[0]
-            print(f"Processing: {entry.title}")
-            content = ai_analyze(entry.title)
+            content = ai_analyze(feed.entries[0].title)
             if content:
                 item = json.loads(content)
                 audio_fn = f"audio_{i}.mp3"
-                # 朗读 120 字的深度摘要，时长约 50-70 秒
-                asyncio.run(gen_voice(item.get('en_summary', entry.title), audio_fn))
+                # 朗读 120 字长摘要，时长约 1 分钟
+                asyncio.run(gen_voice(item.get('en_summary', 'Summarizing...'), audio_fn))
                 item['audio_file'] = audio_fn
                 all_data.append(item)
     
