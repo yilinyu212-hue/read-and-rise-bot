@@ -3,13 +3,11 @@ from datetime import datetime
 
 DEEPSEEK_API_KEY = os.getenv("DEEPSEEK_API_KEY")
 
-# 1. 顶级信源库
 RSS_SOURCES = [
     {"name": "McKinsey", "url": "https://www.mckinsey.com/insights/rss"},
     {"name": "HBR", "url": "https://hbr.org/rss/feed/topics/leadership"},
     {"name": "Economist", "url": "https://www.economist.com/business/rss.xml"},
     {"name": "MIT Tech Review", "url": "https://www.technologyreview.com/feed/"},
-    {"name": "Fast Company", "url": "https://www.fastcompany.com/business/rss"},
     {"name": "Fortune", "url": "https://fortune.com/feed/all/"}
 ]
 
@@ -17,15 +15,18 @@ def ai_analyze(title, link):
     if not DEEPSEEK_API_KEY: return None
     url = "https://api.deepseek.com/chat/completions"
     
-    # 修复：JSON 格式使用双大括号 {{ }} 避免 f-string 报错
-    prompt = f"""As a top business consultant, analyze this article: '{title}'. 
-    Return a strict JSON object:
-    {{
-        "en_summary": "A 100-word executive summary in English.",
-        "cn_analysis": "300字中文深度拆解：包含行业影响、竞争策略及教育者启示。",
-        "actions": ["Action Point 1", "Action Point 2", "Action Point 3"],
-        "model_scores": {{"Strategy": 90, "Innovation": 85, "Execution": 75, "Insight": 95}}
-    }}"""
+    # 强制要求 JSON 标签化输出
+    prompt = f"""Analyze this executive article: '{title}'. 
+    Return a strict JSON format (using double curly braces for escaping):
+    {{{{
+        "en_summary": "100-word English summary.",
+        "cn_analysis": "300字中文深度拆解。",
+        "reading_level": "Level: Senior/Middle/Entry",
+        "tags": ["Tag1", "Tag2"],
+        "reflection_flow": ["Deep Question 1", "Deep Question 2"],
+        "action_points": ["Action 1", "Action 2"],
+        "model_scores": {{"Strategy": 90, "Innovation": 80}}
+    }}}}"""
     
     try:
         res = requests.post(url, headers={"Authorization": f"Bearer {DEEPSEEK_API_KEY}"}, json={
@@ -40,17 +41,17 @@ def ai_analyze(title, link):
     except: return None
 
 async def generate_audio(text):
-    # 使用 Edge-TTS 生成极具质感的伦敦腔
     communicate = edge_tts.Communicate(text, "en-GB-RyanNeural")
     await communicate.save("daily_briefing.mp3")
 
 def run_sync():
-    print("🚀 正在从全球顶级信源同步情报...")
+    print("🚀 启动数据中枢...")
     books = []
     if os.path.exists("data.json"):
         try:
             with open("data.json", "r", encoding="utf-8") as f:
-                books = json.load(f).get("books", [])
+                d = json.load(f)
+                books = d.get("books", [])
         except: pass
 
     data = {"briefs": [], "books": books, "update_time": datetime.now().strftime("%Y-%m-%d %H:%M")}
@@ -58,17 +59,13 @@ def run_sync():
     for s in RSS_SOURCES:
         feed = feedparser.parse(s['url'])
         if feed.entries:
-            # 抓取每个源最新的那篇文章
             res = ai_analyze(feed.entries[0].title, feed.entries[0].link)
             if res:
                 res["source"] = s['name']
                 data["briefs"].append(res)
-                print(f"✅ 已抓取: {s['name']}")
     
     if data["briefs"]:
-        script = f"Good day. This is your Read and Rise daily briefing. We've analyzed the latest from McKinsey, HBR, and The Economist. Let's look at today's strategic shifts."
-        asyncio.run(generate_audio(script))
-        print("🎙️ 语音播报合成完成")
+        asyncio.run(generate_audio("Hi Leaders! Here is your Read and Rise daily briefing."))
 
     with open("data.json", "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
