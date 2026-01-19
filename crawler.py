@@ -18,31 +18,27 @@ RSS_SOURCES = [
 
 def ai_analyze(title):
     url = "https://api.deepseek.com/chat/completions"
-    # 身份定制 Prompt
+    # 使用 double-brace {{ }} 避开 f-string 解析冲突
     prompt = f"""
     You are an AI assistant for an Executive Coach & English Trainer. 
-    Analyze the article: '{title}'. 
-    
-    Target Slogan: Read to Rise, Rise to Lead.
+    Analyze: '{title}'. 
+    Slogan: Read to Rise, Rise to Lead.
     
     Return STRICT JSON:
     {{
-        "cn_title": "吸引管理者的中文标题",
+        "cn_title": "中文标题",
         "en_title": "{title}",
-        "cn_analysis": "300字教练视角摘要：Read (输入了什么) & Rise (认知提升了什么)。",
-        "case_study": "针对企业管理者的实战 Coaching Case。",
-        "reflection_flow": ["基于此文的领导力反思1", "基于此文的领导力反思2"],
-        "vocab_cards": [
-            {{"word": "Key Business Term", "meaning": "地道含义及在领导力场景下的用法"}}
-        ],
-        "mental_model": "思维模型名称"
+        "cn_analysis": "300字教练视角摘要",
+        "case_study": "实战管理案例",
+        "reflection_flow": ["反思提问1", "反思提问2"],
+        "vocab_cards": [{{"word": "Key Term", "meaning": "地道用法"}}],
+        "mental_model": "思维模型"
     }}"""
     
     try:
-        res = requests.post(url, 
-            headers={"Authorization": f"Bearer {DEEPSEEK_API_KEY}", "Content-Type": "application/json"}, 
-            json={"model": "deepseek-chat", "messages": [{"role": "user", "content": prompt}], "response_format": {"type": "json_object"}},
-            timeout=60)
+        headers = {"Authorization": f"Bearer {DEEPSEEK_API_KEY}", "Content-Type": "application/json"}
+        payload = {"model": "deepseek-chat", "messages": [{"role": "user", "content": prompt}], "response_format": {"type": "json_object"}}
+        res = requests.post(url, headers=headers, json=payload, timeout=60)
         return res.json()['choices'][0]['message']['content']
     except: return None
 
@@ -57,16 +53,18 @@ def main():
     for i, s in enumerate(RSS_SOURCES):
         feed = feedparser.parse(s['url'])
         if feed.entries:
-            content = ai_analyze(feed.entries[0].title)
+            entry = feed.entries[0]
+            content = ai_analyze(entry.title)
             if content:
                 item = json.loads(content)
                 audio_fn = f"audio_{i}.mp3"
-                asyncio.run(gen_voice(feed.entries[0].title, audio_fn))
+                asyncio.run(gen_voice(entry.title, audio_fn))
                 item['audio_file'] = audio_fn
                 all_data.append(item)
     
+    # 强制保存为带有 "items" 键的字典格式，修复 get() 报错
     with open("data.json", "w", encoding="utf-8") as f:
-        json.dump({"items": all_data, "update_time": datetime.now().strftime("%Y-%m-%d")}, f, ensure_ascii=False)
+        json.dump({"items": all_data}, f, ensure_ascii=False)
 
 if __name__ == "__main__":
     main()
