@@ -1,18 +1,23 @@
-name: Read & Rise Data Sync
+name: Read & Rise Strategic Sync
 
 on:
   schedule:
-    - cron: '0 0 * * *' # 每天零点自动更新
-  workflow_dispatch:      # 允许手动触发
+    - cron: '0 22 * * *' # 每天北京时间凌晨6点自动运行
+  workflow_dispatch:      # 支持手动点击 "Run workflow" 触发
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    
+    # 授予 Action 写回仓库的权限
+    permissions:
+      contents: write
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # 获取完整历史，减少冲突概率
+          fetch-depth: 0 # 获取完整历史以减少推送冲突
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -20,17 +25,29 @@ jobs:
           python-version: '3.10'
 
       - name: Install dependencies
-        run: pip install requests feedparser
+        run: |
+          python -m pip install --upgrade pip
+          # 自动安装所需的全部库
+          pip install requests feedparser edge-tts asyncio
 
-      - name: Run Crawler
+      - name: Run Digital Brain Crawler
         env:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
         run: python crawler.py
 
-      - name: Commit and Push
+      - name: Commit and Push changes
         run: |
-          git config --global user.name "ReadRise-Bot"
-          git config --global user.email "bot@readrise.com"
-          git add data.json daily_briefing.mp3 # 必须包含 mp3
-          git commit -m "Auto-sync: Daily Briefing & Data" || echo "No changes"
-          git push origin main --force
+          git config --local user.email "action@github.com"
+          git config --local user.name "ReadRise-Bot"
+          
+          # 将生成的数据文件和音频文件全部添加到暂存区
+          git add data.json daily_briefing.mp3 || echo "No files to add"
+          
+          # 检查是否有内容变更，有则提交
+          if git diff --quiet && git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "🏹 Auto-sync: Daily Executive Insight $(date)"
+            # 使用 --force 强制推送，解决一切版本冲突拒绝
+            git push origin main --force
+          fi
