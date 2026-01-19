@@ -1,93 +1,80 @@
 import streamlit as st
 import json, os, requests
 
-# ================= 1. 初始化 =================
+# ================= 1. 配置与初始化 =================
 st.set_page_config(page_title="Read & Rise AI Coach", layout="wide")
 
 def load_data():
     if not os.path.exists("data.json"): return {"briefs": []}
-    with open("data.json", "r", encoding="utf-8") as f:
-        return json.load(f)
+    with open("data.json", "r", encoding="utf-8") as f: return json.load(f)
 
 data = load_data()
 
-# ================= 2. AI Coach 核心逻辑 =================
-def call_coach_with_context(user_input, article_data):
+# ================= 2. AI 对话引擎 (RAG) =================
+def call_coach(user_input, article_context):
     api_key = os.getenv("DEEPSEEK_API_KEY")
-    # 核心：将文章的所有深度解析作为上下文喂给 AI
-    context = f"""
-    你正在协助用户研读文章：《{article_data['title']}》
-    案例分析：{article_data.get('case_study', '')}
-    反思流：{article_data.get('reflection_flow', [])}
-    管理词汇：{article_data.get('vocab_bank', [])}
-    请基于以上内容，以专业教练身份回答。
-    """
-    messages = [
-        {"role": "system", "content": context},
-        {"role": "user", "content": user_input}
-    ]
+    context_str = f"文章标题: {article_context['title']}\n案例: {article_context.get('case_study','')}\n反思: {article_context.get('reflection_flow',[])}"
+    
     try:
         res = requests.post("https://api.deepseek.com/chat/completions", 
-                            headers={"Authorization": f"Bearer {api_key}"},
-                            json={"model": "deepseek-chat", "messages": messages})
+            headers={"Authorization": f"Bearer {api_key}"},
+            json={
+                "model": "deepseek-chat",
+                "messages": [
+                    {"role": "system", "content": f"你是针对下文的私教。下文内容如下：\n{context_str}"},
+                    {"role": "user", "content": user_input}
+                ], "temperature": 0.5
+            }, timeout=30)
         return res.json()['choices'][0]['message']['content']
-    except: return "Coach 正在思考，请稍后再试。"
+    except: return "Coach 正在深思，请检查 API Key 配置。"
 
-# ================= 3. 页面频道渲染 =================
+# ================= 3. UI 布局 =================
 menu = st.sidebar.radio("导航", ["🏠 Dashboard", "🚀 全球快报"])
 
 if menu == "🚀 全球快报":
-    # 使用 session_state 记录当前正在对话的文章索引
-    if "active_article_index" not in st.session_state:
-        st.session_state.active_article_index = None
+    col_left, col_right = st.columns([0.6, 0.4]) # 左侧阅读，右侧对话
 
-    col_list, col_chat = st.columns([0.6, 0.4]) # 左侧 60% 列表，右侧 40% 对话
-
-    with col_list:
+    with col_left:
         st.header("🚀 今日智库内参")
         for i, art in enumerate(data.get("briefs", [])):
-            with st.container(border=True):
-                st.subheader(f"{art['title']}")
-                st.caption(f"源自: {art.get('source')} | 模型: {art.get('related_model')}")
-                
-                # 中英文摘要展示
-                t1, t2, t3 = st.tabs(["摘要", "词汇库", "案例 & 反思"])
-                with t1:
-                    st.write("**EN:** " + art.get('en_summary', ''))
-                    st.write("**中:** " + art.get('cn_summary', ''))
-                with t2:
+            with st.expander(f"📌 [{art.get('source')}] {art['title']}", expanded=(i==0)):
+                tab1, tab2, tab3 = st.tabs(["📑 深度摘要", "🎙️ 词汇金句", "🔍 案例反思"])
+                with tab1:
+                    st.write("**EN Summary:**")
+                    for p in art.get('en_summary', []): st.write(f"• {p}")
+                    st.write("**中文摘要:**")
+                    for p in art.get('cn_summary', []): st.write(f"• {p}")
+                with tab2:
                     for v in art.get('vocab_bank', []):
-                        st.write(f"🔹 **{v['word']}**: {v['meaning']}")
-                        st.caption(f"Example: {v['example']}")
-                with t3:
-                    st.write("**案例:** " + art.get('case_study', ''))
-                    st.write("**反思提问:**")
-                    for q in art.get('reflection_flow', []): st.warning(q)
+                        st.markdown(f"**{v['word']}**: {v['meaning']}  \n*Example: {v['example']}*")
+                with tab3:
+                    st.write(f"**案例分析:** {art.get('case_study')}")
+                    for rf in art.get('reflection_flow', []): st.warning(rf)
                 
-                if st.button("🎙️ 在此开启教练对话", key=f"btn_{i}"):
-                    st.session_state.active_article_index = i
+                if st.button("🎙️ 针对此文开启对话", key=f"btn_{i}"):
+                    st.session_state.active_art = art
+                    st.session_state.chat_history = []
 
-    # --- 右侧对话框部分 ---
-    with col_chat:
-        st.header("🎙️ AI Coach Session")
-        if st.session_state.active_article_index is not None:
-            active_art = data["briefs"][st.session_state.active_article_index]
-            st.info(f"正在对话：《{active_art['title']}》")
+    with col_right:
+        st.header("🎙️ Coach Session")
+        if "active_art" in st.session_state:
+            active_art = st.session_state.active_art
+            st.info(f"正在深度研读：{active_art['title']}")
             
-            # 聊天历史展示
-            chat_key = f"history_{st.session_state.active_article_index}"
-            if chat_key not in st.session_state: st.session_state[chat_key] = []
+            # 聊天窗口
+            container = st.container(height=500)
+            if "chat_history" not in st.session_state: st.session_state.chat_history = []
             
-            for msg in st.session_state[chat_key]:
-                with st.chat_message(msg["role"]): st.write(msg["content"])
+            for m in st.session_state.chat_history:
+                with container.chat_message(m["role"]): st.markdown(m["content"])
             
-            if user_p := st.chat_input("针对此文向教练提问..."):
-                st.session_state[chat_key].append({"role": "user", "content": user_p})
-                with st.chat_message("user"): st.write(user_p)
+            if prompt := st.chat_input("向教练提问..."):
+                st.session_state.chat_history.append({"role": "user", "content": prompt})
+                with container.chat_message("user"): st.markdown(prompt)
                 
-                with st.chat_message("assistant"):
-                    response = call_coach_with_context(user_p, active_art)
-                    st.write(response)
-                    st.session_state[chat_key].append({"role": "assistant", "content": response})
+                with container.chat_message("assistant"):
+                    response = call_coach(prompt, active_art)
+                    st.markdown(response)
+                    st.session_state.chat_history.append({"role": "assistant", "content": response})
         else:
-            st.info("请在左侧点击【开启教练对话】开始。")
+            st.info("请在左侧点击【开启对话】按钮启动私教 Session。")
