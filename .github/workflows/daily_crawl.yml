@@ -31,5 +31,7 @@ jobs:
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add data.json knowledge_base.json audio_*.mp3
-          git commit -m "Auto-update: 10 new insights and archive" || exit 0
-          git push
+          git commit -m "Auto-update: New insights and archive" || exit 0
+          # 关键修复：先 pull 解决冲突再强制推送到 main
+          git pull --rebase origin main
+          git push origin main
