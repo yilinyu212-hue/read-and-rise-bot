@@ -1,48 +1,53 @@
-# app.py
 import streamlit as st
 from backend.engine import run_rize_insight
 from datetime import datetime
 import json, os
 
-# 导入配置
+# --- 核心配置 ---
 API_KEY = "pat_jGg7SBGnKdh5oSsb9WoByDhSTEuCYzreP4xQSPJjym27HE11vnFpyv7zQfweC4dp"
 WORKFLOW_ID = "7597720250343424040"
+DB_PATH = "data/knowledge.json"
 
-st.set_page_config(page_title="Read & Rise", layout="wide")
+st.set_page_config(page_title="Read & Rise | 行政简报", layout="wide")
 
-# 加载历史数据逻辑
 def load_db():
-    if os.path.exists("data/knowledge.json"):
-        with open("data/knowledge.json", "r") as f: return json.load(f)
+    if os.path.exists(DB_PATH) and os.path.getsize(DB_PATH) > 0:
+        with open(DB_PATH, "r", encoding="utf-8") as f:
+            return json.load(f)
     return []
 
-# --- 界面排版 ---
-st.sidebar.title("🏹 Read & Rise")
-menu = st.sidebar.radio("专区", ["🏠 每日简报", "⚙️ 同步后台"])
-
-if menu == "🏠 每日简报":
-    st.header("Morning, Leader! 👋")
+def save_to_db(new_item):
     db = load_db()
-    if not db:
-        st.info("尚未同步内容，请先前往后台。")
-    for item in db:
-        with st.expander(f"📅 {item['date']} | {item['title']}"):
-            # 采用卡片式排版，避免文字拥挤
-            st.markdown(f"### {item['model']}")
-            st.write(item['content'])
+    new_item['date'] = datetime.now().strftime("%Y-%m-%d")
+    db.insert(0, new_item)
+    with open(DB_PATH, "w", encoding="utf-8") as f:
+        json.dump(db, f, ensure_ascii=False, indent=4)
 
-elif menu == "⚙️ 同步后台":
-    st.title("🛠 认知引擎管理")
-    topic = st.text_input("输入今日研究主题")
-    if st.button("开始同步"):
-        with st.spinner("正在链接扣子并生成内容..."):
+# --- UI 渲染 ---
+with st.sidebar:
+    st.title("🏹 Read & Rise")
+    st.markdown("---")
+    menu = st.radio("功能导航", ["🏠 决策仪表盘", "⚙️ 自动化同步"])
+
+if menu == "🏠 决策仪表盘":
+    st.header("Executive Insight Dashboard")
+    items = load_db()
+    if not items:
+        st.info("库中尚无内容。请前往“自动化同步”开启今日抓取。")
+    else:
+        for it in items:
+            with st.expander(f"📅 {it['date']} | {it['title']}"):
+                st.info(f"💡 核心模型：{it['model']}")
+                st.markdown(it['content'])
+
+elif menu == "⚙️ 自动化同步":
+    st.title("🛠 认知引擎后台")
+    topic = st.text_input("输入今日研究主题（如：AI对高管决策的影响）")
+    if st.button("🚀 启动全球抓取任务"):
+        with st.spinner("Mentor Rize 正在调取全球数据库并进行模型拆解..."):
             result = run_rize_insight(topic, API_KEY, WORKFLOW_ID)
             if result:
-                # 存入数据库
-                current_db = load_db()
-                result['date'] = datetime.now().strftime("%Y-%m-%d")
-                current_db.insert(0, result)
-                with open("data/knowledge.json", "w") as f: json.dump(current_db, f)
-                st.success("同步成功！")
+                save_to_db(result)
+                st.success(f"同步成功！《{result['title']}》已入库。")
             else:
-                st.error("同步失败，请检查 API Token 权限。")
+                st.error("同步失败。原因：API连接或工作流返回异常。")
