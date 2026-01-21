@@ -19,7 +19,7 @@ components.html(f"""
 """, height=0)
 
 # --- 2. 身份认证与 API 配置 ---
-API_KEY = "pat_DNy8zk5DxAsNDzVEIxkzweVaXo9hic4fDPagIAUjoepgLK2zL3bub16Mp3RxvsRY" # 👈 填入 pat_ 开头的 Token
+API_KEY = "pat_eaOALk7CRZrn8psvXRZ3erf7hiwnrgHoFmoq4erzqVg7sCVloqAU1ov5G7fb9Xar" # 👈 填入 pat_ 开头的 Token
 WORKFLOW_ID = "7597720250343424040" # 👈 填入工作流 ID
 
 def load_data():
