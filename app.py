@@ -18,7 +18,7 @@ components.html(f"""
 """, height=0)
 
 # --- 2. 身份认证与 API 配置 ---
-API_KEY = "pat_WHGOXd86jTAtCjYvv0c8dWan9wqyfWU8pU92rdcpdcN5Q31D4B7kGZKKIiySJ5qb" # 👈 填入你在个人中心生成的 pat_... 令牌
+API_KEY = "pat_jGg7SBGnKdh5oSsb9WoByDhSTEuCYzreP4xQSPJjym27HE11vnFpyv7zQfweC4dp" # 👈 填入你在个人中心生成的 pat_... 令牌
 WORKFLOW_ID = "7597720250343424040" # 👈 填入你的工作流 ID
 
 def load_data():
