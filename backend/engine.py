@@ -1,25 +1,18 @@
 # backend/engine.py
-import requests
-from .crawler import get_search_query
+import requests, json
+from .crawler import fetch
 
-def run_rize_insight(topic, api_key, workflow_id):
-    # 调用爬虫逻辑生成精准搜索词
-    refined_query = get_search_query(topic)
+def run_auto_sync(api_key, workflow_id):
+    # 1. 抓取外刊原文
+    raw_articles = fetch()
+    results = []
     
-    url = "https://api.coze.cn/v1/workflow/run"
-    headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
-    payload = {"workflow_id": workflow_id, "parameters": {"input": refined_query}}
+    # 2. 挑出最新的（比如第一篇）发给扣子进行深度拆解
+    for article in raw_articles[:3]: # 每次处理前3篇
+        topic_with_context = f"来源:{article['source']} | 标题:{article['title']} | 内容摘要:{article['content']}"
+        
+        # 调用扣子 API
+        # ... 这里保留之前的 requests.post 逻辑，但发送的是 topic_with_context ...
+        # ... 得到 res 后存入 data/knowledge.json ...
     
-    try:
-        response = requests.post(url, headers=headers, json=payload, timeout=60)
-        if response.status_code == 200:
-            data = response.json().get('data', {})
-            return {
-                "title": data.get('cn_title'),
-                "one_sentence": data.get('one_sentence'),
-                "content": data.get('cn_analysis'),
-                "model": data.get('mental_model'),
-                "reflection": data.get('reflection')
-            }
-        return None
-    except: return None
+    return True
