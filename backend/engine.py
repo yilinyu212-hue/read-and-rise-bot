@@ -1,4 +1,3 @@
-# backend/engine.py
 import requests
 import json
 
@@ -16,21 +15,29 @@ def run_rize_insight(topic, api_key, workflow_id):
     try:
         response = requests.post(url, headers=headers, json=payload)
         if response.status_code == 200:
-            raw_data = response.json().get('data')
-            # 兼容性处理：无论扣子返回的是 JSON 字符串还是对象，统统拿下
+            res_json = response.json()
+            # 兼容处理：Coze 的 workflow 返回数据在 'data' 字段里
+            raw_data = res_json.get('data')
+            
+            # 如果是字符串形式的 JSON，解析它
             if isinstance(raw_data, str):
                 parsed = json.loads(raw_data)
             else:
-                parsed = raw_data
-            
-            # 自动提取你工作流里的那个 'output' 变量
-            content = parsed.get('output') or parsed.get('cn_analysis') or "内容生成失败"
+                parsed = raw_data if raw_data else {}
+
+            # 提取内容：优先找你的具体字段，找不到就拿全量 output
+            content = parsed.get('output') or parsed.get('cn_analysis') or str(parsed)
+            model = parsed.get('mental_model') or "决策者心智模型"
+            title = parsed.get('cn_title') or f"关于 {topic} 的深度拆解"
+
             return {
-                "title": f"关于 {topic} 的深度洞察",
+                "title": title,
                 "content": content,
-                "model": parsed.get('mental_model', '战略决策模型')
+                "model": model
             }
-        return None
+        else:
+            print(f"API Error: {response.text}")
+            return None
     except Exception as e:
-        print(f"Engine Error: {e}")
+        print(f"Engine Exception: {e}")
         return None
