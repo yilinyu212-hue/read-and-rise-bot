@@ -1,33 +1,37 @@
 import openai
 
-def analyze_article(title, content):
+def run_rize_insight(title, content):
     """
-    对接 DeepSeek 大脑，生成 Read & Rise 深度解析内容
+    对接 DeepSeek，生成 Read & Rise 深度解析
     """
-    prompt = f"""
-    你是一位资深的教育者和商业教练。请根据以下外刊全文内容，为‘Read & Rise’平台生成深度内容。
-    
-    文章标题：{title}
-    文章全文：{content}
-    
-    请严格按照以下板块输出（使用中英文双语）：
-
-    ### 📘 [Read] 深度精读与案例
-    - **Core Concept (核心概念)**: 提取文章最核心的一个理论。
-    - **Case Study (案例解析)**: 详细描述文中的公司或人物案例。
-    
-    ### 🚀 [Rise] 管理跃迁与反思
-    - **Mental Model (思维模型)**: 这篇文章对应哪个经典的商业思维模型？
-    - **Actionable Advice (行动建议)**: 给教育者/管理者的 3 条具体操作建议。
-    """
-    
     client = openai.OpenAI(
-        api_key="你的DEEPSEEK_API_KEY", # 这里请确保填入你的 Key
+        api_key="sk-0e2da60735ee494e9ff1d3d0f4185239", # <--- 请在此处粘贴你的 Key
         base_url="https://api.deepseek.com"
     )
-    
+
+    prompt = f"""
+    你是一位资深的教育者。请根据以下外刊全文，为 'Read & Rise' 平台生成深度内容。
+    要求：使用中英文双语，包含具体案例。
+
+    文章标题：{title}
+    文章内容：{content}
+
+    ### 📘 [Read] 深度精读与案例 (Deep Dive & Cases)
+    - **Core Concept**: 提取核心理论。
+    - **Case Study**: 详细描述文中的真实案例。
+
+    ### 🚀 [Rise] 管理跃迁与反思 (Strategic Rise)
+    - **Mental Model**: 对应哪个思维模型？
+    - **Actionable Advice**: 给管理者的 3 条具体建议。
+    """
+
     response = client.chat.completions.create(
         model="deepseek-chat",
         messages=[{"role": "user", "content": prompt}]
     )
     return response.choices[0].message.content
+
+def sync_global_publications():
+    """兼容 app.py 的导入需求"""
+    from .crawler import fetch
+    return fetch()
