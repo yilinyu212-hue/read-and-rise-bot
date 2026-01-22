@@ -1,23 +1,15 @@
 import openai
 import json
+# 关键：必须从本地 crawler 导入 fetch
+from .crawler import fetch 
 
-def run_rize_insight(title, content, workflow_id=None):
+def run_rize_insight(title, content):
     client = openai.OpenAI(
         api_key="sk-4ee83ed8d53a4390846393de5a23165f", 
         base_url="https://api.deepseek.com"
     )
 
-    prompt = f"""
-    你是一位顶级战略顾问。请阅读以下素材，输出中文决策内参。
-    素材：{content}
-
-    请严格按 JSON 输出，确保 key 如下：
-    {{
-        "punchline": "一句话爆点",
-        "read": "这里写 200 字以上的中文案例拆解和逻辑分析。",
-        "rise": "这里写 1 个思维模型和 3 条管理行动指令。"
-    }}
-    """
+    prompt = f"请根据以下素材输出中文内参。素材：{content}。严格按 JSON 格式输出：{{'punchline': '...', 'read': '...', 'rise': '...'}}"
 
     try:
         response = client.chat.completions.create(
@@ -27,18 +19,18 @@ def run_rize_insight(title, content, workflow_id=None):
         )
         return json.loads(response.choices[0].message.content)
     except Exception as e:
-        return {"punchline": "解析失败", "read": str(e), "rise": "检查API"}
+        return {"punchline": "解析失败", "read": f"错误：{str(e)}", "rise": "请检查配置"}
 
-def sync_global_publications(api_key=None, workflow_id=None):
-    # 这里直接调用我们刚才写的 fetch
+def sync_global_publications():
+    # 调用上面定义的 fetch
     articles = fetch()
     processed = []
     for a in articles:
         res = run_rize_insight(a['title'], a['content'])
         processed.append({
             "title": a['title'],
-            "punchline": res.get("punchline"),
-            "read": res.get("read"),
-            "rise": res.get("rise")
+            "punchline": res.get("punchline", "核心洞察"),
+            "read": res.get("read", "深度内容生成中"), # 确保 key 是 'read'
+            "rise": res.get("rise", "行动建议")
         })
     return processed
