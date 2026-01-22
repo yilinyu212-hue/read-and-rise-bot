@@ -1,7 +1,6 @@
 import openai
 import json
-# 关键：必须从本地 crawler 导入 fetch
-from .crawler import fetch 
+from .crawler import fetch # 关键：修复 NameError
 
 def run_rize_insight(title, content):
     client = openai.OpenAI(
@@ -9,7 +8,16 @@ def run_rize_insight(title, content):
         base_url="https://api.deepseek.com"
     )
 
-    prompt = f"请根据以下素材输出中文内参。素材：{content}。严格按 JSON 格式输出：{{'punchline': '...', 'read': '...', 'rise': '...'}}"
+    prompt = f"""
+    作为战略顾问，请根据以下素材输出中文内参。
+    素材：{content}
+    严格按 JSON 格式输出：
+    {{
+        "punchline": "一句话核心洞察",
+        "read": "这里写不少于200字的中文深度案例拆解。",
+        "rise": "这里写 1 个思维模型和 3 条行动建议。"
+    }}
+    """
 
     try:
         response = client.chat.completions.create(
@@ -22,7 +30,6 @@ def run_rize_insight(title, content):
         return {"punchline": "解析失败", "read": f"错误：{str(e)}", "rise": "请检查配置"}
 
 def sync_global_publications():
-    # 调用上面定义的 fetch
     articles = fetch()
     processed = []
     for a in articles:
@@ -30,7 +37,7 @@ def sync_global_publications():
         processed.append({
             "title": a['title'],
             "punchline": res.get("punchline", "核心洞察"),
-            "read": res.get("read", "深度内容生成中"), # 确保 key 是 'read'
+            "read": res.get("read", "深度内容生成中"), 
             "rise": res.get("rise", "行动建议")
         })
     return processed
