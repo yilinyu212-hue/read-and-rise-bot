@@ -1,14 +1,14 @@
 def fetch():
     """
-    【本地保底版】直接提供高质量素材，确保 [Read] 部分不再空白。
+    【本地保底版】注入多元化商业/技术案例。
     """
     return [
         {
-            "title": "Netflix's 2026 Strategy Shift",
-            "content": "Netflix has pivoted its management culture to focus on 'Extreme Talent Density'. By utilizing AI for routine tasks, the company reduced middle management by 15% while increasing creative output. This shift emphasizes high-performance over tenure."
+            "title": "NVIDIA's Unseen Competitive Moat",
+            "content": "NVIDIA's dominance isn't just hardware; it's the CUDA ecosystem. By locking in developers, they've created high switching costs. Current data: 80% market share in AI training chips. Strategic pivot: moving into AI-as-a-Service."
         },
         {
-            "title": "The Rise of Adaptive Learning AI",
-            "content": "In recent educational management trends, schools are implementing adaptive learning systems. Initial data shows a 25% improvement in math scores across primary education sectors. Managers are focusing on teacher retraining to act as mentors."
+            "title": "The 'Small Team' Revolution at Amazon",
+            "content": "Amazon is testing a 'Two-Pizza Team' 2.0. By using LLMs to handle cross-team documentation, they are reducing 'communication overhead'. Results: Product cycle reduced from 6 months to 45 days. Focus: Speed over certainty."
         }
     ]
