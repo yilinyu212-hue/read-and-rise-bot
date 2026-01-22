@@ -1,6 +1,6 @@
 import openai
 import json
-from .crawler import fetch # 关键：修复 NameError
+from .crawler import fetch 
 
 def run_rize_insight(title, content):
     client = openai.OpenAI(
@@ -9,13 +9,21 @@ def run_rize_insight(title, content):
     )
 
     prompt = f"""
-    作为战略顾问，请根据以下素材输出中文内参。
-    素材：{content}
-    严格按 JSON 格式输出：
+    作为顶级咨询顾问，请将以下素材转化为一份高质感内参。
+    
+    【原则】：
+    1. 关键术语保留英文原词，如：(Talent Density / 人才密度)。
+    2. 严禁大段文字，必须使用 Markdown 列表(Bullet Points)。
+    3. 增加“呼吸感”，每段话不超过 3 行。
+
+    素材标题：{title}
+    素材内容：{content}
+
+    请严格按 JSON 格式输出：
     {{
-        "punchline": "一句话核心洞察",
-        "read": "这里写不少于200字的中文深度案例拆解。",
-        "rise": "这里写 1 个思维模型和 3 条行动建议。"
+        "punchline": "用一句极具爆点的话总结洞察 (20字以内)",
+        "read": "### 核心逻辑\\n- **Key Insight**: 用一句话说明核心逻辑\\n- **Context (背景)**: 简单说明背景\\n- **Action (行动)**: 文中公司做了什么\\n- **Data (数据)**: 具体成效",
+        "rise": "### 🚀 Actionable Advice\\n- **Mental Model (思维模型)**: 关联模型名称\\n- **Daily Directive (今日指令)**: \\n  1. [Stop] 停止的行为\\n  2. [Start] 启动的布局"
     }}
     """
 
@@ -27,7 +35,7 @@ def run_rize_insight(title, content):
         )
         return json.loads(response.choices[0].message.content)
     except Exception as e:
-        return {"punchline": "解析失败", "read": f"错误：{str(e)}", "rise": "请检查配置"}
+        return {"punchline": "解析失败", "read": "暂无数据", "rise": "暂无指令"}
 
 def sync_global_publications():
     articles = fetch()
@@ -36,8 +44,8 @@ def sync_global_publications():
         res = run_rize_insight(a['title'], a['content'])
         processed.append({
             "title": a['title'],
-            "punchline": res.get("punchline", "核心洞察"),
-            "read": res.get("read", "深度内容生成中"), 
-            "rise": res.get("rise", "行动建议")
+            "punchline": res.get("punchline"),
+            "read": res.get("read"), 
+            "rise": res.get("rise")
         })
     return processed
