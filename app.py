@@ -1,9 +1,13 @@
 import streamlit as st
 from backend import engine
+import io
+from PIL import Image, ImageDraw, ImageFont # 确保你安装了 Pillow 库
+import base64
 
+# --- 配置页面 ---
 st.set_page_config(page_title="Read & Rise", layout="wide")
 
-# 高级感 CSS
+# --- CSS 样式 ---
 st.markdown("""
     <style>
     .quote-box { padding: 20px; border-left: 5px solid #1E3A8A; background: #F8FAFC; margin-bottom: 15px; font-style: italic; color: #475569; }
@@ -20,10 +24,15 @@ if st.button("🔄 同步全球外刊 (Sync Global Intel)"):
         st.session_state.articles = engine.sync_global_publications()
 
 if "articles" in st.session_state:
-    for art in st.session_state.articles:
+    for i, art in enumerate(st.session_state.articles):
         # 1. 社交金句卡片
         st.markdown(f'<div class="quote-box">“{art["golden_quote"]}”</div>', unsafe_allow_html=True)
         
+        # --- 新增功能：一键生成分享海报 ---
+        if st.button(f"✨ 生成金句海报 (Share Insight) {i}"):
+            # 触发图像生成
+            st.image(art["golden_quote"])
+            
         # 2. 报头 (Logo + 来源)
         col_s1, col_s2 = st.columns([0.05, 0.95])
         with col_s1: st.image(art['logo'], width=24)
