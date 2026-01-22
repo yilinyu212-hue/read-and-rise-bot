@@ -1,14 +1,20 @@
 import streamlit as st
 from backend import engine
 
-st.set_page_config(page_title="Read & Rise | Global Insight", layout="wide")
+st.set_page_config(page_title="Read & Rise", layout="wide")
 
-# 自定义 CSS：增加留白，让内容不再密集
+# 引入呼吸感 CSS
 st.markdown("""
     <style>
-    .stMarkdown { line-height: 1.8; letter-spacing: 0.02rem; }
-    h3 { color: #1E3A8A; padding-top: 1rem; }
-    .report-box { padding: 20px; border-radius: 10px; background-color: #f8fafc; }
+    .stMarkdown { line-height: 1.8; color: #334155; }
+    .quote-box { 
+        padding: 25px; 
+        border-left: 5px solid #1E3A8A; 
+        background: #F1F5F9; 
+        margin-bottom: 20px;
+        font-style: italic;
+    }
+    h3 { margin-top: 2rem !important; color: #0F172A; }
     </style>
     """, unsafe_allow_html=True)
 
@@ -16,23 +22,23 @@ st.title("🏹 Read & Rise")
 st.caption("跨界全球洞察 · 赋能管理决策 | Global Intelligence for Decision Makers")
 
 if st.button("🔄 同步全球商业内参 (Sync Insight)"):
-    with st.spinner("DeepSeek 正在解析全球战略数据..."):
+    with st.spinner("DeepSeek 正在扫描全球动态..."):
         st.session_state.articles = engine.sync_global_publications()
 
 if "articles" in st.session_state:
     for art in st.session_state.articles:
-        # 核心爆点
+        # 1. 社交金句卡片
+        st.markdown(f"""<div class="quote-box">“{art['golden_quote']}”</div>""", unsafe_allow_html=True)
+        
+        # 2. 深度爆点
         st.markdown(f"### 🎯 {art['punchline']}")
         
-        col1, col2 = st.columns([3, 2], gap="large")
-        
+        # 3. 三段式展示
+        col1, col2 = st.columns([1.5, 1], gap="large")
         with col1:
-            st.markdown("#### 📘 [Read] 逻辑拆解")
             st.info(art['read'])
-            
         with col2:
-            st.markdown("#### 🚀 [Rise] 跃迁行动")
-            st.warning(art['rise'])
-        st.markdown("---")
+            st.success(art['rise'])
+        st.markdown("<br><hr>", unsafe_allow_html=True)
 else:
-    st.write("点击按钮，获取今日全球商业与管理趋势拆解。")
+    st.info("点击按钮，获取今日全球商业与管理趋势拆解。")
