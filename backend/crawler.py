@@ -2,15 +2,16 @@ import feedparser
 import requests
 
 def get_full_text(url):
-    """利用 Jina 抓取外刊全文，确保 Read/Rise 板块内容充实"""
+    """【核心升级】利用 Jina 抓取外刊全文，确保 Read/Rise 板块有真实案例支撑"""
     jina_url = f"https://r.jina.ai/{url}"
     try:
         response = requests.get(jina_url, timeout=12)
-        return response.text[:3000] # 抓取 3000 字，深度解析的黄金素材
+        # 抓取 3000 字，让 AI 有充足素材生成中英文解析
+        return response.text[:3000] 
     except: return ""
 
 def fetch():
-    # 按照 Educator 需求配置的 10 个顶级外刊源
+    # 按照合伙人要求配置的 10 个顶级外刊源
     RSS_SOURCES = [
         {"name": "HBR-Leadership", "url": "https://hbr.org/rss/feed/topics/leadership"},
         {"name": "McKinsey-Insights", "url": "https://www.mckinsey.com/insights/rss"},
