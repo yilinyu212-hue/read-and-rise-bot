@@ -9,21 +9,21 @@ def run_rize_insight(title, content):
     )
 
     prompt = f"""
-    作为顶级咨询顾问，请将以下素材转化为一份高质感内参。
+    作为一名顶级商业内参主编，请解析以下外刊素材。
     
-    【原则】：
-    1. 关键术语保留英文原词，如：(Talent Density / 人才密度)。
-    2. 严禁大段文字，必须使用 Markdown 列表(Bullet Points)。
-    3. 增加“呼吸感”，每段话不超过 3 行。
+    【核心要求】：
+    1. 风格：专业、精炼、高级。
+    2. 语言：中文为主，关键商业术语保留英文原词（如：Flywheel Effect, Optionality）。
+    3. 结构：严禁大段长句。使用列表形式，每行不超过 20 字，确保视觉上有“呼吸感”。
 
     素材标题：{title}
-    素材内容：{content}
+    素材原文：{content}
 
     请严格按 JSON 格式输出：
     {{
-        "punchline": "用一句极具爆点的话总结洞察 (20字以内)",
-        "read": "### 核心逻辑\\n- **Key Insight**: 用一句话说明核心逻辑\\n- **Context (背景)**: 简单说明背景\\n- **Action (行动)**: 文中公司做了什么\\n- **Data (数据)**: 具体成效",
-        "rise": "### 🚀 Actionable Advice\\n- **Mental Model (思维模型)**: 关联模型名称\\n- **Daily Directive (今日指令)**: \\n  1. [Stop] 停止的行为\\n  2. [Start] 启动的布局"
+        "punchline": "一句直戳管理者痛点的商业洞察。",
+        "read": "### 核心逻辑 (Core Logic)\\n- **趋势**: 说明宏观动向\\n- **案例**: 具体公司/项目做了什么\\n- **数据**: 1-2个核心指标",
+        "rise": "### 决策指南 (Decision Guide)\\n- **思维模型**: 关联1个跨界模型\\n- **行动建议**:\\n  - [S] 停止无效动作\\n  - [S] 启动战略布局"
     }}
     """
 
@@ -35,7 +35,7 @@ def run_rize_insight(title, content):
         )
         return json.loads(response.choices[0].message.content)
     except Exception as e:
-        return {"punchline": "解析失败", "read": "暂无数据", "rise": "暂无指令"}
+        return {"punchline": "解析中", "read": "加载失败", "rise": "请重试"}
 
 def sync_global_publications():
     articles = fetch()
