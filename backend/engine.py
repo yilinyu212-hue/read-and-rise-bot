@@ -6,7 +6,7 @@ def run_rize_insight(title, content, workflow_id=None):
     【解析补丁版】确保 read 字段内容 100% 投递到前端
     """
     client = openai.OpenAI(
-        api_key="在此粘贴你的_DEEPSEEK_API_KEY", 
+        api_key="sk-4ee83ed8d53a4390846393de5a23165f", 
         base_url="https://api.deepseek.com"
     )
 
