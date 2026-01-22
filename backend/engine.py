@@ -1,38 +1,33 @@
-import requests
-import json
-from .crawler import fetch
+import openai
 
-def run_rize_insight(topic, api_key, workflow_id):
-    """解析单条内容"""
-    url = "https://api.coze.cn/v1/workflow/run"
-    headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
-    payload = {"workflow_id": workflow_id, "parameters": {"input": topic}}
+def analyze_article(title, content):
+    """
+    对接 DeepSeek 大脑，生成 Read & Rise 深度解析内容
+    """
+    prompt = f"""
+    你是一位资深的教育者和商业教练。请根据以下外刊全文内容，为‘Read & Rise’平台生成深度内容。
     
-    try:
-        response = requests.post(url, headers=headers, json=payload, timeout=60)
-        if response.status_code == 200:
-            data = response.json().get('data', {})
-            if isinstance(data, str):
-                try: data = json.loads(data)
-                except: pass
-            return {
-                "title": data.get('cn_title') or f"专题: {topic[:15]}",
-                "one_sentence": data.get('one_sentence') or "正在生成爆点...",
-                "content": data.get('cn_analysis') or "内容生成中...",
-                "model": data.get('mental_model') or "商业模型分析",
-                "reflection": data.get('reflection') or "思考是管理者的核心工作。"
-            }
-    except: return None
+    文章标题：{title}
+    文章全文：{content}
+    
+    请严格按照以下板块输出（使用中英文双语）：
 
-# --- 报错的关键：必须包含这个函数 ---
-def sync_global_publications(api_key, workflow_id):
-    """一键同步逻辑"""
-    articles = fetch()
-    results = []
-    for art in articles:
-        context = f"来源:{art['source']} | 标题:{art['title']} | 摘要:{art['content']}"
-        res = run_rize_insight(context, api_key, workflow_id)
-        if res:
-            res['url'] = art['url']
-            results.append(res)
-    return results
+    ### 📘 [Read] 深度精读与案例
+    - **Core Concept (核心概念)**: 提取文章最核心的一个理论。
+    - **Case Study (案例解析)**: 详细描述文中的公司或人物案例。
+    
+    ### 🚀 [Rise] 管理跃迁与反思
+    - **Mental Model (思维模型)**: 这篇文章对应哪个经典的商业思维模型？
+    - **Actionable Advice (行动建议)**: 给教育者/管理者的 3 条具体操作建议。
+    """
+    
+    client = openai.OpenAI(
+        api_key="你的DEEPSEEK_API_KEY", # 这里请确保填入你的 Key
+        base_url="https://api.deepseek.com"
+    )
+    
+    response = client.chat.completions.create(
+        model="deepseek-chat",
+        messages=[{"role": "user", "content": prompt}]
+    )
+    return response.choices[0].message.content
