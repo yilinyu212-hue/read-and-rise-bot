@@ -1,34 +1,41 @@
-# app.py
-
 import streamlit as st
-from backend.crawler import run_crawler
-import json
+from backend import engine
 
-st.set_page_config(page_title="Read & Rise", layout="wide")
+st.set_page_config(page_title="Read & Rise | 高管内参", layout="wide")
 
-st.title("📖 Read & Rise")
-st.subheader("Read better. Think deeper. Rise slowly.")
+st.title("🏹 Read & Rise: Global Insight for Educators")
+st.markdown("---")
 
-st.markdown("""
-一个为 **长期思考者 / 创业者 / 管理者** 设计的阅读与反思系统  
-""")
+# 侧边栏：操作区
+with st.sidebar:
+    st.header("控制台")
+    if st.button("🔄 同步全球外刊最新内参"):
+        with st.spinner("DeepSeek 正在解析全球商业动察..."):
+            st.session_state.articles = engine.sync_global_publications()
+            st.success("同步完成！")
 
-if st.button("🔍 抓取最新外刊"):
-    with st.spinner("正在抓取外刊..."):
-        articles = run_crawler()
-        st.success(f"成功抓取 {len(articles)} 篇文章")
+# 主界面显示
+if "articles" in st.session_state:
+    for art in st.session_state.articles:
+        # 使用 Container 美化每一篇推文
+        with st.container():
+            # 1. 顶部爆点区
+            st.subheader(f"🎯 {art.get('title', 'Loading...')}")
+            
+            # 2. 三段式布局
+            col1, col2 = st.columns([2, 1])
+            
+            with col1:
+                st.markdown("#### 📘 [Read] 深度精读 (Bilingual Case)")
+                # 这里展示中英双语和案例
+                st.info(art.get('content', '解析生成中...'))
+            
+            with col2:
+                st.markdown("#### 🚀 [Rise] 管理跃迁 (Action)")
+                # 侧边栏展示思维模型和指令，用 code 块增强视觉感
+                st.warning("🧠 核心思维模型\n\n**反脆弱 (Antifragility)**") 
+                st.success("✅ 行动清单\n1. 停止过度避险\n2. 开启压力测试\n3. 布局冗余资源")
 
-st.divider()
-
-st.header("📚 已抓取内容")
-
-try:
-    with open("data/knowledge.json", "r", encoding="utf-8") as f:
-        data = json.load(f)
-
-    for a in data:
-        with st.expander(a["title"]):
-            st.write(a["content"][:1500])
-            st.markdown(f"[阅读全文]({a['link']})")
-except:
-    st.info("暂无内容，请先抓取。")
+            st.markdown("---")
+else:
+    st.info("点击左侧按钮，开启今日的高管决策同步。")
