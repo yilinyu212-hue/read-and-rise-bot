@@ -3,53 +3,59 @@ import json
 
 def run_rize_insight(title, content, workflow_id=None):
     """
-    【高管内参定稿版】
-    强制 DeepSeek 避开翻译，直接输出深度结构化内容
+    【解析补丁版】确保 read 字段内容 100% 投递到前端
     """
     client = openai.OpenAI(
-        api_key="你的_DEEPSEEK_API_KEY", # <--- 请务必确认这里填了 Key
+        api_key="在此粘贴你的_DEEPSEEK_API_KEY", 
         base_url="https://api.deepseek.com"
     )
 
     prompt = f"""
-    你是一位顶级商业咨询顾问。请阅读以下外刊全文，为中高层管理者撰写一份【中文为主、关键术语英文】的深度内参。
-    
-    外刊标题：{title}
-    原文素材：{content[:3000]} 
+    你是一位顶级战略顾问。请阅读外刊全文，生成决策内参。
+    标题：{title}
+    全文：{content[:3000]}
 
-    请严格按照以下 JSON 格式输出，不要有任何多余文字：
+    请严格按 JSON 输出：
     {{
-        "punchline": "用中文写一句话爆点。点出这篇文章对管理者最核心的生存/盈利价值。",
-        "read_content": "### 📘 [Read] 深度精读\\n- **核心洞察**: (中文描述核心逻辑)\\n- **实战案例**: (详细拆解文中的公司案例，包含具体行动和数据。)",
-        "rise_content": "### 🚀 [Rise] 管理跃迁\\n- **思维模型**: (关联1个经典模型，如：反脆弱、飞轮效应)\\n- **行动清单**: (1. 停止做什么；2. 开始做什么；3. 长期布局。)"
+        "punchline": "一句话核心洞察",
+        "read_content": "这里写深度精读的具体案例和逻辑分析，不少于200字。",
+        "rise_content": "这里写思维模型和具体行动建议。"
     }}
     """
 
     try:
         response = client.chat.completions.create(
             model="deepseek-chat",
-            messages=[{"role": "system", "content": "你是一位专注于商业深度拆解的 AI 合伙人。"},
-                      {"role": "user", "content": prompt}],
+            messages=[{"role": "user", "content": prompt}],
             response_format={ "type": "json_object" }
         )
-        return json.loads(response.choices[0].message.content)
+        res_data = json.loads(response.choices[0].message.content)
+        
+        # 核心修复点：确保返回的 key 与 app.py 调用的完全一致
+        return {
+            "punchline": res_data.get("punchline", "暂无爆点"),
+            "read": res_data.get("read_content", "案例解析提取失败，请重试"), 
+            "rise": res_data.get("rise_content", "行动建议生成失败")
+        }
     except Exception as e:
         return {
-            "punchline": "内容解析中",
-            "read_content": f"正在调取 DeepSeek 深层大脑... (Error: {str(e)})",
-            "rise_content": "请稍后刷新"
+            "punchline": "解析异常",
+            "read": f"由于网络波动，深度精读内容未能加载：{str(e)}",
+            "rise": "请检查后台日志"
         }
 
 def sync_global_publications(api_key=None, workflow_id=None):
     from .crawler import fetch
     articles = fetch()
     processed = []
-    for a in articles[:3]: # 先精准处理前3篇，确保每一篇都是精品
+    # 限制处理篇数以提高响应速度
+    for a in articles[:3]:
         res = run_rize_insight(a['title'], a['content'])
+        # 确保这里拼装给前端的 key 叫 'read' 和 'rise'
         processed.append({
             "title": a['title'],
-            "punchline": res.get("punchline"),
-            "read": res.get("read_content"),
-            "rise": res.get("rise_content")
+            "punchline": res['punchline'],
+            "read": res['read'],
+            "rise": res['rise']
         })
     return processed
