@@ -1,50 +1,34 @@
+# app.py
+
 import streamlit as st
 from backend.crawler import run_crawler
-from backend.engine import analyze_article
 import json
 
 st.set_page_config(page_title="Read & Rise", layout="wide")
 
-# ====== 侧边栏 ======
-st.sidebar.title("📘 Read & Rise")
-page = st.sidebar.radio(
-    "导航",
-    ["🏠 主页", "📰 今日精选", "⚙️ 手动抓取"]
-)
+st.title("📖 Read & Rise")
+st.subheader("Read better. Think deeper. Rise slowly.")
 
-# ====== 主页 ======
-if page == "🏠 主页":
-    st.title("Read & Rise")
-    st.subheader("Read Daily · Rise Strategically")
+st.markdown("""
+一个为 **长期思考者 / 创业者 / 管理者** 设计的阅读与反思系统  
+""")
 
-    st.markdown("""
-    **为创业者 / 管理者 / 知识型创作者设计的外刊洞察系统**
-    
-    - 每日精选高质量外刊
-    - AI 提炼思维模型
-    - 形成可复用的管理认知
-    """)
+if st.button("🔍 抓取最新外刊"):
+    with st.spinner("正在抓取外刊..."):
+        articles = run_crawler()
+        st.success(f"成功抓取 {len(articles)} 篇文章")
 
-# ====== 今日精选 ======
-elif page == "📰 今日精选":
-    st.title("今日精选")
+st.divider()
 
-    try:
-        with open("data/knowledge.json", "r", encoding="utf-8") as f:
-            items = json.load(f)
+st.header("📚 已抓取内容")
 
-        for item in items[:5]:
-            st.markdown(f"### {item['cn_title']}")
-            st.write(item.get("cn_analysis", ""))
-            st.divider()
-    except:
-        st.info("暂无内容，请先抓取")
+try:
+    with open("data/knowledge.json", "r", encoding="utf-8") as f:
+        data = json.load(f)
 
-# ====== 手动抓取 ======
-elif page == "⚙️ 手动抓取":
-    st.title("手动抓取外刊")
-
-    if st.button("🚀 开始抓取"):
-        with st.spinner("正在抓取并分析..."):
-            run_crawler()
-        st.success("抓取完成！")
+    for a in data:
+        with st.expander(a["title"]):
+            st.write(a["content"][:1500])
+            st.markdown(f"[阅读全文]({a['link']})")
+except:
+    st.info("暂无内容，请先抓取。")
